@@ -1,10 +1,10 @@
 #!/bin/bash
-grep="grep --line-buffered -v -P '^\s\s[+-~\s]' | uniq"
+grep="grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)'"
 args=()
 for arg in "$@"; do
   case "$arg" in
-    -compact);;
-    -short) grep="grep --line-buffered -v -P '(known after apply)'";;
+    -compact) grep="grep --line-buffered -v -P '^\s\s[\s+~-]' | uniq";;
+    -short) ;;
     -full) grep="cat";;
     -*) args+=("$arg");;
     *) args+=("-target=$arg")
