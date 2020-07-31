@@ -1,6 +1,6 @@
 #!/bin/bash
 trap 'rm -rf terraform.tfplan' EXIT
-grep="grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)'"
+grep="grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)' | uniq"
 args=()
 for arg in "$@"; do
   case "$arg" in
@@ -13,7 +13,7 @@ for arg in "$@"; do
 done
 terraform plan -detailed-exitcode ${args[*]} -out=terraform.tfplan | eval $grep
 test ${PIPESTATUS[0]} = 2 || exit $?
-echo "Do you want to perform these actions?"
+echo "[0m[1mDo you want to perform these actions?[0m"
 echo "  Terraform will perform the actions described above."
 echo "  Only 'yes' will be accepted to approve.:"
 echo ""

@@ -1,6 +1,6 @@
 #!/bin/bash
 trap 'rm -rf terraform.tfplan' EXIT
-grep="grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)'"
+grep="grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)' | uniq"
 args=()
 for arg in "$@"; do
   case "$arg" in
