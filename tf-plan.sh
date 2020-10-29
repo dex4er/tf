@@ -10,5 +10,6 @@ for arg in "$@"; do
     *) args+=("-target=$arg")
   esac
 done
+tf-init
 terraform plan -detailed-exitcode ${args[*]} | eval "$grep"
 exit ${PIPESTATUS[0]}
