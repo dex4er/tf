@@ -4,7 +4,7 @@ trap 'rm -rf terraform.tfplan' EXIT
 trap '' INT
 
 function filter_manifest_short() {
-  grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)'
+  grep --line-buffered -v -P '\(known after apply\)|\(\d+ unchanged \w+ hidden\)'
 }
 
 function filter_manifest_compact() {

@@ -4,7 +4,7 @@ trap 'rm -rf terraform.tfplan' EXIT
 trap '' INT
 
 function filter_manifest_short() {
-  grep --line-buffered -v -P '^\s{4}(?!.*[~+/-]\e)|\(known after apply\)'
+  grep --line-buffered -v -P '\(known after apply\)|\(\d+ unchanged \w+ hidden\)'
 }
 
 function filter_manifest_compact() {
@@ -17,9 +17,21 @@ function filter_terraform_status() {
   declare -A progress
   progress=(["-"]="\\\\" ["\\\\"]="|" ["|"]="/" ["/"]="-" [r]="R" [R]="r" [a]="A" [A]="a" [c]="C" [C]="c" [d]="D" [D]="d")
 
+  ignore=no
+
   IFS=''
   while read line; do
     test "$line" != "$prev" || continue
+    case "$line" in
+      *'Warning:'*'Applied changes may be incomplete'*|*'Warning:'*'Resource targeting is in effect'*|'This plan was saved to: terraform.tfplan')
+        ignore=yes
+        ;;
+      *'suggests to use it as part of an error message'*|*'exceptional situations such as recovering from errors or mistakes'*|*'terraform apply "terraform.tfplan"')
+        ignore=no
+        continue
+        ;;
+    esac
+    test $ignore = yes && continue
     case "$line" in
       *': Refreshing state...'*)
         key="-"
@@ -90,8 +102,6 @@ for arg in "$@"; do
     *) args+=("-target=$arg")
   esac
 done
-
-tf-init
 
 terraform plan -detailed-exitcode ${args[*]} -out=terraform.tfplan | eval $filter
 
