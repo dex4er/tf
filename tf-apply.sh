@@ -68,9 +68,9 @@ function filter_terraform_status() {
         echo "${statusline[*]}" | xargs printf "%s"
         printf "\r"
         ;;
-      *': Still '*'ing...'*)
+      *': Still '*'ing... '*)
         statusline["-"]="*"
-        key="${line%: Still *ing...*}"
+        key="${line%: Still *ing... *}"
         statusline[$key]="${progress[${statusline[$key]}]}"
         echo "${statusline[*]}" | xargs printf "%s"
         printf "\r"
