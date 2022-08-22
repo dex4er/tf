@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Fake terraform
         run: |
-          echo '#!/bin/bash' > /usr/local/bin/terraform
-          echo 'echo Fake Terraform' >> /usr/local/bin/terraform
-          chmod +x /usr/local/bin/terraform
+          echo '#!/bin/bash' | sudo tee /usr/local/bin/terraform
+          echo 'echo Fake Terraform' | sudo tee -a /usr/local/bin/terraform
+          sudo chmod +x /usr/local/bin/terraform
       - name: Test
         run: ./tf.sh version
