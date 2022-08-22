@@ -242,8 +242,8 @@ untaint)
 	;;
 
 version)
-  echo tf 1.0.0
-  terraform version
+	echo tf 1.0.0
+	terraform version
 	;;
 
 *)
