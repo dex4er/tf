@@ -15,5 +15,7 @@ jobs:
           echo '#!/bin/bash' | sudo tee /usr/local/bin/terraform
           echo 'echo Fake Terraform' | sudo tee -a /usr/local/bin/terraform
           sudo chmod +x /usr/local/bin/terraform
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Test
         run: ./tf.sh version
