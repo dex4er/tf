@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  - pull_request
+  - push
+  - workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fake terraform
+        run: |
+          echo '#!/bin/bash' > /usr/local/bin/terraform
+          echo 'echo Fake Terraform' >> /usr/local/bin/terraform
+          chmod +x /usr/local/bin/terraform
+      - name: Test
+        run: ./tf.sh version
