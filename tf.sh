@@ -129,7 +129,7 @@ shift
 
 case "$command" in
 
-apply | destroy | plan)
+apply | destroy | plan | refresh)
   declare filter="filter_manifest_short | filter_terraform_status"
 
   declare args=()
@@ -176,6 +176,9 @@ apply | destroy | plan)
 
     terraform apply -compact-warnings -auto-approve -refresh=false "${args[@]}" terraform.tfplan | eval "$filter"
     ;;
+  refresh)
+    terraform apply -compact-warnings "${args[@]}" -refresh-only | eval "$filter"
+    ;;
   esac
 
   exit "${PIPESTATUS[0]}"
@@ -198,18 +201,6 @@ list)
 mv)
   set -e
   terraform state mv "$@"
-  ;;
-
-refresh)
-  args=()
-  for arg in "$@"; do
-    case "$arg" in
-    -*) args+=("$arg") ;;
-    *) args+=("-target=$arg") ;;
-    esac
-  done
-  terraform refresh "${args[@]}"
-  exit "${PIPESTATUS[0]}"
   ;;
 
 rm)

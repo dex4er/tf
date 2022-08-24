@@ -19,6 +19,16 @@ tf list
 tf show
 ```
 
+etc...
+
+You can combine commands, ie.:
+
+```sh
+tf destroy $(tf list | grep aws_batch_job_definition)
+tf refresh $(tf list | grep data.aws_region.current)
+tf rm $(tf list | grep random_password)
+```
+
 ### `tf apply`
 
 The same as `terraform apply` with less verbose output.
@@ -76,7 +86,7 @@ completely.
 
 ### `tf refresh`
 
-The same as `terraform refresh` with less verbose output.
+The same as `terraform apply -refresh-only` with less verbose output.
 
 The command accepts resource name as an argument without `-target=` option.
 
