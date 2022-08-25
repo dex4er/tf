@@ -1,6 +1,6 @@
 # tf
 
-Less verbose Terraform.
+Less verbose and more shell friendly Terraform.
 
 ## Install
 
@@ -24,10 +24,14 @@ etc...
 You can combine commands, ie.:
 
 ```sh
-tf destroy $(tf list | grep aws_batch_job_definition)
-tf refresh $(tf list | grep data.aws_region.current)
-tf rm $(tf list | grep random_password)
+tf apply $(tf list | grep aws_vpc)
+tf list | grep data.aws_region.current | xargs tf refresh
+tf list | grep random_password | xargs tf rm
+tf list | grep aws_subnet | xargs tf show
 ```
+
+Be careful: you cannot use `xargs` with `tf apply`, `tf destroy` or `tf refresh`
+because these commands are interactive. Still you can use `$()`.
 
 ### `tf apply`
 
@@ -45,6 +49,8 @@ The command accepts resource name as an argument without `-target=` option.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
+The command will log to the file named in `TF_LOG_FILE` environment variable.
+
 ### `tf destroy`
 
 The same as `terraform destroy` with less verbose output.
@@ -61,9 +67,13 @@ The command accepts resource name as an argument without `-target=` option.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
+The command will log to the file named in `TF_LOG_FILE` environment variable.
+
 ### `tf init`
 
 The same as `terraform init` with less verbose output.
+
+The command will log to the file named in `TF_LOG_FILE` environment variable.
 
 ### `tf list`
 
@@ -84,15 +94,21 @@ It will skip `(known after apply)` lines from the output.
 An additional option is `-compact` which will skip the content of the resources
 completely.
 
+The command will log to the file named in `TF_LOG_FILE` environment variable.
+
 ### `tf refresh`
 
 The same as `terraform apply -refresh-only` with less verbose output.
 
 The command accepts resource name as an argument without `-target=` option.
 
+The command will log to the file named in `TF_LOG_FILE` environment variable.
+
 ### `tf rm`
 
 The same as `terraform state rm` with less verbose output.
+
+The command accepts multiple arguments.
 
 ### `tf show`
 
@@ -101,6 +117,8 @@ and ANSI stripped.
 
 `terraform show` is used when the command is run without arguments and
 `terraform state show` when arguments are used.
+
+The command accepts multiple arguments.
 
 ### `tf taint`
 

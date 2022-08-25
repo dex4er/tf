@@ -130,15 +130,20 @@ shift
 case "$command" in
 
 apply | destroy | plan | refresh)
-  declare filter="filter_manifest_short | filter_terraform_status"
+  declare logging=""
+  if [[ -n $TF_LOG_FILE ]]; then
+    logging="tee -a \"$TF_LOG_FILE\" | "
+  fi
+
+  declare filter="${logging}filter_manifest_short | filter_terraform_status"
 
   declare args=()
 
   for arg in "$@"; do
     case "$arg" in
-    -compact) filter="filter_manifest_compact | filter_terraform_status" ;;
+    -compact) filter="${logging}filter_manifest_compact | filter_terraform_status" ;;
     -short) ;;
-    -full) filter="cat" ;;
+    -full) filter="${logging}" ;;
     -*) args+=("$arg") ;;
     *) args+=("-target=$arg") ;;
     esac
@@ -185,8 +190,14 @@ apply | destroy | plan | refresh)
   ;;
 
 init)
+  declare logging="cat"
+  if [[ -n $TF_LOG_FILE ]]; then
+    logging="tee -a \"$TF_LOG_FILE\""
+  fi
+
   set -e
-  exec terraform init -upgrade |
+
+  exec terraform init -upgrade | eval "$logging" |
     grep -v -P 'Finding .* versions matching|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
     sed '/Terraform has been successfully initialized/,$d' |
     uniq |
@@ -210,8 +221,9 @@ rm)
 
 show)
   if [[ $# -gt 0 ]]; then
-    terraform state show -no-color "$@" | sed 's/\x1b\[[01]m//g'
-    exit "${PIPESTATUS[0]}"
+    for r in "$@"; do
+      terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
+    done
   else
     terraform show -no-color
     exit $?
