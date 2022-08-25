@@ -130,9 +130,11 @@ shift
 case "$command" in
 
 apply | destroy | plan | refresh)
+  declare tf_log_file
   declare logging=""
   if [[ -n $TF_LOG_FILE ]]; then
-    logging="tee -a \"$TF_LOG_FILE\" | "
+    tf_log_file=$(LC_ALL=C date "+$TF_LOG_FILE")
+    logging="tee -a \"$tf_log_file\" | "
   fi
 
   declare filter="${logging}filter_manifest_short | filter_terraform_status"

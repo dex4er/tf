@@ -50,6 +50,7 @@ The command accepts resource name as an argument without `-target=` option.
 The command will generate temporarily the `terraform.tfplan` file.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
+The file name is solved by `date` command for `%` sequences.
 
 ### `tf destroy`
 
@@ -68,12 +69,14 @@ The command accepts resource name as an argument without `-target=` option.
 The command will generate temporarily the `terraform.tfplan` file.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
+The file name is solved by `date` command for `%` sequences.
 
 ### `tf init`
 
 The same as `terraform init` with less verbose output.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
+The file name is solved by `date` command for `%` sequences.
 
 ### `tf list`
 
@@ -95,6 +98,7 @@ An additional option is `-compact` which will skip the content of the resources
 completely.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
+The file name is solved by `date` command for `%` sequences.
 
 ### `tf refresh`
 
@@ -103,6 +107,7 @@ The same as `terraform apply -refresh-only` with less verbose output.
 The command accepts resource name as an argument without `-target=` option.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
+The file name is solved by `date` command for `%` sequences.
 
 ### `tf rm`
 
