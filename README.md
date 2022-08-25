@@ -25,13 +25,15 @@ You can combine commands, ie.:
 
 ```sh
 tf apply $(tf list | grep aws_vpc)
-tf list | grep data.aws_region.current | xargs tf refresh
-tf list | grep random_password | xargs tf rm
+tf refresh $(tf list | grep data.aws_region.current)
+tf rm $(tf list | grep random_password)
 tf list | grep aws_subnet | xargs tf show
 ```
 
-Be careful: you cannot use `xargs` with `tf apply`, `tf destroy` or `tf refresh`
-because these commands are interactive. Still you can use `$()`.
+It is recommended to use `$()` rather than `xargs`. You cannot use `xargs` with
+`tf apply`, `tf destroy` or `tf refresh` because these commands are interactive.
+Also it will fail on resources with multiple instances when resource's index is
+a string.
 
 ### `tf apply`
 
