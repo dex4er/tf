@@ -75,7 +75,7 @@ The file name is solved by `date` command for `%` sequences.
 
 ### `tf init`
 
-The same as `terraform init` with less verbose output.
+The same as `terraform init -upgrade` with less verbose output.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
 The file name is solved by `date` command for `%` sequences.
