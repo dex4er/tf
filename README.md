@@ -25,15 +25,13 @@ You can combine commands, ie.:
 
 ```sh
 tf apply $(tf list | grep aws_vpc)
-tf refresh $(tf list | grep data.aws_region.current)
-tf rm $(tf list | grep random_password)
+tf list | grep data.aws_region.current | xargs tf refresh
+tf list | grep random_password | xargs tf rm
 tf list | grep aws_subnet | xargs tf show
 ```
 
 It is recommended to use `$()` rather than `xargs`. You cannot use `xargs` with
-`tf apply`, `tf destroy` or `tf refresh` because these commands are interactive.
-Also it will fail on resources with multiple instances when resource's index is
-a string.
+`tf apply` or `tf destroy` because these commands are interactive.
 
 ### `tf apply`
 
@@ -47,7 +45,8 @@ It will skip `(known after apply)` lines from the output.
 An additional option is `-compact` which will skip the content of the resources
 completely.
 
-The command accepts resource name as an argument without `-target=` option.
+The command accepts resource name as an argument without `-target=` option. If
+argument misses quotes inside square brackets then they will be added.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
@@ -66,7 +65,8 @@ It will skip `(known after apply)` lines from the output.
 An additional option is `-compact` which will skip the content of the resources
 completely.
 
-The command accepts resource name as an argument without `-target=` option.
+The command accepts resource name as an argument without `-target=` option. If
+argument misses quotes inside square brackets then they will be added.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
@@ -84,9 +84,13 @@ The file name is solved by `date` command for `%` sequences.
 
 The same as `terraform state list` with less verbose output and ANSI stripped.
 
+If argument misses quotes inside square brackets then they will be added.
+
 ### `tf mv`
 
 The same as `terraform state mv` with less verbose output.
+
+If argument misses quotes inside square brackets then they will be added.
 
 ### `tf plan`
 
@@ -99,6 +103,9 @@ It will skip `(known after apply)` lines from the output.
 An additional option is `-compact` which will skip the content of the resources
 completely.
 
+The command accepts resource name as an argument without `-target=` option. If
+argument misses quotes inside square brackets then they will be added.
+
 The command will log to the file named in `TF_LOG_FILE` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
@@ -106,7 +113,8 @@ The file name is solved by `date` command for `%` sequences.
 
 The same as `terraform apply -refresh-only` with less verbose output.
 
-The command accepts resource name as an argument without `-target=` option.
+The command accepts resource name as an argument without `-target=` option. If
+argument misses quotes inside square brackets then they will be added.
 
 The command will log to the file named in `TF_LOG_FILE` environment variable.
 The file name is solved by `date` command for `%` sequences.
@@ -115,7 +123,8 @@ The file name is solved by `date` command for `%` sequences.
 
 The same as `terraform state rm` with less verbose output.
 
-The command accepts multiple arguments.
+The command accepts multiple arguments. If argument misses quotes inside square
+brackets then they will be added.
 
 ### `tf show`
 
@@ -125,15 +134,18 @@ and ANSI stripped.
 `terraform show` is used when the command is run without arguments and
 `terraform state show` when arguments are used.
 
-The command accepts multiple arguments.
+The command accepts multiple arguments. If argument misses quotes inside square
+brackets then they will be added.
 
 ### `tf taint`
 
-The same as `terraform taint` and it accepts multiple arguments.
+The same as `terraform taint` and it accepts multiple arguments. If argument
+misses quotes inside square brackets then they will be added.
 
 ### `tf untaint`
 
-The same as `terraform untaint` and it accepts multiple arguments.
+The same as `terraform untaint` and it accepts multiple arguments. If argument
+misses quotes inside square brackets then they will be added.
 
 ### License
 

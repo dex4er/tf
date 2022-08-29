@@ -147,7 +147,10 @@ apply | destroy | plan | refresh)
     -short) ;;
     -full) filter="${logging}" ;;
     -*) args+=("$arg") ;;
-    *) args+=("-target=$arg") ;;
+    *)
+      r=$(echo "$arg" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+      args+=("-target=$r")
+      ;;
     esac
   done
 
@@ -184,7 +187,7 @@ apply | destroy | plan | refresh)
     terraform apply -compact-warnings -auto-approve -refresh=false "${args[@]}" terraform.tfplan | eval "$filter"
     ;;
   refresh)
-    terraform apply -compact-warnings "${args[@]}" -refresh-only | eval "$filter"
+    terraform apply -compact-warnings -auto-approve "${args[@]}" -refresh-only | eval "$filter"
     ;;
   esac
 
@@ -207,23 +210,39 @@ init)
   ;;
 
 list)
-  terraform state list "$@" | sed 's/\x1b\[[01]m//g'
+  # trunk-ignore(shellcheck/SC2046)
+  terraform state list $(
+    for r in "$@"; do
+      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+    done
+  ) | sed 's/\x1b\[[01]m//g'
   exit "${PIPESTATUS[0]}"
   ;;
 
 mv)
   set -e
-  terraform state mv "$@"
+  # trunk-ignore(shellcheck/SC2046)
+  terraform state mv $(
+    for r in "$@"; do
+      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+    done
+  )
   ;;
 
 rm)
   set -e
-  terraform state rm "$@"
+  # trunk-ignore(shellcheck/SC2046)
+  terraform state rm $(
+    for r in "$@"; do
+      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+    done
+  )
   ;;
 
 show)
   if [[ $# -gt 0 ]]; then
     for r in "$@"; do
+      r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
       terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
     done
   else
@@ -235,6 +254,7 @@ show)
 taint)
   set -e
   for r in "$@"; do
+    r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
     terraform taint "$r"
   done
   ;;
@@ -242,6 +262,7 @@ taint)
 untaint)
   set -e
   for r in "$@"; do
+    r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
     terraform untaint "$r"
   done
   ;;
