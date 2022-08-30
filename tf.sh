@@ -273,6 +273,10 @@ version)
   ;;
 
 *)
-  exec "tf-$command" "$@"
+  if command -v "tf-$command" >/dev/null; then
+    exec "tf-$command" "$@"
+  else
+    exec terraform "$command" "$@"
+  fi
   ;;
 esac
