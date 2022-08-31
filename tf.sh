@@ -7,11 +7,11 @@
 ## MIT License
 
 function filter_manifest_short() {
-  grep --line-buffered -v -P '\(known after apply\)|\(\d+ unchanged \w+ hidden\)'
+  grep --line-buffered -v -P '\(known after apply\)|\(\d+ unchanged \w+ hidden\)|\(config refers to values not yet known\)'
 }
 
 function filter_manifest_compact() {
-  grep --line-buffered -v -P '^\s\s[\s+~-]'
+  grep --line-buffered -v -P '^\s\s[\s+~-]|\(config refers to values not yet known\)'
 }
 
 function filter_terraform_status() {
