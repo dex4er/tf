@@ -1,6 +1,28 @@
 # tf
 
+[![GitHub](https://img.shields.io/github/v/release/dex4er/tf?display_name=tag&sort=semver)](https://github.com/dex4er/tf)
+[![CI](https://github.com/dex4er/tf/actions/workflows/ci.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/ci.yaml)
+[![Lint](https://github.com/dex4er/tf/actions/workflows/lint.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/lint.yaml)
+
 Less verbose and more shell friendly Terraform.
+
+Better this:
+
+![tf apply -compact](tf-apply-compact.gif)
+
+than this:
+
+![terraform apply](terraform-apply.gif)
+
+The original Terraform is abusively oververbosed. The `tf` bash script is a
+simple wrapper which makes Terraform more CLI friendly:
+
+- removes unecessary output
+- adds own progress indicator
+- provides extra compact mode
+- allows to use multiple arguments when original command don't support it
+- adds automatically quotes for indexed resources
+- generates log file when `TF_LOG_FILE` environment variable is used
 
 ## Install
 
