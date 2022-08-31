@@ -52,8 +52,9 @@ tf list | grep random_password | xargs tf rm
 tf list | grep aws_subnet | xargs tf show
 ```
 
-It is recommended to use `$()` rather than `xargs`. You cannot use `xargs` with
-`tf apply` or `tf destroy` because these commands are interactive.
+It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy` because these commands are interactive.
+
+For not recognized commands `tf` passes all arguments to `terraform` command.
 
 ### `tf apply`
 
