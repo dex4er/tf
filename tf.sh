@@ -117,6 +117,8 @@ function filter_terraform_status() {
     *'record the updated values in the Terraform state without changing any remote'*) ignore=next ;;
     *'Terraform has checked that the real remote objects still match the result of'*) ;;
     *'your most recent changes, and found no differences.'*) ;;
+    *'To perform exactly these actions, run the following command to apply:'*) ;;
+    *"Saved the plan to: terraform.tfplan"*) ignore=next ;;
     *'To see the full warning notes, run Terraform without -compact-warnings.'*) ;;
     *'Acquiring state lock. This may take a few moments...'*) ;;
     *'Releasing state lock. This may take a few moments...'*) ;;
@@ -171,6 +173,9 @@ apply | destroy | plan | refresh)
     trap 'rm -rf terraform.tfplan' EXIT
     trap '' INT
 
+    declare workspace
+    workspace=$(terraform workspace show 2>/dev/null || true)
+
     case "$command" in
     apply)
       terraform plan -compact-warnings -detailed-exitcode "${args[@]}" -out=terraform.tfplan | eval "$filter"
@@ -182,12 +187,15 @@ apply | destroy | plan | refresh)
 
     test "${PIPESTATUS[0]}" = 2 || exit 0
 
-    echo "[0m[1mDo you want to perform these actions?[0m"
-    echo "  Terraform will perform the actions described above."
-    echo "  Only 'yes' will be accepted to approve.:"
-    echo ""
+    if [[ -n $workspace ]]; then
+      echo -n "[0m[1mDo you want to perform these actions in workspace \"$workspace\"?[0m "
+    else
+      echo -n "[0m[1mDo you want to perform these actions?[0m "
+    fi
 
-    read -r -p "  Enter a value: " VALUE
+    trap - INT
+    read -r VALUE
+    trap '' INT
 
     test "$VALUE" = "yes" || exit 0
 
