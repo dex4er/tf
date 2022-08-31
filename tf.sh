@@ -229,7 +229,8 @@ import)
   src=$(echo "$1" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
   shift
 
-  terraform import "${args[@]}" "$src" "$*"
+  terraform import "${args[@]}" "$src" "$*" | grep --line-buffered -v -P '(The resources that were imported are shown above. These resources are now in|your Terraform state and will henceforth be managed by Terraform.)'
+  terraform state show -no-color "$src"
   ;;
 
 init)
