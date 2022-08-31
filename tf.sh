@@ -108,6 +108,9 @@ function filter_terraform_status() {
     *'Terraform will perform the following actions:'*) ;;
     *'Terraform has compared your real infrastructure against your configuration'*) ;;
     *'and found no differences, so no changes are needed.'*) ;;
+    *'Unless you have made equivalent changes to your configuration, or ignored the'*) ;;
+    *'relevant attributes using ignore_changes, the following plan may include'*) ;;
+    *'actions to undo or respond to these changes.'*) ;;
     *'To see the full warning notes, run Terraform without -compact-warnings.'*) ;;
     *'Acquiring state lock. This may take a few moments...'*) ;;
     *'Releasing state lock. This may take a few moments...'*) ;;
