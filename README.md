@@ -50,6 +50,7 @@ tf apply $(tf list | grep aws_vpc)
 tf list | grep data.aws_region.current | xargs tf refresh
 tf list | grep random_password | xargs tf rm
 tf list | grep aws_subnet | xargs tf show
+tf list | grep module.one | while read r; do echo tf mv $r ${r/module.one./module.two.}; done | bash -x
 ```
 
 It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy` because these commands are interactive.
