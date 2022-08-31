@@ -214,10 +214,15 @@ apply | destroy | plan | refresh)
 
 import)
   declare args=()
+  declare show=no
   declare src
 
   while [[ ${1#-} != "$1" ]]; do
-    args+=("$1")
+    if [[ $1 == "-show" ]]; then
+      show=yes
+    else
+      args+=("$1")
+    fi
     shift
   done
 
@@ -230,7 +235,10 @@ import)
   shift
 
   terraform import "${args[@]}" "$src" "$*" | grep --line-buffered -v -P '(The resources that were imported are shown above. These resources are now in|your Terraform state and will henceforth be managed by Terraform.)'
-  terraform state show -no-color "$src"
+
+  if [[ $show == "yes" ]]; then
+    terraform state show -no-color "$src"
+  fi
   ;;
 
 init)

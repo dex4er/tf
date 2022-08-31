@@ -106,6 +106,8 @@ added.
 
 The command concatenatest second and rest arguments into one.
 
+The resource is shown when `-show` argument was used.
+
 ### `tf init`
 
 The same as `terraform init -upgrade` with less verbose output.
