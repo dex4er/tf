@@ -159,6 +159,7 @@ apply | destroy | plan | refresh)
     -full) filter="${logging}" ;;
     -*) args+=("$arg") ;;
     *)
+      declare r
       r=$(echo "$arg" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
       args+=("-target=$r")
       ;;
@@ -211,6 +212,26 @@ apply | destroy | plan | refresh)
   exit "${PIPESTATUS[0]}"
   ;;
 
+import)
+  declare args=()
+  declare src
+
+  while [[ ${1#-} != "$1" ]]; do
+    args+=("$1")
+    shift
+  done
+
+  if [[ $# -lt 2 ]]; then
+    terraform import "${args[@]}"
+    exit $?
+  fi
+
+  src=$(echo "$1" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+  shift
+
+  terraform import "${args[@]}" "$src" "$*"
+  ;;
+
 init)
   declare logging="cat"
   if [[ -n $TF_LOG_FILE ]]; then
@@ -259,6 +280,7 @@ rm)
 show)
   if [[ $# -gt 0 ]]; then
     for r in "$@"; do
+      declare r
       r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
       terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
     done
@@ -271,6 +293,7 @@ show)
 taint)
   set -e
   for r in "$@"; do
+    declare r
     r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
     terraform taint "$r"
   done
@@ -279,6 +302,7 @@ taint)
 untaint)
   set -e
   for r in "$@"; do
+    declare r
     r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
     terraform untaint "$r"
   done

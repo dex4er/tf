@@ -96,6 +96,15 @@ The command will generate temporarily the `terraform.tfplan` file.
 The command will log to the file named in `TF_LOG_FILE` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
+### `tf import`
+
+The same as `terraform import` with better handling of arguments.
+
+If the first argument misses quotes inside square brackets then they will be
+added.
+
+The command concatenatest second and rest arguments into one.
+
 ### `tf init`
 
 The same as `terraform init -upgrade` with less verbose output.
