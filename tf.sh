@@ -160,7 +160,7 @@ apply | destroy | plan | refresh)
     -*) args+=("$arg") ;;
     *)
       declare r
-      r=$(echo "$arg" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+      r=$(echo "$arg" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
       args+=("-target=$r")
       ;;
     esac
@@ -231,7 +231,7 @@ import)
     exit $?
   fi
 
-  src=$(echo "$1" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+  src=$(echo "$1" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
   shift
 
   terraform import "${args[@]}" "$src" "$*" | grep --line-buffered -v -P '(The resources that were imported are shown above. These resources are now in|your Terraform state and will henceforth be managed by Terraform.)'
@@ -260,7 +260,7 @@ list)
   # trunk-ignore(shellcheck/SC2046)
   terraform state list $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
     done
   ) | sed 's/\x1b\[[01]m//g'
   exit "${PIPESTATUS[0]}"
@@ -271,7 +271,7 @@ mv)
   # trunk-ignore(shellcheck/SC2046)
   terraform state mv $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
     done
   )
   ;;
@@ -281,7 +281,7 @@ rm)
   # trunk-ignore(shellcheck/SC2046)
   terraform state rm $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g'
+      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
     done
   )
   ;;
@@ -290,7 +290,7 @@ show)
   if [[ $# -gt 0 ]]; then
     for r in "$@"; do
       declare r
-      r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+      r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
       terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
     done
   else
@@ -303,7 +303,7 @@ taint)
   set -e
   for r in "$@"; do
     declare r
-    r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+    r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
     terraform taint "$r"
   done
   ;;
@@ -312,7 +312,7 @@ untaint)
   set -e
   for r in "$@"; do
     declare r
-    r=$(echo "$r" | sed 's/\[\([a-z_][0-9a-z_-]*\)\]/["\1"]/g')
+    r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
     terraform untaint "$r"
   done
   ;;
