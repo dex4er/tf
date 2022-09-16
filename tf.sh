@@ -15,6 +15,7 @@ function filter_manifest_compact() {
 }
 
 function filter_terraform_status() {
+  declare fan="-"
   declare -A statusline
 
   declare -A progress
@@ -37,54 +38,52 @@ function filter_terraform_status() {
     fi
     case "$line" in
     *': Refreshing state...'*)
-      key="-"
-      currentstate="${statusline[$key]:-/}"
-      statusline[$key]="${progress[$currentstate]}"
-      echo "${statusline[*]}" | xargs printf "%s"
+      fan="${progress[$fan]}"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': Reading...'*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: Reading...*}"
       statusline[$key]="r"
-      echo "${statusline[*]}" | xargs printf "%s"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': Creating...'*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: Creating...*}"
       statusline[$key]="a"
-      echo "${statusline[*]}" | xargs printf "%s"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': Modifying...'*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: Modifying...*}"
       statusline[$key]="c"
-      echo "${statusline[*]}" | xargs printf "%s"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': Destroying...'*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: Destroying...*}"
       key="${key% (* ????????)}"
       statusline[$key]="d"
-      echo "${statusline[*]}" | xargs printf "%s"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': Still '*'ing... '*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: Still *}"
       statusline[$key]="${progress[${statusline[$key]}]}"
-      echo "${statusline[*]}" | xargs printf "%s"
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
       printf "\r"
       ;;
     *': '*' complete after '*)
-      statusline["-"]="*"
+      fan="${progress[$fan]}"
       key="${line%: * complete after *}"
-      statusline[$key]="*"
-      echo "${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      statusline[$key]=" "
+      echo "$fan ${statusline[*]}" | xargs printf "%s"
+      printf " \r"
       ;;
     *'Warning:'*'Applied changes may be incomplete'*) ignore=yes ;;
     *'Warning:'*'Resource targeting is in effect'*) ignore=yes ;;
