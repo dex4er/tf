@@ -147,20 +147,22 @@ case "$command" in
 
 apply | destroy | plan | refresh)
   declare tf_log_file
-  declare logging=""
+  declare logging="cat"
   if [[ -n $TF_LOG_FILE ]]; then
     tf_log_file=$(LC_ALL=C date "+$TF_LOG_FILE")
-    logging="tee -a \"$tf_log_file\" | "
+    logging="tee -a \"$tf_log_file\""
   fi
 
-  declare filter="${logging}filter_manifest_short | filter_terraform_status"
+  declare filter_manifest="filter_manifest_short"
+  declare filter_status="filter_terraform_status"
 
   declare args=()
 
   for arg in "$@"; do
     case "$arg" in
-    -compact) filter="${logging}filter_manifest_compact | filter_terraform_status" ;;
-    -verbose) filter="${logging}cat" ;;
+    -compact) filter_manifest="filter_manifest_compact" ;;
+    -full) filter_manifest="cat" ;;
+    -verbose) filter_status="cat" ;;
     -*) args+=("$arg") ;;
     *)
       declare r
@@ -169,6 +171,9 @@ apply | destroy | plan | refresh)
       ;;
     esac
   done
+
+  declare filter="$logging | $filter_manifest | $filter_status"
+  filter=${filter//| cat /}
 
   case "$command" in
   plan)
