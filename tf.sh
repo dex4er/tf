@@ -146,6 +146,7 @@ shift
 case "$command" in
 
 apply | destroy | plan | refresh)
+  declare auto_approve=no
   declare tf_log_file
   declare logging="cat"
   if [[ -n $TF_LOG_FILE ]]; then
@@ -163,6 +164,7 @@ apply | destroy | plan | refresh)
     -compact) filter_manifest="filter_manifest_compact" ;;
     -full) filter_manifest="cat" ;;
     -verbose) filter_status="cat" ;;
+    -auto-approve) auto_approve=yes ;;
     -*) args+=("$arg") ;;
     *)
       declare r
@@ -197,19 +199,21 @@ apply | destroy | plan | refresh)
 
     test "${PIPESTATUS[0]}" = 2 || exit 0
 
-    if [[ -n $workspace ]]; then
-      echo -n "[0m[1mDo you want to perform these actions in workspace \"$workspace\"?[0m "
-    else
-      echo -n "[0m[1mDo you want to perform these actions?[0m "
+    if [[ $auto_approve == no ]]; then
+      if [[ -n $workspace ]]; then
+        echo -n "[0m[1mDo you want to perform these actions in workspace \"$workspace\"?[0m "
+      else
+        echo -n "[0m[1mDo you want to perform these actions?[0m "
+      fi
+
+      trap - INT
+      read -r VALUE
+      trap '' INT
+
+      test "$VALUE" = "yes" || exit 0
+
+      echo ""
     fi
-
-    trap - INT
-    read -r VALUE
-    trap '' INT
-
-    test "$VALUE" = "yes" || exit 0
-
-    echo ""
 
     terraform apply -compact-warnings -auto-approve -refresh=false "${args[@]}" terraform.tfplan | eval "$filter"
     ;;
