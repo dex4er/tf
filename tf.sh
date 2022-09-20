@@ -20,7 +20,7 @@ function filter_manifest_compact() {
   grep --line-buffered -v -P '^\s\s[\s+~-]|\(config refers to values not yet known\)'
 }
 
-function filter_terraform_status() {
+function filter_progress_fan() {
   declare fan="-"
   declare -A statusline
 
@@ -154,17 +154,24 @@ apply | destroy | plan | refresh)
     logging="tee -a \"$tf_log_file\""
   fi
 
-  declare filter_manifest="filter_manifest_short"
-  declare filter_status="filter_terraform_status"
+  declare filter_manifest="cat"
+  declare filter_progress="cat"
 
   declare args=()
 
-  for arg in "$@"; do
+  declare default_args=(-short -fan)
+  if [[ ${TF_IN_AUTOMATION:-0} == 1 ]]; then
+    default_args=(-short -verbose)
+  fi
+
+  for arg in "${default_args[@]}" "$@"; do
     case "$arg" in
-    -compact) filter_manifest="filter_manifest_compact" ;;
-    -full) filter_manifest="cat" ;;
-    -verbose) filter_status="cat" ;;
     -auto-approve) auto_approve=yes ;;
+    -compact) filter_manifest="filter_manifest_compact" ;;
+    -fan) filter_progress="filter_progress_fan" ;;
+    -full) filter_manifest="cat" ;;
+    -short) filter_manifest="filter_manifest_short" ;;
+    -verbose) filter_progress="cat" ;;
     -*) args+=("$arg") ;;
     *)
       declare r
@@ -174,7 +181,7 @@ apply | destroy | plan | refresh)
     esac
   done
 
-  declare filter="$logging | $filter_manifest | $filter_status"
+  declare filter="$logging | $filter_manifest | $filter_progress"
   filter=${filter//| cat /}
 
   case "$command" in
