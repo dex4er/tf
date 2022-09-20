@@ -6,8 +6,14 @@
 ##
 ## MIT License
 
+shopt -s inherit_errexit
+
+function add_quotes() {
+  echo "$1" | sed 's/\[\([a-z_][^]]*\)\]/["\1"]/g'
+}
+
 function filter_manifest_short() {
-  grep --line-buffered -v -P '\(known after apply\)|\(\d+ unchanged \w+ hidden\)|\(config refers to values not yet known\)'
+  grep --line-buffered -v -P '= \(known after apply\)|\(\d+ unchanged \w+ hidden\)|\(config refers to values not yet known\)'
 }
 
 function filter_manifest_compact() {
@@ -159,7 +165,7 @@ apply | destroy | plan | refresh)
     -*) args+=("$arg") ;;
     *)
       declare r
-      r=$(echo "$arg" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
+      r=$(add_quotes "$arg")
       args+=("-target=$r")
       ;;
     esac
@@ -230,7 +236,7 @@ import)
     exit $?
   fi
 
-  src=$(echo "$1" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
+  src=$(add_quotes "$1")
   shift
 
   terraform import "${args[@]}" "$src" "$*" | grep --line-buffered -v -P '(The resources that were imported are shown above. These resources are now in|your Terraform state and will henceforth be managed by Terraform.)'
@@ -259,7 +265,7 @@ list)
   # trunk-ignore(shellcheck/SC2046)
   terraform state list $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
+      add_quotes "$r"
     done
   ) | sed 's/\x1b\[[01]m//g'
   exit "${PIPESTATUS[0]}"
@@ -270,7 +276,7 @@ mv)
   # trunk-ignore(shellcheck/SC2046)
   terraform state mv $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
+      add_quotes "$r"
     done
   )
   ;;
@@ -280,7 +286,7 @@ rm)
   # trunk-ignore(shellcheck/SC2046)
   terraform state rm $(
     for r in "$@"; do
-      echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g'
+      add_quotes "$r"
     done
   )
   ;;
@@ -289,7 +295,7 @@ show)
   if [[ $# -gt 0 ]]; then
     for r in "$@"; do
       declare r
-      r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
+      r="$(add_quotes "$r")"
       terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
     done
   else
@@ -302,7 +308,7 @@ taint)
   set -e
   for r in "$@"; do
     declare r
-    r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
+    r=$(add_quotes "$r")
     terraform taint "$r"
   done
   ;;
@@ -311,7 +317,7 @@ untaint)
   set -e
   for r in "$@"; do
     declare r
-    r=$(echo "$r" | sed 's/\[\([a-z_][^"]*\)\]/["\1"]/g')
+    r=$(add_quotes "$r")
     terraform untaint "$r"
   done
   ;;
