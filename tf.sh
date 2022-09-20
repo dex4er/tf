@@ -160,8 +160,7 @@ apply | destroy | plan | refresh)
   for arg in "$@"; do
     case "$arg" in
     -compact) filter="${logging}filter_manifest_compact | filter_terraform_status" ;;
-    -short) ;;
-    -full) filter="${logging}" ;;
+    -verbose) filter="${logging}cat" ;;
     -*) args+=("$arg") ;;
     *)
       declare r
