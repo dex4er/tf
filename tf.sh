@@ -151,7 +151,7 @@ apply | destroy | plan | refresh)
   declare logging="cat"
   if [[ -n $TF_LOG_FILE ]]; then
     tf_log_file=$(LC_ALL=C date "+$TF_LOG_FILE")
-    logging="tee -a \"$tf_log_file\""
+    logging="cat 2> >(tee -a \"$tf_log_file\" >&2) | tee -a \"$tf_log_file\""
   fi
 
   declare filter_manifest="cat"
