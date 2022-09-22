@@ -66,8 +66,11 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-An additional option is `-compact` which will skip the content of the resources
-completely.
+Additional options can be used: `-compact` skips the content of the resources,
+`-short` removes unecessary lines (default), `-full` keeps original manifest,
+`-fan` hides messages about progress and shows short indicator (default),
+`-verbose` keeps original messages about progress (default if
+`TF_IN_AUTOMATION=1`).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -86,8 +89,11 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-An additional option is `-compact` which will skip the content of the resources
-completely.
+Additional options can be used: `-compact` skips the content of the resources,
+`-short` removes unecessary lines (default), `-full` keeps original manifest,
+`-fan` hides messages about progress and shows short indicator (default),
+`-verbose` keeps original messages about progress (default if
+`TF_IN_AUTOMATION=1`).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -147,6 +153,12 @@ The file name is solved by `date` command for `%` sequences.
 ### `tf refresh`
 
 The same as `terraform apply -refresh-only` with less verbose output.
+
+Additional options can be used: `-compact` skips the content of the resources,
+`-short` removes unecessary lines (default), `-full` keeps original manifest,
+`-fan` hides messages about progress and shows short indicator (default),
+`-verbose` keeps original messages about progress (default if
+`TF_IN_AUTOMATION=1`).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
