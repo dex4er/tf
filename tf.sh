@@ -117,8 +117,7 @@ function filter_progress_fan() {
     *'relevant attributes using ignore_changes, the following plan may include'*) ;;
     *'actions to undo or respond to these changes.'*) ;;
     *'This is a refresh-only plan, so Terraform will not take any actions to undo'*) ;;
-    *'these. If you were expecting these changes then you can apply this plan to
-'*) ;;
+    *'these. If you were expecting these changes then you can apply this plan to'*) ;;
     *'record the updated values in the Terraform state without changing any remote'*) ignore=next ;;
     *'Terraform has checked that the real remote objects still match the result of'*) ;;
     *'your most recent changes, and found no differences.'*) ;;
