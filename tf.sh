@@ -21,25 +21,7 @@ function filter_manifest_compact() {
 }
 
 function filter_outputs() {
-  local ignore=no
-
-  local prev=''
-  IFS=''
-  while read -r line; do
-    if [[ $ignore == "yes" ]]; then
-      continue
-    fi
-    if [[ $line == "$prev" ]]; then
-      continue
-    fi
-    case "$line" in
-    *'Outputs:'*) ignore=yes ;;
-    *)
-      echo "$line"
-      prev="$line"
-      ;;
-    esac
-  done
+  sed '/^Outputs:$/,$d'
 }
 
 function filter_progress() {
