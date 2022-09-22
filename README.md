@@ -68,9 +68,10 @@ It will skip `(known after apply)` lines from the output.
 
 Additional options can be used: `-compact` skips the content of the resources,
 `-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default),
+`-fan` hides messages about progress and shows short indicator (default), `-dot`
+hides messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
-`TF_IN_AUTOMATION=1`).
+`TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -91,9 +92,10 @@ It will skip `(known after apply)` lines from the output.
 
 Additional options can be used: `-compact` skips the content of the resources,
 `-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default),
+`-fan` hides messages about progress and shows short indicator (default), `-dot`
+hides messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
-`TF_IN_AUTOMATION=1`).
+`TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -156,9 +158,10 @@ The same as `terraform apply -refresh-only` with less verbose output.
 
 Additional options can be used: `-compact` skips the content of the resources,
 `-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default),
+`-fan` hides messages about progress and shows short indicator (default), `-dot`
+hides messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
-`TF_IN_AUTOMATION=1`).
+`TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.

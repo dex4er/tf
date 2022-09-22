@@ -20,16 +20,43 @@ function filter_manifest_compact() {
   grep --line-buffered -v -P '^\s\s[\s+~-]|\(config refers to values not yet known\)'
 }
 
-function filter_progress_fan() {
-  declare fan="-"
+function filter_outputs() {
+  local ignore=no
+
+  local prev=''
+  IFS=''
+  while read -r line; do
+    if [[ $ignore == "yes" ]]; then
+      continue
+    fi
+    if [[ $line == "$prev" ]]; then
+      continue
+    fi
+    case "$line" in
+    *'Outputs:'*) ignore=yes ;;
+    *)
+      echo "$line"
+      prev="$line"
+      ;;
+    esac
+  done
+}
+
+function filter_progress() {
+  local mode="$1"
+
+  local fan="-"
   declare -A statusline
 
   declare -A progress
   # trunk-ignore(shellcheck/SC1003)
   progress=(["-"]='\\' ['\\']="|" ["|"]="/" ["/"]="-" [r]="R" [R]="r" [a]="A" [A]="a" [c]="C" [C]="c" [d]="D" [D]="d")
 
-  ignore=no
+  local dot_ended=no
 
+  local ignore=no
+
+  local prev=''
   IFS=''
   while read -r line; do
     if [[ $ignore == "yes" ]]; then
@@ -44,52 +71,98 @@ function filter_progress_fan() {
     fi
     case "$line" in
     *': Refreshing state...'*)
-      fan="${progress[$fan]}"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot)
+        printf "."
+        ;;
+      esac
       ;;
     *': Reading...'*)
-      fan="${progress[$fan]}"
-      key="${line%: Reading...*}"
-      statusline[$key]="r"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: Reading...*}"
+        statusline[$key]="r"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot)
+        printf "r"
+        ;;
+      esac
       ;;
     *': Creating...'*)
-      fan="${progress[$fan]}"
-      key="${line%: Creating...*}"
-      statusline[$key]="a"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: Creating...*}"
+        statusline[$key]="a"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot) printf "a" ;;
+      esac
       ;;
     *': Modifying...'*)
-      fan="${progress[$fan]}"
-      key="${line%: Modifying...*}"
-      statusline[$key]="c"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: Modifying...*}"
+        statusline[$key]="c"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot) printf "c" ;;
+      esac
       ;;
     *': Destroying...'*)
-      fan="${progress[$fan]}"
-      key="${line%: Destroying...*}"
-      key="${key% (* ????????)}"
-      statusline[$key]="d"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: Destroying...*}"
+        key="${key% (* ????????)}"
+        statusline[$key]="d"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot) printf "d" ;;
+      esac
       ;;
     *': Still '*'ing... '*)
-      fan="${progress[$fan]}"
-      key="${line%: Still *}"
-      statusline[$key]="${progress[${statusline[$key]}]}"
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf "\r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: Still *}"
+        statusline[$key]="${progress[${statusline[$key]}]}"
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf "\r"
+        ;;
+      dot) printf "." ;;
+      esac
       ;;
     *': '*' complete after '*)
-      fan="${progress[$fan]}"
-      key="${line%: * complete after *}"
-      statusline[$key]=" "
-      echo "$fan ${statusline[*]}" | xargs printf "%s"
-      printf " \r"
+      case "$mode" in
+      fan)
+        fan="${progress[$fan]}"
+        key="${line%: * complete after *}"
+        statusline[$key]=" "
+        echo "$fan ${statusline[*]}" | xargs printf "%s"
+        printf " \r"
+        ;;
+      dot)
+        case "$line" in
+        *'Read complete after'*) printf "R" ;;
+        *'Creation complete after'*) printf "A" ;;
+        *'Destruction complete after'*) printf "D" ;;
+        *'Modifications complete after'*) printf "C" ;;
+        esac
+        ;;
+      esac
       ;;
     *'Warning:'*'Applied changes may be incomplete'*) ignore=yes ;;
     *'Warning:'*'Resource targeting is in effect'*) ignore=yes ;;
@@ -106,9 +179,7 @@ function filter_progress_fan() {
       ignore=no
       continue
       ;;
-    *'Terraform used the selected providers to generate the following execution'*)
-      echo
-      ;;
+    *'Terraform used the selected providers to generate the following execution'*) echo ;;
     *'plan. Resource actions are indicated with the following symbols:') ;;
     *'Terraform will perform the following actions:'*) ;;
     *'Terraform has compared your real infrastructure against your configuration'*) ;;
@@ -132,6 +203,10 @@ function filter_progress_fan() {
     *'guarantee to take exactly these actions if you run "terraform apply" now.'*) ;;
     *'─────────────────────────────────────────────────────────────────────────────'*) ;;
     *)
+      if [[ $mode == dot ]] && [[ $dot_ended == no ]]; then
+        echo
+        dot_ended=yes
+      fi
       echo "$line"
       prev="$line"
       ;;
@@ -155,6 +230,7 @@ apply | destroy | plan | refresh)
 
   declare filter_manifest="cat"
   declare filter_progress="cat"
+  declare filter_outputs="cat"
 
   declare args=()
 
@@ -167,8 +243,11 @@ apply | destroy | plan | refresh)
     case "$arg" in
     -auto-approve) auto_approve=yes ;;
     -compact) filter_manifest="filter_manifest_compact" ;;
-    -fan) filter_progress="filter_progress_fan" ;;
+    -dot) filter_progress="filter_progress dot" ;;
+    -fan) filter_progress="filter_progress fan" ;;
     -full) filter_manifest="cat" ;;
+    -no-outputs) filter_outputs="filter_outputs" ;;
+    -quiet) filter_progress="filter_progress quiet" ;;
     -short) filter_manifest="filter_manifest_short" ;;
     -verbose) filter_progress="cat" ;;
     -*) args+=("$arg") ;;
@@ -180,7 +259,7 @@ apply | destroy | plan | refresh)
     esac
   done
 
-  declare filter="$logging | $filter_manifest | $filter_progress"
+  declare filter="$logging | $filter_manifest | $filter_outputs | $filter_progress"
   filter=${filter//| cat /}
 
   case "$command" in
