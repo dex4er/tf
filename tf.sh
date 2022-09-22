@@ -183,6 +183,7 @@ function filter_progress() {
     *'- Experimental feature '*' is active'*) ignore=next ;;
     *'Note: You '*' use the -out option to save this plan, so Terraform'*) ;;
     *'guarantee to take exactly these actions if you run "terraform apply" now.'*) ;;
+    *'Apply complete! Resources: 0 added, 0 changed, 0 destroyed.'*) ;;
     *'─────────────────────────────────────────────────────────────────────────────'*) ;;
     *)
       if [[ $mode == dot ]] && [[ $dot_ended == no ]]; then
