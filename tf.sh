@@ -21,7 +21,7 @@ function filter_manifest_compact() {
 }
 
 function filter_outputs() {
-  sed '/^Outputs:$/,$d'
+  sed -u '/^Outputs:$/,$d'
 }
 
 function filter_progress() {
@@ -332,9 +332,9 @@ init)
 
   exec terraform init -upgrade | eval "$logging" |
     grep --line-buffered -v -P 'Finding .* versions matching|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
-    sed '/Terraform has been successfully initialized/,$d' |
+    sed -u '/Terraform has been successfully initialized/,$d' |
     uniq |
-    sed '1{/^$/d}'
+    sed -u '1{/^$/d}'
   ;;
 
 list)
@@ -343,7 +343,7 @@ list)
     for r in "$@"; do
       add_quotes "$r"
     done
-  ) | sed 's/\x1b\[[01]m//g'
+  ) | sed -u 's/\x1b\[[01]m//g'
   exit "${PIPESTATUS[0]}"
   ;;
 
@@ -372,7 +372,7 @@ show)
     for r in "$@"; do
       declare r
       r="$(add_quotes "$r")"
-      terraform state show -no-color "$r" | sed 's/\x1b\[[01]m//g'
+      terraform state show -no-color "$r" | sed -u 's/\x1b\[[01]m//g'
     done
   else
     terraform show -no-color
