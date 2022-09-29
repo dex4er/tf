@@ -330,9 +330,9 @@ init)
 
   set -e
 
-  exec terraform init -upgrade | eval "$logging" |
-    grep --line-buffered -v -P 'Finding .* versions matching|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
-    sed -u '/Terraform has been successfully initialized/,$d' |
+  exec terraform init | eval "$logging" |
+    grep --line-buffered -v -P 'Finding .* versions matching|Initializing Terraform|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
+    sed -u '/You may now begin working with Terraform/,$d' |
     uniq |
     sed -u '1{/^$/d}'
   ;;
@@ -396,6 +396,21 @@ untaint)
     r=$(add_quotes "$r")
     terraform untaint "$r"
   done
+  ;;
+
+upgrade)
+  declare logging="cat"
+  if [[ -n $TF_LOG_FILE ]]; then
+    logging="tee -a \"$TF_LOG_FILE\""
+  fi
+
+  set -e
+
+  exec terraform init -upgrade | eval "$logging" |
+    grep --line-buffered -v -P 'Finding .* versions matching|Initializing Terraform|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
+    sed -u '/You may now begin working with Terraform/,$d' |
+    uniq |
+    sed -u '1{/^$/d}'
   ;;
 
 version)
