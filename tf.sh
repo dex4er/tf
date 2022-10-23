@@ -9,7 +9,7 @@
 shopt -s inherit_errexit
 
 function add_quotes() {
-  echo "$1" | sed 's/\[\([a-z_][^]]*\)\]/["\1"]/g'
+  echo "$1" | sed 's/\[\([a-z_][^]]*\)\]/["\1"]/gi'
 }
 
 function filter_manifest_short() {
