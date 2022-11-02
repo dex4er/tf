@@ -245,13 +245,14 @@ apply | destroy | plan | refresh)
   declare filter="$logging | $filter_manifest | $filter_outputs | $filter_progress"
   filter=${filter//| cat /}
 
+  trap '' INT
+
   case "$command" in
   plan)
     terraform plan -compact-warnings "${args[@]}" | eval "$filter"
     ;;
   apply | destroy)
     trap 'rm -rf terraform.tfplan' EXIT
-    trap '' INT
 
     declare workspace
     workspace=$(terraform workspace show 2>/dev/null || true)
