@@ -1,11 +1,24 @@
 version: 0.1
 cli:
-  version: 0.16.1-beta
+  version: 1.1.0
 lint:
   enabled:
+    - actionlint@1.6.22
     - git-diff-check@SYSTEM
-    - gitleaks@8.11.0
-    - markdownlint@0.32.1
-    - prettier@2.7.1
+    - gitleaks@8.15.1
+    - markdownlint@0.32.2
+    - prettier@2.8.0
     - shellcheck@0.8.0
     - shfmt@3.5.0
+actions:
+  enabled:
+    - trunk-upgrade-available
+plugins:
+  sources:
+    - id: trunk
+      ref: v0.0.6
+      uri: https://github.com/trunk-io/plugins
+runtimes:
+  enabled:
+    - go@1.18.3
+    - node@16.14.2
