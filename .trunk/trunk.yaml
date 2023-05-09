@@ -22,5 +22,5 @@ plugins:
 runtimes:
   enabled:
     - python@3.10.8
-    - go@1.19.5
+    - go@1.20.3
     - node@18.12.1
