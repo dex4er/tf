@@ -24,6 +24,12 @@ simple wrapper which makes Terraform more CLI friendly:
 - adds automatically quotes for indexed resources
 - generates log file when `TF_LOG_FILE` environment variable is used
 
+## Prerequisities
+
+Bash >= 4.0 or ZSH.
+
+On MacOS also `brew install gnu-sed grep`.
+
 ## Install
 
 ```sh

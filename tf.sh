@@ -2,11 +2,23 @@
 
 ## https://github.com/dex4er/tf
 ##
-## (c) 2020-2022 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+## (c) 2020-2023 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 ##
 ## MIT License
 
-shopt -s inherit_errexit
+if [[ -n $BASH_VERSINFO ]] && [[ $BASH_VERSINFO -le 3 ]] && command -v zsh >/dev/null; then
+  exec zsh "$0" "$@"
+fi
+
+shopt -s inherit_errexit 2>/dev/null || true
+
+if command -v ggrep >/dev/null; then
+  alias grep=ggrep
+fi
+
+if command -v gsed >/dev/null; then
+  alias sed=gsed
+fi
 
 function add_quotes() {
   echo "$1" | sed 's/\[\([a-z_][^]]*\)\]/["\1"]/gi'
@@ -31,7 +43,6 @@ function filter_progress() {
   declare -A statusline
 
   declare -A progress
-  # trunk-ignore(shellcheck/SC1003)
   progress=(["-"]='\\' ['\\']="|" ["|"]="/" ["/"]="-" [r]="R" [R]="r" [a]="A" [A]="a" [c]="C" [C]="c" [d]="D" [D]="d")
 
   local dot_ended=no
@@ -198,7 +209,7 @@ function filter_progress() {
 }
 
 declare command="$1"
-shift
+test $# -gt 0 && shift
 
 case "$command" in
 
