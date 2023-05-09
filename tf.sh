@@ -6,7 +6,9 @@
 ##
 ## MIT License
 
-if [[ -n $BASH_VERSINFO ]] && [[ $BASH_VERSINFO -le 3 ]] && command -v zsh >/dev/null; then
+VERSION=1.5.0
+
+if [[ -n ${BASH_VERSINFO[0]} ]] && [[ ${BASH_VERSINFO[0]} -le 3 ]] && command -v zsh >/dev/null; then
   exec zsh "$0" "$@"
 fi
 
@@ -426,7 +428,7 @@ upgrade)
   ;;
 
 version)
-  echo tf 1.0.0
+  echo "tf ${VERSION}"
   terraform version
   ;;
 
