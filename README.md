@@ -34,7 +34,7 @@ On MacOS also `brew install gnu-sed grep`.
 
 ```sh
 curl https://raw.githubusercontent.com/dex4er/tf/main/tf.sh | sudo tee /usr/local/bin/tf
-chmod +x /usr/local/bin/tf
+sudo chmod +x /usr/local/bin/tf
 ```
 
 ## Usage
