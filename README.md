@@ -26,7 +26,7 @@ simple wrapper which makes Terraform more CLI friendly:
 
 ## Prerequisities
 
-Bash >= 4.0 or ZSH.
+Bash >= 4.0 or Zsh.
 
 On MacOS also `brew install gnu-sed grep`.
 
@@ -35,6 +35,17 @@ On MacOS also `brew install gnu-sed grep`.
 ```sh
 curl https://raw.githubusercontent.com/dex4er/tf/main/tf.sh | sudo tee /usr/local/bin/tf
 sudo chmod +x /usr/local/bin/tf
+```
+
+### Zsh
+
+With Zsh `noglob` should be used to prevent errors when indexed paramerers are
+arguments for `tf` command.
+
+Add to `~/.zshenv`:
+
+```sh
+alias tf='noglob tf'
 ```
 
 ## Usage
