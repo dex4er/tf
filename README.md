@@ -212,6 +212,6 @@ The file name is solved by `date` command for `%` sequences.
 
 ### License
 
-Copyright (c) 2020-2022 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+Copyright (c) 2020-2023 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 
 [MIT](https://opensource.org/licenses/MIT)
