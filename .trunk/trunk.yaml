@@ -1,9 +1,8 @@
 version: 0.1
 cli:
-  version: 1.9.1
+  version: 1.10.0
 lint:
   enabled:
-    - yamllint@1.31.0
     - actionlint@1.6.24
     - git-diff-check@SYSTEM
     - gitleaks@8.16.3
@@ -11,8 +10,12 @@ lint:
     - prettier@2.8.8
     - shellcheck@0.9.0
     - shfmt@3.5.0
+    - yamllint@1.32.0
 actions:
   enabled:
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
     - trunk-upgrade-available
 plugins:
   sources:

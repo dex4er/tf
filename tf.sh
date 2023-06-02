@@ -6,7 +6,7 @@
 ##
 ## MIT License
 
-VERSION=1.5.0
+VERSION=1.6.0
 
 if [[ -n ${BASH_VERSINFO[0]} ]] && [[ ${BASH_VERSINFO[0]} -le 3 ]] && command -v zsh >/dev/null; then
   exec zsh "$0" "$@"
@@ -15,11 +15,23 @@ fi
 shopt -s inherit_errexit 2>/dev/null || true
 
 if command -v ggrep >/dev/null; then
-  alias grep=ggrep
+  function grep() {
+    ggrep "$@"
+  }
 fi
 
 if command -v gsed >/dev/null; then
-  alias sed=gsed
+  function sed() {
+    gsed "$@"
+  }
+fi
+
+if [[ -n $ZSH_VERSION ]]; then
+  # shellcheck disable=SC2016
+  pipestatus0='$pipestatus[1]'
+else
+  # shellcheck disable=SC2016
+  pipestatus0='${PIPESTATUS[0]}'
 fi
 
 function add_quotes() {
@@ -175,7 +187,16 @@ function filter_progress() {
       continue
       ;;
     *'Terraform used the selected providers to generate the following execution'*) echo ;;
-    *'plan. Resource actions are indicated with the following symbols:') ;;
+    *'Preparing the remote plan...'*) ;;
+    *'Running plan in Terraform Cloud. Output will stream here. Pressing Ctrl-C'*) ;;
+    *'will stop streaming the logs, but will not stop the plan running remotely.'*) ;;
+    *'The remote workspace is configured to work with configuration at'*) ;;
+    *'relative to the target repository.'*) ;;
+    *'excluding files or directories as defined by a .terraformignore file'*) ;;
+    *'at '*'.terraformignore (if it is present),'*) ;;
+    *'in order to capture the filesystem context the remote workspace expects:'*) ;;
+    *'plan. Resource actions are indicated with the following symbols:'*) ;;
+    *'Waiting for the plan to start...'*) ;;
     *'Terraform will perform the following actions:'*) ;;
     *'Terraform has compared your real infrastructure against your configuration'*) ;;
     *'and found no differences, so no changes are needed.'*) ;;
@@ -273,19 +294,19 @@ apply | destroy | plan | refresh)
     case "$command" in
     apply)
       terraform plan -compact-warnings -detailed-exitcode "${args[@]}" -out=terraform.tfplan | eval "$filter"
+      eval test "${pipestatus0}" = 2 || exit 0
       ;;
     destroy)
       terraform plan -destroy -compact-warnings -detailed-exitcode "${args[@]}" -out=terraform.tfplan | eval "$filter"
+      eval test "${pipestatus0}" = 2 || exit 0
       ;;
     esac
 
-    test "${PIPESTATUS[0]}" = 2 || exit 0
-
     if [[ $auto_approve == no ]]; then
       if [[ -n $workspace ]]; then
-        echo -n "[0m[1mDo you want to perform these actions in workspace \"$workspace\"?[0m "
+        echo -ne "\e[0m\e[1mDo you want to perform these actions in workspace \"$workspace\"?\e[0m "
       else
-        echo -n "[0m[1mDo you want to perform these actions?[0m "
+        echo -ne "\e[0m\e[1mDo you want to perform these actions?\e[0m "
       fi
 
       trap - INT
@@ -298,13 +319,13 @@ apply | destroy | plan | refresh)
     fi
 
     terraform apply -compact-warnings -auto-approve -refresh=false "${args[@]}" terraform.tfplan | eval "$filter"
+    eval exit "${pipestatus0}"
     ;;
   refresh)
     terraform apply -compact-warnings -auto-approve "${args[@]}" -refresh-only | eval "$filter"
+    eval exit "${pipestatus0}"
     ;;
   esac
-
-  exit "${PIPESTATUS[0]}"
   ;;
 
 import)
@@ -352,18 +373,18 @@ init)
   ;;
 
 list)
-  # trunk-ignore(shellcheck/SC2046)
+  # shellcheck disable=SC2046
   terraform state list $(
     for r in "$@"; do
       add_quotes "$r"
     done
   ) | sed -u 's/\x1b\[[01]m//g'
-  exit "${PIPESTATUS[0]}"
+  eval exit "${pipestatus0}"
   ;;
 
 mv)
   set -e
-  # trunk-ignore(shellcheck/SC2046)
+  # shellcheck disable=SC2046
   terraform state mv $(
     for r in "$@"; do
       add_quotes "$r"
@@ -373,7 +394,7 @@ mv)
 
 rm)
   set -e
-  # trunk-ignore(shellcheck/SC2046)
+  # shellcheck disable=SC2046
   terraform state rm $(
     for r in "$@"; do
       add_quotes "$r"
