@@ -5,6 +5,8 @@ on:
   - push
   - workflow_dispatch
 
+permissions: read-all
+
 jobs:
   test:
     strategy:
