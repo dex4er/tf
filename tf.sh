@@ -6,7 +6,7 @@
 ##
 ## MIT License
 
-VERSION=1.6.0
+VERSION=1.7.0
 
 if [[ -n ${BASH_VERSINFO[0]} ]] && [[ ${BASH_VERSINFO[0]} -le 3 ]] && command -v zsh >/dev/null; then
   exec zsh "$0" "$@"
@@ -77,7 +77,7 @@ function filter_progress() {
       continue
     fi
     case "$line" in
-    *': Refreshing state...'*)
+    *': Refreshing state...'* | *': Refreshing...'* | *': Drift detected'*)
       case "$mode" in
       fan)
         fan="${progress[$fan]}"
@@ -404,8 +404,8 @@ rm)
 
 show)
   if [[ $# -gt 0 ]]; then
+    declare r
     for r in "$@"; do
-      declare r
       r="$(add_quotes "$r")"
       terraform state show -no-color "$r" | sed -u 's/\x1b\[[01]m//g'
     done
@@ -417,8 +417,8 @@ show)
 
 taint)
   set -e
+  declare r
   for r in "$@"; do
-    declare r
     r=$(add_quotes "$r")
     terraform taint "$r"
   done
@@ -426,8 +426,8 @@ taint)
 
 untaint)
   set -e
+  declare r
   for r in "$@"; do
-    declare r
     r=$(add_quotes "$r")
     terraform untaint "$r"
   done
@@ -441,11 +441,13 @@ upgrade)
 
   set -e
 
-  exec terraform init -upgrade | eval "$logging" |
+  terraform init -upgrade | eval "$logging" |
     grep --line-buffered -v -P 'Finding .* versions matching|Initializing Terraform|Initializing (modules|the backend|provider plugins)...|Upgrading modules...|Using previously-installed|Reusing previous version of|from the shared cache directory|in modules/' |
     sed -u '/You may now begin working with Terraform/,$d' |
     uniq |
     sed -u '1{/^$/d}'
+
+  echo -ne "\e[0m"
   ;;
 
 version)
