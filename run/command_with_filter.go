@@ -11,11 +11,13 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/mitchellh/colorstring"
+
 	"github.com/dex4er/tf/util"
 )
 
 func commandWithFilter(command string, args []string, ignorePattern string, endPattern string) error {
-	defer fmt.Printf("\033[0m")
+	defer colorstring.Printf("[reset]")
 
 	signal.Ignore(syscall.SIGINT)
 
@@ -71,7 +73,7 @@ func commandWithFilter(command string, args []string, ignorePattern string, endP
 			line = line + string(r)
 		}
 
-		if strings.Contains(line, "\x1b[1mEnter a value:\x1b[0m \x1b[0m") || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
+		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
 			if file != nil {
 				fmt.Fprintln(file, line)
 			}
