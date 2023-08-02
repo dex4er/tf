@@ -72,8 +72,8 @@ func commandWithProgress(command string, args []string) error {
 	// 	"|: Refreshing\\.\\.\\."
 	// patternStopRefreshing := ": Drift detected"
 
-	// patternStartReading := ": Reading\\.\\.\\."
-	// patternStopReading := ": Read complete after"
+	patternStartReading := "(?:.\\[0m.\\[1m)?(.*?): Reading\\.\\.\\."
+	patternStopReading := "(?:.\\[0m.\\[1m)?(.*?): Read complete after"
 
 	// patternStartCreating := ": Creating\\.\\.\\."
 	// patternStopCreating := ": Creation complete after"
@@ -92,6 +92,8 @@ func commandWithProgress(command string, args []string) error {
 	reIgnoreBlockEnd := regexp.MustCompile(patternIgnoreBlockEnd)
 	reIgnoreShortFormat := regexp.MustCompile(patternIgnoreShortFormat)
 	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
+	reStartReading := regexp.MustCompile(patternStartReading)
+	reStopReading := regexp.MustCompile(patternStopReading)
 
 	format := "short"
 	progress := "fan"
@@ -192,6 +194,20 @@ func commandWithProgress(command string, args []string) error {
 				fmt.Fprintln(file, line)
 			}
 
+			if m := reStartReading.FindStringSubmatch(line); m != nil {
+				r := m[1]
+				colorstring.Printf("[cyan]0/1[reset] [green]0/0[reset] [yellow]0/0[reset] [red]0/0[reset] %s\r", r)
+				line = ""
+				continue
+			}
+
+			if m := reStopReading.FindStringSubmatch(line); m != nil {
+				r := m[1]
+				colorstring.Printf("[cyan]1/1[reset] [green]0/0[reset] [yellow]0/0[reset] [red]0/0[reset] %s\r", r)
+				line = ""
+				continue
+			}
+
 			if reIgnoreBlockStart.MatchString(line) {
 				ignoreBlock = true
 				line = ""
@@ -250,7 +266,13 @@ func commandWithProgress(command string, args []string) error {
 				continue
 			}
 
-			fmt.Print(line)
+			if strings.HasSuffix(line, "\n") {
+				line = strings.TrimSuffix(line, "\n")
+				fmt.Print(line)
+				fmt.Println(strings.Repeat(" ", 79-len(line)))
+			} else {
+				fmt.Print(line)
+			}
 
 			wasEmptyLine = util.IsEmptyLine(line)
 

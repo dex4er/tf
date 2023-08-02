@@ -2,6 +2,7 @@
 *~
 *.backup
 *.lock.hcl
+*.lock.info
 *.log
 *.tfstate
 /tf
