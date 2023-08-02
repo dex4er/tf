@@ -17,7 +17,7 @@ import (
 )
 
 func commandWithFilter(command string, args []string, ignoreLinePattern string, ignoreNextLinePattern string, ignoreBlockStartPattern string, ignoreBlockEndPattern string, footerPattern string) error {
-	defer colorstring.Printf("[reset]")
+	defer fmt.Print(util.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
 
@@ -131,14 +131,14 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 				continue
 			}
 
-			if wasEmptyLine && (line == "" || line == "\n" || line == "\r\n") {
+			if wasEmptyLine && util.IsEmptyLine(line) {
 				line = ""
 				continue
 			}
 
 			fmt.Print(line)
 
-			wasEmptyLine = line == "" || line == "\n" || line == "\r\n"
+			wasEmptyLine = util.IsEmptyLine(line)
 
 			if footerPattern != "" && reFooter.MatchString(line) {
 				skipFooter = true
