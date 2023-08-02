@@ -16,7 +16,7 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func commandWithFilter(command string, args []string, ignoreLinePattern string, footerPattern string) error {
+func commandWithFilter(command string, args []string, ignoreLinePattern string, ignoreNextLinePattern string, ignoreBlockStartPattern string, ignoreBlockEndPattern string, footerPattern string) error {
 	defer colorstring.Printf("[reset]")
 
 	signal.Ignore(syscall.SIGINT)
@@ -45,10 +45,15 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
-	reIgnore := regexp.MustCompile(ignoreLinePattern)
+	reIgnoreLine := regexp.MustCompile(ignoreLinePattern)
+	reIgnoreNextLine := regexp.MustCompile(ignoreNextLinePattern)
+	reIgnoreBlockStart := regexp.MustCompile(ignoreBlockStartPattern)
+	reIgnoreBlockEnd := regexp.MustCompile(ignoreBlockEndPattern)
 	reFooter := regexp.MustCompile(footerPattern)
 
 	isEof := false
+	ignoreNextLine := false
+	ignoreBlock := false
 	skipHeader := true
 	skipFooter := false
 	wasEmptyLine := false
@@ -83,7 +88,36 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 				continue
 			}
 
-			if reIgnore.MatchString(line) {
+			if reIgnoreBlockStart.MatchString(line) {
+				ignoreBlock = true
+				line = ""
+				continue
+			}
+
+			if reIgnoreBlockEnd.MatchString(line) {
+				ignoreBlock = false
+				line = ""
+				continue
+			}
+
+			if ignoreBlock {
+				line = ""
+				continue
+			}
+
+			if reIgnoreNextLine.MatchString(line) {
+				ignoreNextLine = true
+				line = ""
+				continue
+			}
+
+			if ignoreNextLine {
+				ignoreNextLine = false
+				line = ""
+				continue
+			}
+
+			if reIgnoreLine.MatchString(line) {
 				line = ""
 				continue
 			}
