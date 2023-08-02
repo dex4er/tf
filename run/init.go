@@ -1,7 +1,7 @@
 package run
 
 func Init(args []string) error {
-	ignoreLinePattern := "Finding .* versions matching" +
+	patternIgnoreLine := "Finding .* versions matching" +
 		"|Initializing Terraform" +
 		"|Initializing (modules" +
 		"|the backend" +
@@ -19,7 +19,7 @@ func Init(args []string) error {
 		"|in the \\.terraform\\.lock\\.hcl file. Review those changes and commit them to your" +
 		"|version control system if they represent changes you intended to make\\."
 
-	footerPattern := "Terraform.* has been successfully initialized!"
+	patternIgnoreFooter := "Terraform.* has been successfully initialized!"
 
-	return commandWithFilter("init", args, ignoreLinePattern, footerPattern)
+	return commandWithFilter("init", args, patternIgnoreLine, patternIgnoreFooter)
 }

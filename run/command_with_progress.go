@@ -16,7 +16,7 @@ import (
 )
 
 func commandWithProgress(command string, args []string) error {
-	ignoreLinePattern := "Terraform used the selected providers to generate the following execution" +
+	patternIgnoreLine := "Terraform used the selected providers to generate the following execution" +
 		"|Preparing the remote plan\\.\\.\\." +
 		"|Running plan in Terraform Cloud\\. Output will stream here\\. Pressing Ctrl-C" +
 		"|will stop streaming the logs, but will not stop the plan running remotely\\." +
@@ -48,59 +48,96 @@ func commandWithProgress(command string, args []string) error {
 		"|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\\." +
 		"|─────────────────────────────────────────────────────────────────────────────"
 
-	// not full
-	ignoreLinePattern += "|= \\(known after apply\\)" +
-		"|\\(\\d+ unchanged \\w+ hidden\\)" +
-		"|\\(config refers to values not yet known\\)"
-
-	// compact
-	ignoreLinePattern += "|^\\s\\s[\\s+~-]" +
-		"|\\(config refers to values not yet known\\)"
-
-	// refreshing
-	ignoreLinePattern += "|: Refreshing state\\.\\.\\." +
-		"|: Refreshing\\.\\.\\." +
-		"|: Drift detected"
-
-	// reading
-	ignoreLinePattern += "|: Reading\\.\\.\\." +
-		"|: Read complete after"
-
-	// creating
-	ignoreLinePattern += "|: Creating\\.\\.\\." +
-		"|: Creation complete after"
-
-	// destroying
-	ignoreLinePattern += "|: Destroying\\.\\.\\." +
-		"|: Destruction complete after"
-
-	// modifying
-	ignoreLinePattern += "|: Modifying\\.\\.\\." +
-		"|: Modifications complete after"
-
-	// still...
-	ignoreLinePattern += "|: Still .*ing\\.\\.\\."
-
-	ignoreNextLinePattern := "record the updated values in the Terraform state without changing any remote" +
+	patternIgnoreNextLine := "record the updated values in the Terraform state without changing any remote" +
 		"|record the updated values in the Terraform state without changing any remote" +
 		"| Experimental feature .* is active" +
 		"|Saved the plan to: terraform\\.tfplan"
 
-	ignoreBlockStartPattern := "Warning:.*Applied changes may be incomplete" +
+	patternIgnoreBlockStart := "Warning:.*Applied changes may be incomplete" +
 		"|Warning:.*Resource targeting is in effect" +
 		"|This plan was saved to: terraform.tfplan"
 
-	ignoreBlockEndPattern := "suggests to use it as part of an error message" +
+	patternIgnoreBlockEnd := "suggests to use it as part of an error message" +
 		"|exceptional situations such as recovering from errors or mistakes" +
 		"|terraform apply \"terraform\\.tfplan\""
 
-	footerPattern := ""
+	patternIgnoreShortFormat := "= \\(known after apply\\)" +
+		"|\\(\\d+ unchanged \\w+ hidden\\)" +
+		"|\\(config refers to values not yet known\\)"
+
+	patternIgnoreCompactFormat := "^\\s\\s[\\s+~-]" +
+		"|\\(config refers to values not yet known\\)"
+
+	// patternStartRefreshing := ": Refreshing state\\.\\.\\." +
+	// 	"|: Refreshing\\.\\.\\."
+	// patternStopRefreshing := ": Drift detected"
+
+	// patternStartReading := ": Reading\\.\\.\\."
+	// patternStopReading := ": Read complete after"
+
+	// patternStartCreating := ": Creating\\.\\.\\."
+	// patternStopCreating := ": Creation complete after"
+
+	// patternStartDestroying := ": Destroying\\.\\.\\."
+	// patternStopDestroying := ": Destruction complete after"
+
+	// patternStartModyfying := ": Modifying\\.\\.\\."
+	// patternStopModifying := ": Modifications complete after"
+
+	// patternStillProcessing := ": Still .*ing\\.\\.\\."
+
+	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
+	reIgnoreNextLine := regexp.MustCompile(patternIgnoreNextLine)
+	reIgnoreBlockStart := regexp.MustCompile(patternIgnoreBlockStart)
+	reIgnoreBlockEnd := regexp.MustCompile(patternIgnoreBlockEnd)
+	reIgnoreShortFormat := regexp.MustCompile(patternIgnoreShortFormat)
+	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
+
+	format := "short"
+	progress := "fan"
+	noOutputs := false
+
+	if os.Getenv("TF_IN_AUTOMATION") == "1" {
+		progress = "verbose"
+	}
+
+	newArgs := []string{}
+
+	for _, arg := range args {
+		switch arg {
+		case "-compact":
+			format = "compact"
+		case "-dot":
+			progress = "dot"
+		case "-fan":
+			progress = "fan"
+		case "-full":
+			format = "full"
+		case "-no-outputs":
+			noOutputs = true
+		case "-quiet":
+			progress = "quiet"
+		case "-short":
+			format = "short"
+		case "-verbose":
+			progress = "verbose"
+		default:
+			if util.StartsWith(arg, '-') {
+				newArgs = append(newArgs, arg)
+			} else {
+				newArgs = append(newArgs, fmt.Sprintf("-target=%s", util.AddQuotes(arg)))
+			}
+		}
+	}
+
+	fmt.Println(progress)
+	fmt.Println(noOutputs)
 
 	defer fmt.Print(util.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{command}, args...)...)
+	cmd := exec.Command("terraform", append([]string{command}, newArgs...)...)
 
 	cmd.Stdin = os.Stdin
 
@@ -124,17 +161,10 @@ func commandWithProgress(command string, args []string) error {
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
-	reIgnoreLine := regexp.MustCompile(ignoreLinePattern)
-	reIgnoreNextLine := regexp.MustCompile(ignoreNextLinePattern)
-	reIgnoreBlockStart := regexp.MustCompile(ignoreBlockStartPattern)
-	reIgnoreBlockEnd := regexp.MustCompile(ignoreBlockEndPattern)
-	reFooter := regexp.MustCompile(footerPattern)
-
 	isEof := false
 	ignoreNextLine := false
 	ignoreBlock := false
 	skipHeader := true
-	skipFooter := false
 	wasEmptyLine := false
 
 	reader := bufio.NewReader(cmdStdout)
@@ -160,11 +190,6 @@ func commandWithProgress(command string, args []string) error {
 		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
 			if file != nil {
 				fmt.Fprintln(file, line)
-			}
-
-			if skipFooter {
-				line = ""
-				continue
 			}
 
 			if reIgnoreBlockStart.MatchString(line) {
@@ -201,6 +226,16 @@ func commandWithProgress(command string, args []string) error {
 				continue
 			}
 
+			if format == "short" && reIgnoreShortFormat.MatchString(line) {
+				line = ""
+				continue
+			}
+
+			if format == "compact" && reIgnoreCompactFormat.MatchString(line) {
+				line = ""
+				continue
+			}
+
 			if skipHeader && line != "" {
 				skipHeader = false
 			}
@@ -218,10 +253,6 @@ func commandWithProgress(command string, args []string) error {
 			fmt.Print(line)
 
 			wasEmptyLine = util.IsEmptyLine(line)
-
-			if footerPattern != "" && reFooter.MatchString(line) {
-				skipFooter = true
-			}
 
 			if isEof {
 				break
