@@ -1,3 +1,8 @@
 ?.*
 *~
+*.backup
+*.lock.hcl
+*.log
+*.tfstate
+/tf
 .vscode

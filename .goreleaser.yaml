@@ -1,0 +1,31 @@
+project_name: tf
+
+force_token: github
+
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - binary: tf
+    env:
+      - CGO_ENABLED=0
+    goarch:
+      - amd64
+      - arm64
+    goos:
+      - darwin
+      - linux
+      - windows
+    flags:
+      - -trimpath
+
+archives:
+  - name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}"
+    format: binary
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  use: github
