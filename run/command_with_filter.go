@@ -16,7 +16,7 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func commandWithFilter(command string, args []string, ignorePattern string, endPattern string) error {
+func commandWithFilter(command string, args []string, ignorePattern string, footerPattern string) error {
 	defer colorstring.Printf("[reset]")
 
 	signal.Ignore(syscall.SIGINT)
@@ -46,11 +46,11 @@ func commandWithFilter(command string, args []string, ignorePattern string, endP
 	}
 
 	reIgnore := regexp.MustCompile(ignorePattern)
-	reEnd := regexp.MustCompile(endPattern)
+	reFooter := regexp.MustCompile(footerPattern)
 
 	isEof := false
-	skipBegin := true
-	skipEnd := false
+	skipHeader := true
+	skipFooter := false
 	wasEmptyLine := false
 
 	reader := bufio.NewReader(cmdStdout)
@@ -78,7 +78,7 @@ func commandWithFilter(command string, args []string, ignorePattern string, endP
 				fmt.Fprintln(file, line)
 			}
 
-			if skipEnd {
+			if skipFooter {
 				line = ""
 				continue
 			}
@@ -88,11 +88,11 @@ func commandWithFilter(command string, args []string, ignorePattern string, endP
 				continue
 			}
 
-			if skipBegin && line != "" {
-				skipBegin = false
+			if skipHeader && line != "" {
+				skipHeader = false
 			}
 
-			if skipBegin {
+			if skipHeader {
 				line = ""
 				continue
 			}
@@ -106,8 +106,8 @@ func commandWithFilter(command string, args []string, ignorePattern string, endP
 
 			wasEmptyLine = line == "" || line == "\n" || line == "\r\n"
 
-			if endPattern != "" && reEnd.MatchString(line) {
-				skipEnd = true
+			if footerPattern != "" && reFooter.MatchString(line) {
+				skipFooter = true
 			}
 
 			if isEof {
