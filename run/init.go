@@ -19,11 +19,7 @@ func Init(args []string) error {
 		"|in the \\.terraform\\.lock\\.hcl file. Review those changes and commit them to your" +
 		"|version control system if they represent changes you intended to make\\."
 
-	ignoreNextLinePattern := ""
-	ignoreBlockStartPattern := ""
-	ignoreBlockEndPattern := ""
-
 	footerPattern := "Terraform.* has been successfully initialized!"
 
-	return commandWithFilter("init", args, ignoreLinePattern, ignoreNextLinePattern, ignoreBlockStartPattern, ignoreBlockEndPattern, footerPattern)
+	return commandWithFilter("init", args, ignoreLinePattern, footerPattern)
 }

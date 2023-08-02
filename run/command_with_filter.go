@@ -16,7 +16,7 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func commandWithFilter(command string, args []string, ignoreLinePattern string, ignoreNextLinePattern string, ignoreBlockStartPattern string, ignoreBlockEndPattern string, footerPattern string) error {
+func commandWithFilter(command string, args []string, ignoreLinePattern string, ignoreFooterPattern string) error {
 	defer fmt.Print(util.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
@@ -46,10 +46,7 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 	}
 
 	reIgnoreLine := regexp.MustCompile(ignoreLinePattern)
-	reIgnoreNextLine := regexp.MustCompile(ignoreNextLinePattern)
-	reIgnoreBlockStart := regexp.MustCompile(ignoreBlockStartPattern)
-	reIgnoreBlockEnd := regexp.MustCompile(ignoreBlockEndPattern)
-	reFooter := regexp.MustCompile(footerPattern)
+	reIgnoreFooter := regexp.MustCompile(ignoreFooterPattern)
 
 	isEof := false
 	ignoreNextLine := false
@@ -88,25 +85,7 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 				continue
 			}
 
-			if reIgnoreBlockStart.MatchString(line) {
-				ignoreBlock = true
-				line = ""
-				continue
-			}
-
-			if reIgnoreBlockEnd.MatchString(line) {
-				ignoreBlock = false
-				line = ""
-				continue
-			}
-
 			if ignoreBlock {
-				line = ""
-				continue
-			}
-
-			if reIgnoreNextLine.MatchString(line) {
-				ignoreNextLine = true
 				line = ""
 				continue
 			}
@@ -140,7 +119,7 @@ func commandWithFilter(command string, args []string, ignoreLinePattern string, 
 
 			wasEmptyLine = util.IsEmptyLine(line)
 
-			if footerPattern != "" && reFooter.MatchString(line) {
+			if ignoreFooterPattern != "" && reIgnoreFooter.MatchString(line) {
 				skipFooter = true
 			}
 
