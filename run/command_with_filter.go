@@ -16,7 +16,7 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func commandWithFilter(command string, args []string, ignorePattern string, footerPattern string) error {
+func commandWithFilter(command string, args []string, ignoreLinePattern string, footerPattern string) error {
 	defer colorstring.Printf("[reset]")
 
 	signal.Ignore(syscall.SIGINT)
@@ -45,7 +45,7 @@ func commandWithFilter(command string, args []string, ignorePattern string, foot
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
-	reIgnore := regexp.MustCompile(ignorePattern)
+	reIgnore := regexp.MustCompile(ignoreLinePattern)
 	reFooter := regexp.MustCompile(footerPattern)
 
 	isEof := false
