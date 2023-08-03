@@ -11,9 +11,13 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/dex4er/tf/util"
 	"github.com/mitchellh/colorstring"
+
+	"github.com/dex4er/tf/console"
+	"github.com/dex4er/tf/util"
 )
+
+var TF_IN_AUTOMATION = os.Getenv("TF_IN_AUTOMATION")
 
 func commandWithProgress(command string, args []string) error {
 	patternIgnoreLine := "Terraform used the selected providers to generate the following execution" +
@@ -99,7 +103,7 @@ func commandWithProgress(command string, args []string) error {
 	progress := "fan"
 	noOutputs := false
 
-	if os.Getenv("TF_IN_AUTOMATION") == "1" {
+	if TF_IN_AUTOMATION == "1" {
 		progress = "verbose"
 	}
 
@@ -135,7 +139,7 @@ func commandWithProgress(command string, args []string) error {
 	fmt.Println(progress)
 	fmt.Println(noOutputs)
 
-	defer fmt.Print(util.ColorReset)
+	defer fmt.Print(console.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
 
@@ -195,15 +199,15 @@ func commandWithProgress(command string, args []string) error {
 			}
 
 			if m := reStartReading.FindStringSubmatch(line); m != nil {
-				r := m[1]
-				colorstring.Printf("[cyan]0/1[reset] [green]0/0[reset] [yellow]0/0[reset] [red]0/0[reset] %s\r", r)
+				r := m[0]
+				colorstring.Printf("[cyan]R:0/1[reset] [green]A:0/0[reset] [yellow]C:0/0[reset] [red]D:0/0[reset] %s\r", r)
 				line = ""
 				continue
 			}
 
 			if m := reStopReading.FindStringSubmatch(line); m != nil {
-				r := m[1]
-				colorstring.Printf("[cyan]1/1[reset] [green]0/0[reset] [yellow]0/0[reset] [red]0/0[reset] %s\r", r)
+				r := m[0]
+				colorstring.Printf("[cyan]R:0/1[reset] [green]A:0/0[reset] [yellow]C:0/0[reset] [red]D:0/0[reset] %s\r", r)
 				line = ""
 				continue
 			}
@@ -266,12 +270,10 @@ func commandWithProgress(command string, args []string) error {
 				continue
 			}
 
-			if strings.HasSuffix(line, "\n") {
-				line = strings.TrimSuffix(line, "\n")
+			if TF_IN_AUTOMATION == "1" {
 				fmt.Print(line)
-				fmt.Println(strings.Repeat(" ", 79-len(line)))
 			} else {
-				fmt.Print(line)
+				console.Print(line)
 			}
 
 			wasEmptyLine = util.IsEmptyLine(line)

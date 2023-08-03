@@ -13,6 +13,7 @@ import (
 
 	"github.com/mitchellh/colorstring"
 
+	"github.com/dex4er/tf/console"
 	"github.com/dex4er/tf/util"
 )
 
@@ -20,7 +21,7 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreFooter := regexp.MustCompile(patternIgnoreFooter)
 
-	defer fmt.Print(util.ColorReset)
+	defer fmt.Print(console.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
 
