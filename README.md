@@ -162,8 +162,13 @@ Instead of Reading... messages it will show a short progress indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-An additional option is `-compact` which will skip the content of the resources
-completely.
+Additional options can be used: `-counter` shows counter with processed
+resources, `-compact` skips the content of the resources, `-short` removes
+unecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dot` hides
+messages about progress and shows single dot or character for each line,
+`-verbose` keeps original messages about progress (default if
+`TF_IN_AUTOMATION=1`).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.

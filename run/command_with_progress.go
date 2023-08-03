@@ -199,19 +199,21 @@ func commandWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			if m := reRefreshing.FindStringSubmatch(line); m != nil {
-				progress.Refresh(progressFormat, m[0], m[1], m[2])
-				goto NEXT
-			}
+			if progressFormat != "verbose" {
+				if m := reRefreshing.FindStringSubmatch(line); m != nil {
+					progress.Refresh(progressFormat, m[0], m[1], m[2])
+					goto NEXT
+				}
 
-			if m := reStartReading.FindStringSubmatch(line); m != nil {
-				progress.Start(progressFormat, m[0], m[1], m[2])
-				goto NEXT
-			}
+				if m := reStartReading.FindStringSubmatch(line); m != nil {
+					progress.Start(progressFormat, m[0], m[1], m[2])
+					goto NEXT
+				}
 
-			if m := reStopReading.FindStringSubmatch(line); m != nil {
-				progress.Stop(progressFormat, m[0], m[1], m[2])
-				goto NEXT
+				if m := reStopReading.FindStringSubmatch(line); m != nil {
+					progress.Stop(progressFormat, m[0], m[1], m[2])
+					goto NEXT
+				}
 			}
 
 			if reIgnoreBlockStart.MatchString(line) {
