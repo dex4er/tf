@@ -14,6 +14,7 @@ import (
 	"github.com/mitchellh/colorstring"
 
 	"github.com/dex4er/tf/console"
+	"github.com/dex4er/tf/progress"
 	"github.com/dex4er/tf/util"
 )
 
@@ -76,17 +77,9 @@ func commandWithProgress(command string, args []string) error {
 	// 	"|: Refreshing\\.\\.\\."
 	// patternStopRefreshing := ": Drift detected"
 
-	patternStartReading := "(?:.\\[0m.\\[1m)?(.*?): Reading\\.\\.\\."
-	patternStopReading := "(?:.\\[0m.\\[1m)?(.*?): Read complete after"
-
-	// patternStartCreating := ": Creating\\.\\.\\."
-	// patternStopCreating := ": Creation complete after"
-
-	// patternStartDestroying := ": Destroying\\.\\.\\."
-	// patternStopDestroying := ": Destruction complete after"
-
-	// patternStartModyfying := ": Modifying\\.\\.\\."
-	// patternStopModifying := ": Modifications complete after"
+	patternRefreshing := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:efreshing(?: state)?)\\.\\.\\."
+	patternStartOperation := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\\.\\.\\."
+	patternStopOperation := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after"
 
 	// patternStillProcessing := ": Still .*ing\\.\\.\\."
 
@@ -96,15 +89,16 @@ func commandWithProgress(command string, args []string) error {
 	reIgnoreBlockEnd := regexp.MustCompile(patternIgnoreBlockEnd)
 	reIgnoreShortFormat := regexp.MustCompile(patternIgnoreShortFormat)
 	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
-	reStartReading := regexp.MustCompile(patternStartReading)
-	reStopReading := regexp.MustCompile(patternStopReading)
+	reRefreshing := regexp.MustCompile(patternRefreshing)
+	reStartReading := regexp.MustCompile(patternStartOperation)
+	reStopReading := regexp.MustCompile(patternStopOperation)
 
 	format := "short"
-	progress := "fan"
+	progressFormat := "counter"
 	noOutputs := false
 
 	if TF_IN_AUTOMATION == "1" {
-		progress = "verbose"
+		progressFormat = "verbose"
 	}
 
 	newArgs := []string{}
@@ -113,20 +107,22 @@ func commandWithProgress(command string, args []string) error {
 		switch arg {
 		case "-compact":
 			format = "compact"
+		case "-counter":
+			progressFormat = "counter"
 		case "-dot":
-			progress = "dot"
+			progressFormat = "dot"
 		case "-fan":
-			progress = "fan"
+			progressFormat = "fan"
 		case "-full":
 			format = "full"
 		case "-no-outputs":
 			noOutputs = true
 		case "-quiet":
-			progress = "quiet"
+			progressFormat = "quiet"
 		case "-short":
 			format = "short"
 		case "-verbose":
-			progress = "verbose"
+			progressFormat = "verbose"
 		default:
 			if util.StartsWith(arg, '-') {
 				newArgs = append(newArgs, arg)
@@ -136,7 +132,7 @@ func commandWithProgress(command string, args []string) error {
 		}
 	}
 
-	fmt.Println(progress)
+	fmt.Println(progressFormat)
 	fmt.Println(noOutputs)
 
 	defer fmt.Print(console.ColorReset)
@@ -198,16 +194,20 @@ func commandWithProgress(command string, args []string) error {
 				fmt.Fprintln(file, line)
 			}
 
+			if m := reRefreshing.FindStringSubmatch(line); m != nil {
+				progress.Refresh(progressFormat, m[0], m[1], m[2])
+				line = ""
+				continue
+			}
+
 			if m := reStartReading.FindStringSubmatch(line); m != nil {
-				r := m[0]
-				colorstring.Printf("[cyan]R:0/1[reset] [green]A:0/0[reset] [yellow]C:0/0[reset] [red]D:0/0[reset] %s\r", r)
+				progress.Start(progressFormat, m[0], m[1], m[2])
 				line = ""
 				continue
 			}
 
 			if m := reStopReading.FindStringSubmatch(line); m != nil {
-				r := m[0]
-				colorstring.Printf("[cyan]R:0/1[reset] [green]A:0/0[reset] [yellow]C:0/0[reset] [red]D:0/0[reset] %s\r", r)
+				progress.Stop(progressFormat, m[0], m[1], m[2])
 				line = ""
 				continue
 			}

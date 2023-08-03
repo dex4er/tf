@@ -83,10 +83,11 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-Additional options can be used: `-compact` skips the content of the resources,
-`-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default), `-dot`
-hides messages about progress and shows single dot or character for each line,
+Additional options can be used: `-counters` shows counter with processed
+resources, `-compact` skips the content of the resources, `-short` removes
+unecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dot` hides
+messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
 `TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 
@@ -107,10 +108,11 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-Additional options can be used: `-compact` skips the content of the resources,
-`-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default), `-dot`
-hides messages about progress and shows single dot or character for each line,
+Additional options can be used: `-counters` shows counter with processed
+resources, `-compact` skips the content of the resources, `-short` removes
+unecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dot` hides
+messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
 `TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 
@@ -173,10 +175,11 @@ The file name is solved by `date` command for `%` sequences.
 
 The same as `terraform apply -refresh-only` with less verbose output.
 
-Additional options can be used: `-compact` skips the content of the resources,
-`-short` removes unecessary lines (default), `-full` keeps original manifest,
-`-fan` hides messages about progress and shows short indicator (default), `-dot`
-hides messages about progress and shows single dot or character for each line,
+Additional options can be used: `-counters` shows counter with processed
+resources, `-compact` skips the content of the resources, `-short` removes
+unecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dot` hides
+messages about progress and shows single dot or character for each line,
 `-verbose` keeps original messages about progress (default if
 `TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs.
 

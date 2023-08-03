@@ -9,15 +9,15 @@ import (
 
 const defaultCols = 80
 
-var cols = getCols()
+var Cols = getCols()
 
 func Print(msg string) {
 	if strings.HasSuffix(msg, "\n") {
 		msg = strings.TrimSuffix(msg, "\n")
 		lenMsg := len(msg)
-		if lenMsg < cols {
+		if lenMsg < Cols {
 			fmt.Print(msg)
-			fmt.Println(strings.Repeat(" ", cols-1-lenMsg))
+			fmt.Println(strings.Repeat(" ", Cols-1-lenMsg))
 		} else {
 			fmt.Println(msg)
 		}
