@@ -50,17 +50,21 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 	}
 
 	isEof := false
-	ignoreNextLine := false
 	ignoreBlock := false
-	skipHeader := true
-	skipFooter := false
+	ignoreFooter := false
 	wasEmptyLine := false
 
 	reader := bufio.NewReader(cmdStdout)
 
+	// buffer for the current line
 	line := ""
 
+	// Token scanner cannot be used here because of interactive prompts from
+	// terraform. The prompt doesn't end with EOL then Stdout must be read rune
+	// by rune.
+
 	for {
+		// stream was ended in previous iteration of the loop
 		if isEof {
 			break
 		}
@@ -68,6 +72,7 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 		r, _, err := reader.ReadRune()
 		if err != nil {
 			if err == io.EOF {
+				// still we need to process the line and end this loop in the next iteration
 				isEof = true
 			} else {
 				return fmt.Errorf("reading command output: %w", err)
@@ -76,58 +81,48 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 			line = line + string(r)
 		}
 
-		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
+		// tokens that triggers processing of the line
+		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) ||
+			strings.Contains(line, "Enter a value: ") ||
+			r == '\n' || isEof {
+
+			// verbatim output to the log file
 			if file != nil {
 				fmt.Fprint(file, line)
 			}
 
-			if skipFooter {
-				line = ""
-				continue
+			if ignoreFooter {
+				goto NEXT
 			}
 
 			if ignoreBlock {
-				line = ""
-				continue
+				goto NEXT
 			}
 
-			if ignoreNextLine {
-				ignoreNextLine = false
-				line = ""
-				continue
-			}
-
+			// ignore just this line
 			if reIgnoreLine.MatchString(line) {
-				line = ""
-				continue
+				goto NEXT
 			}
 
-			if skipHeader && line != "" {
-				skipHeader = false
-			}
-
-			if skipHeader {
-				line = ""
-				continue
-			}
-
+			// skip another empty line but preserve color codes
 			if wasEmptyLine && util.IsEmptyLine(line) {
-				line = ""
-				continue
+				line = strings.TrimSuffix(line, "\n")
+				line = strings.TrimSuffix(line, "\r")
 			}
 
+			// print current line buffer
 			fmt.Print(line)
 
+			// mark if current line was empty for next loop iteration
 			wasEmptyLine = util.IsEmptyLine(line)
 
+			// ignore from this line to the end
 			if patternIgnoreFooter != "" && reIgnoreFooter.MatchString(line) {
-				skipFooter = true
+				ignoreFooter = true
 			}
 
-			if isEof {
-				break
-			}
-
+		NEXT:
+			// empty line buffer before next loop iteration
 			line = ""
 		}
 	}

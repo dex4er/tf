@@ -182,7 +182,7 @@ func commandWithProgress(command string, args []string) error {
 	// by rune.
 
 	for {
-		// stream ended in previous iteration of the loop
+		// stream was ended in previous iteration of the loop
 		if isEof {
 			break
 		}
@@ -304,8 +304,8 @@ func commandWithProgress(command string, args []string) error {
 			// mark if current line was empty for next loop iteration
 			wasEmptyLine = util.IsEmptyLine(line)
 
-			// empty line buffer before next loop iteration
 		NEXT:
+			// empty line buffer before next loop iteration
 			line = ""
 		}
 	}
