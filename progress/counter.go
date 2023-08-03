@@ -27,7 +27,7 @@ func stopCounter(line string, resource string, operation string) {
 }
 
 func showCounter(line string, resource string, operation string) {
-	s := fmt.Sprintf("*%d", refreshed)
+	s := fmt.Sprintf("^%d", refreshed)
 	r := fmt.Sprintf("=%d/%d", stopped["R"], started["R"])
 	c := fmt.Sprintf("+%d/%d", stopped["C"], started["C"])
 	m := fmt.Sprintf("~%d/%d", stopped["M"], started["M"])
