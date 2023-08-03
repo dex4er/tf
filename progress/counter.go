@@ -21,6 +21,10 @@ func startCounter(line string, resource string, operation string) {
 	showCounter(line, resource, operation)
 }
 
+func stillCounter(line string, resource string, operation string) {
+	showCounter(line, resource, operation)
+}
+
 func stopCounter(line string, resource string, operation string) {
 	stopped[operation] += 1
 	showCounter(line, resource, operation)

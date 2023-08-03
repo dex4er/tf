@@ -78,7 +78,7 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 
 		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
 			if file != nil {
-				fmt.Fprintln(file, line)
+				fmt.Fprint(file, line)
 			}
 
 			if skipFooter {

@@ -77,11 +77,10 @@ func commandWithProgress(command string, args []string) error {
 	// 	"|: Refreshing\\.\\.\\."
 	// patternStopRefreshing := ": Drift detected"
 
-	patternRefreshing := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:efreshing(?: state)?)\\.\\.\\."
-	patternStartOperation := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\\.\\.\\."
-	patternStopOperation := "(?:.\\[0m.\\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after"
-
-	// patternStillProcessing := ": Still .*ing\\.\\.\\."
+	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\.`
+	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\.`
+	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\.`
+	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
 
@@ -92,11 +91,12 @@ func commandWithProgress(command string, args []string) error {
 	reIgnoreShortFormat := regexp.MustCompile(patternIgnoreShortFormat)
 	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
 	reRefreshing := regexp.MustCompile(patternRefreshing)
-	reStartReading := regexp.MustCompile(patternStartOperation)
-	reStopReading := regexp.MustCompile(patternStopOperation)
+	reStartOperation := regexp.MustCompile(patternStartOperation)
+	reStillOperation := regexp.MustCompile(patternStillOperation)
+	reStopOperation := regexp.MustCompile(patternStopOperation)
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
-	format := "short"
+	planFormat := "short"
 	progressFormat := "counter"
 	noOutputs := false
 
@@ -109,7 +109,7 @@ func commandWithProgress(command string, args []string) error {
 	for _, arg := range args {
 		switch arg {
 		case "-compact":
-			format = "compact"
+			planFormat = "compact"
 		case "-counter":
 			progressFormat = "counter"
 		case "-dot":
@@ -117,13 +117,13 @@ func commandWithProgress(command string, args []string) error {
 		case "-fan":
 			progressFormat = "fan"
 		case "-full":
-			format = "full"
+			planFormat = "full"
 		case "-no-outputs":
 			noOutputs = true
 		case "-quiet":
 			progressFormat = "quiet"
 		case "-short":
-			format = "short"
+			planFormat = "short"
 		case "-verbose":
 			progressFormat = "verbose"
 		default:
@@ -135,21 +135,24 @@ func commandWithProgress(command string, args []string) error {
 		}
 	}
 
+	// clear color even after errors
 	defer fmt.Print(console.ColorReset)
 
+	// original terraform still handles ctrl-c
 	signal.Ignore(syscall.SIGINT)
 
 	cmd := exec.Command("terraform", append([]string{command}, newArgs...)...)
 
 	cmd.Stdin = os.Stdin
 
-	file, err := util.OpenLogfile()
+	// errors are written as-is to `TF_LOG_FILE`
+	logFile, err := util.OpenLogfile()
 	if err != nil {
 		return err
 	}
-	if file != nil {
-		defer file.Close()
-		cmd.Stderr = io.MultiWriter(os.Stderr, file)
+	if logFile != nil {
+		defer logFile.Close()
+		cmd.Stderr = io.MultiWriter(os.Stderr, logFile)
 	} else {
 		cmd.Stderr = os.Stderr
 	}
@@ -163,18 +166,23 @@ func commandWithProgress(command string, args []string) error {
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
+	reader := bufio.NewReader(cmdStdout)
+
 	isEof := false
 	ignoreNextLine := false
 	ignoreBlock := false
-	skipHeader := true
 	skipOutputs := false
 	wasEmptyLine := false
 
-	reader := bufio.NewReader(cmdStdout)
-
+	// buffer for the current line
 	line := ""
 
+	// Token scanner cannot be used here because of interactive prompts from
+	// terraform. The prompt doesn't end with EOL then Stdout must be read rune
+	// by rune.
+
 	for {
+		// stream ended in previous iteration of the loop
 		if isEof {
 			break
 		}
@@ -182,6 +190,7 @@ func commandWithProgress(command string, args []string) error {
 		r, _, err := reader.ReadRune()
 		if err != nil {
 			if err == io.EOF {
+				// still we need to process the line and end this loop in the next iteration
 				isEof = true
 			} else {
 				return fmt.Errorf("reading command output: %w", err)
@@ -190,32 +199,50 @@ func commandWithProgress(command string, args []string) error {
 			line = line + string(r)
 		}
 
-		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) || strings.Contains(line, "Enter a value: ") || r == '\n' || isEof {
-			if file != nil {
-				fmt.Fprintln(file, line)
+		// tokens that triggers processing of the line
+		if strings.Contains(line, colorstring.Color("[bold]Enter a value:[reset] ")) ||
+			strings.Contains(line, "Enter a value: ") ||
+			r == '\n' || isEof {
+
+			// verbatim output to the log file
+			if logFile != nil {
+				fmt.Fprint(logFile, line)
 			}
 
+			// skip after "Outputs:" line
 			if skipOutputs {
 				goto NEXT
 			}
 
+			// verbose format is not processed or ignored
 			if progressFormat != "verbose" {
 				if m := reRefreshing.FindStringSubmatch(line); m != nil {
 					progress.Refresh(progressFormat, m[0], m[1], m[2])
 					goto NEXT
 				}
 
-				if m := reStartReading.FindStringSubmatch(line); m != nil {
+				if m := reStartOperation.FindStringSubmatch(line); m != nil {
 					progress.Start(progressFormat, m[0], m[1], m[2])
 					goto NEXT
 				}
 
-				if m := reStopReading.FindStringSubmatch(line); m != nil {
+				if m := reStillOperation.FindStringSubmatch(line); m != nil {
+					progress.Still(progressFormat, m[0], m[1], m[2])
+					goto NEXT
+				}
+
+				if m := reStopOperation.FindStringSubmatch(line); m != nil {
 					progress.Stop(progressFormat, m[0], m[1], m[2])
 					goto NEXT
 				}
 			}
 
+			// dot format trims EOL then we need one extra just before "Apply complete!"
+			if progressFormat == "dot" && strings.HasPrefix(line, "Apply complete!") {
+				fmt.Println()
+			}
+
+			// handles block to ignore: it has start and end pattern
 			if reIgnoreBlockStart.MatchString(line) {
 				ignoreBlock = true
 				goto NEXT
@@ -230,6 +257,7 @@ func commandWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
+			// handles pattern that causes ignoring this and next line
 			if reIgnoreNextLine.MatchString(line) {
 				ignoreNextLine = true
 				goto NEXT
@@ -240,47 +268,43 @@ func commandWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
+			// ignore just this line
 			if reIgnoreLine.MatchString(line) {
 				goto NEXT
 			}
 
+			// starts ignoring the outputs
 			if noOutputs && reIgnoreOutputs.MatchString(line) {
 				skipOutputs = true
 				goto NEXT
 			}
 
-			if format == "short" && reIgnoreShortFormat.MatchString(line) {
+			// handles different plan formats
+			if planFormat == "short" && reIgnoreShortFormat.MatchString(line) {
 				goto NEXT
 			}
 
-			if format == "compact" && reIgnoreCompactFormat.MatchString(line) {
+			if planFormat == "compact" && reIgnoreCompactFormat.MatchString(line) {
 				goto NEXT
 			}
 
-			if skipHeader && line != "" {
-				skipHeader = false
-			}
-
-			if skipHeader {
-				goto NEXT
-			}
-
+			// skip another empty line but preserve color codes
 			if wasEmptyLine && util.IsEmptyLine(line) {
-				goto NEXT
+				line = strings.TrimSuffix(line, "\n")
+				line = strings.TrimSuffix(line, "\r")
 			}
 
+			// in CI do not add spaces clearing progress indicator
 			if TF_IN_AUTOMATION == "1" {
 				fmt.Print(line)
 			} else {
 				console.Print(line)
 			}
 
+			// mark if current line was empty for next loop iteration
 			wasEmptyLine = util.IsEmptyLine(line)
 
-			if isEof {
-				break
-			}
-
+			// empty line buffer before next loop iteration
 		NEXT:
 			line = ""
 		}
