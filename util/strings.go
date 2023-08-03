@@ -2,9 +2,6 @@ package util
 
 import (
 	"regexp"
-	"strings"
-
-	"github.com/dex4er/tf/console"
 )
 
 func AddQuotes(input string) string {
@@ -15,10 +12,8 @@ func AddQuotes(input string) string {
 }
 
 func IsEmptyLine(line string) bool {
-	line = strings.TrimSuffix(line, "\n")
-	line = strings.TrimSuffix(line, "\r")
-	line = strings.TrimSuffix(line, console.ColorReset)
-	return line == ""
+	re := regexp.MustCompile(`(?s)^(\033\[\d+m)*\r?\n?$`)
+	return re.MatchString(line)
 }
 
 func StartsWith(s string, prefix rune) bool {

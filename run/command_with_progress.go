@@ -83,6 +83,8 @@ func commandWithProgress(command string, args []string) error {
 
 	// patternStillProcessing := ": Still .*ing\\.\\.\\."
 
+	patternIgnoreOutputs := `^Outputs:(\n|$)`
+
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreNextLine := regexp.MustCompile(patternIgnoreNextLine)
 	reIgnoreBlockStart := regexp.MustCompile(patternIgnoreBlockStart)
@@ -92,6 +94,7 @@ func commandWithProgress(command string, args []string) error {
 	reRefreshing := regexp.MustCompile(patternRefreshing)
 	reStartReading := regexp.MustCompile(patternStartOperation)
 	reStopReading := regexp.MustCompile(patternStopOperation)
+	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
 	format := "short"
 	progressFormat := "counter"
@@ -132,9 +135,6 @@ func commandWithProgress(command string, args []string) error {
 		}
 	}
 
-	fmt.Println(progressFormat)
-	fmt.Println(noOutputs)
-
 	defer fmt.Print(console.ColorReset)
 
 	signal.Ignore(syscall.SIGINT)
@@ -167,6 +167,7 @@ func commandWithProgress(command string, args []string) error {
 	ignoreNextLine := false
 	ignoreBlock := false
 	skipHeader := true
+	skipOutputs := false
 	wasEmptyLine := false
 
 	reader := bufio.NewReader(cmdStdout)
@@ -194,66 +195,64 @@ func commandWithProgress(command string, args []string) error {
 				fmt.Fprintln(file, line)
 			}
 
+			if skipOutputs {
+				goto NEXT
+			}
+
 			if m := reRefreshing.FindStringSubmatch(line); m != nil {
 				progress.Refresh(progressFormat, m[0], m[1], m[2])
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if m := reStartReading.FindStringSubmatch(line); m != nil {
 				progress.Start(progressFormat, m[0], m[1], m[2])
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if m := reStopReading.FindStringSubmatch(line); m != nil {
 				progress.Stop(progressFormat, m[0], m[1], m[2])
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if reIgnoreBlockStart.MatchString(line) {
 				ignoreBlock = true
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if reIgnoreBlockEnd.MatchString(line) {
 				ignoreBlock = false
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if ignoreBlock {
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if reIgnoreNextLine.MatchString(line) {
 				ignoreNextLine = true
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if ignoreNextLine {
 				ignoreNextLine = false
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if reIgnoreLine.MatchString(line) {
-				line = ""
-				continue
+				goto NEXT
+			}
+
+			if noOutputs && reIgnoreOutputs.MatchString(line) {
+				skipOutputs = true
+				goto NEXT
 			}
 
 			if format == "short" && reIgnoreShortFormat.MatchString(line) {
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if format == "compact" && reIgnoreCompactFormat.MatchString(line) {
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if skipHeader && line != "" {
@@ -261,13 +260,11 @@ func commandWithProgress(command string, args []string) error {
 			}
 
 			if skipHeader {
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if wasEmptyLine && util.IsEmptyLine(line) {
-				line = ""
-				continue
+				goto NEXT
 			}
 
 			if TF_IN_AUTOMATION == "1" {
@@ -282,6 +279,7 @@ func commandWithProgress(command string, args []string) error {
 				break
 			}
 
+		NEXT:
 			line = ""
 		}
 	}
