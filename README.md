@@ -83,7 +83,7 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-Additional options can be used: `-counters` shows counter with processed
+Additional options can be used: `-counter` shows counter with processed
 resources, `-compact` skips the content of the resources, `-short` removes
 unecessary lines (default), `-full` keeps original manifest, `-fan` hides
 messages about progress and shows short indicator (default), `-dot` hides
@@ -108,7 +108,7 @@ indicator.
 
 It will skip `(known after apply)` lines from the output.
 
-Additional options can be used: `-counters` shows counter with processed
+Additional options can be used: `-counter` shows counter with processed
 resources, `-compact` skips the content of the resources, `-short` removes
 unecessary lines (default), `-full` keeps original manifest, `-fan` hides
 messages about progress and shows short indicator (default), `-dot` hides
@@ -175,7 +175,7 @@ The file name is solved by `date` command for `%` sequences.
 
 The same as `terraform apply -refresh-only` with less verbose output.
 
-Additional options can be used: `-counters` shows counter with processed
+Additional options can be used: `-counter` shows counter with processed
 resources, `-compact` skips the content of the resources, `-short` removes
 unecessary lines (default), `-full` keeps original manifest, `-fan` hides
 messages about progress and shows short indicator (default), `-dot` hides
