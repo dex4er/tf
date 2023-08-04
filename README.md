@@ -100,6 +100,10 @@ The command will generate temporarily the `terraform.tfplan` file.
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
+The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
+short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
+for progress indicator (counters, fan, dots, verbose, verbatim).
+
 ### `tf destroy`
 
 The same as `terraform destroy` with less verbose output.
@@ -125,6 +129,10 @@ The command will generate temporarily the `terraform.tfplan` file.
 
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
+
+The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
+short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
+for progress indicator (counters, fan, dots, verbose, verbatim).
 
 ### `tf import`
 
@@ -178,6 +186,10 @@ argument misses quotes inside square brackets then they will be added.
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
+The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
+short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
+for progress indicator (counters, fan, dots, verbose, verbatim).
+
 ### `tf refresh`
 
 The same as `terraform apply -refresh-only` with less verbose output.
@@ -196,6 +208,10 @@ argument misses quotes inside square brackets then they will be added.
 
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
+
+The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
+short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
+for progress indicator (counters, fan, dots, verbose, verbatim).
 
 ### `tf rm`
 

@@ -19,6 +19,8 @@ import (
 )
 
 var TF_IN_AUTOMATION = os.Getenv("TF_IN_AUTOMATION")
+var TF_PLAN_FORMAT = os.Getenv("TF_PLAN_FORMAT")
+var TF_PROGRESS_FORMAT = os.Getenv("TF_PROGRESS_FORMAT")
 
 func terraformWithProgress(command string, args []string) error {
 	patternIgnoreLine := "Terraform used the selected providers to generate the following execution" +
@@ -103,6 +105,14 @@ func terraformWithProgress(command string, args []string) error {
 
 	if TF_IN_AUTOMATION == "1" {
 		progressFormat = "verbose"
+	}
+
+	if TF_PLAN_FORMAT != "" {
+		planFormat = TF_PLAN_FORMAT
+	}
+
+	if TF_PROGRESS_FORMAT != "" {
+		progressFormat = TF_PROGRESS_FORMAT
 	}
 
 	newArgs := []string{}
