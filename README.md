@@ -14,8 +14,8 @@ than this:
 
 ![terraform apply](terraform-apply.gif)
 
-The original Terraform is abusively oververbosed. The `tf` bash script is a
-simple wrapper which makes Terraform more CLI friendly:
+The original Terraform is abusively oververbosed. The `tf` wrapper makes
+Terraform more CLI friendly:
 
 - removes unecessary output
 - adds own progress indicator
@@ -24,18 +24,7 @@ simple wrapper which makes Terraform more CLI friendly:
 - adds automatically quotes for indexed resources
 - generates log file when `TF_OUTPUT_PATH` environment variable is used
 
-## Prerequisities
-
-Bash >= 4.0 or Zsh.
-
-On MacOS also `brew install gnu-sed grep`.
-
 ## Install
-
-```sh
-curl https://raw.githubusercontent.com/dex4er/tf/main/tf.sh | sudo tee /usr/local/bin/tf
-sudo chmod +x /usr/local/bin/tf
-```
 
 ### Zsh
 
@@ -248,7 +237,7 @@ The same as `terraform init -upgrade` with less verbose output.
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
-### License
+## License
 
 Copyright (c) 2020-2023 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 
