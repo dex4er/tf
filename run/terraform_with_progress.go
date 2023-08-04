@@ -155,14 +155,14 @@ func terraformWithProgress(command string, args []string) error {
 
 	cmd.Stdin = os.Stdin
 
-	// errors are written as-is to `TF_LOG_FILE`
-	logFile, err := util.OpenLogfile()
+	// errors are written as-is to `TF_OUTPUT_PATH`
+	outputFile, err := util.OpenOutputFile()
 	if err != nil {
 		return err
 	}
-	if logFile != nil {
-		defer logFile.Close()
-		cmd.Stderr = io.MultiWriter(os.Stderr, logFile)
+	if outputFile != nil {
+		defer outputFile.Close()
+		cmd.Stderr = io.MultiWriter(os.Stderr, outputFile)
 	} else {
 		cmd.Stderr = os.Stderr
 	}
@@ -215,8 +215,8 @@ func terraformWithProgress(command string, args []string) error {
 			r == '\n' || isEof {
 
 			// verbatim output to the log file
-			if logFile != nil {
-				fmt.Fprint(logFile, line)
+			if outputFile != nil {
+				fmt.Fprint(outputFile, line)
 			}
 
 			// skip after "Outputs:" line

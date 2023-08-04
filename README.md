@@ -22,7 +22,7 @@ simple wrapper which makes Terraform more CLI friendly:
 - provides extra compact mode
 - allows to use multiple arguments when original command don't support it
 - adds automatically quotes for indexed resources
-- generates log file when `TF_LOG_FILE` environment variable is used
+- generates log file when `TF_OUTPUT_PATH` environment variable is used
 
 ## Prerequisities
 
@@ -97,7 +97,7 @@ argument misses quotes inside square brackets then they will be added.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### `tf destroy`
@@ -123,7 +123,7 @@ argument misses quotes inside square brackets then they will be added.
 
 The command will generate temporarily the `terraform.tfplan` file.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### `tf import`
@@ -141,7 +141,7 @@ The resource is shown when `-show` argument was used.
 
 The same as `terraform init` with less verbose output.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### `tf list`
@@ -175,7 +175,7 @@ to original messages (default if `TF_IN_AUTOMATION=1`).
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### `tf refresh`
@@ -194,7 +194,7 @@ outputs.
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### `tf rm`
@@ -229,7 +229,7 @@ misses quotes inside square brackets then they will be added.
 
 The same as `terraform init -upgrade` with less verbose output.
 
-The command will log to the file named in `TF_LOG_FILE` environment variable.
+The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
 ### License

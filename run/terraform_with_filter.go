@@ -45,7 +45,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 
 	cmd.Stdin = os.Stdin
 
-	file, err := util.OpenLogfile()
+	file, err := util.OpenOutputFile()
 	if err != nil {
 		return err
 	}
