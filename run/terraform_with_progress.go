@@ -54,7 +54,12 @@ func terraformWithProgress(command string, args []string) error {
 		"|guarantee to take exactly these actions if you run `terraform apply` now\\." +
 		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
 		`|─────────────────────────────────────────────────────────────────────────────` +
-		`|: Drift detected`
+		`|: Drift detected` +
+		`|guarantee to take exactly these actions if you run "terraform apply" now\.` +
+		`|Terraform will destroy all your managed infrastructure, as shown above\.` +
+		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
+		`|You can apply this plan to save these new output values to the Terraform` +
+		`|state, without changing any real infrastructure\.`
 
 	patternIgnoreNextLine := `record the updated values in the Terraform state without changing any remote` +
 		`|record the updated values in the Terraform state without changing any remote` +
@@ -81,7 +86,7 @@ func terraformWithProgress(command string, args []string) error {
 	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\.`
 	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after`
 
-	patternIgnoreOutputs := `^Outputs:(\n|$)`
+	patternIgnoreOutputs := `^(Changes to )?Outputs:(\n|$)`
 
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreNextLine := regexp.MustCompile(patternIgnoreNextLine)
