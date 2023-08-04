@@ -1,5 +1,7 @@
 package progress
 
+var NoColor = false
+
 func Refresh(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":

@@ -40,7 +40,11 @@ func showCounter(line string, resource string, operation string) {
 	maxLine := maxInt(console.Cols-len(s)-len(r)-len(c)-len(m)-len(d)-6, 0)
 	l := line[:minInt(len(line), maxLine)]
 
-	colorstring.Printf("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s\r", s, r, c, m, d, l)
+	if NoColor {
+		fmt.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
+	} else {
+		colorstring.Printf("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s\r", s, r, c, m, d, l)
+	}
 }
 
 func maxInt(x int, y int) int {

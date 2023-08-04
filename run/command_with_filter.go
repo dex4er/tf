@@ -13,7 +13,6 @@ import (
 
 	"github.com/mitchellh/colorstring"
 
-	"github.com/dex4er/tf/console"
 	"github.com/dex4er/tf/util"
 )
 
@@ -21,11 +20,28 @@ func commandWithFilter(command string, args []string, patternIgnoreLine string, 
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreFooter := regexp.MustCompile(patternIgnoreFooter)
 
-	defer fmt.Print(console.ColorReset)
+	noColor := false
+
+	newArgs := []string{}
+
+	for _, arg := range args {
+		switch arg {
+		case "-no-color":
+			noColor = true
+			newArgs = append(newArgs, arg)
+		default:
+			newArgs = append(newArgs, arg)
+		}
+	}
+
+	// clear color even after errors
+	if !noColor {
+		defer fmt.Print("\x1b[0m")
+	}
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{command}, args...)...)
+	cmd := exec.Command("terraform", append([]string{command}, newArgs...)...)
 
 	cmd.Stdin = os.Stdin
 

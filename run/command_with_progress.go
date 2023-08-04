@@ -98,6 +98,7 @@ func commandWithProgress(command string, args []string) error {
 
 	planFormat := "short"
 	progressFormat := "counters"
+	noColor := false
 	noOutputs := false
 
 	if TF_IN_AUTOMATION == "1" {
@@ -118,6 +119,10 @@ func commandWithProgress(command string, args []string) error {
 			progressFormat = "fan"
 		case "-full":
 			planFormat = "full"
+		case "-no-color":
+			noColor = true
+			progress.NoColor = true
+			newArgs = append(newArgs, arg)
 		case "-no-outputs":
 			noOutputs = true
 		case "-quiet":
@@ -136,7 +141,9 @@ func commandWithProgress(command string, args []string) error {
 	}
 
 	// clear color even after errors
-	defer fmt.Print(console.ColorReset)
+	if !noColor {
+		defer fmt.Print("\x1b[0m")
+	}
 
 	// original terraform still handles ctrl-c
 	signal.Ignore(syscall.SIGINT)
