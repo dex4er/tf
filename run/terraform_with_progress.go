@@ -20,7 +20,7 @@ import (
 
 var TF_IN_AUTOMATION = os.Getenv("TF_IN_AUTOMATION")
 
-func commandWithProgress(command string, args []string) error {
+func terraformWithProgress(command string, args []string) error {
 	patternIgnoreLine := "Terraform used the selected providers to generate the following execution" +
 		"|Preparing the remote plan\\.\\.\\." +
 		"|Running plan in Terraform Cloud\\. Output will stream here\\. Pressing Ctrl-C" +

@@ -1,5 +1,5 @@
 package run
 
 func Apply(args []string) error {
-	return commandWithProgress("apply", args)
+	return terraformWithProgress("apply", args)
 }

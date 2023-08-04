@@ -16,7 +16,7 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func commandWithFilter(command string, args []string, patternIgnoreLine string, patternIgnoreFooter string) error {
+func terraformWithFilter(command string, args []string, patternIgnoreLine string, patternIgnoreFooter string) error {
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreFooter := regexp.MustCompile(patternIgnoreFooter)
 

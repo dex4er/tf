@@ -21,5 +21,5 @@ func Init(args []string) error {
 
 	patternIgnoreFooter := "Terraform.* has been successfully initialized!"
 
-	return commandWithFilter("init", args, patternIgnoreLine, patternIgnoreFooter)
+	return terraformWithFilter("init", args, patternIgnoreLine, patternIgnoreFooter)
 }

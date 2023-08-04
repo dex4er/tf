@@ -7,6 +7,7 @@ import (
 	"github.com/dex4er/tf/progress/verbose"
 )
 
+// Handles progress indicator when refreshing resources.
 func Refresh(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
@@ -20,6 +21,7 @@ func Refresh(progressFormat string, line string, resource string, operation stri
 	}
 }
 
+// Handles progress indicator when operation on resource starts.
 func Start(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
@@ -33,6 +35,7 @@ func Start(progressFormat string, line string, resource string, operation string
 	}
 }
 
+// Handles progress indicator when operation on resource still is in progress.
 func Still(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
@@ -46,6 +49,7 @@ func Still(progressFormat string, line string, resource string, operation string
 	}
 }
 
+// Handles progress indicator when operation on resource ends.
 func Stop(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":

@@ -10,9 +10,13 @@ import (
 
 const defaultCols = 80
 
+// Flag enabled if `-no-color` option is used.
 var NoColor = false
+
+// Number of columns detected from Stdin or 80 by default.
 var Cols = getCols()
 
+// Print string to the console with space padding so progress indicator might be overriden.
 func Print(msg string) {
 	if strings.HasSuffix(msg, "\n") {
 		msg = strings.TrimSuffix(msg, "\n")
