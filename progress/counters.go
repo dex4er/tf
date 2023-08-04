@@ -11,21 +11,21 @@ var refreshed = 0
 var started = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
 var stopped = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
 
-func refreshCounter(line string, resource string, operation string) {
+func refreshCounters(line string, resource string, operation string) {
 	refreshed += 1
 	showCounter(line, resource, operation)
 }
 
-func startCounter(line string, resource string, operation string) {
+func startCounters(line string, resource string, operation string) {
 	started[operation] += 1
 	showCounter(line, resource, operation)
 }
 
-func stillCounter(line string, resource string, operation string) {
+func stillCounters(line string, resource string, operation string) {
 	showCounter(line, resource, operation)
 }
 
-func stopCounter(line string, resource string, operation string) {
+func stopCounters(line string, resource string, operation string) {
 	stopped[operation] += 1
 	showCounter(line, resource, operation)
 }

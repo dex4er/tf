@@ -97,7 +97,7 @@ func commandWithProgress(command string, args []string) error {
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
 	planFormat := "short"
-	progressFormat := "counter"
+	progressFormat := "counters"
 	noOutputs := false
 
 	if TF_IN_AUTOMATION == "1" {
@@ -110,10 +110,10 @@ func commandWithProgress(command string, args []string) error {
 		switch arg {
 		case "-compact":
 			planFormat = "compact"
-		case "-counter":
-			progressFormat = "counter"
-		case "-dot":
-			progressFormat = "dot"
+		case "-counters":
+			progressFormat = "counters"
+		case "-dots":
+			progressFormat = "dots"
 		case "-fan":
 			progressFormat = "fan"
 		case "-full":
@@ -238,7 +238,7 @@ func commandWithProgress(command string, args []string) error {
 			}
 
 			// dot format trims EOL then we need one extra just before "Apply complete!"
-			if progressFormat == "dot" && strings.HasPrefix(line, "Apply complete!") {
+			if progressFormat == "dots" && strings.HasPrefix(line, "Apply complete!") {
 				fmt.Println()
 			}
 
