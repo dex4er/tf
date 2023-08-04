@@ -23,61 +23,58 @@ var TF_PLAN_FORMAT = os.Getenv("TF_PLAN_FORMAT")
 var TF_PROGRESS_FORMAT = os.Getenv("TF_PROGRESS_FORMAT")
 
 func terraformWithProgress(command string, args []string) error {
-	patternIgnoreLine := "Terraform used the selected providers to generate the following execution" +
-		"|Preparing the remote plan\\.\\.\\." +
-		"|Running plan in Terraform Cloud\\. Output will stream here\\. Pressing Ctrl-C" +
-		"|will stop streaming the logs, but will not stop the plan running remotely\\." +
-		"|The remote workspace is configured to work with configuration at" +
-		"|relative to the target repository." +
-		"|excluding files or directories as defined by a \\.terraformignore file" +
-		"|at .*\\.terraformignore (if it is present)," +
-		"|in order to capture the filesystem context the remote workspace expects:" +
-		"|plan. Resource actions are indicated with the following symbols:" +
-		"|Waiting for the plan to start\\.\\.\\." +
-		"|Terraform will perform the following actions:" +
-		"|Terraform will perform the actions described above\\." +
-		"|Terraform has compared your real infrastructure against your configuration" +
-		"|and found no differences, so no changes are needed\\." +
-		"|Unless you have made equivalent changes to your configuration, or ignored the" +
-		"|relevant attributes using ignore_changes, the following plan may include" +
-		"|actions to undo or respond to these changes\\." +
-		"|This is a refresh-only plan, so Terraform will not take any actions to undo" +
-		"|these\\. If you were expecting these changes then you can apply this plan to" +
-		"|Terraform has checked that the real remote objects still match the result of" +
-		"|your most recent changes, and found no differences\\." +
-		"|To perform exactly these actions, run the following command to apply:" +
-		"|To see the full warning notes, run Terraform without -compact-warnings\\." +
-		"|Acquiring state lock\\. This may take a few moments\\.\\.\\." +
-		"|Releasing state lock\\. This may take a few moments\\.\\.\\." +
-		"|Warnings:" +
-		"|Note: You .* use the -out option to save this plan, so Terraform" +
-		"|guarantee to take exactly these actions if you run \"terraform apply\" now\\." +
-		"|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\\." +
-		"|─────────────────────────────────────────────────────────────────────────────"
+	patternIgnoreLine := `Terraform used the selected providers to generate the following execution` +
+		`|Preparing the remote plan\.\.\.` +
+		`|Running plan in Terraform Cloud\. Output will stream here\. Pressing Ctrl-C` +
+		`|will stop streaming the logs, but will not stop the plan running remotely\.` +
+		`|The remote workspace is configured to work with configuration at` +
+		`|relative to the target repository.` +
+		`|excluding files or directories as defined by a \.terraformignore file` +
+		`|at .*\.terraformignore (if it is present),` +
+		`|in order to capture the filesystem context the remote workspace expects:` +
+		`|plan. Resource actions are indicated with the following symbols:` +
+		`|Waiting for the plan to start\.\.\.` +
+		`|Terraform will perform the following actions:` +
+		`|Terraform will perform the actions described above\.` +
+		`|Terraform has compared your real infrastructure against your configuration` +
+		`|and found no differences, so no changes are needed\.` +
+		`|Unless you have made equivalent changes to your configuration, or ignored the` +
+		`|relevant attributes using ignore_changes, the following plan may include` +
+		`|actions to undo or respond to these changes\.` +
+		`|This is a refresh-only plan, so Terraform will not take any actions to undo` +
+		`|these\. If you were expecting these changes then you can apply this plan to` +
+		`|Terraform has checked that the real remote objects still match the result of` +
+		`|your most recent changes, and found no differences\.` +
+		`|To perform exactly these actions, run the following command to apply:` +
+		`|To see the full warning notes, run Terraform without -compact-warnings\.` +
+		`|Acquiring state lock\. This may take a few moments\.\.\.` +
+		`|Releasing state lock\. This may take a few moments\.\.\.` +
+		`|Warnings:` +
+		`|Note: You .* use the -out option to save this plan, so Terraform` +
+		"|guarantee to take exactly these actions if you run `terraform apply` now\\." +
+		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
+		`|─────────────────────────────────────────────────────────────────────────────` +
+		`|: Drift detected`
 
-	patternIgnoreNextLine := "record the updated values in the Terraform state without changing any remote" +
-		"|record the updated values in the Terraform state without changing any remote" +
-		"| Experimental feature .* is active" +
-		"|Saved the plan to: terraform\\.tfplan"
+	patternIgnoreNextLine := `record the updated values in the Terraform state without changing any remote` +
+		`|record the updated values in the Terraform state without changing any remote` +
+		`| Experimental feature .* is active` +
+		`|Saved the plan to: terraform\.tfplan`
 
-	patternIgnoreBlockStart := "Warning:.*Applied changes may be incomplete" +
-		"|Warning:.*Resource targeting is in effect" +
-		"|This plan was saved to: terraform.tfplan"
+	patternIgnoreBlockStart := `Warning:.*Applied changes may be incomplete` +
+		`|Warning:.*Resource targeting is in effect` +
+		`|This plan was saved to: terraform.tfplan`
 
-	patternIgnoreBlockEnd := "suggests to use it as part of an error message" +
-		"|exceptional situations such as recovering from errors or mistakes" +
-		"|terraform apply \"terraform\\.tfplan\""
+	patternIgnoreBlockEnd := `suggests to use it as part of an error message` +
+		`|exceptional situations such as recovering from errors or mistakes` +
+		"|terraform apply `terraform\\.tfplan`"
 
-	patternIgnoreShortFormat := "= \\(known after apply\\)" +
-		"|\\(\\d+ unchanged \\w+ hidden\\)" +
-		"|\\(config refers to values not yet known\\)"
+	patternIgnoreShortFormat := `= \(known after apply\)` +
+		`|\(\d+ unchanged \w+ hidden\)` +
+		`|\(config refers to values not yet known\)`
 
-	patternIgnoreCompactFormat := "^\\s\\s[\\s+~-]" +
-		"|\\(config refers to values not yet known\\)"
-
-	// patternStartRefreshing := ": Refreshing state\\.\\.\\." +
-	// 	"|: Refreshing\\.\\.\\."
-	// patternStopRefreshing := ": Drift detected"
+	patternIgnoreCompactFormat := `^\s\s[\s+~-]` +
+		`|\(config refers to values not yet known\)`
 
 	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\.`
 	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\.`
