@@ -1,5 +1,12 @@
 package run
 
+import (
+	"os"
+	"os/exec"
+
+	"github.com/dex4er/tf/util"
+)
+
 func Init(args []string) error {
 	patternIgnoreLine := "Finding .* versions matching" +
 		"|Initializing Terraform" +
@@ -21,5 +28,44 @@ func Init(args []string) error {
 
 	patternIgnoreFooter := "Terraform.* has been successfully initialized!"
 
-	return terraformWithFilter("init", args, patternIgnoreLine, patternIgnoreFooter)
+	newArgs := []string{}
+
+	var codesign = false
+
+	for _, arg := range args {
+		switch arg {
+		case "-codesign":
+			codesign = true
+		default:
+			newArgs = append(newArgs, arg)
+		}
+	}
+
+	if err := terraformWithFilter("init", newArgs, patternIgnoreLine, patternIgnoreFooter); err != nil {
+		return err
+	}
+
+	if codesign {
+		if err := runCodesign(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func runCodesign() error {
+	cmd := exec.Command("sh", "-c", "find .terraform/providers -type f -follow -name '*_v*.*.*' | xargs -n1 codesign --force --deep --sign -")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		return err
+	}
+
+	if err := util.ReplacePatternInFile(".terraform.lock.hcl", `(?s)  hashes = \[.*?  \]\r?\n`, ""); err != nil {
+		return err
+	}
+
+	return nil
 }

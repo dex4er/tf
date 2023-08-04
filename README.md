@@ -141,6 +141,11 @@ The same as `terraform init` with less verbose output.
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
 
+Additional option `-codesign` causes that all providers will have replaced
+existing signature and checksums will be removed from the lock file. It will
+allow to run providers by Terraform on MacOS when the system blocks
+applications with unrecognized signature.
+
 ### `tf list`
 
 The same as `terraform state list` with less verbose output and ANSI stripped.
@@ -236,6 +241,11 @@ The same as `terraform init -upgrade` with less verbose output.
 
 The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
 The file name is solved by `date` command for `%` sequences.
+
+Additional option `-codesign` causes that all providers will have replaced
+existing signature and checksums will be removed from the lock file. It will
+allow to run providers by Terraform on MacOS when the system blocks
+applications with unrecognized signature.
 
 ## License
 
