@@ -12,8 +12,13 @@ func AddQuotes(input string) string {
 }
 
 func IsEmptyLine(line string) bool {
-	re := regexp.MustCompile(`(?s)^(\033\[\d+m)*\r?\n?$`)
+	re := regexp.MustCompile(`^(\033\[\d+m)*\r?\n?$`)
 	return re.MatchString(line)
+}
+
+func RemoveColors(line string) string {
+	re := regexp.MustCompile(`\033\[\d+m`)
+	return re.ReplaceAllString(line, "")
 }
 
 func StartsWith(s string, prefix rune) bool {

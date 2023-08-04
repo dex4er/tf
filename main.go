@@ -28,6 +28,8 @@ func main() {
 			err = run.Destroy(args)
 		case "init":
 			err = run.Init(args)
+		case "list":
+			err = run.List(args)
 		case "plan":
 			err = run.Plan(args)
 		case "upgrade":
