@@ -1,39 +1,51 @@
 package progress
 
-var NoColor = false
+import (
+	"github.com/dex4er/tf/progress/counters"
+	"github.com/dex4er/tf/progress/dots"
+	"github.com/dex4er/tf/progress/verbose"
+)
 
 func Refresh(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
-		refreshCounters(line, resource, operation)
+		counters.Refresh(line, resource, operation)
 	case "dots":
-		refreshDots(line, resource, operation)
+		dots.Refresh(line, resource, operation)
+	case "verbose":
+		verbose.Refresh(line, resource, operation)
 	}
 }
 
 func Start(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
-		startCounters(line, resource, operation)
+		counters.Start(line, resource, operation)
 	case "dots":
-		startDots(line, resource, operation)
+		dots.Start(line, resource, operation)
+	case "verbose":
+		verbose.Start(line, resource, operation)
 	}
 }
 
 func Still(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
-		stillCounters(line, resource, operation)
+		counters.Still(line, resource, operation)
 	case "dots":
-		stillDots(line, resource, operation)
+		dots.Still(line, resource, operation)
+	case "verbose":
+		verbose.Still(line, resource, operation)
 	}
 }
 
 func Stop(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
-		stopCounters(line, resource, operation)
+		counters.Stop(line, resource, operation)
 	case "dots":
-		stopDots(line, resource, operation)
+		dots.Stop(line, resource, operation)
+	case "verbose":
+		verbose.Stop(line, resource, operation)
 	}
 }

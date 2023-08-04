@@ -1,4 +1,4 @@
-package progress
+package counters
 
 import (
 	"fmt"
@@ -13,26 +13,26 @@ var refreshed = 0
 var started = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
 var stopped = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
 
-func refreshCounters(line string, resource string, operation string) {
+func Refresh(line string, resource string, operation string) {
 	refreshed += 1
-	showCounters(line, resource, operation)
+	show(line, resource, operation)
 }
 
-func startCounters(line string, resource string, operation string) {
+func Start(line string, resource string, operation string) {
 	started[operation] += 1
-	showCounters(line, resource, operation)
+	show(line, resource, operation)
 }
 
-func stillCounters(line string, resource string, operation string) {
-	showCounters(line, resource, operation)
+func Still(line string, resource string, operation string) {
+	show(line, resource, operation)
 }
 
-func stopCounters(line string, resource string, operation string) {
+func Stop(line string, resource string, operation string) {
 	stopped[operation] += 1
-	showCounters(line, resource, operation)
+	show(line, resource, operation)
 }
 
-func showCounters(line string, resource string, operation string) {
+func show(line string, resource string, operation string) {
 	s := fmt.Sprintf("^%d", refreshed)
 	r := fmt.Sprintf("=%d/%d", stopped["R"], started["R"])
 	c := fmt.Sprintf("+%d/%d", stopped["C"], started["C"])
@@ -42,7 +42,7 @@ func showCounters(line string, resource string, operation string) {
 	maxLine := util.MaxInt(console.Cols-len(s)-len(r)-len(c)-len(m)-len(d)-6, 0)
 	l := line[:util.MinInt(len(line), maxLine)]
 
-	if NoColor {
+	if console.NoColor {
 		fmt.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
 	} else {
 		colorstring.Printf("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s\r", s, r, c, m, d, l)

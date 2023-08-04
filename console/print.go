@@ -9,6 +9,7 @@ import (
 
 const defaultCols = 80
 
+var NoColor = false
 var Cols = getCols()
 
 func Print(msg string) {

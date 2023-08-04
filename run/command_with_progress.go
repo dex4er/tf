@@ -121,7 +121,7 @@ func commandWithProgress(command string, args []string) error {
 			planFormat = "full"
 		case "-no-color":
 			noColor = true
-			progress.NoColor = true
+			console.NoColor = true
 			newArgs = append(newArgs, arg)
 		case "-no-outputs":
 			noOutputs = true
@@ -129,6 +129,9 @@ func commandWithProgress(command string, args []string) error {
 			progressFormat = "quiet"
 		case "-short":
 			planFormat = "short"
+		case "-verbatim":
+			planFormat = "full"
+			progressFormat = "verbatim"
 		case "-verbose":
 			progressFormat = "verbose"
 		default:
@@ -221,8 +224,8 @@ func commandWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			// verbose format is not processed or ignored
-			if progressFormat != "verbose" {
+			// verbatim progress format is not processed or ignored
+			if progressFormat != "verbatim" {
 				if m := reRefreshing.FindStringSubmatch(line); m != nil {
 					progress.Refresh(progressFormat, m[0], m[1], m[2])
 					goto NEXT
