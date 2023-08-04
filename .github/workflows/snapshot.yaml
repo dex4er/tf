@@ -1,0 +1,51 @@
+name: Snapshot
+
+on:
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - .editorconfig
+      - .gitignore
+      - .markdownlint.yaml
+      - .trunk/**
+      - LICENSE
+      - README.md
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: Build
+
+    permissions:
+      id-token: write
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Fake terraform
+        run: |
+          echo '#!/bin/bash' | sudo tee /usr/local/bin/terraform
+          echo 'echo Fake Terraform' | sudo tee -a /usr/local/bin/terraform
+          sudo chmod +x /usr/local/bin/terraform
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.20.5 # datasource=github-releases depName=golang/go
+
+      - name: Build binary
+        run: make download build
+
+      - name: Test binary
+        run: |
+          ./tf version
