@@ -150,7 +150,7 @@ func terraformWithProgress(command string, args []string) error {
 			if util.StartsWith(arg, '-') {
 				newArgs = append(newArgs, arg)
 			} else {
-				newArgs = append(newArgs, fmt.Sprintf("-target=%s", util.AddQuotes(arg)))
+				newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
 			}
 		}
 	}
