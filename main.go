@@ -34,6 +34,10 @@ func main() {
 			err = run.Plan(args)
 		case "show":
 			err = run.Show(args)
+		case "taint":
+			err = run.Taint(args)
+		case "untaint":
+			err = run.Untaint(args)
 		case "upgrade":
 			err = run.Upgrade(args)
 		case "version":
