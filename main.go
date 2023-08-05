@@ -36,6 +36,8 @@ func main() {
 			err = run.Mv(args)
 		case "plan":
 			err = run.Plan(args)
+		case "refresh":
+			err = run.Refresh(args)
 		case "rm":
 			err = run.Rm(args)
 		case "show":

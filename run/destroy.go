@@ -3,7 +3,7 @@ package run
 import "github.com/dex4er/tf/util"
 
 func Destroy(args []string) error {
-	newArgs := []string{"list"}
+	newArgs := []string{}
 
 	for _, arg := range args {
 		if util.StartsWith(arg, '-') {

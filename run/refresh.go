@@ -2,7 +2,7 @@ package run
 
 import "github.com/dex4er/tf/util"
 
-func Plan(args []string) error {
+func Refresh(args []string) error {
 	newArgs := []string{}
 
 	for _, arg := range args {
@@ -13,5 +13,5 @@ func Plan(args []string) error {
 		}
 	}
 
-	return terraformWithProgress("plan", newArgs)
+	return terraformWithProgress("refresh", newArgs)
 }
