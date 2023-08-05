@@ -130,9 +130,10 @@ The same as `terraform import` with better handling of arguments.
 If the first argument misses quotes inside square brackets then they will be
 added.
 
-The command concatenatest second and rest arguments into one.
+The command appends the third argument and more to the second with a space as
+separator.
 
-The resource is shown when `-show` argument was used.
+The `tf show` for this resource is run after import.
 
 ### `tf init`
 

@@ -26,6 +26,8 @@ func main() {
 			err = run.Apply(args)
 		case "destroy":
 			err = run.Destroy(args)
+		case "import":
+			err = run.Import(args)
 		case "init":
 			err = run.Init(args)
 		case "list":

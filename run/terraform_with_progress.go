@@ -59,7 +59,10 @@ func terraformWithProgress(command string, args []string) error {
 		`|Terraform will destroy all your managed infrastructure, as shown above\.` +
 		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
 		`|You can apply this plan to save these new output values to the Terraform` +
-		`|state, without changing any real infrastructure\.`
+		`|state, without changing any real infrastructure\.` +
+		`|The resources that were imported are shown above\. These resources are now in` +
+		`|your Terraform state and will henceforth be managed by Terraform\.` +
+		`|  Prepared .* for import`
 
 	patternIgnoreNextLine := `record the updated values in the Terraform state without changing any remote` +
 		`|record the updated values in the Terraform state without changing any remote` +
@@ -147,11 +150,7 @@ func terraformWithProgress(command string, args []string) error {
 		case "-verbose":
 			progressFormat = "verbose"
 		default:
-			if util.StartsWith(arg, '-') {
-				newArgs = append(newArgs, arg)
-			} else {
-				newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
-			}
+			newArgs = append(newArgs, arg)
 		}
 	}
 
