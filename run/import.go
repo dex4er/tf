@@ -10,8 +10,12 @@ func Import(args []string) error {
 	newArgs := []string{}
 	resource := ""
 
+	noOutputs := false
+
 	for i, arg := range args {
-		if util.StartsWith(arg, '-') {
+		if arg == "-no-outputs" {
+			noOutputs = true
+		} else if util.StartsWith(arg, '-') {
 			newArgs = append(newArgs, arg)
 		} else {
 			resource = util.AddQuotes(arg)
@@ -28,5 +32,9 @@ func Import(args []string) error {
 		return err
 	}
 
-	return Show([]string{resource})
+	if !noOutputs {
+		return Show([]string{resource})
+	}
+
+	return nil
 }

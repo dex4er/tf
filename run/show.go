@@ -13,16 +13,14 @@ func Show(args []string) error {
 	noOutputs := false
 
 	for _, arg := range args {
-		switch arg {
-		case "-no-outputs":
+		if arg == "-no-outputs" {
 			noOutputs = true
-		default:
-			if util.StartsWith(arg, '-') {
-				newArgs = append(newArgs, arg)
-			} else {
-				resources = append(resources, util.AddQuotes(arg))
-			}
+		} else if util.StartsWith(arg, '-') {
+			newArgs = append(newArgs, arg)
+		} else {
+			resources = append(resources, util.AddQuotes(arg))
 		}
+
 	}
 
 	patternIgnoreFooter := ""
