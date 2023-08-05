@@ -10,13 +10,22 @@ func Show(args []string) error {
 	resources := []string{}
 	newArgs := []string{}
 
+	noOutputs := false
+
 	for _, arg := range args {
-		if util.StartsWith(arg, '-') {
-			newArgs = append(newArgs, arg)
-		} else {
-			resources = append(resources, util.AddQuotes(arg))
+		switch arg {
+		case "-no-outputs":
+			noOutputs = true
+		default:
+			if util.StartsWith(arg, '-') {
+				newArgs = append(newArgs, arg)
+			} else {
+				resources = append(resources, util.AddQuotes(arg))
+			}
 		}
 	}
+
+	patternIgnoreFooter := ""
 
 	if len(resources) > 0 {
 		newArgs = append([]string{"show"}, newArgs...)
@@ -24,12 +33,15 @@ func Show(args []string) error {
 			if i > 0 {
 				fmt.Println()
 			}
-			if err := terraformWithoutColors("state", append(newArgs, r)); err != nil {
+			if err := terraformWithoutColors("state", append(newArgs, r), patternIgnoreFooter); err != nil {
 				return err
 			}
 		}
 		return nil
 	}
 
-	return terraformWithoutColors("show", newArgs)
+	if noOutputs {
+		patternIgnoreFooter = `^Outputs:$`
+	}
+	return terraformWithoutColors("show", newArgs, patternIgnoreFooter)
 }

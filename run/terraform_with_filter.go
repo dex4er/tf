@@ -116,7 +116,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 			}
 
 			// ignore just this line
-			if reIgnoreLine.MatchString(line) {
+			if patternIgnoreLine != "" && reIgnoreLine.MatchString(line) {
 				goto NEXT
 			}
 
