@@ -133,7 +133,8 @@ added.
 The command appends the third argument and more to the second with a space as
 separator.
 
-The `tf show` for this resource is run after import.
+The `tf show` for this resource is run after import unless additional option
+`-no-show` has been used.
 
 ### `tf init`
 

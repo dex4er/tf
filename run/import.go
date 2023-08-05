@@ -13,7 +13,7 @@ func Import(args []string) error {
 	noOutputs := false
 
 	for i, arg := range args {
-		if arg == "-no-outputs" {
+		if arg == "-no-show" {
 			noOutputs = true
 		} else if util.StartsWith(arg, '-') {
 			newArgs = append(newArgs, arg)
