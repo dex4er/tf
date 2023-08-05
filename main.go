@@ -30,8 +30,12 @@ func main() {
 			err = run.Init(args)
 		case "list":
 			err = run.List(args)
+		case "mv":
+			err = run.Mv(args)
 		case "plan":
 			err = run.Plan(args)
+		case "rm":
+			err = run.Rm(args)
 		case "show":
 			err = run.Show(args)
 		case "taint":
