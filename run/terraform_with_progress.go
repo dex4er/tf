@@ -313,6 +313,8 @@ func terraformWithProgress(command string, args []string) error {
 			if wasEmptyLine && util.IsEmptyLine(line) {
 				line = strings.TrimSuffix(line, "\n")
 				line = strings.TrimSuffix(line, "\r")
+				line = strings.ReplaceAll(line, "╵", "")
+				line = strings.ReplaceAll(line, "╷", "")
 			}
 
 			// in CI do not add spaces clearing progress indicator

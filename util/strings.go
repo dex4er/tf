@@ -12,7 +12,7 @@ func AddQuotes(input string) string {
 }
 
 func IsEmptyLine(line string) bool {
-	re := regexp.MustCompile(`^(\033\[\d+m)*\r?\n?$`)
+	re := regexp.MustCompile(`^(\033\[\d+m[╷╵]?)*\r?\n?$`)
 	return re.MatchString(line)
 }
 
