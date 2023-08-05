@@ -11,20 +11,10 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
-func terraformStateWithoutColors(command string, args []string) error {
-	newArgs := []string{}
-
-	for _, arg := range args {
-		if util.StartsWith(arg, '-') {
-			newArgs = append(newArgs, arg)
-		} else {
-			newArgs = append(newArgs, util.AddQuotes(arg))
-		}
-	}
-
+func terraformWithoutColors(command string, args []string) error {
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{"state", command}, newArgs...)...)
+	cmd := exec.Command("terraform", append([]string{command}, args...)...)
 
 	cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr

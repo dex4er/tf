@@ -32,6 +32,8 @@ func main() {
 			err = run.List(args)
 		case "plan":
 			err = run.Plan(args)
+		case "show":
+			err = run.Show(args)
 		case "upgrade":
 			err = run.Upgrade(args)
 		case "version":

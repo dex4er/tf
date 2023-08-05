@@ -5,7 +5,7 @@ import (
 )
 
 func AddQuotes(input string) string {
-	re := regexp.MustCompile(`\[([a-z_][^\]]*)\]`)
+	re := regexp.MustCompile(`\[([A-Za-z_][^\]]*)\]`)
 	return re.ReplaceAllStringFunc(input, func(match string) string {
 		return `["` + re.FindStringSubmatch(match)[1] + `"]`
 	})
