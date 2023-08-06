@@ -15,7 +15,7 @@ func Refresh(line string, resource string, operation string) {
 	if console.NoColor {
 		fmt.Print("^")
 	} else {
-		colorstring.Print("[blue]^")
+		console.Print(colorstring.Color("[blue]^"))
 	}
 }
 
@@ -23,7 +23,7 @@ func Start(line string, resource string, operation string) {
 	if console.NoColor {
 		fmt.Print(".")
 	} else {
-		colorstring.Print("[" + operation2color[operation] + "].")
+		console.Print(colorstring.Color("[" + operation2color[operation] + "]."))
 	}
 }
 
@@ -35,6 +35,6 @@ func Stop(line string, resource string, operation string) {
 	if console.NoColor {
 		fmt.Print(operation2symbol[operation])
 	} else {
-		colorstring.Print("[" + operation2color[operation] + "]" + operation2symbol[operation])
+		console.Print(colorstring.Color("[" + operation2color[operation] + "]" + operation2symbol[operation]))
 	}
 }

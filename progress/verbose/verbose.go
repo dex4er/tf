@@ -41,6 +41,6 @@ func show(line string, resource string, operation string) {
 	if console.NoColor {
 		fmt.Printf("%s %s %s %s %s %s\n", s, r, c, m, d, line)
 	} else {
-		colorstring.Printf("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s\n", s, r, c, m, d, line)
+		console.Printf(colorstring.Color("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s")+"\n", s, r, c, m, d, line)
 	}
 }

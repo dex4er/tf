@@ -2,7 +2,6 @@ package console
 
 import (
 	"fmt"
-	"regexp"
 	"strings"
 
 	"golang.org/x/term"
@@ -16,27 +15,24 @@ var NoColor = false
 // Number of columns detected from Stdin or 80 by default.
 var Cols = getCols()
 
+var previousWasCR = false
+
 // Print string to the console with space padding so progress indicator might be overriden.
 func Print(msg string) {
-	if strings.HasSuffix(msg, "\n") {
-		msg = strings.TrimSuffix(msg, "\n")
-		lenMsg := lenWithoutColors(msg)
-		if lenMsg < Cols {
-			fmt.Println(msg, strings.Repeat(" ", Cols-1-lenMsg))
-		} else {
-			fmt.Println(msg)
-		}
-	} else if strings.HasSuffix(msg, "\r") {
-		msg = strings.TrimSuffix(msg, "\r")
-		lenMsg := lenWithoutColors(msg)
-		if lenMsg < Cols {
-			fmt.Print(msg, strings.Repeat(" ", Cols-1-lenMsg), "\r")
-		} else {
-			fmt.Print(msg, "\r")
-		}
-	} else {
-		fmt.Print(msg)
+	if previousWasCR {
+		fmt.Print(strings.Repeat(" ", Cols-1), "\r")
+		previousWasCR = false
 	}
+	if strings.HasSuffix(msg, "\r") {
+		fmt.Print(msg)
+		previousWasCR = true
+	}
+	fmt.Print(msg)
+}
+
+// Printf string to the console with space padding so progress indicator might be overriden.
+func Printf(format string, a ...interface{}) {
+	Print(fmt.Sprintf(format, a...))
 }
 
 func getCols() int {
@@ -45,10 +41,4 @@ func getCols() int {
 		return defaultCols
 	}
 	return width
-}
-
-func lenWithoutColors(msg string) int {
-	re := regexp.MustCompile(`\033\[\d+m`)
-	re.ReplaceAllString(msg, "")
-	return len(msg)
 }
