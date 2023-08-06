@@ -7,4 +7,5 @@
 *.tfstate
 demo-*.txt
 /tf
+.terraform
 .vscode
