@@ -188,7 +188,7 @@ for progress indicator (counters, fan, dots, verbose, verbatim).
 
 ### `tf refresh`
 
-The same as `terraform apply -refresh-only` with less verbose output.
+The same as `terraform refresh` with less verbose output.
 
 Additional options can be used: `-counters` shows counters with processed
 resources, `-compact` skips the content of the resources, `-short` removes

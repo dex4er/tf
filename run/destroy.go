@@ -9,7 +9,7 @@ func Destroy(args []string) error {
 		if util.StartsWith(arg, '-') {
 			newArgs = append(newArgs, arg)
 		} else {
-			newArgs = append(newArgs, util.AddQuotes(arg))
+			newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
 		}
 	}
 
