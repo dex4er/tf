@@ -1,0 +1,302 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+
+  # Specify the current working directory path
+  # the default is the current working directory path
+  # cwd: .
+
+  # Export additional ENV variables
+  env:
+    recording: true
+
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 80
+
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 24
+
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+
+  # Quality
+  # 1 - 100
+  quality: 100
+
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 5000
+
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: terraform
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: Monaco, Lucida Console, Ubuntu Mono, Monospace
+
+  # The size of the font
+  fontSize: 12
+
+  # The height of lines
+  lineHeight: 1
+
+  # The spacing between letters
+  letterSpacing: 0
+
+  # Theme
+  theme:
+    background: transparent
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+
+# Records, feel free to edit them
+records:
+  - delay: 1
+    content: "\e[0m"
+  - delay: 1
+    content: "$ "
+  - delay: 100
+    content: t
+  - delay: 100
+    content: e
+  - delay: 100
+    content: r
+  - delay: 100
+    content: r
+  - delay: 100
+    content: a
+  - delay: 100
+    content: f
+  - delay: 100
+    content: o
+  - delay: 100
+    content: r
+  - delay: 100
+    content: m
+  - delay: 100
+    content: " "
+  - delay: 100
+    content: a
+  - delay: 100
+    content: p
+  - delay: 100
+    content: p
+  - delay: 100
+    content: l
+  - delay: 100
+    content: y
+  - delay: 100
+    content: "\r\n\e[?2004l\r"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"8\"]: Refreshing state... [id=2023-08-06T16:33:51Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"2\"]: Refreshing state... [id=2023-08-06T16:33:27Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"4\"]: Refreshing state... [id=2023-08-06T16:33:47Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"3\"]: Refreshing state... [id=2023-08-06T16:33:46Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"1\"]: Refreshing state... [id=2023-08-06T16:33:26Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"6\"]: Refreshing state... [id=2023-08-06T16:33:49Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"5\"]: Refreshing state... [id=2023-08-06T16:33:48Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"0\"]: Refreshing state... [id=2023-08-06T16:33:25Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"9\"]: Refreshing state... [id=2023-08-06T16:33:52Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mtime_sleep.this[\"7\"]: Refreshing state... [id=2023-08-06T16:33:50Z]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"1\"]: Refreshing state... [id=ab8366d7206c431e6e15a625a04d0fbe5510984d]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"9\"]: Refreshing state... [id=0b3fcfc3c47ebcb023b29162b5bbe24a37c81921]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"7\"]: Refreshing state... [id=dc80681ca75408be7cc233f412c94f5397a5f90c]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"3\"]: Refreshing state... [id=ffbb3db597a7dffadbaed70c929894cd5937bbf4]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"8\"]: Refreshing state... [id=18f2cbee9756187ac80e27c7043006d42a38c62b]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"0\"]: Refreshing state... [id=4cf95cb065f76558d747a43b0b61d257d6ac49f6]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"4\"]: Refreshing state... [id=1fb5a271e335464c4f7c1450ae8f4f74911afa90]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"5\"]: Refreshing state... [id=b909326d154d820cf18686ac860d07ab15b6f39c]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"6\"]: Refreshing state... [id=4a45c68a186271cca8cb00dbd00aa4c607cf1dad]\e[0m\r\n"
+  - delay: 200
+    content: "\e[0m\e[1mlocal_file.this[\"2\"]: Refreshing state... [id=0db0e5fa1ecf3e7659504f2e4048434cd9f20d2d]\e[0m\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "Terraform used the selected providers to generate the following execution plan.\r\n"
+  - delay: 10
+    content: "Resource actions are indicated with the following symbols:\r\n"
+  - delay: 10
+    content: "  \e[32m+\e[0m create\e[0m\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "Terraform will perform the following actions:\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "\e[1m  # local_file.this[\"8\"]\e[0m will be created\r\n"
+  - delay: 10
+    content: "\e[0m  \e[32m+\e[0m\e[0m resource \"local_file\" \"this\" {\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content              = \"Content 8\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_base64sha256 = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_base64sha512 = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_md5          = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha1         = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha256       = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha512       = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m directory_permission = \"0777\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m file_permission      = \"0664\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m filename             = \"./demo-8.txt\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m id                   = (known after apply)\r\n"
+  - delay: 10
+    content: "    }\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "\e[1m  # local_file.this[\"9\"]\e[0m will be created\r\n"
+  - delay: 10
+    content: "\e[0m  \e[32m+\e[0m\e[0m resource \"local_file\" \"this\" {\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content              = \"Content 9\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_base64sha256 = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_base64sha512 = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_md5          = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha1         = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha256       = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m content_sha512       = (known after apply)\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m directory_permission = \"0777\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m file_permission      = \"0664\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m filename             = \"./demo-9.txt\"\r\n"
+  - delay: 10
+    content: "      \e[32m+\e[0m\e[0m id                   = (known after apply)\r\n"
+  - delay: 10
+    content: "    }\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "\e[1mPlan:\e[0m 2 to add, 0 to change, 0 to destroy.\r\n"
+  - delay: 10
+    content: "\e[0m\e[0m\e[1m\r\n"
+  - delay: 10
+    content: "Do you want to perform these actions?\e[0m\r\n"
+  - delay: 10
+    content: "  Terraform will perform the actions described above.\r\n"
+  - delay: 10
+    content: "  Only 'yes' will be accepted to approve.\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "  \e[1mEnter a value:\e[0m \e[0m"
+  - delay: 500
+    content: "y"
+  - delay: 100
+    content: e
+  - delay: 100
+    content: s
+  - delay: 100
+    content: "\r\n"
+  - delay: 10
+    content: "\r\n"
+  - delay: 10
+    content: "\e[0m\e[1mlocal_file.this[\"8\"]: Creating...\e[0m\e[0m\r\n"
+  - delay: 10
+    content: "\e[0m\e[1mlocal_file.this[\"9\"]: Creating...\e[0m\e[0m\r\n"
+  - delay: 1000
+    content: "\e[0m\e[1mlocal_file.this[\"9\"]: Creation complete after 0s [id=0b3fcfc3c47ebcb023b29162b5bbe24a37c81921]\e[0m\r\n"
+  - delay: 1000
+    content: "\e[0m\e[1mlocal_file.this[\"8\"]: Creation complete after 0s [id=18f2cbee9756187ac80e27c7043006d42a38c62b]\e[0m\r\n"
+  - delay: 10
+    content: "\e[0m\e[1m\e[32m\r\n"
+  - delay: 10
+    content: "Apply complete! Resources: 2 added, 0 changed, 0 destroyed.\r\n"
+  - delay: 100
+    content: "\e[0m$ "
+  - delay: 5000
+    content: "\r\n"

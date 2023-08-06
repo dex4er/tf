@@ -6,13 +6,9 @@
 
 Less verbose and more shell friendly Terraform.
 
-Better this:
-
-![tf apply -compact](tf-apply-compact.gif)
-
-than this:
-
-![terraform apply](terraform-apply.gif)
+| Better this:                                               | Than this:                                                             |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [![tf apply -compact](assets/tf-small.gif)](assets/tf.gif) | [![terraform apply](assets/terraform-small.gif)](assets/terraform.gif) |
 
 The original Terraform is abusively oververbosed. The `tf` wrapper makes
 Terraform more CLI friendly:
