@@ -16,7 +16,7 @@ locals {
   items = [for v in range(var.n) : tostring(v)]
 }
 
-resource "time_sleep" "this" {
+resource "time_sleep" "this" { ## tflint-ignore: terraform_required_providers
   for_each = toset(local.items)
 
   triggers = {
@@ -27,7 +27,7 @@ resource "time_sleep" "this" {
   destroy_duration = "${each.key}s"
 }
 
-resource "local_file" "this" {
+resource "local_file" "this" { ## tflint-ignore: terraform_required_providers
   for_each = toset(local.items)
 
   content  = "Content ${time_sleep.this[each.key].triggers.key}"
