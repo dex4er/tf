@@ -13,7 +13,7 @@ func Show(args []string) error {
 	noOutputs := false
 
 	for _, arg := range args {
-		if arg == "-no-outputs" {
+		if arg == "-no-output" || arg == "-no-outputs" {
 			noOutputs = true
 		} else if util.StartsWith(arg, '-') {
 			newArgs = append(newArgs, arg)

@@ -126,8 +126,12 @@ func terraformWithProgress(command string, args []string) error {
 		switch arg {
 		case "-compact":
 			planFormat = "compact"
+		case "-counter":
+			progressFormat = "counters"
 		case "-counters":
 			progressFormat = "counters"
+		case "-dot":
+			progressFormat = "dots"
 		case "-dots":
 			progressFormat = "dots"
 		case "-fan":
@@ -138,6 +142,8 @@ func terraformWithProgress(command string, args []string) error {
 			noColor = true
 			console.NoColor = true
 			newArgs = append(newArgs, arg)
+		case "-no-output":
+			noOutputs = true
 		case "-no-outputs":
 			noOutputs = true
 		case "-quiet":
