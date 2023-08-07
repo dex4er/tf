@@ -23,58 +23,60 @@ var TF_PLAN_FORMAT = os.Getenv("TF_PLAN_FORMAT")
 var TF_PROGRESS_FORMAT = os.Getenv("TF_PROGRESS_FORMAT")
 
 func terraformWithProgress(command string, args []string) error {
-	patternIgnoreLine := `Terraform used the selected providers to generate the following execution` +
-		`|Preparing the remote plan\.\.\.` +
-		`|Running plan in Terraform Cloud\. Output will stream here\. Pressing Ctrl-C` +
-		`|will stop streaming the logs, but will not stop the plan running remotely\.` +
-		`|The remote workspace is configured to work with configuration at` +
-		`|relative to the target repository.` +
-		`|excluding files or directories as defined by a \.terraformignore file` +
-		`|at .*\.terraformignore (if it is present),` +
-		`|in order to capture the filesystem context the remote workspace expects:` +
-		`|plan. Resource actions are indicated with the following symbols:` +
-		`|Waiting for the plan to start\.\.\.` +
-		`|Terraform will perform the following actions:` +
-		`|Terraform will perform the actions described above\.` +
-		`|Terraform has compared your real infrastructure against your configuration` +
-		`|and found no differences, so no changes are needed\.` +
-		`|Unless you have made equivalent changes to your configuration, or ignored the` +
-		`|relevant attributes using ignore_changes, the following plan may include` +
+	patternIgnoreLine := `  Prepared .* for import` +
+		`|: Drift detected` +
+		`|: Refresh complete after ` +
+		`|Acquiring state lock\. This may take a few moments\.\.\.` +
 		`|actions to undo or respond to these changes\.` +
-		`|This is a refresh-only plan, so Terraform will not take any actions to undo` +
-		`|these\. If you were expecting these changes then you can apply this plan to` +
+		`|and found no differences, so no changes are needed\.` +
+		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
+		`|at .* \(if it is present\),` +
+		`|at .*\.terraformignore (if it is present),` +
+		`|excluding files or directories as defined by a \.terraformignore file` +
+		`|guarantee to take exactly these actions if you run "terraform apply" now\.` +
+		"|guarantee to take exactly these actions if you run `terraform apply` now\\." +
+		`|in order to capture the filesystem context the remote workspace expects:` +
+		`|Note: You .* use the -out option to save this plan, so Terraform` +
+		`|plan. Resource actions are indicated with the following symbols:` +
+		`|Preparing the remote plan\.\.\.` +
+		`|relative to the target repository.` +
+		`|Releasing state lock\. This may take a few moments\.\.\.` +
+		`|relevant attributes using ignore_changes, the following plan may include` +
+		`|Running plan in Terraform Cloud\. Output will stream here\. Pressing Ctrl-C` +
+		`|state, without changing any real infrastructure\.` +
 		`|Terraform has checked that the real remote objects still match the result of` +
-		`|your most recent changes, and found no differences\.` +
+		`|Terraform has compared your real infrastructure against your configuration` +
+		`|Terraform used the selected providers to generate the following execution` +
+		`|Terraform will destroy all your managed infrastructure, as shown above\.` +
+		`|Terraform will perform the actions described above\.` +
+		`|Terraform will perform the following actions:` +
+		`|The remote workspace is configured to work with configuration at` +
+		`|The resources that were imported are shown above\. These resources are now in` +
+		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
+		`|these\. If you were expecting these changes then you can apply this plan to` +
+		`|This is a refresh-only plan, so Terraform will not take any actions to undo` +
 		`|To perform exactly these actions, run the following command to apply:` +
 		`|To see the full warning notes, run Terraform without -compact-warnings\.` +
-		`|Acquiring state lock\. This may take a few moments\.\.\.` +
-		`|Releasing state lock\. This may take a few moments\.\.\.` +
+		`|Unless you have made equivalent changes to your configuration, or ignored the` +
+		`|Waiting for the plan to start\.\.\.` +
 		`|Warnings:` +
-		`|Note: You .* use the -out option to save this plan, so Terraform` +
-		"|guarantee to take exactly these actions if you run `terraform apply` now\\." +
-		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
-		`|─────────────────────────────────────────────────────────────────────────────` +
-		`|: Drift detected` +
-		`|guarantee to take exactly these actions if you run "terraform apply" now\.` +
-		`|Terraform will destroy all your managed infrastructure, as shown above\.` +
-		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
+		`|will stop streaming the logs, but will not stop the plan running remotely\.` +
 		`|You can apply this plan to save these new output values to the Terraform` +
-		`|state, without changing any real infrastructure\.` +
-		`|The resources that were imported are shown above\. These resources are now in` +
+		`|your most recent changes, and found no differences\.` +
 		`|your Terraform state and will henceforth be managed by Terraform\.` +
-		`|  Prepared .* for import`
+		`|─────────────────────────────────────────────────────────────────────────────`
 
-	patternIgnoreNextLine := `record the updated values in the Terraform state without changing any remote` +
+	patternIgnoreNextLine := ` Experimental feature .* is active` +
 		`|record the updated values in the Terraform state without changing any remote` +
-		`| Experimental feature .* is active` +
+		`|record the updated values in the Terraform state without changing any remote` +
 		`|Saved the plan to: terraform\.tfplan`
 
-	patternIgnoreBlockStart := `Warning:.*Applied changes may be incomplete` +
-		`|Warning:.*Resource targeting is in effect` +
-		`|This plan was saved to: terraform.tfplan`
+	patternIgnoreBlockStart := `This plan was saved to: terraform.tfplan` +
+		`|Warning:.*Applied changes may be incomplete` +
+		`|Warning:.*Resource targeting is in effect`
 
-	patternIgnoreBlockEnd := `suggests to use it as part of an error message` +
-		`|exceptional situations such as recovering from errors or mistakes` +
+	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
+		`|suggests to use it as part of an error message` +
 		"|terraform apply `terraform\\.tfplan`"
 
 	patternIgnoreShortFormat := `= \(known after apply\)` +
