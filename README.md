@@ -22,6 +22,21 @@ Terraform more CLI friendly:
 
 ## Install
 
+Download from [https://github.com/dex4er/tf/releases](releases).
+
+### MacOS
+
+MacOS forbids running the code directly downloaded with the browser from an
+unknown source. In that case, the file must downloaded in the terminal, not a
+GUI or the downloaded binary must be recreated, ie.:[Title](../../gitlab/gitlab-ci-semver-labels/Makefile.ps1)
+
+```sh
+cat tf > tf_unquarantined
+rm -f tf
+mv -f tf_unquarantined tf
+chmod +x tf
+```
+
 ### Zsh
 
 With Zsh `noglob` should be used to prevent errors when indexed paramerers are
