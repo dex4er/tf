@@ -1,8 +1,9 @@
 # tf
 
 [![GitHub](https://img.shields.io/github/v/release/dex4er/tf?display_name=tag&sort=semver)](https://github.com/dex4er/tf)
-[![CI](https://github.com/dex4er/tf/actions/workflows/ci.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/ci.yaml)
-[![Lint](https://github.com/dex4er/tf/actions/workflows/lint.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/lint.yaml)
+[![Snapshot](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml)
+[![Release](https://github.com/dex4er/tf/actions/workflows/release.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/release.yaml)
+[![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/trunk.yaml)
 
 Less verbose and more shell friendly Terraform.
 
@@ -14,21 +15,22 @@ The original Terraform is abusively oververbosed. The `tf` wrapper makes
 Terraform more CLI friendly:
 
 - removes unecessary output
-- adds own progress indicator
+- adds own colored progress indicator
 - provides extra compact mode
 - allows to use multiple arguments when original command don't support it
-- adds automatically quotes for indexed resources
+- adds automatically quotes for indexed resources (xargs friendly)
 - generates log file when `TF_OUTPUT_PATH` environment variable is used
 
 ## Install
 
-Download from [https://github.com/dex4er/tf/releases](releases).
+Download from [https://github.com/dex4er/tf/releases](releases). Put anywhere
+in the `$PATH`.
 
 ### MacOS
 
 MacOS forbids running the code directly downloaded with the browser from an
 unknown source. In that case, the file must downloaded in the terminal, not a
-GUI or the downloaded binary must be recreated, ie.:[Title](../../gitlab/gitlab-ci-semver-labels/Makefile.ps1)
+GUI or the downloaded binary must be recreated, ie.:[Title](../../gitlab/tf/Makefile.ps1)
 
 ```sh
 cat tf > tf_unquarantined
