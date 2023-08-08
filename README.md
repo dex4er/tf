@@ -23,12 +23,12 @@ Terraform more CLI friendly:
 
 ## Install
 
-Download from [https://github.com/dex4er/tf/releases](releases). Put anywhere
+Download from [releases](https://github.com/dex4er/tf/releases). Put anywhere
 in the `$PATH`.
 
 ### asdf
 
-Install with [https://asdf-vm.com/](asdf):
+Install with [asdf](https://asdf-vm.com/):
 
 ```shell
 asdf plugin-add tf https://github.com/dex4er/asdf-tf.git
