@@ -27,7 +27,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.20.5 # datasource=github-releases depName=golang/go
+          go-version: 1.21.0 # datasource=github-releases depName=golang/go
 
       - name: Goreleaser
         uses: goreleaser/goreleaser-action@v4

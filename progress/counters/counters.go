@@ -6,7 +6,6 @@ import (
 	"github.com/mitchellh/colorstring"
 
 	"github.com/dex4er/tf/console"
-	"github.com/dex4er/tf/util"
 )
 
 var refreshed = 0
@@ -39,8 +38,8 @@ func show(line string, resource string, operation string) {
 	m := fmt.Sprintf("~%d/%d", stopped["M"], started["M"])
 	d := fmt.Sprintf("-%d/%d", stopped["D"], started["D"])
 
-	maxLine := util.MaxInt(console.Cols-len(s)-len(r)-len(c)-len(m)-len(d)-6, 0)
-	l := line[:util.MinInt(len(line), maxLine)]
+	maxLine := max(console.Cols-len(s)-len(r)-len(c)-len(m)-len(d)-6, 0)
+	l := line[:min(len(line), maxLine)]
 
 	if console.NoColor {
 		fmt.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
