@@ -26,11 +26,21 @@ Terraform more CLI friendly:
 Download from [https://github.com/dex4er/tf/releases](releases). Put anywhere
 in the `$PATH`.
 
+### asdf
+
+Install with [https://asdf-vm.com/](asdf):
+
+```shell
+asdf plugin-add tf https://github.com/dex4er/asdf-tf.git
+asdf install tf latest
+asdf global tf latest
+```
+
 ### MacOS
 
 MacOS forbids running the code directly downloaded with the browser from an
 unknown source. In that case, the file must downloaded in the terminal, not a
-GUI or the downloaded binary must be recreated, ie.:[Title](../../gitlab/tf/Makefile.ps1)
+GUI or the downloaded binary must be recreated, ie.:
 
 ```sh
 cat tf > tf_unquarantined
@@ -38,6 +48,8 @@ rm -f tf
 mv -f tf_unquarantined tf
 chmod +x tf
 ```
+
+You can download the application with ie. `curl` or `asdf` instead.
 
 ### Zsh
 
