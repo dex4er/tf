@@ -109,10 +109,8 @@ outputs.
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will generate temporarily the `terraform.tfplan` file.
-
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
 short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
@@ -139,10 +137,8 @@ outputs.
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will generate temporarily the `terraform.tfplan` file.
-
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
 short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
@@ -165,8 +161,8 @@ The `tf show` for this resource is run after import unless additional option
 
 The same as `terraform init` with less verbose output.
 
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 Additional option `-codesign` causes that all providers will have replaced
 existing signature and checksums will be removed from the lock file. It will
@@ -204,8 +200,8 @@ to original messages (default if `TF_IN_AUTOMATION=1`).
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
 short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
@@ -227,8 +223,8 @@ outputs.
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
 
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 The variable `TF_PLAN_FORMAT` switches the default format for plan (compact,
 short, full). The variable `TF_PROGRESS_FORMAT` switches the default format
@@ -266,8 +262,8 @@ misses quotes inside square brackets then they will be added.
 
 The same as `terraform init -upgrade` with less verbose output.
 
-The command will log to the file named in `TF_OUTPUT_PATH` environment variable.
-The file name is solved by `date` command for `%` sequences.
+The command will log to the file named in `TF_OUTPUT_PATH` environment
+variable. The file name is resolved with `strftime`'s `%` sequences.
 
 Additional option `-codesign` causes that all providers will have replaced
 existing signature and checksums will be removed from the lock file. It will
