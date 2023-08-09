@@ -111,7 +111,7 @@ config:
 # Records, feel free to edit them
 records:
   - delay: 1
-    content: "\e[0m"
+    content: "\r\e[0m"
   - delay: 1
     content: "$ "
   - delay: 100
@@ -153,45 +153,45 @@ records:
   - delay: 1
     content: "\e[?2004l\r"
   - delay: 200
-    content: "\e[34m^1\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"1\"]: Refreshing state...\r"
+    content: "\e[34m^1\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"1\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^2\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"4\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^2\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"4\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^3\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"5\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^3\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"5\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^4\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"3\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^4\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"3\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^5\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"6\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^5\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"6\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^6\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"9\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^6\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"9\"]: Refreshing state... [id=2023-08-06]\r"
   - delay: 200
-    content: "\e[0m\e[34m^7\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"8\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^7\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"8\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^8\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"7\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^8\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"7\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^9\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"2\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^9\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"2\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^10\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"0\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^10\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mtime_sleep.this[\"0\"]: Refreshing state... [id=2023-08-06\r"
   - delay: 200
-    content: "\e[0m\e[34m^11\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"1\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^11\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"1\"]: Refreshing state... [id=ab8366d720\r"
   - delay: 200
-    content: "\e[0m\e[34m^12\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"0\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^12\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"0\"]: Refreshing state... [id=4cf95cb065\r"
   - delay: 200
-    content: "\e[0m\e[34m^13\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"4\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^13\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"4\"]: Refreshing state... [id=1fb5a271e3\r"
   - delay: 200
-    content: "\e[0m\e[34m^14\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"2\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^14\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"2\"]: Refreshing state... [id=0db0e5fa1e\r"
   - delay: 200
-    content: "\e[0m\e[34m^15\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"7\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^15\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"7\"]: Refreshing state... [id=dc80681ca7\r"
   - delay: 200
-    content: "\e[0m\e[34m^16\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"9\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^16\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"9\"]: Refreshing state... [id=0b3fcfc3c4\r"
   - delay: 200
-    content: "\e[0m\e[34m^17\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"3\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^17\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"3\"]: Refreshing state... [id=ffbb3db597\r"
   - delay: 200
-    content: "\e[0m\e[34m^18\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"5\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^18\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"5\"]: Refreshing state... [id=b909326d15\r"
   - delay: 200
-    content: "\e[0m\e[34m^19\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"8\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^19\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"8\"]: Refreshing state... [id=18f2cbee97\r"
   - delay: 200
-    content: "\e[0m\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"6\"]: Refreshing state...\r"
+    content: "\e[0m\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+0/0\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"6\"]: Refreshing state... [id=4a45c68a18\r"
   - delay: 200
     content: "\e[0m"
   - delay: 1000
@@ -237,9 +237,9 @@ records:
   - delay: 1000
     content: "\e[0m\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+0/2\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"8\"]: Creating...\r"
   - delay: 1000
-    content: "\e[0m\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+1/2\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"8\"]: Creation complete after\r\e[0m"
+    content: "\e[0m\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+1/2\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"8\"]: Creation complete after 0s [id=18\r\e[0m"
   - delay: 1000
-    content: "\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+2/2\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"9\"]: Creation complete after\r\e[0m"
+    content: "\e[34m^20\e[0m \e[36m=0/0\e[0m \e[32m+2/2\e[0m \e[33m~0/0\e[0m \e[31m-0/0\e[0m \e[0m\e[1mlocal_file.this[\"9\"]: Creation complete after 0s [id=0b\r\e[0m"
   - delay: 1000
     content: "\e[0m\e[1m\e[32mApply complete! Resources: 2 added, 0 changed, 0 destroyed.                     \r\n"
   - delay: 1

@@ -86,10 +86,10 @@ func terraformWithProgress(command string, args []string) error {
 	patternIgnoreCompactFormat := `^\s\s[\s+~-]` +
 		`|\(config refers to values not yet known\)`
 
-	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\.`
-	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\.`
-	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\.`
-	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after`
+	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\..*?(?:\r?\n|$)`
+	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\..*?(?:\r?\n|$)`
+	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\..*?(?:\r?\n|$)`
+	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after.*?(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^(Changes to )?Outputs:(\n|$)`
 
@@ -246,22 +246,34 @@ func terraformWithProgress(command string, args []string) error {
 			// verbatim progress format is not processed or ignored
 			if progressFormat != "verbatim" {
 				if m := reRefreshing.FindStringSubmatch(line); m != nil {
-					progress.Refresh(progressFormat, m[0], m[1], m[2])
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Refresh(progressFormat, line, m[1], m[2])
 					goto NEXT
 				}
 
 				if m := reStartOperation.FindStringSubmatch(line); m != nil {
-					progress.Start(progressFormat, m[0], m[1], m[2])
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Start(progressFormat, line, m[1], m[2])
 					goto NEXT
 				}
 
 				if m := reStillOperation.FindStringSubmatch(line); m != nil {
-					progress.Still(progressFormat, m[0], m[1], m[2])
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Still(progressFormat, line, m[1], m[2])
 					goto NEXT
 				}
 
 				if m := reStopOperation.FindStringSubmatch(line); m != nil {
-					progress.Stop(progressFormat, m[0], m[1], m[2])
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Stop(progressFormat, line, m[1], m[2])
 					goto NEXT
 				}
 			}
