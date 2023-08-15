@@ -88,6 +88,8 @@ It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy
 
 For not recognized commands `tf` passes all arguments to `terraform` command.
 
+`terraform` command might be overriden using `TERRAFORM` environment variable.
+
 ### `tf apply`
 
 The same as `terraform apply` with less verbose output.

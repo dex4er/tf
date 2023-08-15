@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
 	"os/signal"
 	"regexp"
 	"strings"
@@ -174,7 +173,7 @@ func terraformWithProgress(command string, args []string) error {
 	// original terraform still handles ctrl-c
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{command}, newArgs...)...)
+	cmd := execTerraformCommand(append([]string{command}, newArgs...)...)
 
 	cmd.Stdin = os.Stdin
 

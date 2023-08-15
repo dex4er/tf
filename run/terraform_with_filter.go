@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
 	"os/signal"
 	"regexp"
 	"strings"
@@ -44,7 +43,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{command}, newArgs...)...)
+	cmd := execTerraformCommand(append([]string{command}, newArgs...)...)
 
 	cmd.Stdin = os.Stdin
 

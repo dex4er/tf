@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"os/exec"
 	"os/signal"
 	"regexp"
 	"syscall"
@@ -17,7 +16,7 @@ func terraformWithoutColors(command string, args []string, patternIgnoreFooter s
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := exec.Command("terraform", append([]string{command}, args...)...)
+	cmd := execTerraformCommand(append([]string{command}, args...)...)
 
 	cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr
