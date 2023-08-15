@@ -144,6 +144,10 @@ func terraformWithProgress(command string, args []string) error {
 			noColor = true
 			console.NoColor = true
 			newArgs = append(newArgs, arg)
+		case "-no-colors":
+			noColor = true
+			console.NoColor = true
+			newArgs = append(newArgs, "-no-color")
 		case "-no-output":
 			noOutputs = true
 		case "-no-outputs":
