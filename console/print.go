@@ -23,11 +23,10 @@ func Print(msg string) {
 		fmt.Print(strings.Repeat(" ", Cols-1), "\r")
 		previousWasCR = false
 	}
+	fmt.Print(msg)
 	if strings.HasSuffix(msg, "\r") {
-		fmt.Print(msg)
 		previousWasCR = true
 	}
-	fmt.Print(msg)
 }
 
 // Printf string to the console with space padding so progress indicator might be overriden.
