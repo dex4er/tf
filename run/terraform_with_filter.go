@@ -29,6 +29,9 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 		case "-no-color":
 			noColor = true
 			newArgs = append(newArgs, arg)
+		case "-no-colors":
+			noColor = true
+			newArgs = append(newArgs, "-no-color")
 		default:
 			newArgs = append(newArgs, arg)
 		}
