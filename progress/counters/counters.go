@@ -42,7 +42,7 @@ func show(line string, resource string, operation string) {
 	l := line[:min(len(line), maxLine)]
 
 	if console.NoColor {
-		fmt.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
+		console.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
 	} else {
 		console.Printf(colorstring.Color("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s")+"\r", s, r, c, m, d, l)
 	}

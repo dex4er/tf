@@ -33,7 +33,7 @@ func Still(line string, resource string, operation string) {
 
 func Stop(line string, resource string, operation string) {
 	if console.NoColor {
-		fmt.Print(operation2symbol[operation])
+		console.Print(operation2symbol[operation])
 	} else {
 		console.Print(colorstring.Color("[" + operation2color[operation] + "]" + operation2symbol[operation]))
 	}
