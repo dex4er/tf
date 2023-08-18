@@ -124,7 +124,7 @@ func terraformWithProgress(command string, args []string) error {
 	newArgs := []string{}
 
 	for _, arg := range args {
-		switch arg {
+		switch util.ReplaceFirstTwoDashes(arg) {
 		case "-compact":
 			planFormat = "compact"
 		case "-counter":

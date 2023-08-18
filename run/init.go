@@ -33,7 +33,7 @@ func Init(args []string) error {
 	var codesign = false
 
 	for _, arg := range args {
-		switch arg {
+		switch util.ReplaceFirstTwoDashes(arg) {
 		case "-codesign":
 			codesign = true
 		default:

@@ -24,7 +24,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 	newArgs := []string{}
 
 	for _, arg := range args {
-		switch arg {
+		switch util.ReplaceFirstTwoDashes(arg) {
 		case "-no-color":
 			noColor = true
 			newArgs = append(newArgs, arg)
