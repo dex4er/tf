@@ -1,6 +1,10 @@
 package run
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/dex4er/tf/util"
+)
 
 func Refresh(args []string) error {
 	newArgs := []string{}
@@ -8,6 +12,9 @@ func Refresh(args []string) error {
 
 	for _, arg := range args {
 		if strings.HasPrefix(arg, "-") {
+			if util.ReplaceFirstTwoDashes(arg) == "-target" {
+				continue
+			}
 			newArgs = append(newArgs, arg)
 		} else {
 			resources = append(resources, arg)

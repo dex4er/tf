@@ -11,6 +11,9 @@ func Plan(args []string) error {
 
 	for _, arg := range args {
 		if strings.HasPrefix(arg, "-") {
+			if util.ReplaceFirstTwoDashes(arg) == "-target" {
+				continue
+			}
 			newArgs = append(newArgs, arg)
 		} else {
 			newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
