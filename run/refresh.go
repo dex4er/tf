@@ -1,13 +1,13 @@
 package run
 
-import "github.com/dex4er/tf/util"
+import "strings"
 
 func Refresh(args []string) error {
 	newArgs := []string{}
 	resources := []string{}
 
 	for _, arg := range args {
-		if util.StartsWith(arg, '-') {
+		if strings.HasPrefix(arg, "-") {
 			newArgs = append(newArgs, arg)
 		} else {
 			resources = append(resources, arg)

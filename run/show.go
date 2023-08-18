@@ -2,6 +2,7 @@ package run
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/dex4er/tf/util"
 )
@@ -15,7 +16,7 @@ func Show(args []string) error {
 	for _, arg := range args {
 		if arg == "-no-output" || arg == "-no-outputs" {
 			noOutputs = true
-		} else if util.StartsWith(arg, '-') {
+		} else if strings.HasPrefix(arg, "-") {
 			newArgs = append(newArgs, arg)
 		} else {
 			resources = append(resources, util.AddQuotes(arg))

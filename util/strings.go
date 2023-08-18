@@ -29,10 +29,3 @@ func ReplaceFirstTwoDashes(input string) string {
 	}
 	return input
 }
-
-func StartsWith(s string, prefix rune) bool {
-	if len(s) == 0 {
-		return false
-	}
-	return []rune(s)[0] == prefix
-}
