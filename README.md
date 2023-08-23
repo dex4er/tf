@@ -97,7 +97,9 @@ The same as `terraform apply` with less verbose output.
 Instead of Reading/Creating/Destroying... messages it will show a short progress
 indicator.
 
-It will skip `(known after apply)` lines from the output.
+It will skip `(known after apply)` lines from the `-short` mode output. Also
+it will hide a plan for data sources (`data.xxx will be read during apply`
+blocks) from the `-short` and `-compact` mode output.
 
 Additional options can be used: `-counters` shows counters with processed
 resources, `-compact` skips the content of the resources, `-short` removes
@@ -125,7 +127,9 @@ The same as `terraform destroy` with less verbose output.
 Instead of Reading/Creating/Destroying... messages it will show a short progress
 indicator.
 
-It will skip `(known after apply)` lines from the output.
+It will skip `(known after apply)` lines from the `-short` mode output. Also
+it will hide a plan for data sources (`data.xxx will be read during apply`
+blocks) from the `-short` and `-compact` mode output.
 
 Additional options can be used: `-counters` shows counters with processed
 resources, `-compact` skips the content of the resources, `-short` removes
@@ -189,7 +193,9 @@ The same as `terraform plan` with less verbose output.
 
 Instead of Reading... messages it will show a short progress indicator.
 
-It will skip `(known after apply)` lines from the output.
+It will skip `(known after apply)` lines from the `-short` mode output. Also
+it will hide a plan for data sources (`data.xxx will be read during apply`
+blocks) from the `-short` and `-compact` mode output.
 
 Additional options can be used: `-counters` shows counters with processed
 resources, `-compact` skips the content of the resources, `-short` removes
