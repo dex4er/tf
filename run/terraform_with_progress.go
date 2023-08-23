@@ -308,12 +308,12 @@ func terraformWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			if reIgnoreBlockEnd.MatchString(line) {
+			if ignoreBlock && reIgnoreBlockEnd.MatchString(line) {
 				ignoreBlock = false
 				goto NEXT
 			}
 
-			if planFormat == "short" && reIgnoreShortBlockEnd.MatchString(line) {
+			if planFormat == "short" && ignoreBlock && reIgnoreShortBlockEnd.MatchString(line) {
 				ignoreBlock = false
 				goto NEXT
 			}
