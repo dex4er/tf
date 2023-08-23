@@ -16,7 +16,8 @@ locals {
   items = [for v in range(var.n) : "${v}s"]
 }
 
-resource "time_sleep" "this" { ## tflint-ignore: terraform_required_providers
+## tflint-ignore: terraform_required_providers
+resource "time_sleep" "this" {
   for_each = toset(local.items)
 
   triggers = {
@@ -27,10 +28,22 @@ resource "time_sleep" "this" { ## tflint-ignore: terraform_required_providers
   destroy_duration = each.key
 }
 
-resource "local_file" "this" { ## tflint-ignore: terraform_required_providers
+## tflint-ignore: terraform_required_providers
+resource "local_file" "this" {
   for_each = toset(local.items)
 
   content         = "Content ${time_sleep.this[each.key].triggers.key}"
   filename        = "./demo-${each.key}.txt"
   file_permission = "0664"
+}
+
+## tflint-ignore: terraform_required_providers,terraform_unused_declarations
+data "local_file" "this" {
+  for_each = toset(local.items)
+
+  filename = local_file.this[each.key].filename
+}
+
+output "filenames" {
+  value = [for i in local.items : data.local_file.this[i].filename]
 }

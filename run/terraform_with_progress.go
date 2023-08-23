@@ -80,10 +80,19 @@ func terraformWithProgress(command string, args []string) error {
 
 	patternIgnoreShortFormat := `= \(known after apply\)` +
 		`|\(\d+ unchanged \w+ hidden\)` +
-		`|\(config refers to values not yet known\)`
+		`|\(config refers to values not yet known\)` +
+		`|read \(data resources\)`
+
+	patternIgnoreShortBlockStart := ` will be read during apply`
+
+	patternIgnoreShortBlockEnd := `^    }`
 
 	patternIgnoreCompactFormat := `^\s\s[\s+~-]` +
-		`|\(config refers to values not yet known\)`
+		`|<=.* data ".*?" ".*?" \{` +
+		`|\(config refers to values not yet known\)` +
+		`|\(depends on a resource or a module with changes pending\)` +
+		`|read \(data resources\)` +
+		`|will be read during apply`
 
 	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\..*?(?:\r?\n|$)`
 	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\..*?(?:\r?\n|$)`
@@ -97,6 +106,8 @@ func terraformWithProgress(command string, args []string) error {
 	reIgnoreBlockStart := regexp.MustCompile(patternIgnoreBlockStart)
 	reIgnoreBlockEnd := regexp.MustCompile(patternIgnoreBlockEnd)
 	reIgnoreShortFormat := regexp.MustCompile(patternIgnoreShortFormat)
+	reIgnoreShortBlockStart := regexp.MustCompile(patternIgnoreShortBlockStart)
+	reIgnoreShortBlockEnd := regexp.MustCompile(patternIgnoreShortBlockEnd)
 	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
 	reRefreshing := regexp.MustCompile(patternRefreshing)
 	reStartOperation := regexp.MustCompile(patternStartOperation)
@@ -292,7 +303,17 @@ func terraformWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
+			if planFormat == "short" && reIgnoreShortBlockStart.MatchString(line) {
+				ignoreBlock = true
+				goto NEXT
+			}
+
 			if reIgnoreBlockEnd.MatchString(line) {
+				ignoreBlock = false
+				goto NEXT
+			}
+
+			if planFormat == "short" && reIgnoreShortBlockEnd.MatchString(line) {
 				ignoreBlock = false
 				goto NEXT
 			}
