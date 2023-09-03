@@ -8,6 +8,7 @@ func Help(args []string) error {
 
 	fmt.Println()
 	fmt.Println("Extra commands:")
+	fmt.Println("  list          The same as terraform state list")
 	fmt.Println("  mv            The same as terraform state mv")
 	fmt.Println("  rm            The same as terraform state rm")
 	fmt.Println("  upgrade       The same as terraform init -upgrade")
