@@ -82,13 +82,19 @@ tf list | grep data.aws_region.current | xargs tf refresh
 tf list | grep random_password | xargs tf rm
 tf list | grep aws_subnet | xargs tf show
 tf list | grep module.one | while read r; do echo tf mv $r ${r/module.one./module.two.}; done | bash -x
+tf list | fzf | xargs tf show | highlight -O xterm256 --syntax terraform
 ```
 
 It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy` because these commands are interactive.
 
 For not recognized commands `tf` passes all arguments to `terraform` command.
 
-`terraform` command might be overriden using `TERRAFORM` environment variable.
+`terraform` command might be replaced with another using `TERRAFORM`
+environment variable, ie.:
+
+```sh
+export TERRAFORM=opentf
+```
 
 ### `tf apply`
 

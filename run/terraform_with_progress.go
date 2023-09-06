@@ -32,10 +32,11 @@ func terraformWithProgress(command string, args []string) error {
 		`|at .* \(if it is present\),` +
 		`|at .*\.terraformignore (if it is present),` +
 		`|excluding files or directories as defined by a \.terraformignore file` +
-		`|guarantee to take exactly these actions if you run "terraform apply" now\.` +
-		"|guarantee to take exactly these actions if you run `terraform apply` now\\." +
+		`|found no differences, so no changes are needed.` +
+		`|guarantee to take exactly these actions if you run "(terraform|opentf) apply" now\.` +
+		"|guarantee to take exactly these actions if you run `(terraform|opentf) apply` now\\." +
 		`|in order to capture the filesystem context the remote workspace expects:` +
-		`|Note: You .* use the -out option to save this plan, so Terraform` +
+		`|Note: You .* use the -out option to save this plan, so (Terraform|OpenTF)` +
 		`|plan. Resource actions are indicated with the following symbols:` +
 		`|Preparing the remote plan\.\.\.` +
 		`|relative to the target repository.` +
@@ -43,40 +44,41 @@ func terraformWithProgress(command string, args []string) error {
 		`|relevant attributes using ignore_changes, the following plan may include` +
 		`|Running plan in Terraform Cloud\. Output will stream here\. Pressing Ctrl-C` +
 		`|state, without changing any real infrastructure\.` +
-		`|Terraform has checked that the real remote objects still match the result of` +
-		`|Terraform has compared your real infrastructure against your configuration` +
-		`|Terraform used the selected providers to generate the following execution` +
-		`|Terraform will destroy all your managed infrastructure, as shown above\.` +
-		`|Terraform will perform the actions described above\.` +
-		`|Terraform will perform the following actions:` +
+		`|(Terraform|OpenTF) has checked that the real remote objects still match the result of` +
+		`|(Terraform|OpenTF) has compared your real infrastructure against your configuration` +
+		`|(Terraform|OpenTF) used the selected providers to generate the following execution` +
+		`|(Terraform|OpenTF) will destroy all your managed infrastructure, as shown above\.` +
+		`|(Terraform|OpenTF) will perform the actions described above\.` +
+		`|(Terraform|OpenTF) will perform the following actions:` +
+		`|(Terraform|OpenTF) specifically suggests to use it as part of an error message.` +
 		`|The remote workspace is configured to work with configuration at` +
 		`|The resources that were imported are shown above\. These resources are now in` +
 		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
 		`|these\. If you were expecting these changes then you can apply this plan to` +
-		`|This is a refresh-only plan, so Terraform will not take any actions to undo` +
+		`|This is a refresh-only plan, so (Terraform|OpenTF) will not take any actions to undo` +
 		`|To perform exactly these actions, run the following command to apply:` +
-		`|To see the full warning notes, run Terraform without -compact-warnings\.` +
+		`|To see the full warning notes, run (Terraform|OpenTF) without -compact-warnings\.` +
 		`|Unless you have made equivalent changes to your configuration, or ignored the` +
 		`|Waiting for the plan to start\.\.\.` +
 		`|Warnings:` +
 		`|will stop streaming the logs, but will not stop the plan running remotely\.` +
-		`|You can apply this plan to save these new output values to the Terraform` +
+		`|You can apply this plan to save these new output values to the (Terraform|OpenTF)` +
 		`|your most recent changes, and found no differences\.` +
-		`|your Terraform state and will henceforth be managed by Terraform\.` +
+		`|your (Terraform|OpenTF) state and will henceforth be managed by (Terraform|OpenTF)\.` +
 		`|─────────────────────────────────────────────────────────────────────────────`
 
 	patternIgnoreNextLine := ` Experimental feature .* is active` +
-		`|record the updated values in the Terraform state without changing any remote` +
-		`|record the updated values in the Terraform state without changing any remote` +
-		`|Saved the plan to: terraform\.tfplan`
+		`|record the updated values in the (Terraform|OpenTF) state without changing any remote` +
+		`|record the updated values in the (Terraform|OpenTF) state without changing any remote` +
+		`|Saved the plan to: `
 
-	patternIgnoreBlockStart := `This plan was saved to: terraform.tfplan` +
+	patternIgnoreBlockStart := `This plan was saved to: ` +
 		`|Warning:.*Applied changes may be incomplete` +
 		`|Warning:.*Resource targeting is in effect`
 
 	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
 		`|suggests to use it as part of an error message` +
-		"|terraform apply `terraform\\.tfplan`"
+		"|(terraform|opentf) apply `.*`"
 
 	patternIgnoreShortFormat := `= \(known after apply\)` +
 		`|\(\d+ unchanged \w+ hidden\)` +
