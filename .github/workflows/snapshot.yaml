@@ -41,7 +41,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.21.0 # datasource=github-releases depName=golang/go
+          go-version: 1.21.1 # datasource=github-releases depName=golang/go
 
       - name: Build binary
         run: make download build
