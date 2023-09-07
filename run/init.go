@@ -11,22 +11,27 @@ func Init(args []string) error {
 	patternIgnoreLine := `Finding .* versions matching` +
 		`|Finding latest version of` +
 		`|from the shared cache directory` +
-		`|https://www\.terraform\.io/docs/cli/plugins/signing\.html` +
 		`|If you'd like to know more about provider signing, you can read about it here:` +
 		`|in \.terraform/modules/` +
 		`|in the \.terraform\.lock\.hcl file. Review those changes and commit them to your` +
 		`|Initializing (modules` +
-		`|Initializing Terraform` +
+		`|Initializing (Terraform|OpenTF)` +
 		`|Partner and community providers are signed by their developers\.` +
 		`|provider plugins)\.\.\.` +
+		`|Providers are signed by their developers\.` +
 		`|Reusing previous version of` +
-		`|Terraform has made some changes to the provider dependency selections recorded` +
+		`|selections it made above\. Include this file in your version control repository` +
+		`|signing\.html` +
+		`|so that (Terraform|OpenTF) can guarantee to make the same selections by default when` +
+		`|(Terraform|OpenTF) has created a lock file .* to record the provider` +
+		`|(Terraform|OpenTF) has made some changes to the provider dependency selections recorded` +
 		`|the backend` +
 		`|Upgrading modules\.\.\.` +
 		`|Using previously-installed` +
-		`|version control system if they represent changes you intended to make\.`
+		`|version control system if they represent changes you intended to make\.` +
+		`|you run "(terraform|opentf) init" in the future.`
 
-	patternIgnoreFooter := `Terraform.* has been successfully initialized!`
+	patternIgnoreFooter := `(Terraform|OpenTF).* has been successfully initialized!`
 
 	newArgs := []string{}
 

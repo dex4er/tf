@@ -42,7 +42,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|relative to the target repository.` +
 		`|Releasing state lock\. This may take a few moments\.\.\.` +
 		`|relevant attributes using ignore_changes, the following plan may include` +
-		`|Running plan in Terraform Cloud\. Output will stream here\. Pressing Ctrl-C` +
+		`|Running plan in .*\. Output will stream here\. Pressing Ctrl-C` +
 		`|state, without changing any real infrastructure\.` +
 		`|(Terraform|OpenTF) has checked that the real remote objects still match the result of` +
 		`|(Terraform|OpenTF) has compared your real infrastructure against your configuration` +
