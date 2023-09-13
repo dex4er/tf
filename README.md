@@ -114,7 +114,7 @@ messages about progress and shows short indicator (default), `-dots` hides
 messages about progress and shows single dot or character for each line,
 `-verbatim` keeps original messages about progress, `-verbose` adds counters
 to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
-outputs.
+outputs (default, `-no-outputs=false` shows it again).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -144,7 +144,7 @@ messages about progress and shows short indicator (default), `-dots` hides
 messages about progress and shows single dot or character for each line,
 `-verbatim` keeps original messages about progress, `-verbose` adds counters
 to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
-outputs.
+outputs (default, `-no-outputs=false` shows it again).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.
@@ -232,7 +232,7 @@ messages about progress and shows short indicator (default), `-dots` hides
 messages about progress and shows single dot or character for each line,
 `-verbatim` keeps original messages about progress, `-verbose` adds counters
 to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
-outputs.
+outputs (default, `-no-outputs=false` shows it again).
 
 The command accepts resource name as an argument without `-target=` option. If
 argument misses quotes inside square brackets then they will be added.

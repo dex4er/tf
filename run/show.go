@@ -11,11 +11,13 @@ func Show(args []string) error {
 	resources := []string{}
 	newArgs := []string{}
 
-	noOutputs := false
+	noOutputs := true
 
 	for _, arg := range args {
 		if arg == "-no-output" || arg == "-no-outputs" {
 			noOutputs = true
+		} else if arg == "-no-output=false" || arg == "-no-outputs=false" {
+			noOutputs = false
 		} else if strings.HasPrefix(arg, "-") {
 			newArgs = append(newArgs, arg)
 		} else {

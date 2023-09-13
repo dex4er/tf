@@ -101,7 +101,7 @@ func terraformWithProgress(command string, args []string) error {
 	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\..*?(?:\r?\n|$)`
 	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after.*?(?:\r?\n|$)`
 
-	patternIgnoreOutputs := `^(Changes to )?Outputs:(\n|$)`
+	patternIgnoreOutputs := `^Outputs:(\n|$)`
 
 	reIgnoreLine := regexp.MustCompile(patternIgnoreLine)
 	reIgnoreNextLine := regexp.MustCompile(patternIgnoreNextLine)
@@ -120,7 +120,7 @@ func terraformWithProgress(command string, args []string) error {
 	planFormat := "short"
 	progressFormat := "counters"
 	noColor := false
-	noOutputs := false
+	noOutputs := true
 
 	if TF_IN_AUTOMATION == "1" {
 		progressFormat = "verbose"
@@ -164,6 +164,10 @@ func terraformWithProgress(command string, args []string) error {
 			noOutputs = true
 		case "-no-outputs":
 			noOutputs = true
+		case "-no-output=false":
+			noOutputs = false
+		case "-no-outputs=false":
+			noOutputs = false
 		case "-quiet":
 			progressFormat = "quiet"
 		case "-short":
