@@ -5,15 +5,12 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"regexp"
 	"syscall"
 
 	"github.com/dex4er/tf/util"
 )
 
-func terraformWithoutColors(command string, args []string, patternIgnoreFooter string) error {
-	reIgnoreFooter := regexp.MustCompile(patternIgnoreFooter)
-
+func terraformWithoutColors(command string, args []string) error {
 	signal.Ignore(syscall.SIGINT)
 
 	cmd := execTerraformCommand(append([]string{command}, args...)...)
@@ -41,12 +38,6 @@ func terraformWithoutColors(command string, args []string, patternIgnoreFooter s
 
 		line := scanner.Text()
 		line = util.RemoveColors(line)
-
-		// ignore from this line to the end
-		if patternIgnoreFooter != "" && reIgnoreFooter.MatchString(line) {
-			ignoreFooter = true
-			continue
-		}
 
 		fmt.Println(line)
 	}

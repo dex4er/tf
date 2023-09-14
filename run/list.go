@@ -17,6 +17,5 @@ func List(args []string) error {
 		}
 	}
 
-	patternIgnoreFooter := ""
-	return terraformWithoutColors("state", newArgs, patternIgnoreFooter)
+	return terraformWithoutColors("state", newArgs)
 }
