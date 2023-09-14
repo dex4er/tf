@@ -5,12 +5,12 @@ import (
 	"os/exec"
 )
 
-var TERRAFORM = os.Getenv("TERRAFORM")
+var TERRAFORM_PATH = os.Getenv("TERRAFORM_PATH")
 
 func execTerraformCommand(arg ...string) *exec.Cmd {
-	name := TERRAFORM
-	if TERRAFORM == "" {
-		name = "terraform"
+	path := TERRAFORM_PATH
+	if TERRAFORM_PATH == "" {
+		path = "terraform"
 	}
-	return exec.Command(name, arg...)
+	return exec.Command(path, arg...)
 }

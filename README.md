@@ -89,11 +89,11 @@ It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy
 
 For not recognized commands `tf` passes all arguments to `terraform` command.
 
-`terraform` command might be replaced with another using `TERRAFORM`
+`terraform` command might be replaced with another using `TERRAFORM_PATH`
 environment variable, ie.:
 
 ```sh
-export TERRAFORM=opentf
+export TERRAFORM_PATH=opentf
 ```
 
 ### `tf apply`
