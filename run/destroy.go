@@ -1,6 +1,7 @@
 package run
 
 import (
+	"os"
 	"strings"
 
 	"github.com/dex4er/tf/util"
@@ -16,7 +17,11 @@ func Destroy(args []string) error {
 			}
 			newArgs = append(newArgs, arg)
 		} else {
-			newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
+			if _, err := os.Stat(arg); err == nil {
+				newArgs = append(newArgs, arg)
+			} else {
+				newArgs = append(newArgs, "-target="+util.AddQuotes(arg))
+			}
 		}
 	}
 
