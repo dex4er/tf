@@ -93,7 +93,7 @@ For not recognized commands `tf` passes all arguments to `terraform` command.
 environment variable, ie.:
 
 ```sh
-export TERRAFORM_PATH=opentf
+export TERRAFORM_PATH=tofu
 ```
 
 ### `tf apply`

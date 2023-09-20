@@ -15,23 +15,23 @@ func Init(args []string) error {
 		`|in \.terraform/modules/` +
 		`|in the \.terraform\.lock\.hcl file. Review those changes and commit them to your` +
 		`|Initializing (modules` +
-		`|Initializing (Terraform|OpenTF)` +
+		`|Initializing (Terraform|OpenTofu)` +
 		`|Partner and community providers are signed by their developers\.` +
 		`|provider plugins)\.\.\.` +
 		`|Providers are signed by their developers\.` +
 		`|Reusing previous version of` +
 		`|selections it made above\. Include this file in your version control repository` +
 		`|signing\.html` +
-		`|so that (Terraform|OpenTF) can guarantee to make the same selections by default when` +
-		`|(Terraform|OpenTF) has created a lock file .* to record the provider` +
-		`|(Terraform|OpenTF) has made some changes to the provider dependency selections recorded` +
+		`|so that (Terraform|OpenTofu) can guarantee to make the same selections by default when` +
+		`|(Terraform|OpenTofu) has created a lock file .* to record the provider` +
+		`|(Terraform|OpenTofu) has made some changes to the provider dependency selections recorded` +
 		`|the backend` +
 		`|Upgrading modules\.\.\.` +
 		`|Using previously-installed` +
 		`|version control system if they represent changes you intended to make\.` +
-		`|you run "(terraform|opentf) init" in the future.`
+		`|you run "(terraform|tofu) init" in the future.`
 
-	patternIgnoreFooter := `(Terraform|OpenTF).* has been successfully initialized!`
+	patternIgnoreFooter := `(Terraform|OpenTofu).* has been successfully initialized!`
 
 	newArgs := []string{}
 

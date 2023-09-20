@@ -33,10 +33,10 @@ func terraformWithProgress(command string, args []string) error {
 		`|at .*\.terraformignore (if it is present),` +
 		`|excluding files or directories as defined by a \.terraformignore file` +
 		`|found no differences, so no changes are needed.` +
-		`|guarantee to take exactly these actions if you run "(terraform|opentf) apply" now\.` +
-		"|guarantee to take exactly these actions if you run `(terraform|opentf) apply` now\\." +
+		`|guarantee to take exactly these actions if you run "(terraform|tofu) apply" now\.` +
+		"|guarantee to take exactly these actions if you run `(terraform|tofu) apply` now\\." +
 		`|in order to capture the filesystem context the remote workspace expects:` +
-		`|Note: You .* use the -out option to save this plan, so (Terraform|OpenTF)` +
+		`|Note: You .* use the -out option to save this plan, so (Terraform|OpenTofu)` +
 		`|plan. Resource actions are indicated with the following symbols:` +
 		`|Preparing the remote plan\.\.\.` +
 		`|relative to the target repository.` +
@@ -44,32 +44,32 @@ func terraformWithProgress(command string, args []string) error {
 		`|relevant attributes using ignore_changes, the following plan may include` +
 		`|Running plan in .*\. Output will stream here\. Pressing Ctrl-C` +
 		`|state, without changing any real infrastructure\.` +
-		`|(Terraform|OpenTF) has checked that the real remote objects still match the result of` +
-		`|(Terraform|OpenTF) has compared your real infrastructure against your configuration` +
-		`|(Terraform|OpenTF) used the selected providers to generate the following execution` +
-		`|(Terraform|OpenTF) will destroy all your managed infrastructure, as shown above\.` +
-		`|(Terraform|OpenTF) will perform the actions described above\.` +
-		`|(Terraform|OpenTF) will perform the following actions:` +
-		`|(Terraform|OpenTF) specifically suggests to use it as part of an error message.` +
+		`|(Terraform|OpenTofu) has checked that the real remote objects still match the result of` +
+		`|(Terraform|OpenTofu) has compared your real infrastructure against your configuration` +
+		`|(Terraform|OpenTofu) used the selected providers to generate the following execution` +
+		`|(Terraform|OpenTofu) will destroy all your managed infrastructure, as shown above\.` +
+		`|(Terraform|OpenTofu) will perform the actions described above\.` +
+		`|(Terraform|OpenTofu) will perform the following actions:` +
+		`|(Terraform|OpenTofu) specifically suggests to use it as part of an error message.` +
 		`|The remote workspace is configured to work with configuration at` +
 		`|The resources that were imported are shown above\. These resources are now in` +
 		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
 		`|these\. If you were expecting these changes then you can apply this plan to` +
-		`|This is a refresh-only plan, so (Terraform|OpenTF) will not take any actions to undo` +
+		`|This is a refresh-only plan, so (Terraform|OpenTofu) will not take any actions to undo` +
 		`|To perform exactly these actions, run the following command to apply:` +
-		`|To see the full warning notes, run (Terraform|OpenTF) without -compact-warnings\.` +
+		`|To see the full warning notes, run (Terraform|OpenTofu) without -compact-warnings\.` +
 		`|Unless you have made equivalent changes to your configuration, or ignored the` +
 		`|Waiting for the plan to start\.\.\.` +
 		`|Warnings:` +
 		`|will stop streaming the logs, but will not stop the plan running remotely\.` +
-		`|You can apply this plan to save these new output values to the (Terraform|OpenTF)` +
+		`|You can apply this plan to save these new output values to the (Terraform|OpenTofu)` +
 		`|your most recent changes, and found no differences\.` +
-		`|your (Terraform|OpenTF) state and will henceforth be managed by (Terraform|OpenTF)\.` +
+		`|your (Terraform|OpenTofu) state and will henceforth be managed by (Terraform|OpenTofu)\.` +
 		`|─────────────────────────────────────────────────────────────────────────────`
 
 	patternIgnoreNextLine := ` Experimental feature .* is active` +
-		`|record the updated values in the (Terraform|OpenTF) state without changing any remote` +
-		`|record the updated values in the (Terraform|OpenTF) state without changing any remote` +
+		`|record the updated values in the (Terraform|OpenTofu) state without changing any remote` +
+		`|record the updated values in the (Terraform|OpenTofu) state without changing any remote` +
 		`|Saved the plan to: `
 
 	patternIgnoreBlockStart := `This plan was saved to: ` +
@@ -78,7 +78,7 @@ func terraformWithProgress(command string, args []string) error {
 
 	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
 		`|suggests to use it as part of an error message` +
-		"|(terraform|opentf) apply `.*`"
+		"|(terraform|tofu) apply `.*`"
 
 	patternIgnoreShortFormat := `= \(known after apply\)` +
 		`|\(\d+ unchanged \w+ hidden\)` +
