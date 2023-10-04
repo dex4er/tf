@@ -1,2 +1,2 @@
 golang 1.21.1 # datasource=github-releases depName=golang/go
-goreleaser 1.20.0 # datasource=github-releases depName=goreleaser/goreleaser
+goreleaser 1.21.2 # datasource=github-releases depName=goreleaser/goreleaser
