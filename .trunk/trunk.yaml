@@ -35,6 +35,6 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
-    - go@1.21.1 # datasource=github-releases depName=golang/go
+    - go@1.21.3 # datasource=github-releases depName=golang/go
     - node@18.17.0
     - python@3.10.8
