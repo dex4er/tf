@@ -9,7 +9,6 @@ import (
 )
 
 var refreshing = 0
-var preparingImport = 0
 var started = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
 var stopped = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
 
@@ -19,7 +18,7 @@ func Refreshing(line string, resource string, operation string) {
 }
 
 func PreparingImport(line string, resource string, operation string) {
-	preparingImport += 1
+	refreshing += 1
 	show(line, resource, operation)
 }
 
@@ -40,7 +39,7 @@ func Stop(line string, resource string, operation string) {
 func show(line string, resource string, operation string) {
 	s := fmt.Sprintf("^%d", refreshing)
 	r := fmt.Sprintf("=%d/%d", stopped["R"], started["R"])
-	i := fmt.Sprintf("=%d/%d", stopped["I"], started["I"])
+	i := fmt.Sprintf("&%d/%d", stopped["I"], started["I"])
 	c := fmt.Sprintf("+%d/%d", stopped["C"], started["C"])
 	m := fmt.Sprintf("~%d/%d", stopped["M"], started["M"])
 	d := fmt.Sprintf("-%d/%d", stopped["D"], started["D"])
