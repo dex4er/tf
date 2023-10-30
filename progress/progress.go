@@ -8,16 +8,30 @@ import (
 )
 
 // Handles progress indicator when refreshing resources.
-func Refresh(progressFormat string, line string, resource string, operation string) {
+func Refreshing(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
 	case "counters":
-		counters.Refresh(line, resource, operation)
+		counters.Refreshing(line, resource, operation)
 	case "dots":
-		dots.Refresh(line, resource, operation)
+		dots.Refreshing(line, resource, operation)
 	case "fan":
-		fan.Refresh(line, resource, operation)
+		fan.Refreshing(line, resource, operation)
 	case "verbose":
-		verbose.Refresh(line, resource, operation)
+		verbose.Refreshing(line, resource, operation)
+	}
+}
+
+// Handles progress indicator when preparing import of resources.
+func PreparingImport(progressFormat string, line string, resource string, operation string) {
+	switch progressFormat {
+	case "counters":
+		counters.PreparingImport(line, resource, operation)
+	case "dots":
+		dots.PreparingImport(line, resource, operation)
+	case "fan":
+		fan.PreparingImport(line, resource, operation)
+	case "verbose":
+		verbose.PreparingImport(line, resource, operation)
 	}
 }
 

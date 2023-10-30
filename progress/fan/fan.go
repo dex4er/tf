@@ -10,12 +10,16 @@ import (
 var fanTicks = []string{"-", `\`, "|", "/"}
 var fanIndex = 0
 
-var operation2symbol = map[string]string{"R": "=", "C": "+", "M": "~", "D": "-"}
-var operation2color = map[string]string{"R": "cyan", "C": "green", "M": "yellow", "D": "red"}
+var operation2symbol = map[string]string{"R": "=", "I": "&", "C": "+", "M": "~", "D": "-"}
+var operation2color = map[string]string{"R": "cyan", "I": "dark_gray", "C": "green", "M": "yellow", "D": "red"}
 
 var operations = map[string]string{}
 
-func Refresh(line string, resource string, operation string) {
+func Refreshing(line string, resource string, operation string) {
+	show(line, resource, operation)
+}
+
+func PreparingImport(line string, resource string, operation string) {
 	show(line, resource, operation)
 }
 

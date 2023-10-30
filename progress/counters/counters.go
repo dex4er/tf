@@ -8,12 +8,17 @@ import (
 	"github.com/dex4er/tf/console"
 )
 
-var refreshed = 0
-var started = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
-var stopped = map[string]int{"R": 0, "C": 0, "D": 0, "M": 0}
+var refreshing = 0
+var started = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
+var stopped = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
 
-func Refresh(line string, resource string, operation string) {
-	refreshed += 1
+func Refreshing(line string, resource string, operation string) {
+	refreshing += 1
+	show(line, resource, operation)
+}
+
+func PreparingImport(line string, resource string, operation string) {
+	refreshing += 1
 	show(line, resource, operation)
 }
 
@@ -32,18 +37,19 @@ func Stop(line string, resource string, operation string) {
 }
 
 func show(line string, resource string, operation string) {
-	s := fmt.Sprintf("^%d", refreshed)
+	s := fmt.Sprintf("^%d", refreshing)
 	r := fmt.Sprintf("=%d/%d", stopped["R"], started["R"])
+	i := fmt.Sprintf("&%d/%d", stopped["I"], started["I"])
 	c := fmt.Sprintf("+%d/%d", stopped["C"], started["C"])
 	m := fmt.Sprintf("~%d/%d", stopped["M"], started["M"])
 	d := fmt.Sprintf("-%d/%d", stopped["D"], started["D"])
 
-	maxLine := max(console.Cols-len(s)-len(r)-len(c)-len(m)-len(d)-6, 0)
+	maxLine := max(console.Cols-len(s)-len(r)-len(i)-len(c)-len(m)-len(d)-7, 0)
 	l := line[:min(len(line), maxLine)]
 
 	if console.NoColor {
-		console.Printf("%s %s %s %s %s %s\r", s, r, c, m, d, l)
+		console.Printf("%s %s %s %s %s %s %s\r", s, r, i, c, m, d, l)
 	} else {
-		console.Printf(colorstring.Color("[blue]%s[reset] [cyan]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s")+"\r", s, r, c, m, d, l)
+		console.Printf(colorstring.Color("[blue]%s[reset] [cyan]%s[reset] [dark_gray]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s")+"\r", s, r, i, c, m, d, l)
 	}
 }

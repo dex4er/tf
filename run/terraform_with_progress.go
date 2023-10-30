@@ -97,9 +97,10 @@ func terraformWithProgress(command string, args []string) error {
 		`|will be read during apply`
 
 	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\..*?(?:\r?\n|$)`
-	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:eading|reating|estroying|odifying)\.\.\..*?(?:\r?\n|$)`
+	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (.)(?:reparing import?)\.\.\..*?(?:\r?\n|$)`
+	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:mporting|eading|reating|estroying|odifying)\.\.\..*?(?:\r?\n|$)`
 	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\..*?(?:\r?\n|$)`
-	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:ead|reation|estruction|odifications) complete after.*?(?:\r?\n|$)`
+	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (.)(?:mport|ead|reation|estruction|odifications) complete.*?(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
 
@@ -112,6 +113,7 @@ func terraformWithProgress(command string, args []string) error {
 	reIgnoreShortBlockEnd := regexp.MustCompile(patternIgnoreShortBlockEnd)
 	reIgnoreCompactFormat := regexp.MustCompile(patternIgnoreCompactFormat)
 	reRefreshing := regexp.MustCompile(patternRefreshing)
+	rePreparingImport := regexp.MustCompile(patternPreparingImport)
 	reStartOperation := regexp.MustCompile(patternStartOperation)
 	reStillOperation := regexp.MustCompile(patternStillOperation)
 	reStopOperation := regexp.MustCompile(patternStopOperation)
@@ -269,7 +271,15 @@ func terraformWithProgress(command string, args []string) error {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.Refresh(progressFormat, line, m[1], m[2])
+					progress.Refreshing(progressFormat, line, m[1], m[2])
+					goto NEXT
+				}
+
+				if m := rePreparingImport.FindStringSubmatch(line); m != nil {
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.PreparingImport(progressFormat, line, m[1], m[2])
 					goto NEXT
 				}
 

@@ -47,3 +47,8 @@ data "local_file" "this" {
 output "filenames" {
   value = [for i in local.items : data.local_file.this[i].filename]
 }
+
+import {
+  to = time_sleep.this["1s"]
+  id = "1s,1s"
+}
