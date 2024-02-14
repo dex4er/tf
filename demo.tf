@@ -59,10 +59,10 @@ import {
 #   file_permission = "0664"
 # }
 
-removed {
-  from = local_file.notexisting
+# removed {
+#   from = local_file.notexisting
 
-  lifecycle {
-    destroy = true
-  }
-}
+#   lifecycle {
+#     destroy = true
+#   }
+# }
