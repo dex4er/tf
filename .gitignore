@@ -6,6 +6,8 @@
 *.log
 *.tfstate
 demo-*.txt
+dist/
+tmp/
 /tf
 .terraform
 .vscode

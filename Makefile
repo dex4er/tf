@@ -6,15 +6,19 @@ ifneq (,$(wildcard .env))
 endif
 
 AWK = awk
-DOCKER = docker
-ECHO = echo
 GO = go
 GORELEASER = goreleaser
+HEAD = head
 INSTALL = install
-MAKE = make
 PRINTF = printf
 RM = rm
 SORT = sort
+
+ifeq ($(OS),Darwin)
+SORT = gsort
+else
+SORT = sort
+endif
 
 ifeq ($(GOOS),windows)
 EXE = .exe
@@ -40,13 +44,6 @@ BINDIR = /usr/local/bin
 endif
 endif
 
-VERSION = $(shell ( git describe --tags --exact-match 2>/dev/null || ( git describe --tags 2>/dev/null || echo "0.0.0-0-g$$(git rev-parse --short=8 HEAD)" ) | sed 's/-[0-9][0-9]*-g/-SNAPSHOT-/') | sed 's/^v//' )
-REVISION = $(shell git rev-parse HEAD)
-BUILDDATE = $(shell TZ=GMT date '+%Y-%m-%dT%R:%SZ')
-
-CGO_ENABLED = 0
-export CGO_ENABLED
-
 .PHONY: help
 help:
 	@echo Targets:
@@ -55,12 +52,7 @@ help:
 .PHONY: build
 build: ## Build app binary for single target
 	$(call print-target)
-	$(GO) build -trimpath -ldflags="-s -w -X main.version=$(VERSION)"
-
-.PHONY: goreleaser
-goreleaser: ## Build app binary for all targets
-	$(call print-target)
-	$(GORELEASER) release --auto-snapshot --clean --skip-publish
+	$(GORELEASER) build --clean --snapshot --single-target --output $(BIN)
 
 $(BIN):
 	@$(MAKE) build
@@ -96,59 +88,6 @@ clean: ## Clean working directory
 	$(call print-target)
 	$(RM) -f $(BIN)
 	$(RM) -rf dist
-
-.PHONY: version
-version: ## Show version
-	@$(ECHO) "$(VERSION)"
-
-.PHONY: revision
-revision: ## Show revision
-	@$(ECHO) "$(REVISION)"
-
-.PHONY: builddate
-builddate: ## Show build date
-	@$(ECHO) "$(BUILDDATE)"
-
-DOCKERFILE = Dockerfile
-IMAGE_NAME = $(BIN)
-LOCAL_REPO = localhost:5000/$(IMAGE_NAME)
-DOCKER_REPO = localhost:5000/$(IMAGE_NAME)
-
-ifeq ($(PROCESSOR_ARCHITECTURE),ARM64)
-PLATFORM = linux/arm64
-else ifeq ($(shell uname -m),arm64)
-PLATFORM = linux/arm64
-else ifeq ($(shell uname -m),aarch64)
-PLATFORM = linux/arm64
-else ifeq ($(findstring ARM64, $(shell uname -s)),ARM64)
-PLATFORM = linux/arm64
-else
-PLATFORM = linux/amd64
-endif
-
-.PHONY: image
-image: ## Build a local image without publishing artifacts.
-	$(MAKE) build GOOS=linux
-	$(call print-target)
-	$(DOCKER) buildx build --file=$(DOCKERFILE) \
-	--platform=$(PLATFORM) \
-	--build-arg VERSION=$(VERSION) \
-	--build-arg REVISION=$(REVISION) \
-	--build-arg BUILDDATE=$(BUILDDATE) \
-	--tag $(LOCAL_REPO) \
-	--load \
-	.
-
-.PHONY: push
-push: ## Publish to container registry.
-	$(call print-target)
-	$(DOCKER) tag $(LOCAL_REPO) $(DOCKER_REPO):v$(VERSION)-$(subst /,-,$(PLATFORM))
-	$(DOCKER) push $(DOCKER_REPO):v$(VERSION)-$(subst /,-,$(PLATFORM))
-
-.PHONY: test-image
-test-image: ## Test local image
-	$(call print-target)
-	$(DOCKER) run --platform=$(PLATFORM) --rm -t $(LOCAL_REPO) -v
 
 define print-target
 	@$(PRINTF) "Executing target: \033[36m$@\033[0m\n"

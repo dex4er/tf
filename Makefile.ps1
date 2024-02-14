@@ -26,7 +26,6 @@ foreach ($arg in $args) {
   }
 }
 
-if (-not $env:DOCKER) { $env:DOCKER = "docker" }
 if (-not $env:GO) { $env:GO = "go" }
 if (-not $env:GORELEASER) { $env:GORELEASER = "goreleaser" }
 
@@ -65,47 +64,6 @@ else {
   }
 }
 
-function Get-Version {
-  try {
-    $exactMatch = git describe --tags --exact-match 2>$null
-    if (-not [string]::IsNullOrEmpty($exactMatch)) { 
-      $version = $exactMatch
-    }
-    else {
-      $tags = git describe --tags 2>$null; 
-      if ([string]::IsNullOrEmpty($tags)) { 
-        $commitHash = (git rev-parse --short=8 HEAD).Trim();
-        $version = "0.0.0-0-g$commitHash" 
-      }
-      else { 
-        $version = $tags -replace '-[0-9][0-9]*-g', '-SNAPSHOT-' 
-      }
-    }
-    $version = $version -replace '^v', ''
-    return $version 
-  }
-  catch { 
-    return "0.0.0" 
-  }
-}
-
-function Get-Revision {
-  $revision = git rev-parse HEAD
-  return $revision
-}
-
-function Get-Builddate {
-  $datetime = Get-Date
-  $utc = $datetime.ToUniversalTime()
-  return $utc.tostring("yyyy-MM-ddTHH:mm:ssZ")
-}
-
-if (-not $env:VERSION) { $env:VERSION = (& get-version) }
-if (-not $env:REVISION) { $env:REVISION = (& get-revision) }
-if (-not $env:BUILDDATE) { $env:BUILDDATE = (& get-builddate) }
-
-if (-not $env:CGO_ENABLED) { $env:CGO_ENABLED = "0" }
-
 function Invoke-CommandWithEcho {
   param (
     [string]$Command,
@@ -138,13 +96,9 @@ function Write-Target {
 ## TARGET build Build app binary for single target
 function Invoke-Target-Build {
   Write-Target "build"
-  Invoke-CommandWithEcho $env:GO -Arguments "build", "-trimpath", "-ldflags=`"-s -w -X main.version=$env:VERSION`""
-}
+  # 	$(GORELEASER) build --clean --snapshot --single-target --output $(BIN)
 
-## TARGET goreleaser Build app binary for all targets
-function Invoke-Target-Goreleaser {
-  Write-Target "goreleaser"
-  Invoke-CommandWithEcho $env:GORELEASER -Arguments "release", "--auto-snapshot", "--clean", "--skip-publish"
+  Invoke-CommandWithEcho $env:GORELEASER -Arguments "build", "--clean", "--snapshot", "--single-target", "--output", $env:BIN
 }
 
 ## TARGET install Build and install app binary
@@ -186,72 +140,6 @@ function Invoke-Target-Clean {
   Write-Target "clean"
   Invoke-ExpressionWithEcho -Command "Remove-Item '$env:BIN' -Force -ErrorAction SilentlyContinue"
   Invoke-ExpressionWithEcho -Command "Remove-Item dist -Recurse -Force -ErrorAction SilentlyContinue"
-}
-
-## TARGET version Show version
-function Invoke-Target-Version {
-  Write-Host $env:VERSION
-}
-
-## TARGET revision Show revision
-function Invoke-Target-Revision {
-  Write-Host $env:REVISION
-}
-
-## TARGET builddate Show build date
-function Invoke-Target-Builddate {
-  Write-Host $env:BUILDDATE
-}
-
-if (-not $env:DOCKERFILE) { $env:DOCKERFILE = "Dockerfile" }
-if (-not $env:IMAGE_NAME) { $env:IMAGE_NAME = $env:BIN }
-if (-not $env:LOCAL_REPO) { $env:LOCAL_REPO = "localhost:5000/$env:IMAGE_NAME" }
-if (-not $env:DOCKER_REPO) { $env:DOCKER_REPO = "localhost:5000/$env:IMAGE_NAME" }
-
-if (-not $env:PLATFORM) {
-  if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") {
-    $env:PLATFORM = "linux/arm64"
-  }
-  elseif ((uname -m) -eq "arm64") {
-    $env:PLATFORM = "linux/arm64"
-  }
-  elseif ((uname -m) -eq "aarch64") {
-    $env:PLATFORM = "linux/arm64"
-  }
-  elseif ((uname -s) -match "ARM64") {
-    $env:PLATFORM = "linux/arm64"
-  }
-  else {
-    $env:PLATFORM = "linux/amd64"
-  }
-}
-
-## TARGET image Build a local image without publishing artifacts.
-function Invoke-Target-Image {
-  $env:GOOS = "linux"
-  Invoke-Target-Build
-  Write-Target "image"
-  Invoke-CommandWithEcho $env:DOCKER -Arguments "buildx", "build", "--file=$env:DOCKERFILE",
-  "--platform=$env:PLATFORM",
-  "--build-arg", "VERSION=$env:VERSION",
-  "--build-arg", "REVISION=$env:REVISION",
-  "--build-arg", "BUILDDATE=$env:BUILDDATE",
-  "--tag", $env:LOCAL_REPO,
-  "--load",
-  "."
-}
-
-## TARGET push Publish to container registry.
-function Invoke-Target-Push {
-  Write-Target "push"
-  Invoke-CommandWithEcho $env:DOCKER -Arguments "tag", $env:LOCAL_REPO, "$($env:DOCKER_REPO):v$($env:VERSION)-$($env:PLATFORM -replace '/','-')"
-  Invoke-CommandWithEcho $env:DOCKER -Arguments "push", "$($env:DOCKER_REPO):v$($env:VERSION)-$($env:PLATFORM -replace '/','-')"
-}
-
-## TARGET test-image Test local image
-function Invoke-Target-Test-Image {
-  Write-Target "test-image"
-  Invoke-CommandWithEcho $env:DOCKER -Arguments "run", "--platform=$env:PLATFORM", "--rm", "-t", $env:LOCAL_REPO, "-v"
 }
 
 function Invoke-Target-Help {
