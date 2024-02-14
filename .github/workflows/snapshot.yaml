@@ -50,7 +50,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
-          version: 1.21.2 # datasource=github-releases depName=goreleaser/goreleaser
+          version: 1.24.0 # datasource=github-releases depName=goreleaser/goreleaser
           args: build --clean --snapshot --single-target --output tf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
