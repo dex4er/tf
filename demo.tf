@@ -52,3 +52,17 @@ import {
   to = time_sleep.this["1s"]
   id = "1s,1s"
 }
+
+# resource "local_file" "notexisting" {
+#   content         = "Content"
+#   filename        = "./demo-delete.txt"
+#   file_permission = "0664"
+# }
+
+removed {
+  from = local_file.notexisting
+
+  lifecycle {
+    destroy = true
+  }
+}

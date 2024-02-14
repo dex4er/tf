@@ -74,10 +74,12 @@ func terraformWithProgress(command string, args []string) error {
 
 	patternIgnoreBlockStart := `This plan was saved to: ` +
 		`|Warning:.*Applied changes may be incomplete` +
-		`|Warning:.*Resource targeting is in effect`
+		`|Warning:.*Resource targeting is in effect` +
+		`|Warning:.*Some objects will no longer be managed by Terraform`
 
 	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
 		`|suggests to use it as part of an error message` +
+		`|You will need to import them into Terraform to manage them again\.` +
 		"|(terraform|tofu) apply `.*`"
 
 	patternIgnoreShortFormat := `= \(known after apply\)` +
