@@ -89,6 +89,12 @@ clean: ## Clean working directory
 	$(RM) -f $(BIN)
 	$(RM) -rf dist
 
+.PHONY: test
+test: ## Test app binary
+test: $(BIN)
+	$(call print-target)
+	@tests/test.sh
+
 define print-target
 	@$(PRINTF) "Executing target: \033[36m$@\033[0m\n"
 endef

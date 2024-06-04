@@ -35,26 +35,8 @@ jobs:
       - name: Fetch Git tags
         run: git fetch --force --tags
 
-      - name: Fake terraform
-        run: |
-          echo '#!/bin/bash' | sudo tee /usr/local/bin/terraform
-          echo 'echo Fake Terraform' | sudo tee -a /usr/local/bin/terraform
-          sudo chmod +x /usr/local/bin/terraform
-
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.21.3 # datasource=github-releases depName=golang/go
-
-      - name: Goreleaser
-        uses: goreleaser/goreleaser-action@v5
-        with:
-          distribution: goreleaser
-          version: 1.24.0 # datasource=github-releases depName=goreleaser/goreleaser
-          args: build --clean --snapshot --single-target --output tf
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: jdx/mise-action@v2
 
       - name: Test binary
         run: |
-          ./tf version
+          make test

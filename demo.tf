@@ -13,7 +13,7 @@ variable "n" {
 }
 
 locals {
-  items = [for v in range(var.n) : "${v}s"]
+  items = [for v in range(var.n) : "${v + 1}s"]
 }
 
 ## tflint-ignore: terraform_required_providers
