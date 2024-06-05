@@ -93,7 +93,7 @@ clean: ## Clean working directory
 test: ## Test app binary
 test: $(BIN)
 	$(call print-target)
-	@tests/test.sh
+	$(MAKE) -C tests test
 
 define print-target
 	@$(PRINTF) "Executing target: \033[36m$@\033[0m\n"
