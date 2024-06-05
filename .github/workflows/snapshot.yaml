@@ -39,4 +39,6 @@ jobs:
 
       - name: Test binary
         run: |
+          terraform version
+          tofu version
           make test
