@@ -2,6 +2,8 @@
 
 tr '\015' '\012' | \
 sed -e '/^ *$/d' \
+    -e '/Your version of .* is out of date! The latest version/d' \
+    -e '/You can update by downloading from/d' \
     -e '/: Creating\.\.\./d' \
     -e '/: Destroying\.\.\./d' \
     -e '/: Reading\.\.\./d' \
@@ -18,6 +20,7 @@ sed -e '/^ *$/d' \
     -e 's/: Read complete/: Read compl/' \
     -e 's/: Read complet/: Read compl/' \
     -e 's/: Read comple/: Read compl/' \
+    -e 's/: Read compl /: Read compl/' \
     -e 's/: Refreshing state\.\. /: Refreshing state../' \
     -e 's/darwin_amd64/XXX/g' \
     -e 's/darwin_arm64/XXX/g' \
