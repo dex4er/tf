@@ -1,0 +1,6 @@
+enable=all
+source-path=SCRIPTDIR
+
+disable=SC2086 # Double quote to prevent globbing and word splitting.uired.
+disable=SC2248 # Prefer double quoting even when variables don't contain special characters.
+disable=SC2250 # Prefer putting braces around variable references even when not strictly req

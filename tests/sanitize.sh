@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-tr '\015' '\012' | \
-sed -e '/^ *$/d' \
+set -euo pipefail
+
+tr '\015' '\012' |
+  sed -e '/^ *$/d' \
     -e '/Your version of .* is out of date! The latest version/d' \
     -e '/You can update by downloading from/d' \
     -e '/: Creating\.\.\./d' \

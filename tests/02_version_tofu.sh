@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-cd $(dirname $0)
-test=$(basename $0 .sh)
+cd "$(dirname "$0")"
+test=$(basename "$0" .sh)
 
 export TERRAFORM_PATH=${test##*_}
 
@@ -13,8 +13,9 @@ cp ../demo.tf tmp/$test
 pushd tmp/$test >/dev/null
 
 {
+  set -x
   ../../../tf version
-} | ../../sanitize.sh 2>&1 >> tf.out
+} 2>&1 | ../../sanitize.sh >>tf.out
 
 diff -u ../../$test.out tf.out
 
