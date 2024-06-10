@@ -17,5 +17,7 @@ func List(args []string) error {
 		}
 	}
 
-	return terraformWithoutColors("state", newArgs)
+	noOutputs := false
+
+	return terraformWithoutColors("state", noOutputs, newArgs)
 }

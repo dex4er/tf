@@ -12,13 +12,26 @@ func Show(args []string) error {
 	resources := []string{}
 	newArgs := []string{}
 
+	noOutputs := false
+
 	for _, arg := range args {
-		if strings.HasPrefix(arg, "-") {
-			newArgs = append(newArgs, arg)
-		} else if _, err := os.Stat(arg); err == nil {
-			newArgs = append(newArgs, arg)
-		} else {
-			resources = append(resources, util.AddQuotes(arg))
+		switch util.ReplaceFirstTwoDashes(arg) {
+		case "-no-output":
+			noOutputs = true
+		case "-no-outputs":
+			noOutputs = true
+		case "-no-output=false":
+			noOutputs = false
+		case "-no-outputs=false":
+			noOutputs = false
+		default:
+			if strings.HasPrefix(arg, "-") {
+				newArgs = append(newArgs, arg)
+			} else if _, err := os.Stat(arg); err == nil {
+				newArgs = append(newArgs, arg)
+			} else {
+				resources = append(resources, util.AddQuotes(arg))
+			}
 		}
 	}
 
@@ -28,12 +41,12 @@ func Show(args []string) error {
 			if i > 0 {
 				fmt.Println()
 			}
-			if err := terraformWithoutColors("state", append(newArgs, r)); err != nil {
+			if err := terraformWithoutColors("state", noOutputs, append(newArgs, r)); err != nil {
 				return err
 			}
 		}
 		return nil
 	}
 
-	return Terraform("show", newArgs)
+	return terraformWithoutColors("show", noOutputs, newArgs)
 }

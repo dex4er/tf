@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"regexp"
 	"syscall"
 
 	"github.com/dex4er/tf/util"
 )
 
-func terraformWithoutColors(command string, args []string) error {
+func terraformWithoutColors(command string, noOutputs bool, args []string) error {
+	patternIgnoreOutputs := `^Outputs:(\n|$)`
+	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
+
 	signal.Ignore(syscall.SIGINT)
 
 	cmd := execTerraformCommand(append([]string{command}, args...)...)
@@ -27,17 +31,23 @@ func terraformWithoutColors(command string, args []string) error {
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
-	ignoreFooter := false
+	skipOutputs := false
 
 	scanner := bufio.NewScanner(cmdStdout)
 
 	for scanner.Scan() {
-		if ignoreFooter {
+		if skipOutputs {
 			continue
 		}
 
 		line := scanner.Text()
 		line = util.RemoveColors(line)
+
+		// starts ignoring the outputs
+		if noOutputs && reIgnoreOutputs.MatchString(line) {
+			skipOutputs = true
+			continue
+		}
 
 		fmt.Println(line)
 	}
