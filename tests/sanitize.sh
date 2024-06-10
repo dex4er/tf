@@ -10,8 +10,9 @@ tr '\015' '\012' |
     -e '/: Destroying\.\.\./d' \
     -e '/: Reading\.\.\./d' \
     -e '/: Still .*\.\.\./d' \
-    -e 's/: Creation complete a/: Creation complete/' \
+    -e 's/ complete after [0-9][0-9]*s/ complete after Xs/g' \
     -e 's/: Creation complete /: Creation complete/' \
+    -e 's/: Creation completea/: Creation complet a/' \
     -e 's/: Destruction complete/: Destruction co/' \
     -e 's/: Destruction complet/: Destruction co/' \
     -e 's/: Destruction comple/: Destruction co/' \
@@ -35,5 +36,4 @@ tr '\015' '\012' |
     -e 's/\(hashicorp\/\)[a-z]* /\1XXX /g' \
     -e 's/\["[0-9][0-9]*s"\]:/["Xs"]:/g' \
     -e 's/\^[0-9][0-9]*/^X/g' \
-    -e 's/\([=&+~-]\)[0-9][0-9]*\/[0-9][0-9]*/\1X\/X/g' \
-    -e 's/ complete after [0-9][0-9]*s/ complete after Xs/g'
+    -e 's/\([=&+~-]\)[0-9][0-9]*\/[0-9][0-9]*/\1X\/X/g'

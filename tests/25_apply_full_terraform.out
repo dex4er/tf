@@ -4,87 +4,297 @@
 - Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf upgrade
-[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf plan -parallelism=30
+[0m+ ../../../tf plan -parallelism=30 -full
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
   [32m+[0m create[0m
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
+ [36m<=[0m read (data resources)[0m
+[1m  # data.local_file.this["10s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-10s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["1s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-1s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["2s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-2s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["3s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-3s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["4s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-4s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["5s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-5s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["6s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-6s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["7s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-7s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["8s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-8s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["9s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-9s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
 [1m  # local_file.this["10s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 10s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-10s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["1s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 1s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-1s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["2s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 2s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-2s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["3s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 3s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-3s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["4s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 4s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-4s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["5s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 5s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-5s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["6s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 6s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-6s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["7s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 7s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-7s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["8s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 8s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-8s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["9s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 9s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-9s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # time_sleep.this["10s"][0m will be created
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "10s"
       [32m+[0m[0m destroy_duration = "10s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "10s"
         }
@@ -104,6 +314,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "2s"
       [32m+[0m[0m destroy_duration = "2s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "2s"
         }
@@ -112,6 +323,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "3s"
       [32m+[0m[0m destroy_duration = "3s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "3s"
         }
@@ -120,6 +332,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "4s"
       [32m+[0m[0m destroy_duration = "4s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "4s"
         }
@@ -128,6 +341,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "5s"
       [32m+[0m[0m destroy_duration = "5s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "5s"
         }
@@ -136,6 +350,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "6s"
       [32m+[0m[0m destroy_duration = "6s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "6s"
         }
@@ -144,6 +359,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "7s"
       [32m+[0m[0m destroy_duration = "7s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "7s"
         }
@@ -152,6 +368,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "8s"
       [32m+[0m[0m destroy_duration = "8s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "8s"
         }
@@ -160,6 +377,7 @@
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "9s"
       [32m+[0m[0m destroy_duration = "9s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "9s"
         }
@@ -180,85 +398,297 @@ Changes to Outputs:
       [32m+[0m[0m "./demo-10s.txt",
     ]
 [90m
-[0m+ ../../../tf apply -auto-approve -parallelism=30
+[0m+ ../../../tf apply -auto-approve -parallelism=30 -full
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
   [32m+[0m create[0m
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
+ [36m<=[0m read (data resources)[0m
+[1m  # data.local_file.this["10s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-10s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["1s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-1s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["2s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-2s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["3s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-3s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["4s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-4s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["5s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-5s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["6s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-6s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["7s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-7s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["8s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-8s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+[1m  # data.local_file.this["9s"][0m will be read during apply
+  # (depends on a resource or a module with changes pending)
+[0m [36m<=[0m[0m data "local_file" "this" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64       = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m filename             = "./demo-9s.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
 [1m  # local_file.this["10s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 10s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-10s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["1s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 1s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-1s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["2s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 2s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-2s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["3s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 3s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-3s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["4s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 4s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-4s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["5s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 5s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-5s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["6s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 6s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-6s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["7s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 7s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-7s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["8s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 8s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-8s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # local_file.this["9s"][0m will be created
 [0m  [32m+[0m[0m resource "local_file" "this" {
       [32m+[0m[0m content              = "Content 9s"
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-9s.txt"
+      [32m+[0m[0m id                   = (known after apply)
     }
 [1m  # time_sleep.this["10s"][0m will be created
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "10s"
       [32m+[0m[0m destroy_duration = "10s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "10s"
         }
@@ -278,6 +708,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "2s"
       [32m+[0m[0m destroy_duration = "2s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "2s"
         }
@@ -286,6 +717,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "3s"
       [32m+[0m[0m destroy_duration = "3s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "3s"
         }
@@ -294,6 +726,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "4s"
       [32m+[0m[0m destroy_duration = "4s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "4s"
         }
@@ -302,6 +735,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "5s"
       [32m+[0m[0m destroy_duration = "5s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "5s"
         }
@@ -310,6 +744,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "6s"
       [32m+[0m[0m destroy_duration = "6s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "6s"
         }
@@ -318,6 +753,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "7s"
       [32m+[0m[0m destroy_duration = "7s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "7s"
         }
@@ -326,6 +762,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "8s"
       [32m+[0m[0m destroy_duration = "8s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "8s"
         }
@@ -334,6 +771,7 @@ Changes to Outputs:
 [0m  [32m+[0m[0m resource "time_sleep" "this" {
       [32m+[0m[0m create_duration  = "9s"
       [32m+[0m[0m destroy_duration = "9s"
+      [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "9s"
         }
@@ -389,7 +827,7 @@ Changes to Outputs:
 [0m[1m[32m
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [0m[0m[1m[32m
-[0m+ ../../../tf refresh -parallelism=30
+[0m+ ../../../tf refresh -parallelism=30 -full
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
@@ -421,7 +859,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
 [0m[1m[32m
-[0m+ ../../../tf destroy -auto-approve -parallelism=30
+[0m+ ../../../tf destroy -auto-approve -parallelism=30 -full
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m

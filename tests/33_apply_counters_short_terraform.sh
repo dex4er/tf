@@ -16,10 +16,10 @@ pushd tmp/$test >/dev/null
   set -x
   ../../../tf init
   ../../../tf upgrade
-  ../../../tf plan -parallelism=30
-  ../../../tf apply -auto-approve -parallelism=30
-  ../../../tf refresh -parallelism=30
-  ../../../tf destroy -auto-approve -parallelism=30
+  ../../../tf plan -parallelism=30 -counters -short
+  ../../../tf apply -auto-approve -parallelism=30 -counters -short
+  ../../../tf refresh -parallelism=30 -counters -short
+  ../../../tf destroy -auto-approve -parallelism=30 -counters -short
 } 2>&1 | ../../sanitize.sh >>tf.out
 
 diff -u ../../$test.out tf.out

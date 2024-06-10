@@ -5,6 +5,182 @@
 - Installed hashicorp/XXX vX.X.X (signed, key ID [0m[1m0C0AF313E5FD9F80[0m[0m)
 https://opentofu.org/docs/cli/plugins/signing/
 [0m[1m[32mOpenTofu has been successfully initialized![0m[32m[0m
+[0m+ ../../../tf upgrade
+[0m[1m[32mOpenTofu has been successfully initialized![0m[32m[0m
+[0m+ ../../../tf plan -parallelism=30
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+  [32m+[0m create[0m
+[31m-[0m/[32m+[0m destroy and then create replacement[0m
+[1m  # local_file.this["10s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 10s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-10s.txt"
+    }
+[1m  # local_file.this["1s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 1s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-1s.txt"
+    }
+[1m  # local_file.this["2s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 2s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-2s.txt"
+    }
+[1m  # local_file.this["3s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 3s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-3s.txt"
+    }
+[1m  # local_file.this["4s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 4s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-4s.txt"
+    }
+[1m  # local_file.this["5s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 5s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-5s.txt"
+    }
+[1m  # local_file.this["6s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 6s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-6s.txt"
+    }
+[1m  # local_file.this["7s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 7s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-7s.txt"
+    }
+[1m  # local_file.this["8s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 8s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-8s.txt"
+    }
+[1m  # local_file.this["9s"][0m will be created
+[0m  [32m+[0m[0m resource "local_file" "this" {
+      [32m+[0m[0m content              = "Content 9s"
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0664"
+      [32m+[0m[0m filename             = "./demo-9s.txt"
+    }
+[1m  # time_sleep.this["10s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "10s"
+      [32m+[0m[0m destroy_duration = "10s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "10s"
+        }
+    }
+[1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
+  # [0m(imported from "1s,1s")
+  # [0m[33mWarning: this will destroy the imported resource[0m
+[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
+        create_duration  = "1s"
+        destroy_duration = "1s"
+      [33m~[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      [33m~[0m[0m triggers         = { [31m# forces replacement[0m[0m
+          [32m+[0m[0m "key" = "1s"
+        }
+    }
+[1m  # time_sleep.this["2s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "2s"
+      [32m+[0m[0m destroy_duration = "2s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "2s"
+        }
+    }
+[1m  # time_sleep.this["3s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "3s"
+      [32m+[0m[0m destroy_duration = "3s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "3s"
+        }
+    }
+[1m  # time_sleep.this["4s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "4s"
+      [32m+[0m[0m destroy_duration = "4s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "4s"
+        }
+    }
+[1m  # time_sleep.this["5s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "5s"
+      [32m+[0m[0m destroy_duration = "5s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "5s"
+        }
+    }
+[1m  # time_sleep.this["6s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "6s"
+      [32m+[0m[0m destroy_duration = "6s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "6s"
+        }
+    }
+[1m  # time_sleep.this["7s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "7s"
+      [32m+[0m[0m destroy_duration = "7s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "7s"
+        }
+    }
+[1m  # time_sleep.this["8s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "8s"
+      [32m+[0m[0m destroy_duration = "8s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "8s"
+        }
+    }
+[1m  # time_sleep.this["9s"][0m will be created
+[0m  [32m+[0m[0m resource "time_sleep" "this" {
+      [32m+[0m[0m create_duration  = "9s"
+      [32m+[0m[0m destroy_duration = "9s"
+      [32m+[0m[0m triggers         = {
+          [32m+[0m[0m "key" = "9s"
+        }
+    }
+[1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m filenames = [
+      [32m+[0m[0m "./demo-1s.txt",
+      [32m+[0m[0m "./demo-2s.txt",
+      [32m+[0m[0m "./demo-3s.txt",
+      [32m+[0m[0m "./demo-4s.txt",
+      [32m+[0m[0m "./demo-5s.txt",
+      [32m+[0m[0m "./demo-6s.txt",
+      [32m+[0m[0m "./demo-7s.txt",
+      [32m+[0m[0m "./demo-8s.txt",
+      [32m+[0m[0m "./demo-9s.txt",
+      [32m+[0m[0m "./demo-10s.txt",
+    ]
+[90m
 [0m+ ../../../tf apply -auto-approve -parallelism=30
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
@@ -181,15 +357,15 @@ Changes to Outputs:
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Importing... [id=X]
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Import complete [id=X]
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
@@ -214,6 +390,38 @@ Changes to Outputs:
 [0m[1m[32m
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [0m[0m[1m[32m
+[0m+ ../../../tf refresh -parallelism=30
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
+[0m[1m[32m
 [0m+ ../../../tf destroy -auto-approve -parallelism=30
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
 [34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
