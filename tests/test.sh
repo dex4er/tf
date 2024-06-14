@@ -4,6 +4,10 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
+pwd=$(pwd)
+export TF_PLUGIN_CACHE_DIR=$pwd/tmp/cache
+mkdir -p $TF_PLUGIN_CACHE_DIR
+
 status=0
 
 for t in [0-9]*.sh; do
@@ -15,5 +19,7 @@ for t in [0-9]*.sh; do
     status=$((status + 1))
   fi
 done
+
+rm -rf $TF_PLUGIN_CACHE_DIR
 
 exit $status
