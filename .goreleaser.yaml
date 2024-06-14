@@ -1,3 +1,5 @@
+version: 2
+
 project_name: tf
 
 force_token: github
