@@ -36,6 +36,15 @@ asdf install tf latest
 asdf global tf latest
 ```
 
+### mise
+
+Install with [mise-en-place](https://mise.jdx.dev/):
+
+```shell
+mise plugins install tf https://github.com/dex4er/asdf-tf.git
+mise use -g tf@latest
+```
+
 ### MacOS
 
 MacOS forbids running the code directly downloaded with the browser from an
@@ -261,6 +270,9 @@ and ANSI stripped.
 
 The command accepts multiple arguments. If argument misses quotes inside square
 brackets then they will be added.
+
+Additional option can be used: `-no-outputs` hides outputs (default,
+`-no-outputs=false` shows it again).
 
 ### `tf taint`
 

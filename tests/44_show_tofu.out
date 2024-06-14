@@ -52,19 +52,6 @@ resource "time_sleep" "this" {
     id               = "XXXX-XX-XXTXX:XX:XXZ"
     triggers         = {}
 }
-Outputs:
-filenames = [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-]
 + ../../../tf show -no-outputs
 # time_sleep.this["Xs"]:
 resource "time_sleep" "this" {

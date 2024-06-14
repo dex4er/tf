@@ -12,7 +12,7 @@ func Show(args []string) error {
 	resources := []string{}
 	newArgs := []string{}
 
-	noOutputs := false
+	noOutputs := true
 
 	for _, arg := range args {
 		switch util.ReplaceFirstTwoDashes(arg) {
