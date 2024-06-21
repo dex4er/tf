@@ -31,3 +31,13 @@ checksum:
 
 changelog:
   use: github
+
+brews:
+  - name: tf
+    description: Less verbose and more shell friendly Terraform
+    homepage: https://github.com/dex4er/tf
+    license: MIT
+    repository:
+      owner: dex4er
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_GITHUB_TOKEN }}"
