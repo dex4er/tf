@@ -6,6 +6,10 @@
 ## $ tf apply
 ## $ tf destroy
 
+terraform {
+  required_version = "~> 1.5"
+}
+
 variable "n" {
   type        = number
   description = "number of items"
