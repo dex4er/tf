@@ -1,9 +1,10 @@
 # tf
 
 [![GitHub](https://img.shields.io/github/v/release/dex4er/tf?display_name=tag&sort=semver)](https://github.com/dex4er/tf)
-[![Snapshot](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml)
-[![Release](https://github.com/dex4er/tf/actions/workflows/release.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/release.yaml)
-[![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk.yaml/badge.svg)](https://github.com/dex4er/tf/actions/workflows/trunk.yaml)
+[![Snapshot](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/snapshot.yaml)
+[![Release](https://github.com/dex4er/tf/actions/workflows/release.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/release.yaml)
+[![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/trunk.yaml)
+[![OSV Scanner](https://github.com/dex4er/tf/actions/workflows/osv-scanner.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/osv-scanner.yaml)
 
 Less verbose and more shell-friendly Terraform.
 
