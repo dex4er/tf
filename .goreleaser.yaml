@@ -41,3 +41,18 @@ brews:
       owner: dex4er
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_GITHUB_TOKEN }}"
+
+snapcrafts:
+  - name: tf-wrapper
+    publish: true
+    summary: Less verbose and more shell-friendly Terraform
+    description: The original Terraform is abusively oververbosed. The tf wrapper makes Terraform more CLI-friendly.
+    grade: devel
+    confinement: classic
+    license: MIT
+    base: bare
+    apps:
+      tf-wrapper:
+        aliases:
+          - tf
+        command: bin/tf
