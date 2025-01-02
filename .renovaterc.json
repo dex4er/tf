@@ -2,8 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":semanticCommitsDisabled"],
   "addLabels": ["renovate"],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "extractVersionTemplate": "^(?<version>.*)$",
       "fileMatch": ["^\\.go-version$"],
       "matchStrings": ["(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
@@ -12,6 +13,7 @@
       "versioningTemplate": "semver"
     },
     {
+      "customType": "regex",
       "extractVersionTemplate": "^v?(?<version>.*)$",
       "fileMatch": [
         "^\\.github/workflows/.*\\.ya?ml$",
