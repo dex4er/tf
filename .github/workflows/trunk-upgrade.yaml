@@ -30,8 +30,8 @@ jobs:
 
       - name: Trunk upgrade
         run: |
-          trunk upgrade --yes-to-all --ci --color | tee .github/update.log
-          printf "pr_body<<END\n%s\nEND\n" "$(cat .github/update.log | sed -e 's/\x1b\[[0-9;]*m//g' | sed -e 's/^\(  \)\{0,1\}  /\1- /')" >> $GITHUB_ENV
+          trunk upgrade --yes-to-all --no-progress --ci --color | tee .github/update.log
+          sed -e '1,/Unpacking Trunk... done/d' -e 's/\x1b\[[0-9;]*m//g' -e 's/^\(  \)\{0,1\}  /\1- /' .github/update.log > .github/pr_body.log
 
       - name: Check for changes
         run: |
@@ -49,9 +49,11 @@ jobs:
           default_author: github_actions
           message: Automated trunk upgrade
           new_branch: automated/trunk-upgrade
+          fetch: false
           push: origin automated/trunk-upgrade --set-upstream --force
 
       - name: Create pull request
+        id: pr
         if: env.changes == 'true'
         uses: devops-infra/action-pull-request@master
         with:
@@ -59,5 +61,10 @@ jobs:
           target_branch: main
           label: automated
           title: Automated trunk upgrade
-          body: ${{ env.pr_body }}
-          get_diff: true
+          get_diff: false
+
+      - name: Update pull request description
+        if: env.changes == 'true'
+        run: gh pr edit ${{ steps.pr.outputs.pr_number }} --body-file .github/pr_body.log
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

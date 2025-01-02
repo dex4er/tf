@@ -33,8 +33,8 @@ jobs:
 
       - name: Go get update
         run: |
-          go get -u | tee .github/update.log
-          printf "pr_body<<END\n%s\nEND\n" "$(cat .github/update.log | sed -e 's/\x1b\[[0-9;]*m//g' | sed -e 's/^go: /- /')" >> $GITHUB_ENV
+          go get -u 2>&1 | tee .github/update.log
+          sed -e 's/\x1b\[[0-9;]*m//g' -e 's/^go: /- /' .github/update.log > .github/pr_body.log
 
       - name: Check for changes
         run: |
@@ -52,9 +52,11 @@ jobs:
           default_author: github_actions
           message: Automated go get update
           new_branch: automated/go-get-update
+          fetch: false
           push: origin automated/go-get-update --set-upstream --force
 
       - name: Create pull request
+        id: pr
         if: env.changes == 'true'
         uses: devops-infra/action-pull-request@master
         with:
@@ -62,5 +64,10 @@ jobs:
           target_branch: main
           label: automated
           title: Automated go get update
-          body: ${{ env.pr_body }}
-          get_diff: true
+          get_diff: false
+
+      - name: Update pull request description
+        if: env.changes == 'true'
+        run: gh pr edit ${{ steps.pr.outputs.pr_number }} --body-file .github/pr_body.log
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
