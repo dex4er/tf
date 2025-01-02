@@ -106,6 +106,10 @@ environment variable, ie.:
 export TERRAFORM_PATH=tofu
 ```
 
+`terraform` command is replaced if `.opentofu-version` file exists in the
+current directory or in one of the parents directories and there was no
+`.terraform-version` file in the directory earlier.
+
 ### `tf apply`
 
 The same as `terraform apply` with less verbose output.
