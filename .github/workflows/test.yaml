@@ -44,11 +44,13 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.5 # datasource=github-releases depName=hashicorp/terraform
+          terraform_wrapper: false
 
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
           tofu_version: 1.7.2 # datasource=github-releases depName=opentofu/opentofu
+          tofu_wrapper: false
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
