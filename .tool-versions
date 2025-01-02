@@ -1,4 +1,4 @@
 golang     1.22.4 # datasource=github-releases depName=golang/go
-goreleaser 2.0.1 # datasource=github-releases depName=goreleaser/goreleaser
+goreleaser 2.5.1 # datasource=github-releases depName=goreleaser/goreleaser
 opentofu   1.7.2 # datasource=github-releases depName=opentofu/opentofu
 terraform  1.8.5 # datasource=github-releases depName=hashicorp/terraform
