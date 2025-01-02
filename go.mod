@@ -1,6 +1,6 @@
 module github.com/dex4er/tf
 
-go 1.21
+go 1.22.4
 
 require (
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
