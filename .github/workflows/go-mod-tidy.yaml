@@ -20,6 +20,7 @@ jobs:
     name: go mod tidy
 
     runs-on: ubuntu-24.04
+    environment: autoupdates
 
     steps:
       - name: Checkout
