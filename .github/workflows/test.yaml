@@ -1,0 +1,60 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - .editorconfig
+      - .gitignore
+      - .markdownlint.yaml
+      - .trunk/**
+      - LICENSE
+      - README.md
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: Test
+
+    permissions:
+      id-token: write
+      contents: write
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch Git tags
+        run: git fetch --force --tags
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5 # datasource=github-releases depName=hashicorp/terraform
+
+      - name: Set up OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.7.2 # datasource=github-releases depName=opentofu/opentofu
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: 2.5.1 # datasource=github-releases depName=goreleaser/goreleaser
+          args: build --clean --snapshot --single-target --output tf
+
+      - name: Run tests
+        run: make test

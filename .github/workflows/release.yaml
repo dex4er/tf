@@ -28,11 +28,16 @@ jobs:
       - name: Fetch Git tags
         run: git fetch --force --tags
 
-      - uses: jdx/mise-action@v2
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
 
-      - name: Test binary
-        run: |
-          goreleaser release --clean
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: 2.5.1 # datasource=github-releases depName=goreleaser/goreleaser
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_GITHUB_TOKEN: ${{ secrets.HOMEBREW_GITHUB_TOKEN }}

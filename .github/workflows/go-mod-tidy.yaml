@@ -1,4 +1,4 @@
-name: Go mod tidy
+name: Automated go mod tidy
 
 on:
   push:
@@ -51,8 +51,8 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           default_author: github_actions
           message: Automated go mod tidy
-          new_branch: update/go-mod-tidy
-          push: origin update/go-mod-tidy --set-upstream --force
+          new_branch: automated/go-mod-tidy
+          push: origin automated/go-mod-tidy --set-upstream --force
 
       - name: Create pull request
         if: env.changes == 'true'

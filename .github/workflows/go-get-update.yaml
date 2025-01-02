@@ -1,4 +1,4 @@
-name: Go get update
+name: Automated go get update
 
 on:
   push:
@@ -51,8 +51,8 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           default_author: github_actions
           message: Automated go get update
-          new_branch: update/go-get-update
-          push: origin update/go-get-update --set-upstream --force
+          new_branch: automated/go-get-update
+          push: origin automated/go-get-update --set-upstream --force
 
       - name: Create pull request
         if: env.changes == 'true'

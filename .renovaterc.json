@@ -6,10 +6,10 @@
     {
       "customType": "regex",
       "extractVersionTemplate": "^(?<version>.*)$",
-      "fileMatch": ["^\\.go-version$"],
+      "fileMatch": ["^\\.opentofu-version$"],
       "matchStrings": ["(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
-      "depNameTemplate": "golang",
-      "datasourceTemplate": "golang-version",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "opentofu/opentofu",
       "versioningTemplate": "semver"
     },
     {
