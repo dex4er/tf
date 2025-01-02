@@ -24,14 +24,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Trunk
         run: curl https://get.trunk.io -fsSL | bash -s -- -y
 
       - name: Trunk upgrade
-        run: trunk upgrade --yes-to-all --ci --color
+        run: |
+          trunk upgrade --yes-to-all --ci --color | tee .github/update.log
+          printf "pr_body<<END\n%s\nEND\n" "$(cat .github/update.log | sed -e 's/\x1b\[[0-9;]*m//g' | sed -e 's/^\(  \)\{0,1\}  /\1- /')" >> $GITHUB_ENV
 
       - name: Check for changes
         run: |
@@ -59,4 +59,5 @@ jobs:
           target_branch: main
           label: automated
           title: Automated trunk upgrade
+          body: ${{ env.pr_body }}
           get_diff: true
