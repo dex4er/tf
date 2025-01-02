@@ -1,22 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":semanticCommitsDisabled"
-  ],
-  "addLabels": [
-    "renovate"
-  ],
+  "extends": ["config:base", ":semanticCommitsDisabled"],
+  "addLabels": ["renovate"],
   "customManagers": [
     {
       "customType": "regex",
       "extractVersionTemplate": "^(?<version>.*)$",
-      "fileMatch": [
-        "^\\.go-version$"
-      ],
-      "matchStrings": [
-        "(?<currentValue>\\d+\\.\\d+\\.\\d+)"
-      ],
+      "fileMatch": ["^\\.go-version$"],
+      "matchStrings": ["(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "depNameTemplate": "golang",
       "datasourceTemplate": "golang-version",
       "versioningTemplate": "semver"
