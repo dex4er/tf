@@ -7,7 +7,6 @@ lint:
     - git-diff-check@SYSTEM
     - gitleaks@8.22.1
     - gofmt@1.20.4
-    - gokart@0.5.1
     - golangci-lint@1.62.2
     - markdownlint@0.43.0
     - prettier@3.4.2
@@ -21,6 +20,7 @@ lint:
     - yamllint@1.35.1
   disabled:
     - checkov
+    - gokart
     - osv-scanner
     - terrascan
     - trivy
@@ -37,6 +37,6 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
-    - go@1.21.3 # datasource=golang-version depName=go
+    - go@1.22.4 # datasource=golang-version depName=go
     - node@20.18.0
     - python@3.11.9
