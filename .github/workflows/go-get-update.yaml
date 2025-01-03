@@ -71,3 +71,9 @@ jobs:
         run: gh pr edit ${{ steps.pr.outputs.pr_number }} --body-file .github/pr_body.log
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Close pull request
+        if: env.changes == 'false'
+        run: gh pr list --head automated/go-get-update --json number --jq '.[].number' | xargs -rn1 gh pr close --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
