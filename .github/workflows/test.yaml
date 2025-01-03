@@ -38,7 +38,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version: 1.22.4 # datasource=github-releases depName=golang/go
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
