@@ -6,32 +6,30 @@ import (
 	"github.com/mitchellh/colorstring"
 
 	"github.com/dex4er/tf/console"
+	"github.com/dex4er/tf/progress/operations"
 )
 
-var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-", "Open": "<", "Clos": ">"}
-var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red", "Open": "blue", "Clos": "blue"}
-
-func Refreshing(line string, resource string, operation string) {
+func Refresh(line string, resource string, operation string) {
 	if console.NoColor {
-		fmt.Print("^")
+		fmt.Print(operations.Operation2symbol[operation])
 	} else {
-		console.Print(colorstring.Color("[blue]^"))
+		console.Print(colorstring.Color("[" + operations.Operation2color[operation] + "]" + operations.Operation2symbol[operation]))
 	}
 }
 
 func PreparingImport(line string, resource string, operation string) {
 	if console.NoColor {
-		fmt.Print("&")
+		fmt.Print(operations.Operation2symbol[operation])
 	} else {
-		console.Print(colorstring.Color("[dark_gray]&"))
+		console.Print(colorstring.Color("[" + operations.Operation2color[operation] + "]" + operations.Operation2symbol[operation]))
 	}
 }
 
 func Start(line string, resource string, operation string) {
 	if console.NoColor {
-		fmt.Print(".")
+		fmt.Print(operations.Operation2symbol[operation])
 	} else {
-		console.Print(colorstring.Color("[" + operation2color[operation] + "]."))
+		console.Print(colorstring.Color("[" + operations.Operation2color[operation] + "]."))
 	}
 }
 
@@ -41,8 +39,8 @@ func Still(line string, resource string, operation string) {
 
 func Stop(line string, resource string, operation string) {
 	if console.NoColor {
-		console.Print(operation2symbol[operation])
+		fmt.Print(operations.Operation2symbol[operation])
 	} else {
-		console.Print(colorstring.Color("[" + operation2color[operation] + "]" + operation2symbol[operation]))
+		console.Print(colorstring.Color("[" + operations.Operation2color[operation] + "]" + operations.Operation2symbol[operation]))
 	}
 }

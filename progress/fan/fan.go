@@ -3,19 +3,18 @@ package fan
 import (
 	"fmt"
 
-	"github.com/dex4er/tf/console"
 	"github.com/mitchellh/colorstring"
+
+	"github.com/dex4er/tf/console"
+	"github.com/dex4er/tf/progress/operations"
 )
 
 var fanTicks = []string{"-", `\`, "|", "/"}
 var fanIndex = 0
 
-var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-", "Open": "<", "Clos": ">"}
-var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red", "Open": "blue", "Clos": "blue"}
+var pending = map[string]string{}
 
-var operations = map[string]string{}
-
-func Refreshing(line string, resource string, operation string) {
+func Refresh(line string, resource string, operation string) {
 	show()
 }
 
@@ -24,17 +23,17 @@ func PreparingImport(line string, resource string, operation string) {
 }
 
 func Start(line string, resource string, operation string) {
-	operations[resource] = operation
+	pending[resource] = operation
 	show()
 }
 
 func Still(line string, resource string, operation string) {
-	operations[resource] = operation
+	pending[resource] = operation
 	show()
 }
 
 func Stop(line string, resource string, operation string) {
-	delete(operations, resource)
+	delete(pending, resource)
 	show()
 }
 
@@ -42,11 +41,11 @@ func show() {
 	fanIndex = (fanIndex + 1) % len(fanTicks)
 	f := fanTicks[fanIndex]
 	i := 0
-	for _, v := range operations {
+	for _, v := range pending {
 		if console.NoColor {
-			f += operation2symbol[v]
+			f += operations.Operation2symbol[v]
 		} else {
-			f += colorstring.Color(fmt.Sprintf("[%s]%s", operation2color[v], operation2symbol[v]))
+			f += colorstring.Color(fmt.Sprintf("[%s]%s", operations.Operation2color[v], operations.Operation2symbol[v]))
 		}
 		if i > console.Cols-2 {
 			break

@@ -17,6 +17,12 @@ import (
 	"github.com/dex4er/tf/util"
 )
 
+const (
+	Compact = "compact"
+	Full    = "full"
+	Short   = "short"
+)
+
 var TF_IN_AUTOMATION = os.Getenv("TF_IN_AUTOMATION")
 var TF_PLAN_FORMAT = os.Getenv("TF_PLAN_FORMAT")
 var TF_PROGRESS_FORMAT = os.Getenv("TF_PROGRESS_FORMAT")
@@ -98,10 +104,10 @@ func terraformWithProgress(command string, args []string) error {
 		`|read \(data resources\)` +
 		`|will be read during apply`
 
-	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\..*?(?:\r?\n|$)`
-	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (.)(?:reparing import?)\.\.\..*?(?:\r?\n|$)`
+	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (Refresh)(?:\w* state)?\.\.\..*?(?:\r?\n|$)`
+	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (Prepar)(?:\w* import)?\.\.\..*?(?:\r?\n|$)`
 	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing\.\.\..*?(?:\r?\n|$)`
-	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\..*?(?:\r?\n|$)`
+	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (import|read|creat|destr|modif|open|clos).*ing\.\.\..*?(?:\r?\n|$)`
 	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w* complete.*?(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
@@ -121,13 +127,13 @@ func terraformWithProgress(command string, args []string) error {
 	reStopOperation := regexp.MustCompile(patternStopOperation)
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
-	planFormat := "short"
-	progressFormat := "counters"
+	planFormat := Short
+	progressFormat := progress.Counters
 	noColor := false
 	noOutputs := true
 
 	if TF_IN_AUTOMATION == "1" {
-		progressFormat = "verbose"
+		progressFormat = progress.Verbose
 	}
 
 	if TF_PLAN_FORMAT != "" {
@@ -143,19 +149,19 @@ func terraformWithProgress(command string, args []string) error {
 	for _, arg := range args {
 		switch util.ReplaceFirstTwoDashes(arg) {
 		case "-compact":
-			planFormat = "compact"
+			planFormat = Compact
 		case "-counter":
-			progressFormat = "counters"
+			progressFormat = progress.Counters
 		case "-counters":
-			progressFormat = "counters"
+			progressFormat = progress.Counters
 		case "-dot":
-			progressFormat = "dots"
+			progressFormat = progress.Dots
 		case "-dots":
-			progressFormat = "dots"
+			progressFormat = progress.Dots
 		case "-fan":
-			progressFormat = "fan"
+			progressFormat = progress.Fan
 		case "-full":
-			planFormat = "full"
+			planFormat = Full
 		case "-no-color":
 			noColor = true
 			console.NoColor = true
@@ -173,14 +179,14 @@ func terraformWithProgress(command string, args []string) error {
 		case "-no-outputs=false":
 			noOutputs = false
 		case "-quiet":
-			progressFormat = "quiet"
+			progressFormat = progress.Quiet
 		case "-short":
-			planFormat = "short"
+			planFormat = Short
 		case "-verbatim":
-			planFormat = "full"
-			progressFormat = "verbatim"
+			planFormat = Full
+			progressFormat = progress.Verbatim
 		case "-verbose":
-			progressFormat = "verbose"
+			progressFormat = progress.Verbose
 		default:
 			newArgs = append(newArgs, arg)
 		}
@@ -268,12 +274,12 @@ func terraformWithProgress(command string, args []string) error {
 			}
 
 			// verbatim progress format is not processed or ignored
-			if progressFormat != "verbatim" {
+			if progressFormat != progress.Verbatim {
 				if m := reRefreshing.FindStringSubmatch(line); m != nil {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.Refreshing(progressFormat, line, m[1], m[2])
+					progress.Refresh(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 
@@ -281,7 +287,7 @@ func terraformWithProgress(command string, args []string) error {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.PreparingImport(progressFormat, line, m[1], m[2])
+					progress.PreparingImport(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 
@@ -289,7 +295,7 @@ func terraformWithProgress(command string, args []string) error {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.Start(progressFormat, line, m[1], m[2])
+					progress.Start(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 
@@ -297,7 +303,7 @@ func terraformWithProgress(command string, args []string) error {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.Still(progressFormat, line, m[1], m[2])
+					progress.Still(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 
@@ -305,13 +311,13 @@ func terraformWithProgress(command string, args []string) error {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
-					progress.Stop(progressFormat, line, m[1], m[2])
+					progress.Stop(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 			}
 
 			// dot format trims EOL then we need one extra just before "Apply complete!"
-			if progressFormat == "dots" && strings.HasPrefix(line, "Apply complete!") {
+			if progressFormat == progress.Dots && strings.HasPrefix(line, "Apply complete!") {
 				fmt.Println()
 			}
 
@@ -321,7 +327,7 @@ func terraformWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			if planFormat == "short" && reIgnoreShortBlockStart.MatchString(line) {
+			if planFormat == Short && reIgnoreShortBlockStart.MatchString(line) {
 				ignoreBlock = true
 				goto NEXT
 			}
@@ -331,7 +337,7 @@ func terraformWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			if planFormat == "short" && ignoreBlock && reIgnoreShortBlockEnd.MatchString(line) {
+			if planFormat == Short && ignoreBlock && reIgnoreShortBlockEnd.MatchString(line) {
 				ignoreBlock = false
 				goto NEXT
 			}
@@ -363,11 +369,11 @@ func terraformWithProgress(command string, args []string) error {
 			}
 
 			// handles different plan formats
-			if planFormat == "short" && reIgnoreShortFormat.MatchString(line) {
+			if planFormat == Short && reIgnoreShortFormat.MatchString(line) {
 				goto NEXT
 			}
 
-			if planFormat == "compact" && reIgnoreCompactFormat.MatchString(line) {
+			if planFormat == Compact && reIgnoreCompactFormat.MatchString(line) {
 				goto NEXT
 			}
 
