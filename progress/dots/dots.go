@@ -8,8 +8,8 @@ import (
 	"github.com/dex4er/tf/console"
 )
 
-var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-"}
-var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red"}
+var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-", "Open": "<", "Clos": ">"}
+var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red", "Open": "blue", "Clos": "blue"}
 
 func Refreshing(line string, resource string, operation string) {
 	if console.NoColor {

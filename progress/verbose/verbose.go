@@ -9,8 +9,8 @@ import (
 )
 
 var refreshing = 0
-var started = map[string]int{"Read": 0, "Import": 0, "Creat": 0, "Destr": 0, "Modif": 0}
-var stopped = map[string]int{"Read": 0, "Import": 0, "Creat": 0, "Destr": 0, "Modif": 0}
+var started = map[string]int{"Read": 0, "Import": 0, "Creat": 0, "Destr": 0, "Modif": 0, "Open": 0, "Clos": 0}
+var stopped = map[string]int{"Read": 0, "Import": 0, "Creat": 0, "Destr": 0, "Modif": 0, "Open": 0, "Clos": 0}
 
 func Refreshing(line string, resource string, operation string) {
 	refreshing += 1
@@ -38,7 +38,7 @@ func Stop(line string, resource string, operation string) {
 
 func show(line string) {
 	s := fmt.Sprintf("^%d", refreshing)
-	r := fmt.Sprintf("=%d/%d", stopped["Read"], started["Read"])
+	r := fmt.Sprintf("=%d/%d", stopped["Read"]+stopped["Open"]+stopped["Clos"], started["Read"]+started["Open"]+started["Clos"])
 	i := fmt.Sprintf("&%d/%d", stopped["Import"], started["Import"])
 	c := fmt.Sprintf("+%d/%d", stopped["Creat"], started["Creat"])
 	m := fmt.Sprintf("~%d/%d", stopped["Modif"], started["Modif"])

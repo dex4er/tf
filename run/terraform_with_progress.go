@@ -100,9 +100,9 @@ func terraformWithProgress(command string, args []string) error {
 
 	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (.)(?:efreshing(?: state)?)\.\.\..*?(?:\r?\n|$)`
 	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (.)(?:reparing import?)\.\.\..*?(?:\r?\n|$)`
-	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif)\w*ing\.\.\..*?(?:\r?\n|$)`
+	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing\.\.\..*?(?:\r?\n|$)`
 	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (.).*ing\.\.\..*?(?:\r?\n|$)`
-	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif)\w* complete.*?(?:\r?\n|$)`
+	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w* complete.*?(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
 

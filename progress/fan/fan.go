@@ -10,8 +10,8 @@ import (
 var fanTicks = []string{"-", `\`, "|", "/"}
 var fanIndex = 0
 
-var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-"}
-var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red"}
+var operation2symbol = map[string]string{"Read": "=", "Import": "&", "Creat": "+", "Modif": "~", "Destr": "-", "Open": "<", "Clos": ">"}
+var operation2color = map[string]string{"Read": "cyan", "Import": "dark_gray", "Creat": "green", "Modif": "yellow", "Destr": "red", "Open": "blue", "Clos": "blue"}
 
 var operations = map[string]string{}
 
