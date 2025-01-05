@@ -1,6 +1,7 @@
 ?.*
 *~
 *.backup
+*.exe
 *.lock.hcl
 *.lock.info
 *.log
