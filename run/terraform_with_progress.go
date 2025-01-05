@@ -104,11 +104,11 @@ func terraformWithProgress(command string, args []string) error {
 		`|read \(data resources\)` +
 		`|will be read during apply`
 
-	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (Refresh)(?:\w* state)?\.\.\..*?(?:\r?\n|$)`
-	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (Prepar)(?:\w* import)?\.\.\..*?(?:\r?\n|$)`
-	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing\.\.\..*?(?:\r?\n|$)`
-	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (import|read|creat|destr|modif|open|clos).*ing\.\.\..*?(?:\r?\n|$)`
-	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w* complete.*?(?:\r?\n|$)`
+	patternRefreshing := `(?:.\[0m.\[1m)?(.*?): (Refresh)\w* st.*?(?:\r?\n|$)`
+	patternPreparingImport := `(?:.\[0m.\[1m)?(.*?): (Prepar)\w* imp.*?(?:\r?\n|$)`
+	patternStartOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing.*?(?:\r?\n|$)`
+	patternStillOperation := `(?:.\[0m.\[1m)?(.*?): Still (import|read|creat|destr|modif|open|clos).*?(?:\r?\n|$)`
+	patternStopOperation := `(?:.\[0m.\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w* co.*?(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
 

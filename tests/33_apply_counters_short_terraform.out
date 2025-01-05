@@ -4,85 +4,85 @@
 - Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf upgrade
+[0m+ ../../../tf upgrade[0m
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf plan -parallelism=30 -counters -short
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-  [32m+[0m create[0m
+[0m+ ../../../tf plan -parallelism=30 -counters -short[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Preparing import...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+  [32m+[0m create
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
-[1m  # local_file.this["10s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["10s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 10s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-10s.txt"
     }
-[1m  # local_file.this["1s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["1s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 1s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-1s.txt"
     }
-[1m  # local_file.this["2s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["2s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 2s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-2s.txt"
     }
-[1m  # local_file.this["3s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["3s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 3s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-3s.txt"
     }
-[1m  # local_file.this["4s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["4s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 4s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-4s.txt"
     }
-[1m  # local_file.this["5s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["5s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 5s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-5s.txt"
     }
-[1m  # local_file.this["6s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["6s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 6s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-6s.txt"
     }
-[1m  # local_file.this["7s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["7s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 7s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-7s.txt"
     }
-[1m  # local_file.this["8s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["8s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 8s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-8s.txt"
     }
-[1m  # local_file.this["9s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["9s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 9s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-9s.txt"
     }
-[1m  # time_sleep.this["10s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["10s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "10s"
       [32m+[0m[0m destroy_duration = "10s"
       [32m+[0m[0m triggers         = {
@@ -91,83 +91,83 @@
     }
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
-  # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
+  # [0m[33mWarning: this will destroy the imported resource
+[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {[0m
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
-      [33m~[0m[0m triggers         = { [31m# forces replacement[0m[0m
+      [33m~[0m[0m triggers         = { [31m# forces replacement[0m
           [32m+[0m[0m "key" = "1s"
         }
     }
-[1m  # time_sleep.this["2s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["2s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "2s"
       [32m+[0m[0m destroy_duration = "2s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "2s"
         }
     }
-[1m  # time_sleep.this["3s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["3s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "3s"
       [32m+[0m[0m destroy_duration = "3s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "3s"
         }
     }
-[1m  # time_sleep.this["4s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["4s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "4s"
       [32m+[0m[0m destroy_duration = "4s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "4s"
         }
     }
-[1m  # time_sleep.this["5s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["5s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "5s"
       [32m+[0m[0m destroy_duration = "5s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "5s"
         }
     }
-[1m  # time_sleep.this["6s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["6s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "6s"
       [32m+[0m[0m destroy_duration = "6s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "6s"
         }
     }
-[1m  # time_sleep.this["7s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["7s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "7s"
       [32m+[0m[0m destroy_duration = "7s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "7s"
         }
     }
-[1m  # time_sleep.this["8s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["8s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "8s"
       [32m+[0m[0m destroy_duration = "8s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "8s"
         }
     }
-[1m  # time_sleep.this["9s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["9s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "9s"
       [32m+[0m[0m destroy_duration = "9s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "9s"
         }
     }
-[1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-[0m
+[1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.[0m
+
 Changes to Outputs:
-  [32m+[0m[0m filenames = [
+  [32m+[0m[0m filenames =
       [32m+[0m[0m "./demo-1s.txt",
       [32m+[0m[0m "./demo-2s.txt",
       [32m+[0m[0m "./demo-3s.txt",
@@ -179,84 +179,84 @@ Changes to Outputs:
       [32m+[0m[0m "./demo-9s.txt",
       [32m+[0m[0m "./demo-10s.txt",
     ]
-[90m
-[0m+ ../../../tf apply -auto-approve -parallelism=30 -counters -short
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-  [32m+[0m create[0m
+[90m[0m
+[0m+ ../../../tf apply -auto-approve -parallelism=30 -counters -short[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Preparing import...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+  [32m+[0m create
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
-[1m  # local_file.this["10s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["10s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 10s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-10s.txt"
     }
-[1m  # local_file.this["1s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["1s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 1s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-1s.txt"
     }
-[1m  # local_file.this["2s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["2s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 2s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-2s.txt"
     }
-[1m  # local_file.this["3s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["3s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 3s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-3s.txt"
     }
-[1m  # local_file.this["4s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["4s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 4s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-4s.txt"
     }
-[1m  # local_file.this["5s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["5s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 5s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-5s.txt"
     }
-[1m  # local_file.this["6s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["6s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 6s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-6s.txt"
     }
-[1m  # local_file.this["7s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["7s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 7s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-7s.txt"
     }
-[1m  # local_file.this["8s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["8s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 8s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-8s.txt"
     }
-[1m  # local_file.this["9s"][0m will be created
-[0m  [32m+[0m[0m resource "local_file" "this" {
+[1m  # local_file.this["9s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "local_file" "this" {[0m
       [32m+[0m[0m content              = "Content 9s"
       [32m+[0m[0m directory_permission = "0777"
       [32m+[0m[0m file_permission      = "0664"
       [32m+[0m[0m filename             = "./demo-9s.txt"
     }
-[1m  # time_sleep.this["10s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["10s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "10s"
       [32m+[0m[0m destroy_duration = "10s"
       [32m+[0m[0m triggers         = {
@@ -265,83 +265,83 @@ Changes to Outputs:
     }
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
-  # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
+  # [0m[33mWarning: this will destroy the imported resource
+[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {[0m
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
-      [33m~[0m[0m triggers         = { [31m# forces replacement[0m[0m
+      [33m~[0m[0m triggers         = { [31m# forces replacement[0m
           [32m+[0m[0m "key" = "1s"
         }
     }
-[1m  # time_sleep.this["2s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["2s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "2s"
       [32m+[0m[0m destroy_duration = "2s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "2s"
         }
     }
-[1m  # time_sleep.this["3s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["3s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "3s"
       [32m+[0m[0m destroy_duration = "3s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "3s"
         }
     }
-[1m  # time_sleep.this["4s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["4s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "4s"
       [32m+[0m[0m destroy_duration = "4s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "4s"
         }
     }
-[1m  # time_sleep.this["5s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["5s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "5s"
       [32m+[0m[0m destroy_duration = "5s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "5s"
         }
     }
-[1m  # time_sleep.this["6s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["6s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "6s"
       [32m+[0m[0m destroy_duration = "6s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "6s"
         }
     }
-[1m  # time_sleep.this["7s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["7s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "7s"
       [32m+[0m[0m destroy_duration = "7s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "7s"
         }
     }
-[1m  # time_sleep.this["8s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["8s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "8s"
       [32m+[0m[0m destroy_duration = "8s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "8s"
         }
     }
-[1m  # time_sleep.this["9s"][0m will be created
-[0m  [32m+[0m[0m resource "time_sleep" "this" {
+[1m  # time_sleep.this["9s"][0m will be created[0m
+[0m  [32m+[0m[0m resource "time_sleep" "this" {[0m
       [32m+[0m[0m create_duration  = "9s"
       [32m+[0m[0m destroy_duration = "9s"
       [32m+[0m[0m triggers         = {
           [32m+[0m[0m "key" = "9s"
         }
     }
-[1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-[0m
+[1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.[0m
+
 Changes to Outputs:
-  [32m+[0m[0m filenames = [
+  [32m+[0m[0m filenames =
       [32m+[0m[0m "./demo-1s.txt",
       [32m+[0m[0m "./demo-2s.txt",
       [32m+[0m[0m "./demo-3s.txt",
@@ -353,340 +353,340 @@ Changes to Outputs:
       [32m+[0m[0m "./demo-9s.txt",
       [32m+[0m[0m "./demo-10s.txt",
     ]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Importing... [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Import complete [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet a[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Creation complete[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[0m[1m[32m
+[34m^X [0m[0m[90m&X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Importing...[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Import[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Creation complete after 10s [0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Creation[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[90m&X/X [0m[0m[32m+X/X [0m[0m[31m-X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[0m[1m[32m[0m
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
-[0m[0m[1m[32m
-[0m+ ../../../tf refresh -parallelism=30 -counters -short
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[0m[1m[32m
-[0m+ ../../../tf destroy -auto-approve -parallelism=30 -counters -short
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Refreshing state..[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mdata.local_file.this["Xs"]: Read compl[0m
-  [31m-[0m destroy[0m
+[0m[0m[1m[32m[0m
+[0m+ ../../../tf refresh -parallelism=30 -counters -short[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[0m[1m[32m[0m
+[0m+ ../../../tf destroy -auto-approve -parallelism=30 -counters -short[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[0m[1mlocal_file.this["Xs"]: Refreshing state...[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[0m[1mdata.local_file.this["Xs"]: Read[0m
+  [31m-[0m destroy
 [1m  # local_file.this["10s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 10s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "Z5prD8GOqCuH+n9ropUeOZ0S97E3On0ZfFErMzwbSY4=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "/5bdepszLGbpdljW+OdT+cuSHW9Kc3SrUeI7NL2VrpjXohtZtpyPAv6jtg7QGUw3AqR4iuCwBd5aKv1TjIT5QA==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "a4fcecea3ac3f81b4d2bf03fc2a3b9f2" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "679a6b0fc18ea82b87fa7f6ba2951e399d12f7b1373a7d197c512b333c1b498e" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "ff96dd7a9b332c66e97658d6f8e753f9cb921d6f4a7374ab51e23b34bd95ae98d7a21b59b69c8f02fea3b60ed0194c3702a4788ae0b005de5a2afd538c84f940" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-10s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 10s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "Z5prD8GOqCuH+n9ropUeOZ0S97E3On0ZfFErMzwbSY4=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "/5bdepszLGbpdljW+OdT+cuSHW9Kc3SrUeI7NL2VrpjXohtZtpyPAv6jtg7QGUw3AqR4iuCwBd5aKv1TjIT5QA==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "a4fcecea3ac3f81b4d2bf03fc2a3b9f2" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "679a6b0fc18ea82b87fa7f6ba2951e399d12f7b1373a7d197c512b333c1b498e" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "ff96dd7a9b332c66e97658d6f8e753f9cb921d6f4a7374ab51e23b34bd95ae98d7a21b59b69c8f02fea3b60ed0194c3702a4788ae0b005de5a2afd538c84f940" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-10s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" [90m-> null[0m
     }
 [1m  # local_file.this["1s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 1s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "R2JqCF9gH8IAaDTCMInEEwcZ1hIl5v8fid8pv8lOyN0=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "0HjHnRP1RyHlGrbjHyxUrh7QglcDtG1qSBVOX/sWKmG8KKf4X8/SW2iSCtTDn1R/BRTnmsXvaMIuzWnPd204mQ==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "e1706ec403695e940bd25721a925a196" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "47626a085f601fc2006834c23089c4130719d61225e6ff1f89df29bfc94ec8dd" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "d078c79d13f54721e51ab6e31f2c54ae1ed0825703b46d6a48154e5ffb162a61bc28a7f85fcfd25b68920ad4c39f547f0514e79ac5ef68c22ecd69cf776d3899" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-1s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 1s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "R2JqCF9gH8IAaDTCMInEEwcZ1hIl5v8fid8pv8lOyN0=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "0HjHnRP1RyHlGrbjHyxUrh7QglcDtG1qSBVOX/sWKmG8KKf4X8/SW2iSCtTDn1R/BRTnmsXvaMIuzWnPd204mQ==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "e1706ec403695e940bd25721a925a196" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "47626a085f601fc2006834c23089c4130719d61225e6ff1f89df29bfc94ec8dd" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "d078c79d13f54721e51ab6e31f2c54ae1ed0825703b46d6a48154e5ffb162a61bc28a7f85fcfd25b68920ad4c39f547f0514e79ac5ef68c22ecd69cf776d3899" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-1s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" [90m-> null[0m
     }
 [1m  # local_file.this["2s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 2s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "BryT775y0R+AMM6kWyyiEUAk4z40AIubLhOxaV5Qe4c=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "6w8oTyKdhdGjDDySTw4L65yEZJP+lQZ1NXvWOHf+vslNXfnNYWW+jvlx0XU53Uxlj6ejtU3PILKFcPDdyHjE7A==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "8806f6195fa442b0a60cc23fe44808b8" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "ac7384e6b359d76c4157ace43768f83ff52de1d1" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "06bc93efbe72d11f8030cea45b2ca2114024e33e34008b9b2e13b1695e507b87" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "eb0f284f229d85d1a30c3c924f0e0beb9c846493fe950675357bd63877febec94d5df9cd6165be8ef971d17539dd4c658fa7a3b54dcf20b28570f0ddc878c4ec" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-2s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "ac7384e6b359d76c4157ace43768f83ff52de1d1" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 2s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "BryT775y0R+AMM6kWyyiEUAk4z40AIubLhOxaV5Qe4c=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "6w8oTyKdhdGjDDySTw4L65yEZJP+lQZ1NXvWOHf+vslNXfnNYWW+jvlx0XU53Uxlj6ejtU3PILKFcPDdyHjE7A==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "8806f6195fa442b0a60cc23fe44808b8" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "ac7384e6b359d76c4157ace43768f83ff52de1d1" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "06bc93efbe72d11f8030cea45b2ca2114024e33e34008b9b2e13b1695e507b87" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "eb0f284f229d85d1a30c3c924f0e0beb9c846493fe950675357bd63877febec94d5df9cd6165be8ef971d17539dd4c658fa7a3b54dcf20b28570f0ddc878c4ec" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-2s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "ac7384e6b359d76c4157ace43768f83ff52de1d1" [90m-> null[0m
     }
 [1m  # local_file.this["3s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 3s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "W6MxY4epoe2trh+J0txiWA1lADpZ+Heql4XgtYbq1Fk=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "LoPBTxnyzFaTg4zSzeVtZuWHUn6OBHIKVtmFqpDKE8hrL+UeXV49970TdqZohd83y24na1NfXJWloehHnjO8PQ==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "51822dc7f0e8ee0c52e82f3ad5b32d05" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "d2a209c18925e90c3cea5e1cec250368799ee185" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "5ba3316387a9a1edadae1f89d2dc62580d65003a59f877aa9785e0b586ead459" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "2e83c14f19f2cc5693838cd2cde56d66e587527e8e04720a56d985aa90ca13c86b2fe51e5d5e3df7bd1376a66885df37cb6e276b535f5c95a5a1e8479e33bc3d" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-3s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "d2a209c18925e90c3cea5e1cec250368799ee185" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 3s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "W6MxY4epoe2trh+J0txiWA1lADpZ+Heql4XgtYbq1Fk=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "LoPBTxnyzFaTg4zSzeVtZuWHUn6OBHIKVtmFqpDKE8hrL+UeXV49970TdqZohd83y24na1NfXJWloehHnjO8PQ==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "51822dc7f0e8ee0c52e82f3ad5b32d05" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "d2a209c18925e90c3cea5e1cec250368799ee185" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "5ba3316387a9a1edadae1f89d2dc62580d65003a59f877aa9785e0b586ead459" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "2e83c14f19f2cc5693838cd2cde56d66e587527e8e04720a56d985aa90ca13c86b2fe51e5d5e3df7bd1376a66885df37cb6e276b535f5c95a5a1e8479e33bc3d" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-3s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "d2a209c18925e90c3cea5e1cec250368799ee185" [90m-> null[0m
     }
 [1m  # local_file.this["4s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 4s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "JwWv2X7fsfGC3ITPVYEVlTpy2ntW98G4LC8QnTVbjw8=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "hfi5tvsiuBKG6E77WEeJnhfJ52VouJQ6Sg0lQM+j6adg0aOkg929SGSEnwghZRgNR6Itm0AlUJhPucqXKbHgAg==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "e06e3b4b609cc9ca6332e0ee0cb7317a" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "fc922ff08cfe15aa027938315e60fcc26244931f" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "2705afd97edfb1f182dc84cf558115953a72da7b56f7c1b82c2f109d355b8f0f" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "85f8b9b6fb22b81286e84efb5847899e17c9e76568b8943a4a0d2540cfa3e9a760d1a3a483ddbd4864849f082165180d47a22d9b402550984fb9ca9729b1e002" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-4s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "fc922ff08cfe15aa027938315e60fcc26244931f" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 4s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "JwWv2X7fsfGC3ITPVYEVlTpy2ntW98G4LC8QnTVbjw8=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "hfi5tvsiuBKG6E77WEeJnhfJ52VouJQ6Sg0lQM+j6adg0aOkg929SGSEnwghZRgNR6Itm0AlUJhPucqXKbHgAg==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "e06e3b4b609cc9ca6332e0ee0cb7317a" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "fc922ff08cfe15aa027938315e60fcc26244931f" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "2705afd97edfb1f182dc84cf558115953a72da7b56f7c1b82c2f109d355b8f0f" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "85f8b9b6fb22b81286e84efb5847899e17c9e76568b8943a4a0d2540cfa3e9a760d1a3a483ddbd4864849f082165180d47a22d9b402550984fb9ca9729b1e002" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-4s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "fc922ff08cfe15aa027938315e60fcc26244931f" [90m-> null[0m
     }
 [1m  # local_file.this["5s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 5s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "9J8E57b+wnBb9pRxxL8WBaFqJbHkC+cQ2+2kw5Wy9Ng=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "Dfv6f8LPfD0h+MMzVx4RDiEF9kCZDGspFDvE8ywv9iTFCDjAGfjxkKyfBSUPDupJZQe9cOwgXFL2D5G2L/5eCQ==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "458fbcf0cd8562e4c3bf6d0837fbdad7" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "285fe43f3bb239622ee280ad61e536db9927c73d" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "f49f04e7b6fec2705bf69471c4bf1605a16a25b1e40be710dbeda4c395b2f4d8" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "0dfbfa7fc2cf7c3d21f8c333571e110e2105f640990c6b29143bc4f32c2ff624c50838c019f8f190ac9f05250f0eea496507bd70ec205c52f60f91b62ffe5e09" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-5s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "285fe43f3bb239622ee280ad61e536db9927c73d" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 5s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "9J8E57b+wnBb9pRxxL8WBaFqJbHkC+cQ2+2kw5Wy9Ng=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "Dfv6f8LPfD0h+MMzVx4RDiEF9kCZDGspFDvE8ywv9iTFCDjAGfjxkKyfBSUPDupJZQe9cOwgXFL2D5G2L/5eCQ==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "458fbcf0cd8562e4c3bf6d0837fbdad7" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "285fe43f3bb239622ee280ad61e536db9927c73d" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "f49f04e7b6fec2705bf69471c4bf1605a16a25b1e40be710dbeda4c395b2f4d8" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "0dfbfa7fc2cf7c3d21f8c333571e110e2105f640990c6b29143bc4f32c2ff624c50838c019f8f190ac9f05250f0eea496507bd70ec205c52f60f91b62ffe5e09" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-5s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "285fe43f3bb239622ee280ad61e536db9927c73d" [90m-> null[0m
     }
 [1m  # local_file.this["6s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 6s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "ipXPegAhhf0c8LpOj3xCOz5NQ6cX7pLS5krQqyIXtNY=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "/zoj7JtiKX4bKprpIjImf/hVY3usHi8tECuBTH1ScCAdaJtglvJoi81oEbCkj+MIsaQp51tqPoEAkf0DQgZCGQ==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "5ed6f753c59c704fd1d743d5bb19ad80" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "8a95cf7a002185fd1cf0ba4e8f7c423b3e4d43a717ee92d2e64ad0ab2217b4d6" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "ff3a23ec9b62297e1b2a9ae92232267ff855637bac1e2f2d102b814c7d5270201d689b6096f2688bcd6811b0a48fe308b1a429e75b6a3e810091fd0342064219" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-6s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 6s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "ipXPegAhhf0c8LpOj3xCOz5NQ6cX7pLS5krQqyIXtNY=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "/zoj7JtiKX4bKprpIjImf/hVY3usHi8tECuBTH1ScCAdaJtglvJoi81oEbCkj+MIsaQp51tqPoEAkf0DQgZCGQ==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "5ed6f753c59c704fd1d743d5bb19ad80" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "8a95cf7a002185fd1cf0ba4e8f7c423b3e4d43a717ee92d2e64ad0ab2217b4d6" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "ff3a23ec9b62297e1b2a9ae92232267ff855637bac1e2f2d102b814c7d5270201d689b6096f2688bcd6811b0a48fe308b1a429e75b6a3e810091fd0342064219" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-6s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" [90m-> null[0m
     }
 [1m  # local_file.this["7s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 7s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "XfZLUzWcw3DOUOo1yQhBlQM6pn3fbBVPzq/6brd/EVg=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "YlXykl5HqOKp1U1pp9GKkZqseE6IdXWuUX8Mt0I1pNlUEqdtEE7vu9XH9isf+k8sKJ00ZTxH/2Evtl428AaW5A==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "28e3dff5895c527bb012bef520227602" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "5df64b53359cc370ce50ea35c9084195033aa67ddf6c154fceaffa6eb77f1158" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "6255f2925e47a8e2a9d54d69a7d18a919aac784e887575ae517f0cb74235a4d95412a76d104eefbbd5c7f62b1ffa4f2c289d34653c47ff612fb65e36f00696e4" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-7s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 7s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "XfZLUzWcw3DOUOo1yQhBlQM6pn3fbBVPzq/6brd/EVg=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "YlXykl5HqOKp1U1pp9GKkZqseE6IdXWuUX8Mt0I1pNlUEqdtEE7vu9XH9isf+k8sKJ00ZTxH/2Evtl428AaW5A==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "28e3dff5895c527bb012bef520227602" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "5df64b53359cc370ce50ea35c9084195033aa67ddf6c154fceaffa6eb77f1158" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "6255f2925e47a8e2a9d54d69a7d18a919aac784e887575ae517f0cb74235a4d95412a76d104eefbbd5c7f62b1ffa4f2c289d34653c47ff612fb65e36f00696e4" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-7s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" [90m-> null[0m
     }
 [1m  # local_file.this["8s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 8s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "b4bvVO1hmISshx/3VSPO8bL7J7souCH9nXM73UQULAc=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "FCKXzUArLQRZQilyRn7OoUbs1a/NszKRDkReXB8eeBcAvzFHx6kcKgUWYTIZprzU+qUX2ZGC3hDhfUyS2W7+vg==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "d8516cb0b4a412344a56baa22e7f9f63" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "1914c083a90ce088fcecee5762ae5d8e1647a994" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "6f86ef54ed619884ac871ff75523cef1b2fb27bb28b821fd9d733bdd44142c07" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "142297cd402b2d0459422972467ecea146ecd5afcdb332910e445e5c1f1e781700bf3147c7a91c2a0516613219a6bcd4faa517d99182de10e17d4c92d96efebe" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-8s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "1914c083a90ce088fcecee5762ae5d8e1647a994" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 8s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "b4bvVO1hmISshx/3VSPO8bL7J7souCH9nXM73UQULAc=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "FCKXzUArLQRZQilyRn7OoUbs1a/NszKRDkReXB8eeBcAvzFHx6kcKgUWYTIZprzU+qUX2ZGC3hDhfUyS2W7+vg==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "d8516cb0b4a412344a56baa22e7f9f63" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "1914c083a90ce088fcecee5762ae5d8e1647a994" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "6f86ef54ed619884ac871ff75523cef1b2fb27bb28b821fd9d733bdd44142c07" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "142297cd402b2d0459422972467ecea146ecd5afcdb332910e445e5c1f1e781700bf3147c7a91c2a0516613219a6bcd4faa517d99182de10e17d4c92d96efebe" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-8s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "1914c083a90ce088fcecee5762ae5d8e1647a994" [90m-> null[0m
     }
 [1m  # local_file.this["9s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "local_file" "this" {
-      [31m-[0m[0m content              = "Content 9s" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha256 = "2CnLqltbZEQQHFaIELAnu6GBR+8HpHdm7v14HkFWCAQ=" [90m-> null[0m[0m
-      [31m-[0m[0m content_base64sha512 = "jY2/DyFsvC5/JLm7T0pjIsJSSzmV/VQfDa5XhiG0ioi7lL7CsBlPeBYjnPaxy7u+A9E7CxmNL1lyUtmDmi8i2A==" [90m-> null[0m[0m
-      [31m-[0m[0m content_md5          = "aea549f00f28a28d0c206c3cd85d95ad" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha1         = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha256       = "d829cbaa5b5b6444101c568810b027bba18147ef07a47766eefd781e41560804" [90m-> null[0m[0m
-      [31m-[0m[0m content_sha512       = "8d8dbf0f216cbc2e7f24b9bb4f4a6322c2524b3995fd541f0dae578621b48a88bb94bec2b0194f7816239cf6b1cbbbbe03d13b0b198d2f597252d9839a2f22d8" [90m-> null[0m[0m
-      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m[0m
-      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m[0m
-      [31m-[0m[0m filename             = "./demo-9s.txt" [90m-> null[0m[0m
-      [31m-[0m[0m id                   = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "local_file" "this" {[0m
+      [31m-[0m[0m content              = "Content 9s" [90m-> null[0m
+      [31m-[0m[0m content_base64sha256 = "2CnLqltbZEQQHFaIELAnu6GBR+8HpHdm7v14HkFWCAQ=" [90m-> null[0m
+      [31m-[0m[0m content_base64sha512 = "jY2/DyFsvC5/JLm7T0pjIsJSSzmV/VQfDa5XhiG0ioi7lL7CsBlPeBYjnPaxy7u+A9E7CxmNL1lyUtmDmi8i2A==" [90m-> null[0m
+      [31m-[0m[0m content_md5          = "aea549f00f28a28d0c206c3cd85d95ad" [90m-> null[0m
+      [31m-[0m[0m content_sha1         = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" [90m-> null[0m
+      [31m-[0m[0m content_sha256       = "d829cbaa5b5b6444101c568810b027bba18147ef07a47766eefd781e41560804" [90m-> null[0m
+      [31m-[0m[0m content_sha512       = "8d8dbf0f216cbc2e7f24b9bb4f4a6322c2524b3995fd541f0dae578621b48a88bb94bec2b0194f7816239cf6b1cbbbbe03d13b0b198d2f597252d9839a2f22d8" [90m-> null[0m
+      [31m-[0m[0m directory_permission = "0777" [90m-> null[0m
+      [31m-[0m[0m file_permission      = "0664" [90m-> null[0m
+      [31m-[0m[0m filename             = "./demo-9s.txt" [90m-> null[0m
+      [31m-[0m[0m id                   = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" [90m-> null[0m
     }
 [1m  # time_sleep.this["10s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "10s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "10s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "10s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "10s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "10s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["1s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "1s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "1s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "1s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "1s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "1s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["2s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "2s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "2s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "2s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "2s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "2s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["3s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "3s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "3s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "3s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "3s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "3s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["4s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "4s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "4s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "4s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "4s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "4s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["5s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "5s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "5s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "5s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "5s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "5s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["6s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "6s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "6s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "6s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "6s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "6s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["7s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "7s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "7s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "7s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "7s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "7s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["8s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "8s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "8s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "8s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "8s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "8s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
 [1m  # time_sleep.this["9s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "9s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "9s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+      [31m-[0m[0m create_duration  = "9s" [90m-> null[0m
+      [31m-[0m[0m destroy_duration = "9s" [90m-> null[0m
+      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
       [31m-[0m[0m triggers         = {
           [31m-[0m[0m "key" = "9s"
-        } [90m-> null[0m[0m
+        } [90m-> null[0m
     }
-[1mPlan:[0m 0 to add, 0 to change, 20 to destroy.
-[0m
+[1mPlan:[0m 0 to add, 0 to change, 20 to destroy.[0m
+
 Changes to Outputs:
-  [31m-[0m[0m filenames = [
+  [31m-[0m[0m filenames =
       [31m-[0m[0m "./demo-1s.txt",
       [31m-[0m[0m "./demo-2s.txt",
       [31m-[0m[0m "./demo-3s.txt",
@@ -697,28 +697,27 @@ Changes to Outputs:
       [31m-[0m[0m "./demo-8s.txt",
       [31m-[0m[0m "./demo-9s.txt",
       [31m-[0m[0m "./demo-10s.txt",
-    ] [90m-> null[0m[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mlocal_file.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Still destroyi[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co[0m
-[0m[1m[32m
+    ] [90m-> null[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mlocal_file.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[0m[36m=X/X [0m[0m[31m-X/X [0m[0m[0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[0m[1m[32m[0m
 Destroy complete! Resources: 20 destroyed.
 [0m[0m

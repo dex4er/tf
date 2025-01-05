@@ -4,36 +4,36 @@
 - Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf upgrade
+[0m+ ../../../tf upgrade[0m
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
-[0m+ ../../../tf plan -parallelism=30 'time_sleep.this[1s]'
-[90m&[0m[34m^[0m
+[0m+ ../../../tf plan -parallelism=30 'time_sleep.this[1s]'[0m
+[][34m^
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
-  # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
-[1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
+  # [0m[33mWarning: this will destroy the imported resource
+[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {[0m
+[1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.[0m
 [0m[33m╷[0m[0m
-[33m[0m[0m[90m[0m+ ../../../tf apply -auto-approve -parallelism=30 'time_sleep.this[1s]'
-[90m&[0m[34m^[0m
+[33m[0m[0m[90m[0m+ ../../../tf apply -auto-approve -parallelism=30 'time_sleep.this[1s]'[0m
+[][34m^
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
-  # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
-[1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
+  # [0m[33mWarning: this will destroy the imported resource
+[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {[0m
+[1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.[0m
 [90m.[0m[90m&[0m[31m.[0m[31m-[0m[32m.[0m[32m+[0m[33m╷[0m[0m
 [33m[0m[0m[33m[0m[0m
-[0m+ ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'
+[0m+ ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'[0m
 [34m^[0m
 [0m[1m[32mNo changes.[0m[1m Your infrastructure still matches the configuration.[0m
 [33m[0m[0m[33m[0m[0m[33m[0m[0m
-[0m+ ../../../tf destroy -auto-approve -parallelism=30 'time_sleep.this[1s]'
+[0m+ ../../../tf destroy -auto-approve -parallelism=30 'time_sleep.this[1s]'[0m
 [34m^[0m
-  [31m-[0m destroy[0m
+  [31m-[0m destroy
 [1m  # time_sleep.this["1s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-[1mPlan:[0m 0 to add, 0 to change, 1 to destroy.
+[0m  [31m-[0m[0m resource "time_sleep" "this" {[0m
+[1mPlan:[0m 0 to add, 0 to change, 1 to destroy.[0m
 [31m.[0m[31m-[0m[33m╷[0m[0m
 [33m[0m[0m[33m[0m[0m[0m
