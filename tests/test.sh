@@ -17,7 +17,7 @@ for t in [0-9]*.sh; do
   else
     echo "FAILED"
     status=$((status + 1))
-    if [[ -n ${UPDATE_OUT-} ]]; then
+    if [[ -n ${TEST_UPDATE-} ]]; then
       n=$(basename "$t" .sh)
       cat tmp/$n/tf.out >$n.out
     fi

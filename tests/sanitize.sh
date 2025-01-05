@@ -2,8 +2,14 @@
 
 set -euo pipefail
 
+if command -v gsed >/dev/null 2>&1; then
+  sed="gsed"
+else
+  sed="sed"
+fi
+
 tr '\015' '\012' |
-  sed -e '/^ *$/d' \
+  $sed -e '/^ *$/d' \
     -e '/Your version of .* is out of date! The latest version/d' \
     -e '/You can update by downloading from/d' \
     -e '/: Creating\.\.\./d' \
@@ -20,6 +26,8 @@ tr '\015' '\012' |
     -e 's/ \[i$//' \
     -e 's/ \[\(\o033\)/\1/' \
     -e 's/ \[$//' \
+    -e 's/ complete after [0-9][0-9]*s \(\o033\)/\1/' \
+    -e 's/ complete after [0-9][0-9]*s $//' \
     -e 's/ complete after [0-9][0-9]*s\(\o033\)/\1/' \
     -e 's/ complete after [0-9][0-9]*s$//' \
     -e 's/ complete after [0-9]*\(\o033\)/\1/' \
@@ -52,11 +60,10 @@ tr '\015' '\012' |
     -e 's/ co$//' \
     -e 's/ c\(\o033\)/\1/' \
     -e 's/ c$//' \
-    -e 's/\o033\[0m$//' \
-    -e 's/\o033\[0$//' \
-    -e 's/\o033\[$//' \
-    -e 's/\o033$//' \
-    -e 's/^\(\o033.*\)/\1\o033\[0m/' \
+    -e 's/\(\o033\)*\o033/\o033/g' \
+    -e 's/\(\o033\[0m\)*\o033\[0m/\o033\[0m/g' \
+    -e 's/\o033\[0\(\o033\)/\1/' \
+    -e 's/\o033\[\(\o033\)/\1/' \
     -e 's/darwin_amd64/XXX/g' \
     -e 's/darwin_arm64/XXX/g' \
     -e 's/linux_amd64/XXX/g' \
