@@ -6,50 +6,100 @@ import (
 	"github.com/mitchellh/colorstring"
 
 	"github.com/dex4er/tf/console"
+	"github.com/dex4er/tf/progress/operations"
 )
 
-var refreshing = 0
-var started = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
-var stopped = map[string]int{"R": 0, "I": 0, "C": 0, "D": 0, "M": 0}
+var Refreshing = 0
+var Started = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0}
+var Stopped = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0}
 
-func Refreshing(line string, resource string, operation string) {
-	refreshing += 1
-	show(line, resource, operation)
+func Refresh(line string, resource string, operation string) {
+	Refreshing += 1
+	show(line)
 }
 
 func PreparingImport(line string, resource string, operation string) {
-	refreshing += 1
-	show(line, resource, operation)
+	Refreshing += 1
+	show(line)
 }
 
 func Start(line string, resource string, operation string) {
-	started[operation] += 1
-	show(line, resource, operation)
+	Started[operation] += 1
+	show(line)
 }
 
 func Still(line string, resource string, operation string) {
-	show(line, resource, operation)
+	show(line)
 }
 
 func Stop(line string, resource string, operation string) {
-	stopped[operation] += 1
-	show(line, resource, operation)
+	Stopped[operation] += 1
+	show(line)
 }
 
-func show(line string, resource string, operation string) {
-	s := fmt.Sprintf("^%d", refreshing)
-	r := fmt.Sprintf("=%d/%d", stopped["R"], started["R"])
-	i := fmt.Sprintf("&%d/%d", stopped["I"], started["I"])
-	c := fmt.Sprintf("+%d/%d", stopped["C"], started["C"])
-	m := fmt.Sprintf("~%d/%d", stopped["M"], started["M"])
-	d := fmt.Sprintf("-%d/%d", stopped["D"], started["D"])
+func show(line string) {
+	counters, countersLength := Counters()
 
-	maxLine := max(console.Cols-len(s)-len(r)-len(i)-len(c)-len(m)-len(d)-7, 0)
-	l := line[:min(len(line), maxLine)]
+	maxLine := max(console.Cols-countersLength, 0)
+	lineTrimmed := line[:min(len(line), maxLine)]
 
-	if console.NoColor {
-		console.Printf("%s %s %s %s %s %s %s\r", s, r, i, c, m, d, l)
-	} else {
-		console.Printf(colorstring.Color("[blue]%s[reset] [cyan]%s[reset] [dark_gray]%s[reset] [green]%s[reset] [yellow]%s[reset] [red]%s[reset] %s")+"\r", s, r, i, c, m, d, l)
+	console.Printf("%s%s%s\r", counters, lineTrimmed, colorstring.Color("[reset]"))
+}
+
+func Counters() (string, int) {
+	countersLength := 0
+	counters := ""
+
+	if c, l := counter(operations.Refreshing); l > 0 {
+		countersLength += l
+		counters += c
 	}
+	if c, l := counter(operations.Reading); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Opening); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Closing); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Importing); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Creating); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Destroying); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Modifying); l > 0 {
+		countersLength += l
+		counters += c
+	}
+
+	return counters, countersLength
+}
+
+func counter(operation string) (string, int) {
+	c := ""
+	if operation == operations.Refreshing {
+		if Refreshing > 0 {
+			c = fmt.Sprintf("%s%d ", operations.Operation2symbol[operation], Refreshing)
+		}
+	} else {
+		if Stopped[operation]+Started[operation] > 0 {
+			c = fmt.Sprintf("%s%d/%d ", operations.Operation2symbol[operation], Stopped[operation], Started[operation])
+		}
+	}
+	l := len(c)
+	if l > 0 && !console.NoColor {
+		return colorstring.Color("[" + operations.Operation2color[operation] + "]" + c + "[reset]"), l
+	}
+	return c, l
 }

@@ -10,13 +10,13 @@
 already deleted outside of Terraform.
 [0m[1m[32m
 Destroy complete! Resources: 0 destroyed.
-[0m[0m+ ../../../tf import 'time_sleep.this[1s]' 1s,1s
-[0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...[0m
+[0m+ ../../../tf import 'time_sleep.this[1s]' 1s,1s
+[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...[0m
 [0m[1m[32mtime_sleep.this["Xs"]: Import prepared![0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [0m[32m
 Import successful!
-[0m[0m# time_sleep.this["Xs"]:
+[0m# time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
     create_duration  = "1s"
     destroy_duration = "1s"

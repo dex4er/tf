@@ -12,3 +12,5 @@ tmp/
 /tf
 .terraform/
 .vscode/
+
+.trunk/

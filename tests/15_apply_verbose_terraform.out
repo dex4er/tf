@@ -7,59 +7,59 @@
 [0m+ ../../../tf upgrade
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
 [0m+ ../../../tf plan -parallelism=30 -verbose 'time_sleep.this[1s]'
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[id=X]
+[34m^X [0m[1mtime_sleep.this["Xs"]: Preparing import...[0m
+[34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
+[0m[31m-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
-      [33m~[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
-      [33m~[0m[0m triggers         = { [31m# forces replacement[0m[0m
-          [32m+[0m[0m "key" = "1s"
+      [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      [33m~[0m triggers         = { [31m# forces replacement[0m
+          [32m+[0m "key" = "1s"
         }
     }
 [1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-[0m[33m╷[0m[0m
-[33m[0m[0m[90m[0m+ ../../../tf apply -auto-approve -parallelism=30 -verbose 'time_sleep.this[1s]'
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Preparing import... [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[id=X]
+[0m[33m╷[0m
+[33m[0m[90m[0m+ ../../../tf apply -auto-approve -parallelism=30 -verbose 'time_sleep.this[1s]'
+[34m^X [0m[1mtime_sleep.this["Xs"]: Preparing import...[0m
+[34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [31m-[0m/[32m+[0m destroy and then create replacement[0m
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced[0m
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource[0m
-[0m[31m-[0m/[32m+[0m[0m resource "time_sleep" "this" {
+[0m[31m-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
-      [33m~[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
-      [33m~[0m[0m triggers         = { [31m# forces replacement[0m[0m
-          [32m+[0m[0m "key" = "1s"
+      [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      [33m~[0m triggers         = { [31m# forces replacement[0m
+          [32m+[0m "key" = "1s"
         }
     }
 [1mPlan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[0m[1mtime_sleep.this["Xs"]: Importing... [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Import complete [id=X]
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co after Xs[0m[0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Creation complet after Xs [id=X]
-[33m╷[0m[0m
-[33m[0m[0m[33m[0m[0m[0m+ ../../../tf refresh -parallelism=30 -verbose 'time_sleep.this[1s]'
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[id=X]
+[34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing...[0m
+[34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Import[0m
+[34m^X [0m[90m&X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[34m^X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Creation[0m
+[33m╷[0m
+[33m[0m[33m[0m+ ../../../tf refresh -parallelism=30 -verbose 'time_sleep.this[1s]'
+[34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [0m[1m[32mNo changes.[0m[1m Your infrastructure still matches the configuration.[0m
-[33m[0m[0m[33m[0m[0m[33m[0m[0m[0m+ ../../../tf destroy -auto-approve -parallelism=30 -verbose 'time_sleep.this[1s]'
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[id=X]
+[33m[0m[33m[0m[33m[0m+ ../../../tf destroy -auto-approve -parallelism=30 -verbose 'time_sleep.this[1s]'
+[34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
   [31m-[0m destroy[0m
 [1m  # time_sleep.this["1s"][0m will be [1m[31mdestroyed[0m
-[0m  [31m-[0m[0m resource "time_sleep" "this" {
-      [31m-[0m[0m create_duration  = "1s" [90m-> null[0m[0m
-      [31m-[0m[0m destroy_duration = "1s" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m[0m
-      [31m-[0m[0m triggers         = {
-          [31m-[0m[0m "key" = "1s"
-        } [90m-> null[0m[0m
+[0m  [31m-[0m resource "time_sleep" "this" {
+      [31m-[0m create_duration  = "1s" [90m-> null[0m
+      [31m-[0m destroy_duration = "1s" [90m-> null[0m
+      [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null[0m
+      [31m-[0m triggers         = {
+          [31m-[0m "key" = "1s"
+        } [90m-> null[0m
     }
 [1mPlan:[0m 0 to add, 0 to change, 1 to destroy.
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Destruction co after Xs[0m[0m
-[33m╷[0m[0m
-[33m[0m[0m[33m[0m[0m[0m
+[34m^X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction[0m
+[33m╷[0m
+[33m[0m[33m[0m

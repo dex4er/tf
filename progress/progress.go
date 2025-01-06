@@ -7,30 +7,39 @@ import (
 	"github.com/dex4er/tf/progress/verbose"
 )
 
+const (
+	Counters = "counters"
+	Dots     = "dots"
+	Fan      = "fan"
+	Quiet    = "quiet"
+	Verbatim = "verbatim"
+	Verbose  = "verbose"
+)
+
 // Handles progress indicator when refreshing resources.
-func Refreshing(progressFormat string, line string, resource string, operation string) {
+func Refresh(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
-	case "counters":
-		counters.Refreshing(line, resource, operation)
-	case "dots":
-		dots.Refreshing(line, resource, operation)
-	case "fan":
-		fan.Refreshing(line, resource, operation)
-	case "verbose":
-		verbose.Refreshing(line, resource, operation)
+	case Counters:
+		counters.Refresh(line, resource, operation)
+	case Dots:
+		dots.Refresh(line, resource, operation)
+	case Fan:
+		fan.Refresh(line, resource, operation)
+	case Verbose:
+		verbose.Refresh(line, resource, operation)
 	}
 }
 
 // Handles progress indicator when preparing import of resources.
 func PreparingImport(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
-	case "counters":
+	case Counters:
 		counters.PreparingImport(line, resource, operation)
-	case "dots":
+	case Dots:
 		dots.PreparingImport(line, resource, operation)
-	case "fan":
+	case Fan:
 		fan.PreparingImport(line, resource, operation)
-	case "verbose":
+	case Verbose:
 		verbose.PreparingImport(line, resource, operation)
 	}
 }
@@ -38,27 +47,27 @@ func PreparingImport(progressFormat string, line string, resource string, operat
 // Handles progress indicator when operation on resource starts.
 func Start(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
-	case "counters":
+	case Counters:
 		counters.Start(line, resource, operation)
-	case "dots":
+	case Dots:
 		dots.Start(line, resource, operation)
-	case "fan":
+	case Fan:
 		fan.Start(line, resource, operation)
-	case "verbose":
+	case Verbose:
 		verbose.Start(line, resource, operation)
 	}
 }
 
-// Handles progress indicator when operation on resource still is in progress.
+// Handles progress indicator when operation on resource still is in
 func Still(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
-	case "counters":
+	case Counters:
 		counters.Still(line, resource, operation)
-	case "dots":
+	case Dots:
 		dots.Still(line, resource, operation)
-	case "fan":
+	case Fan:
 		fan.Still(line, resource, operation)
-	case "verbose":
+	case Verbose:
 		verbose.Still(line, resource, operation)
 	}
 }
@@ -66,13 +75,13 @@ func Still(progressFormat string, line string, resource string, operation string
 // Handles progress indicator when operation on resource ends.
 func Stop(progressFormat string, line string, resource string, operation string) {
 	switch progressFormat {
-	case "counters":
+	case Counters:
 		counters.Stop(line, resource, operation)
-	case "dots":
+	case Dots:
 		dots.Stop(line, resource, operation)
-	case "fan":
+	case Fan:
 		fan.Stop(line, resource, operation)
-	case "verbose":
+	case Verbose:
 		verbose.Stop(line, resource, operation)
 	}
 }

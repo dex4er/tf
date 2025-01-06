@@ -1,8 +1,8 @@
 + ../../../tf init
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed, key ID [0m[1m0C0AF313E5FD9F80[0m[0m)
+- Installed hashicorp/XXX vX.X.X (signed, key ID [0m[1m0C0AF313E5FD9F80[0m)
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed, key ID [0m[1m0C0AF313E5FD9F80[0m[0m)
+- Installed hashicorp/XXX vX.X.X (signed, key ID [0m[1m0C0AF313E5FD9F80[0m)
 https://opentofu.org/docs/cli/plugins/signing/
 [0m[1m[32mOpenTofu has been successfully initialized![0m[32m[0m
 [0m+ ../../../tf destroy -auto-approve
@@ -11,14 +11,14 @@ https://opentofu.org/docs/cli/plugins/signing/
 already deleted outside of OpenTofu.
 [0m[1m[32m
 Destroy complete! Resources: 0 destroyed.
-[0m[0m+ ../../../tf list
+[0m+ ../../../tf list
 + ../../../tf import 'time_sleep.this[1s]' 1s,1s
-[0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...[0m
+[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...[0m
 [0m[1m[32mtime_sleep.this["Xs"]: Import prepared![0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [0m[32m
 Import successful!
-[0m[0m# time_sleep.this["Xs"]:
+[0m# time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
     create_duration  = "1s"
     destroy_duration = "1s"
@@ -26,12 +26,12 @@ resource "time_sleep" "this" {
     triggers         = {}
 }
 + ../../../tf import 'time_sleep.this["2s"]' 2s,2s
-[0m[1mtime_sleep.this["Xs"]: Importing from ID "2s,2s"...[0m
+[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "2s,2s"...[0m
 [0m[1m[32mtime_sleep.this["Xs"]: Import prepared![0m
-[34m^X[0m [36m=X/X[0m [90m&X/X[0m [32m+X/X[0m [33m~X/X[0m [31m-X/X[0m [0m[1mtime_sleep.this["Xs"]: Refreshing state..[0m
+[34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...[0m
 [0m[32m
 Import successful!
-[0m[0m# time_sleep.this["Xs"]:
+[0m# time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
     create_duration  = "2s"
     destroy_duration = "2s"
@@ -42,14 +42,14 @@ resource "time_sleep" "this" {
 time_sleep.this["1s"]
 time_sleep.this["2s"]
 + ../../../tf import 'time_sleep.this[3s]' foo bar baz
-[0m[1mtime_sleep.this["Xs"]: Importing from ID "foo bar baz"...[0m
-[31m[31m╷[0m[0m
-[31m│[0m [0m[1m[31mError: [0m[0m[1mUnexpected Format of ID[0m
+[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "foo bar baz"...[0m
+[31m[31m╷[0m
+[31m│[0m [0m[1m[31mError: [0m[1mUnexpected Format of ID[0m
 [31m│[0m [0m
-[31m│[0m [0m[0mUnexpected format of ID ("foo bar baz"), expected
+[31m│[0m [0mUnexpected format of ID ("foo bar baz"), expected
 [31m│[0m [0mCREATEDURATION,DESTROYDURATION where at least one value is non-empty
-[31m╵[0m[0m
-[0m[0m
+[31m╵[0m
+[0m
 [0m+ true
 + ../../../tf list
 time_sleep.this["1s"]
