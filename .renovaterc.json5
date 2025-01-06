@@ -14,36 +14,6 @@
   "postUpdateOptions": [
     "gomodTidy"
   ],
-  "packageRules": [
-    // update all go dependencies in main module
-    {
-      "groupName": "all go dependencies main",
-      "groupSlug": "all-go-deps-main",
-      "matchFiles": [
-        "go.mod",
-        "go.sum"
-      ],
-      "postUpdateOptions": [
-        "gomodUpdateImportPaths"
-      ]
-    },
-    // ignore go directive as it is minimal working version
-    {
-      "enabled": "false",
-      "matchFiles": [
-        "go.mod"
-      ],
-      "matchDepNames": [
-        "go"
-      ],
-      "matchDatasources": [
-        "golang-version"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ]
-    }
-  ],
   "constraints": {
     // allow minor updates for go
     "go": ">= 1.22"
