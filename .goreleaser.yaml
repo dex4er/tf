@@ -56,7 +56,7 @@ snapcrafts:
       - allows to use of multiple arguments when original command doesn't support it
       - adds automatically quotes for indexed resources (`xargs` friendly)
       - generates a log file when `TF_OUTPUT_PATH` environment variable is used
-    grade: devel
+    grade: stable
     confinement: classic
     license: MIT
     base: bare
