@@ -31,7 +31,7 @@ in the `$PATH`.
 
 Install with [asdf](https://asdf-vm.com/):
 
-```shell
+```sh
 asdf plugin-add tf https://github.com/dex4er/asdf-tf.git
 asdf install tf latest
 asdf global tf latest
@@ -41,9 +41,18 @@ asdf global tf latest
 
 Install with [mise-en-place](https://mise.jdx.dev/):
 
-```shell
+```sh
 mise plugins install tf https://github.com/dex4er/asdf-tf.git
 mise use -g tf@latest
+```
+
+### Snap
+
+Install with [snap](https://snapcraft.io/):
+
+```sh
+snap install tf-wrapper --classic
+snap alias tf-wrapper tf
 ```
 
 ### Homebrew
