@@ -48,6 +48,13 @@ jobs:
             echo "changes=true" >> $GITHUB_ENV
           fi
 
+      - name: Trunk Check
+        if: env.changes == 'true'
+        uses: trunk-io/trunk-action@v1
+        with:
+          check-mode: all
+        continue-on-error: true
+
       - name: Commit and push to branch
         if: env.changes == 'true'
         uses: EndBug/add-and-commit@v9
