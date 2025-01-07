@@ -3,14 +3,14 @@ cli:
   version: 1.22.8
 lint:
   enabled:
-    - actionlint@1.7.5
+    - actionlint@1.7.6
     - git-diff-check@SYSTEM
     - gitleaks@8.22.1
     - gofmt@1.20.4
     - golangci-lint@1.62.2
     - markdownlint@0.43.0
     - prettier@3.4.2
-    - renovate@39.90.2
+    - renovate@39.91.0
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - terraform@1.10.3 # datasource=github-releases depName=hashicorp/terraform
