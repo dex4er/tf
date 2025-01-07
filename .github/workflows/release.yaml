@@ -33,6 +33,11 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Set up Snapcraft
+        uses: samuelmeuli/action-snapcraft@v3
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
