@@ -61,7 +61,7 @@ snapcrafts:
     license: MIT
     base: bare
     apps:
-      tf:
+      tf-wrapper:
         aliases:
           - tf
         command: tf
