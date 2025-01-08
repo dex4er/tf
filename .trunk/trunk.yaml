@@ -7,7 +7,7 @@ lint:
     - git-diff-check@SYSTEM
     - gitleaks@8.22.1
     - gofmt@1.20.4
-    - golangci-lint@1.62.2
+    - golangci-lint@1.63.4
     - markdownlint@0.43.0
     - prettier@3.4.2
     - renovate@39.92.0
