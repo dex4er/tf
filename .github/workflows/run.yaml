@@ -6,6 +6,7 @@ on:
       - created
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -33,6 +34,6 @@ jobs:
           gh pr view "${pr_url##*/}" --json headRefName --jq .headRefName |
           xargs -r gh workflow run "${comment_body##*/run }.yaml" --ref
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           pr_url: ${{ github.event.issue.pull_request.url }}
           comment_body: ${{ github.event.comment.body }}
