@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Set up Trunk
         run: curl https://get.trunk.io -fsSL | bash -s -- -y
@@ -38,7 +40,7 @@ jobs:
       - name: Trunk upgrade
         run: |
           trunk upgrade --yes-to-all --no-progress --ci --color | tee .github/update.log
-          sed -e '1,/Unpacking Trunk... done/d' -e 's/\x1b\[[0-9;]*m//g' -e 's/^\(  \)\{0,1\}  /\1- /' .github/update.log > .github/pr_body.log
+          sed -e '/Downloading Trunk/,/Unpacking Trunk... done/d' -e 's/\x1b\[[0-9;]*m//g' -e 's/^\(  \)\{0,1\}  /\1- /' .github/update.log > .github/pr_body.log
 
       - name: Check for changes
         run: |
@@ -61,7 +63,7 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           default_author: github_actions
-          message: Automated trunk upgrade
+          message: Automated trunk upgrade [skip ci]
           new_branch: automated/trunk-upgrade
           fetch: false
           push: origin automated/trunk-upgrade --set-upstream --force
@@ -74,7 +76,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           target_branch: main
           label: automated
-          title: Automated trunk upgrade
+          title: Automated trunk upgrade [skip ci]
           get_diff: false
 
       - name: Update pull request description

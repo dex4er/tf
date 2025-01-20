@@ -32,6 +32,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -41,6 +43,9 @@ jobs:
       - name: Go get update
         run: |
           go get -u 2>&1 | tee .github/update.log
+          if [[ -s .github/update.log ]]; then
+            go mod tidy -v 2>&1 | tee -a .github/update.log
+          fi
           sed -e 's/\x1b\[[0-9;]*m//g' -e 's/^go: /- /' .github/update.log > .github/pr_body.log
 
       - name: Check for changes
