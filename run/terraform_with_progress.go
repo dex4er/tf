@@ -42,6 +42,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|guarantee to take exactly these actions if you run "(terraform|tofu) apply" now\.` +
 		"|guarantee to take exactly these actions if you run `(terraform|tofu) apply` now\\." +
 		`|in order to capture the filesystem context the remote workspace expects:` +
+		`|\[0mmessage\.` +
 		`|Note: You .* use the -out option to save this plan, so (Terraform|OpenTofu)` +
 		`|plan. Resource actions are indicated with the following symbols:` +
 		`|Preparing the remote plan\.\.\.` +
@@ -56,7 +57,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|(Terraform|OpenTofu) will destroy all your managed infrastructure, as shown above\.` +
 		`|(Terraform|OpenTofu) will perform the actions described above\.` +
 		`|(Terraform|OpenTofu) will perform the following actions:` +
-		`|(Terraform|OpenTofu) specifically suggests to use it as part of an error message.` +
+		`|(Terraform|OpenTofu) specifically suggests` +
 		`|The remote workspace is configured to work with configuration at` +
 		`|The resources that were imported are shown above\. These resources are now in` +
 		`|There is no undo. Only 'yes' will be accepted to confirm\.` +
