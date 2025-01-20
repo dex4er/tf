@@ -104,7 +104,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|read \(data resources\)` +
 		`|will be read during apply`
 
-	patternRefreshing := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Refresh)\w* st.*?(?:\r?\n|$)`
+	patternRefreshing := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Refresh).*(?:\r?\n|$)`
 	patternPreparingImport := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Prepar)\w* imp.*?(?:\r?\n|$)`
 	patternStartOperation := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing.*?(?:\r?\n|$)`
 	patternStillOperation := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): Still (import|read|creat|destr|modif|open|clos).*?(?:\r?\n|$)`
