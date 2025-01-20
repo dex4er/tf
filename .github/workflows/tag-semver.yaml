@@ -1,0 +1,53 @@
+name: Tag semver
+
+on:
+  workflow_dispatch:
+    inputs:
+      newversion:
+        description: New version (major | minor | patch | premajor | preminor | prepatch | prerelease)
+        required: true
+        default: patch
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  tag-semver:
+    name: tag semver
+
+    runs-on: ubuntu-24.04
+    environment: automated
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Increment semver
+        id: semver
+        run: |
+          echo "version=$(npx semver -i "$newversion" $(git describe --tags --abbrev=0))" >> $GITHUB_OUTPUT
+        env:
+          newversion: ${{ github.event.inputs.newversion }}
+
+      - name: Create tag from the main branch
+        if: steps.semver.outputs.version
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const mainRef = await github.rest.git.getRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'heads/main',
+            });
+            const result = await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/v${{ steps.semver.outputs.version }}',
+              sha: mainRef.data.object.sha,
+            });
+            console.log(result);
+          github-token: ${{ secrets.GH_TOKEN }}
