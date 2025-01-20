@@ -46,15 +46,6 @@ mise plugins install tf https://github.com/dex4er/asdf-tf.git
 mise use -g tf@latest
 ```
 
-### Snap
-
-Install with [snap](https://snapcraft.io/):
-
-```sh
-snap install tf-wrapper --classic
-snap alias tf-wrapper tf
-```
-
 ### Homebrew
 
 Install with [homebrew](https://brew.sh/):

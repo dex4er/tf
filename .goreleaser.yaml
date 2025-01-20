@@ -41,27 +41,3 @@ brews:
       owner: dex4er
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_GITHUB_TOKEN }}"
-
-snapcrafts:
-  - name: tf-wrapper
-    publish: true
-    summary: Less verbose and more shell-friendly Terraform
-    description: |-
-      The original Terraform is abusively oververbosed. The `tf` wrapper makes
-      Terraform more CLI-friendly:
-
-      - removes unnecessary output
-      - adds own colored progress indicator
-      - provides an extra compact mode
-      - allows to use of multiple arguments when original command doesn't support it
-      - adds automatically quotes for indexed resources (`xargs` friendly)
-      - generates a log file when `TF_OUTPUT_PATH` environment variable is used
-    grade: stable
-    confinement: classic
-    license: MIT
-    base: bare
-    apps:
-      tf-wrapper:
-        aliases:
-          - tf
-        command: tf
