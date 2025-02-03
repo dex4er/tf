@@ -55,7 +55,7 @@ jobs:
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
-          version: 2.5.1 # datasource=github-releases depName=goreleaser/goreleaser
+          version: 2.6.1 # datasource=github-releases depName=goreleaser/goreleaser
           args: build --clean --snapshot --single-target --output tf
 
       - name: Run tests
