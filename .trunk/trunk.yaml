@@ -1,23 +1,24 @@
 version: 0.1
 cli:
-  version: 1.22.9
+  version: 1.24.0
 lint:
   enabled:
+    - golangci-lint2@2.2.1
     - actionlint@1.7.7
     - git-diff-check@SYSTEM
-    - gitleaks@8.23.1
+    - gitleaks@8.27.2
     - gofmt@1.20.4
-    - golangci-lint@1.63.4
-    - markdownlint@0.43.0
-    - prettier@3.4.2
-    - renovate@39.118.0
+    - golangci-lint@1.64.8
+    - markdownlint@0.45.0
+    - prettier@3.6.2
+    - renovate@41.30.5
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - terraform@1.10.4 # datasource=github-releases depName=hashicorp/terraform
-    - tflint@0.55.0
-    - tfsec@1.28.13
-    - trufflehog@3.88.2
-    - yamllint@1.35.1
+    - tflint@0.58.0
+    - tfsec@1.28.14
+    - trufflehog@3.89.2
+    - yamllint@1.37.1
   disabled:
     - checkov
     - gokart
@@ -33,10 +34,10 @@ actions:
 plugins:
   sources:
     - id: trunk
-      ref: v1.6.6
+      ref: v1.7.1
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
     - go@1.23.5 # datasource=golang-version depName=go
-    - node@20.18.0
+    - node@22.16.0
     - python@3.11.9
