@@ -3,7 +3,7 @@ cli:
   version: 1.24.0
 lint:
   enabled:
-    - golangci-lint2@2.2.1
+    - golangci-lint2@2.2.2
     - actionlint@1.7.7
     - git-diff-check@SYSTEM
     - gitleaks@8.27.2
@@ -11,13 +11,13 @@ lint:
     - golangci-lint@1.64.8
     - markdownlint@0.45.0
     - prettier@3.6.2
-    - renovate@41.30.5
+    - renovate@41.38.1
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - terraform@1.10.4 # datasource=github-releases depName=hashicorp/terraform
-    - tflint@0.58.0
+    - tflint@0.58.1
     - tfsec@1.28.14
-    - trufflehog@3.89.2
+    - trufflehog@3.90.0
     - yamllint@1.37.1
   disabled:
     - checkov
