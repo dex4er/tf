@@ -211,7 +211,11 @@ func terraformWithProgress(command string, args []string) error {
 		return err
 	}
 	if outputFile != nil {
-		defer outputFile.Close()
+		defer func() {
+			if err := outputFile.Close(); err != nil {
+				fmt.Fprintf(os.Stderr, "Error closing output file: %v\n", err)
+			}
+		}()
 		cmd.Stderr = io.MultiWriter(os.Stderr, outputFile)
 	} else {
 		cmd.Stderr = os.Stderr
@@ -242,12 +246,7 @@ func terraformWithProgress(command string, args []string) error {
 	// terraform. The prompt doesn't end with EOL then Stdout must be read rune
 	// by rune.
 
-	for {
-		// stream was ended in previous iteration of the loop
-		if isEof {
-			break
-		}
-
+	for !isEof {
 		r, _, err := reader.ReadRune()
 		if err != nil {
 			if err == io.EOF {
@@ -267,7 +266,9 @@ func terraformWithProgress(command string, args []string) error {
 
 			// verbatim output to the log file
 			if outputFile != nil {
-				fmt.Fprint(outputFile, line)
+				if _, err := fmt.Fprint(outputFile, line); err != nil {
+					return fmt.Errorf("writing to output file: %w", err)
+				}
 			}
 
 			// skip after "Outputs:" line
