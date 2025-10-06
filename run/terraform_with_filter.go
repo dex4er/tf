@@ -52,7 +52,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 		return err
 	}
 	if file != nil {
-		defer file.Close()
+		defer func() { _ = file.Close() }()
 		cmd.Stderr = io.MultiWriter(os.Stderr, file)
 	} else {
 		cmd.Stderr = os.Stderr
@@ -82,11 +82,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 	// terraform. The prompt doesn't end with EOL then Stdout must be read rune
 	// by rune.
 
-	for {
-		// stream was ended in previous iteration of the loop
-		if isEof {
-			break
-		}
+	for !isEof {
 
 		r, _, err := reader.ReadRune()
 		if err != nil {
@@ -107,7 +103,9 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 
 			// verbatim output to the log file
 			if file != nil {
-				fmt.Fprint(file, line)
+				if _, err := fmt.Fprint(file, line); err != nil {
+					return fmt.Errorf("writing to log file: %w", err)
+				}
 			}
 
 			if ignoreFooter {
