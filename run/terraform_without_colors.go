@@ -34,6 +34,8 @@ func terraformWithoutColors(command string, noOutputs bool, args []string) error
 	skipOutputs := false
 
 	scanner := bufio.NewScanner(cmdStdout)
+	// 25MB max token size
+	scanner.Buffer(make([]byte, 0, 64*1024), 25*1024*1024)
 
 	for scanner.Scan() {
 		if skipOutputs {

@@ -72,7 +72,8 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 	ignoreFooter := false
 	wasEmptyLine := false
 
-	reader := bufio.NewReader(cmdStdout)
+	// 25MB buffer
+	reader := bufio.NewReaderSize(cmdStdout, 25*1024*1024)
 
 	// buffer for the current line
 	line := ""
