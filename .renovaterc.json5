@@ -1,65 +1,60 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":semanticCommitsDisabled"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    ':semanticCommitsDisabled',
   ],
-  "addLabels": [
-    "renovate"
+  addLabels: [
+    'renovate',
   ],
-  "ignoreDeps": [
-    // duplicate dependency detected by asdf
-    "opentofu"
+  ignoreDeps: [
+    'opentofu',
   ],
-  "postUpdateOptions": [
-    "gomodTidy"
+  postUpdateOptions: [
+    'gomodTidy',
   ],
-  "constraints": {
-    // allow minor updates for go
-    "go": ">= 1.22"
+  constraints: {
+    go: '>= 1.22',
   },
-  "customManagers": [
-    // .go-version file
+  customManagers: [
     {
-      "customType": "regex",
-      "extractVersionTemplate": "^(?<version>.*)$",
-      "fileMatch": [
-        "^\\.go-version$"
+      customType: 'regex',
+      extractVersionTemplate: '^(?<version>.*)$',
+      managerFilePatterns: [
+        '/^\\.go-version$/',
       ],
-      "matchStrings": [
-        "(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      matchStrings: [
+        '(?<currentValue>\\d+\\.\\d+\\.\\d+)',
       ],
-      "datasourceTemplate": "golang-version",
-      "depNameTemplate": "go",
-      "versioningTemplate": "semver"
+      datasourceTemplate: 'golang-version',
+      depNameTemplate: 'go',
+      versioningTemplate: 'semver',
     },
-    // .opentofu-version file
     {
-      "customType": "regex",
-      "extractVersionTemplate": "^(?<version>.*)$",
-      "fileMatch": [
-        "^\\.opentofu-version$"
+      customType: 'regex',
+      extractVersionTemplate: '^(?<version>.*)$',
+      managerFilePatterns: [
+        '/^\\.opentofu-version$/',
       ],
-      "matchStrings": [
-        "(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      matchStrings: [
+        '(?<currentValue>\\d+\\.\\d+\\.\\d+)',
       ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "opentofu/opentofu",
-      "versioningTemplate": "semver"
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'opentofu/opentofu',
+      versioningTemplate: 'semver',
     },
-    // renovate hints after comment
     {
-      "customType": "regex",
-      "extractVersionTemplate": "^v?(?<version>.*)$",
-      "fileMatch": [
-        "^\\.github/workflows/.*\\.ya?ml$",
-        "^\\.trunk/trunk.yaml",
-        "^\\.tool-versions$"
+      customType: 'regex',
+      extractVersionTemplate: '^v?(?<version>.*)$',
+      managerFilePatterns: [
+        '/^\\.github/workflows/.*\\.ya?ml$/',
+        '/^\\.trunk/trunk.yaml/',
+        '/^\\.tool-versions$/',
       ],
-      "matchStrings": [
-        "(\\s+|.*?@)(?<currentValue>\\S+)\\s*#\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+versioning=(?<versioning>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\s*\\n"
+      matchStrings: [
+        '(\\s+|.*?@)(?<currentValue>\\S+)\\s*#\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+versioning=(?<versioning>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\s*\\n',
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
-  ]
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
+    },
+  ],
 }
