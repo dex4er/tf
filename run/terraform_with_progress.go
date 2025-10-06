@@ -226,7 +226,8 @@ func terraformWithProgress(command string, args []string) error {
 		return fmt.Errorf("starting the command: %w", err)
 	}
 
-	reader := bufio.NewReader(cmdStdout)
+	// 25MB buffer
+	reader := bufio.NewReaderSize(cmdStdout, 25*1024*1024)
 
 	isEof := false
 	ignoreNextLine := false

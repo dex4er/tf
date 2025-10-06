@@ -1,16 +1,6 @@
 name: Test
 
 on:
-  push:
-    branches:
-      - "**"
-    paths-ignore:
-      - .editorconfig
-      - .gitignore
-      - .markdownlint.yaml
-      - .trunk/**
-      - LICENSE
-      - README.md
   pull_request:
     branches:
       - main
