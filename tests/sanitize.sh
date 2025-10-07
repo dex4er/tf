@@ -68,6 +68,10 @@ tr '\015' '\012' |
     -e 's/darwin_arm64/XXX/g' \
     -e 's/linux_amd64/XXX/g' \
     -e 's/linux_arm64/XXX/g' \
+    -e 's/ to the shared cache directory//' \
+    -e 's/ (signed by HashiCorp)//' \
+    -e 's/ (signed, key ID .*)//' \
+    -e 's/ (unauthenticated)//' \
     -e 's/v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[0-9a-zA-Z-]*/vX.X.X/g' \
     -e 's/key ID [0-9A-F][0-9A-F]*/key ID XXX/g' \
     -e 's/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z/XXXX-XX-XXTXX:XX:XXZ/g' \

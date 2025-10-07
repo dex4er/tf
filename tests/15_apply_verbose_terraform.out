@@ -1,8 +1,8 @@
 + ../../../tf init
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
+- Installed hashicorp/XXX vX.X.X
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
+- Installed hashicorp/XXX vX.X.X
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
 [0m+ ../../../tf upgrade
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m

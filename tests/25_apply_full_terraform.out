@@ -1,8 +1,8 @@
 + ../../../tf init
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
+- Installed hashicorp/XXX vX.X.X
 - Installing hashicorp/XXX vX.X.X...
-- Installed hashicorp/XXX vX.X.X (signed by HashiCorp)
+- Installed hashicorp/XXX vX.X.X
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
 [0m+ ../../../tf plan -parallelism=30 -full
 [34m^X [0m[1mtime_sleep.this["Xs"]: Preparing import...[0m
