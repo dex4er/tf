@@ -39,7 +39,7 @@ jobs:
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
-          tofu_version: 1.9.0 # datasource=github-releases depName=opentofu/opentofu
+          tofu_version: 1.10.6 # datasource=github-releases depName=opentofu/opentofu
           tofu_wrapper: false
 
       - name: Run GoReleaser
