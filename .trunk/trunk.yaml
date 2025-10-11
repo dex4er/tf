@@ -11,7 +11,7 @@ lint:
     - golangci-lint@1.64.8
     - markdownlint@0.45.0
     - prettier@3.6.2
-    - renovate@41.135.5
+    - renovate@41.144.1
     - shellcheck@0.11.0
     - shfmt@3.6.0
     - terraform@1.13.3 # datasource=github-releases depName=hashicorp/terraform
@@ -34,7 +34,7 @@ actions:
 plugins:
   sources:
     - id: trunk
-      ref: v1.7.2
+      ref: v1.7.3
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
