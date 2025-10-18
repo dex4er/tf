@@ -4,20 +4,20 @@ cli:
 lint:
   enabled:
     - golangci-lint2@2.5.0
-    - actionlint@1.7.7
+    - actionlint@1.7.8
     - git-diff-check@SYSTEM
     - gitleaks@8.28.0
     - gofmt@1.20.4
     - golangci-lint@1.64.8
     - markdownlint@0.45.0
     - prettier@3.6.2
-    - renovate@41.135.5
+    - renovate@41.151.1
     - shellcheck@0.11.0
     - shfmt@3.6.0
     - terraform@1.13.3 # datasource=github-releases depName=hashicorp/terraform
     - tflint@0.59.1
     - tfsec@1.28.14
-    - trufflehog@3.90.8
+    - trufflehog@3.90.11
     - yamllint@1.37.1
   disabled:
     - checkov
@@ -34,7 +34,7 @@ actions:
 plugins:
   sources:
     - id: trunk
-      ref: v1.7.2
+      ref: v1.7.3
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
