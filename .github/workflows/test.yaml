@@ -37,7 +37,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Set up OpenTofu
-        uses: opentofu/setup-opentofu@v1
+        uses: opentofu/setup-opentofu@v2
         with:
           tofu_version: 1.10.6 # datasource=github-releases depName=opentofu/opentofu
           tofu_wrapper: false
