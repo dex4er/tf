@@ -55,7 +55,6 @@ https://opentofu.org/docs/cli/plugins/signing/
 [1m  # time_sleep.this["9s"][0m will be created
   [32m+[0m resource "time_sleep" "this" {
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-
 Changes to Outputs:
   [32m+[0m filenames =
 [90m
@@ -107,7 +106,6 @@ Changes to Outputs:
 [1m  # time_sleep.this["9s"][0m will be created
   [32m+[0m resource "time_sleep" "this" {
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-
 Changes to Outputs:
   [32m+[0m filenames =
 [34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing...
@@ -251,7 +249,6 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [1m  # time_sleep.this["9s"][0m will be [1m[31mdestroyed
   [31m-[0m resource "time_sleep" "this" {
 [1mPlan:[0m 0 to add, 0 to change, 20 to destroy.
-
 Changes to Outputs:
   [31m-[0m filenames =
 [34m^X [0m[36m=X/X [0m[31m-X/X [0m[1mlocal_file.this["Xs"]: Destruction

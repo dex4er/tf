@@ -383,7 +383,6 @@
         }
     }
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-
 Changes to Outputs:
   [32m+[0m filenames =
       [32m+[0m "./demo-1s.txt",
@@ -777,7 +776,6 @@ Changes to Outputs:
         }
     }
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-
 Changes to Outputs:
   [32m+[0m filenames =
       [32m+[0m "./demo-1s.txt",
@@ -1122,7 +1120,6 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1mPlan:[0m 0 to add, 0 to change, 20 to destroy.
-
 Changes to Outputs:
   [31m-[0m filenames =
       [31m-[0m "./demo-1s.txt",
