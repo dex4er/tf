@@ -13,7 +13,7 @@ lint:
     - renovate@43.150.0
     - shellcheck@0.11.0
     - shfmt@3.6.0
-    - terraform@1.13.3 # datasource=github-releases depName=hashicorp/terraform
+    - terraform@1.15.0 # datasource=github-releases depName=hashicorp/terraform
     - tflint@0.62.0
     - tfsec@1.28.14
     - trufflehog@3.95.2

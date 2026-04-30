@@ -36,7 +36,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v4
         with:
-          terraform_version: 1.13.3 # datasource=github-releases depName=hashicorp/terraform
+          terraform_version: 1.15.0 # datasource=github-releases depName=hashicorp/terraform
           terraform_wrapper: false
 
       - name: Set up OpenTofu
