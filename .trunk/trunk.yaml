@@ -3,6 +3,7 @@ cli:
   version: 1.25.0
 lint:
   enabled:
+    - taplo@0.10.0
     - actionlint@1.7.12
     - git-diff-check@SYSTEM
     - gitleaks@8.30.1
