@@ -25,6 +25,8 @@ func Refresh(progressFormat string, line string, resource string, operation stri
 		dots.Refresh(line, resource, operation)
 	case Fan:
 		fan.Refresh(line, resource, operation)
+	case Quiet:
+		// no-op
 	case Verbose:
 		verbose.Refresh(line, resource, operation)
 	}
@@ -39,6 +41,8 @@ func PreparingImport(progressFormat string, line string, resource string, operat
 		dots.PreparingImport(line, resource, operation)
 	case Fan:
 		fan.PreparingImport(line, resource, operation)
+	case Quiet:
+		// no-op
 	case Verbose:
 		verbose.PreparingImport(line, resource, operation)
 	}
@@ -53,6 +57,8 @@ func Start(progressFormat string, line string, resource string, operation string
 		dots.Start(line, resource, operation)
 	case Fan:
 		fan.Start(line, resource, operation)
+	case Quiet:
+		// no-op
 	case Verbose:
 		verbose.Start(line, resource, operation)
 	}
@@ -67,6 +73,8 @@ func Still(progressFormat string, line string, resource string, operation string
 		dots.Still(line, resource, operation)
 	case Fan:
 		fan.Still(line, resource, operation)
+	case Quiet:
+		// no-op
 	case Verbose:
 		verbose.Still(line, resource, operation)
 	}
@@ -81,6 +89,8 @@ func Stop(progressFormat string, line string, resource string, operation string)
 		dots.Stop(line, resource, operation)
 	case Fan:
 		fan.Stop(line, resource, operation)
+	case Quiet:
+		// no-op
 	case Verbose:
 		verbose.Stop(line, resource, operation)
 	}
