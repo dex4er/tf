@@ -17,7 +17,7 @@ func terraformWithoutColors(command string, noOutputs bool, args []string) error
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := execTerraformCommand(append([]string{command}, args...)...)
+	cmd := execTerraformCommand(terraformCommandArgs(command, args)...)
 
 	cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr

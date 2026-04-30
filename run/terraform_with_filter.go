@@ -43,7 +43,7 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 
 	signal.Ignore(syscall.SIGINT)
 
-	cmd := execTerraformCommand(append([]string{command}, newArgs...)...)
+	cmd := execTerraformCommand(terraformCommandArgs(command, newArgs)...)
 
 	cmd.Stdin = os.Stdin
 
