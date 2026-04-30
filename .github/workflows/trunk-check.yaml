@@ -1,9 +1,12 @@
 name: Trunk Check
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+  pull_request:
+    branches:
+      - "*"
   workflow_dispatch: {}
 
 permissions:
@@ -13,7 +16,11 @@ jobs:
   trunk:
     name: Trunk Check
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    env:
+      DO_NOT_TRACK: "1"
 
     steps:
       - name: Checkout
