@@ -14,10 +14,9 @@ func Init(args []string) error {
 		`|If you'd like to know more about provider signing, you can read about it here:` +
 		`|in \.terraform/modules/` +
 		`|in the \.terraform\.lock\.hcl file. Review those changes and commit them to your` +
-		`|Initializing (modules` +
-		`|Initializing (Terraform|OpenTofu)` +
+		`|Initializing (modules|provider|Terraform|OpenTofu)` +
 		`|Partner and community providers are signed by their developers\.` +
-		`|provider plugins)\.\.\.` +
+		`|provider plugins\)\.\.\.` +
 		`|Providers are signed by their developers\.` +
 		`|Reusing previous version of` +
 		`|selections it made above\. Include this file in your version control repository` +
