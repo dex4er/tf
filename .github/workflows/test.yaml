@@ -43,7 +43,7 @@ jobs:
           tofu_wrapper: false
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           version: 2.12.5 # datasource=github-releases depName=goreleaser/goreleaser
           args: build --clean --snapshot --single-target --output tf
