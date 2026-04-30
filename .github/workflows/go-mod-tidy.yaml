@@ -25,9 +25,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment: automated
 
-    if: >-
-      github.event_name != 'issue_comment' ||
-      contains(github.event.comment.body, '/rerun')
+    if: github.event_name != 'issue_comment' || contains(github.event.comment.body, '/rerun')
 
     steps:
       - name: Checkout

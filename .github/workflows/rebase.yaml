@@ -17,9 +17,8 @@ jobs:
     environment: automated
 
     if: >-
-      github.event.issue.pull_request != '' && 
-      (
-        contains(github.event.comment.body, '/rebase') || 
+      github.event.issue.pull_request != '' && (
+        contains(github.event.comment.body, '/rebase') ||
         contains(github.event.comment.body, '/autosquash')
       )
 
