@@ -4,20 +4,20 @@
 - Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
 https://opentofu.org/docs/cli/plugins/signing/
-[0m[1m[32mOpenTofu has been successfully initialized![0m[32m
-[0m+ ../../../tf destroy -auto-approve
-[0m[1m[32mNo changes.[0m[1m No objects need to be destroyed.
-[0mEither you have not created any objects yet or the existing objects were
+[1m[32mOpenTofu has been successfully initialized![0m[32m
++ ../../../tf destroy -auto-approve
+[1m[32mNo changes.[0m[1m No objects need to be destroyed.
+Either you have not created any objects yet or the existing objects were
 already deleted outside of OpenTofu.
-[0m[1m[32m
+[1m[32m
 Destroy complete! Resources: 0 destroyed.
-[0m+ ../../../tf import 'time_sleep.this[1s]' 1s,1s
++ ../../../tf import 'time_sleep.this[1s]' 1s,1s
 [90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...
-[0m[1m[32mtime_sleep.this["Xs"]: Import prepared!
+[1m[32mtime_sleep.this["Xs"]: Import prepared!
 [34m^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-[0m[32m
+[32m
 Import successful!
-[0m# time_sleep.this["Xs"]:
+# time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
     create_duration  = "1s"
     destroy_duration = "1s"

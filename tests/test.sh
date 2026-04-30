@@ -13,9 +13,9 @@ status=0
 for t in [0-9]*.sh; do
   echo -n "Testing $t... "
   if bash $t </dev/null 1>&2; then
-    echo "OK"
+    echo -e "\033[0mOK"
   else
-    echo "FAILED"
+    echo -e "\033[0mFAILED"
     status=$((status + 1))
     if [[ -n ${TEST_UPDATE-} ]]; then
       n=$(basename "$t" .sh)

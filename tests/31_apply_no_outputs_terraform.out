@@ -3,86 +3,86 @@
 - Installed hashicorp/XXX vX.X.X
 - Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
-[0m[1m[32mTerraform has been successfully initialized![0m[32m
-[0m+ ../../../tf upgrade
-[0m[1m[32mTerraform has been successfully initialized![0m[32m
-[0m+ ../../../tf plan -parallelism=30 -no-outputs
+[1m[32mTerraform has been successfully initialized![0m[32m
++ ../../../tf upgrade
+[1m[32mTerraform has been successfully initialized![0m[32m
++ ../../../tf plan -parallelism=30 -no-outputs
 [34m^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
   [32m+[0m create
 [31m-[0m/[32m+[0m destroy and then create replacement
 [1m  # local_file.this["10s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 10s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-10s.txt"
     }
 [1m  # local_file.this["1s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 1s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-1s.txt"
     }
 [1m  # local_file.this["2s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 2s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-2s.txt"
     }
 [1m  # local_file.this["3s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 3s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-3s.txt"
     }
 [1m  # local_file.this["4s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 4s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-4s.txt"
     }
 [1m  # local_file.this["5s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 5s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-5s.txt"
     }
 [1m  # local_file.this["6s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 6s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-6s.txt"
     }
 [1m  # local_file.this["7s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 7s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-7s.txt"
     }
 [1m  # local_file.this["8s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 8s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-8s.txt"
     }
 [1m  # local_file.this["9s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 9s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-9s.txt"
     }
 [1m  # time_sleep.this["10s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "10s"
       [32m+[0m destroy_duration = "10s"
       [32m+[0m triggers         = {
@@ -92,7 +92,7 @@
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[0m[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+[31m-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -101,7 +101,7 @@
         }
     }
 [1m  # time_sleep.this["2s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "2s"
       [32m+[0m destroy_duration = "2s"
       [32m+[0m triggers         = {
@@ -109,7 +109,7 @@
         }
     }
 [1m  # time_sleep.this["3s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "3s"
       [32m+[0m destroy_duration = "3s"
       [32m+[0m triggers         = {
@@ -117,7 +117,7 @@
         }
     }
 [1m  # time_sleep.this["4s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "4s"
       [32m+[0m destroy_duration = "4s"
       [32m+[0m triggers         = {
@@ -125,7 +125,7 @@
         }
     }
 [1m  # time_sleep.this["5s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "5s"
       [32m+[0m destroy_duration = "5s"
       [32m+[0m triggers         = {
@@ -133,7 +133,7 @@
         }
     }
 [1m  # time_sleep.this["6s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "6s"
       [32m+[0m destroy_duration = "6s"
       [32m+[0m triggers         = {
@@ -141,7 +141,7 @@
         }
     }
 [1m  # time_sleep.this["7s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "7s"
       [32m+[0m destroy_duration = "7s"
       [32m+[0m triggers         = {
@@ -149,7 +149,7 @@
         }
     }
 [1m  # time_sleep.this["8s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "8s"
       [32m+[0m destroy_duration = "8s"
       [32m+[0m triggers         = {
@@ -157,7 +157,7 @@
         }
     }
 [1m  # time_sleep.this["9s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "9s"
       [32m+[0m destroy_duration = "9s"
       [32m+[0m triggers         = {
@@ -165,7 +165,7 @@
         }
     }
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-[0m
+
 Changes to Outputs:
   [32m+[0m filenames =
       [32m+[0m "./demo-1s.txt",
@@ -180,83 +180,83 @@ Changes to Outputs:
       [32m+[0m "./demo-10s.txt",
     ]
 [90m
-[0m+ ../../../tf apply -auto-approve -parallelism=30 -no-outputs
++ ../../../tf apply -auto-approve -parallelism=30 -no-outputs
 [34m^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
   [32m+[0m create
 [31m-[0m/[32m+[0m destroy and then create replacement
 [1m  # local_file.this["10s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 10s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-10s.txt"
     }
 [1m  # local_file.this["1s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 1s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-1s.txt"
     }
 [1m  # local_file.this["2s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 2s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-2s.txt"
     }
 [1m  # local_file.this["3s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 3s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-3s.txt"
     }
 [1m  # local_file.this["4s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 4s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-4s.txt"
     }
 [1m  # local_file.this["5s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 5s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-5s.txt"
     }
 [1m  # local_file.this["6s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 6s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-6s.txt"
     }
 [1m  # local_file.this["7s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 7s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-7s.txt"
     }
 [1m  # local_file.this["8s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 8s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-8s.txt"
     }
 [1m  # local_file.this["9s"][0m will be created
-[0m  [32m+[0m resource "local_file" "this" {
+  [32m+[0m resource "local_file" "this" {
       [32m+[0m content              = "Content 9s"
       [32m+[0m directory_permission = "0777"
       [32m+[0m file_permission      = "0664"
       [32m+[0m filename             = "./demo-9s.txt"
     }
 [1m  # time_sleep.this["10s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "10s"
       [32m+[0m destroy_duration = "10s"
       [32m+[0m triggers         = {
@@ -266,7 +266,7 @@ Changes to Outputs:
 [1m  # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[0m[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+[31m-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -275,7 +275,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["2s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "2s"
       [32m+[0m destroy_duration = "2s"
       [32m+[0m triggers         = {
@@ -283,7 +283,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["3s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "3s"
       [32m+[0m destroy_duration = "3s"
       [32m+[0m triggers         = {
@@ -291,7 +291,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["4s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "4s"
       [32m+[0m destroy_duration = "4s"
       [32m+[0m triggers         = {
@@ -299,7 +299,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["5s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "5s"
       [32m+[0m destroy_duration = "5s"
       [32m+[0m triggers         = {
@@ -307,7 +307,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["6s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "6s"
       [32m+[0m destroy_duration = "6s"
       [32m+[0m triggers         = {
@@ -315,7 +315,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["7s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "7s"
       [32m+[0m destroy_duration = "7s"
       [32m+[0m triggers         = {
@@ -323,7 +323,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["8s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "8s"
       [32m+[0m destroy_duration = "8s"
       [32m+[0m triggers         = {
@@ -331,7 +331,7 @@ Changes to Outputs:
         }
     }
 [1m  # time_sleep.this["9s"][0m will be created
-[0m  [32m+[0m resource "time_sleep" "this" {
+  [32m+[0m resource "time_sleep" "this" {
       [32m+[0m create_duration  = "9s"
       [32m+[0m destroy_duration = "9s"
       [32m+[0m triggers         = {
@@ -339,7 +339,7 @@ Changes to Outputs:
         }
     }
 [1mPlan:[0m 1 to import, 20 to add, 0 to change, 1 to destroy.
-[0m
+
 Changes to Outputs:
   [32m+[0m filenames =
       [32m+[0m "./demo-1s.txt",
@@ -386,10 +386,10 @@ Changes to Outputs:
 [34m^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 [34m^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 [34m^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
-[0m[1m[32m
+[1m[32m
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
-[0m[1m[32m
-[0m+ ../../../tf refresh -parallelism=30 -no-outputs
+[1m[32m
++ ../../../tf refresh -parallelism=30 -no-outputs
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -420,8 +420,8 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [34m^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 [34m^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 [34m^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
-[0m[1m[32m
-[0m+ ../../../tf destroy -auto-approve -parallelism=30 -no-outputs
+[1m[32m
++ ../../../tf destroy -auto-approve -parallelism=30 -no-outputs
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 [34m^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -454,7 +454,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 [34m^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
   [31m-[0m destroy
 [1m  # local_file.this["10s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 10s" [90m-> null
       [31m-[0m content_base64sha256 = "Z5prD8GOqCuH+n9ropUeOZ0S97E3On0ZfFErMzwbSY4=" [90m-> null
       [31m-[0m content_base64sha512 = "/5bdepszLGbpdljW+OdT+cuSHW9Kc3SrUeI7NL2VrpjXohtZtpyPAv6jtg7QGUw3AqR4iuCwBd5aKv1TjIT5QA==" [90m-> null
@@ -468,7 +468,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" [90m-> null
     }
 [1m  # local_file.this["1s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 1s" [90m-> null
       [31m-[0m content_base64sha256 = "R2JqCF9gH8IAaDTCMInEEwcZ1hIl5v8fid8pv8lOyN0=" [90m-> null
       [31m-[0m content_base64sha512 = "0HjHnRP1RyHlGrbjHyxUrh7QglcDtG1qSBVOX/sWKmG8KKf4X8/SW2iSCtTDn1R/BRTnmsXvaMIuzWnPd204mQ==" [90m-> null
@@ -482,7 +482,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" [90m-> null
     }
 [1m  # local_file.this["2s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 2s" [90m-> null
       [31m-[0m content_base64sha256 = "BryT775y0R+AMM6kWyyiEUAk4z40AIubLhOxaV5Qe4c=" [90m-> null
       [31m-[0m content_base64sha512 = "6w8oTyKdhdGjDDySTw4L65yEZJP+lQZ1NXvWOHf+vslNXfnNYWW+jvlx0XU53Uxlj6ejtU3PILKFcPDdyHjE7A==" [90m-> null
@@ -496,7 +496,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "ac7384e6b359d76c4157ace43768f83ff52de1d1" [90m-> null
     }
 [1m  # local_file.this["3s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 3s" [90m-> null
       [31m-[0m content_base64sha256 = "W6MxY4epoe2trh+J0txiWA1lADpZ+Heql4XgtYbq1Fk=" [90m-> null
       [31m-[0m content_base64sha512 = "LoPBTxnyzFaTg4zSzeVtZuWHUn6OBHIKVtmFqpDKE8hrL+UeXV49970TdqZohd83y24na1NfXJWloehHnjO8PQ==" [90m-> null
@@ -510,7 +510,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "d2a209c18925e90c3cea5e1cec250368799ee185" [90m-> null
     }
 [1m  # local_file.this["4s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 4s" [90m-> null
       [31m-[0m content_base64sha256 = "JwWv2X7fsfGC3ITPVYEVlTpy2ntW98G4LC8QnTVbjw8=" [90m-> null
       [31m-[0m content_base64sha512 = "hfi5tvsiuBKG6E77WEeJnhfJ52VouJQ6Sg0lQM+j6adg0aOkg929SGSEnwghZRgNR6Itm0AlUJhPucqXKbHgAg==" [90m-> null
@@ -524,7 +524,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "fc922ff08cfe15aa027938315e60fcc26244931f" [90m-> null
     }
 [1m  # local_file.this["5s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 5s" [90m-> null
       [31m-[0m content_base64sha256 = "9J8E57b+wnBb9pRxxL8WBaFqJbHkC+cQ2+2kw5Wy9Ng=" [90m-> null
       [31m-[0m content_base64sha512 = "Dfv6f8LPfD0h+MMzVx4RDiEF9kCZDGspFDvE8ywv9iTFCDjAGfjxkKyfBSUPDupJZQe9cOwgXFL2D5G2L/5eCQ==" [90m-> null
@@ -538,7 +538,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "285fe43f3bb239622ee280ad61e536db9927c73d" [90m-> null
     }
 [1m  # local_file.this["6s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 6s" [90m-> null
       [31m-[0m content_base64sha256 = "ipXPegAhhf0c8LpOj3xCOz5NQ6cX7pLS5krQqyIXtNY=" [90m-> null
       [31m-[0m content_base64sha512 = "/zoj7JtiKX4bKprpIjImf/hVY3usHi8tECuBTH1ScCAdaJtglvJoi81oEbCkj+MIsaQp51tqPoEAkf0DQgZCGQ==" [90m-> null
@@ -552,7 +552,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" [90m-> null
     }
 [1m  # local_file.this["7s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 7s" [90m-> null
       [31m-[0m content_base64sha256 = "XfZLUzWcw3DOUOo1yQhBlQM6pn3fbBVPzq/6brd/EVg=" [90m-> null
       [31m-[0m content_base64sha512 = "YlXykl5HqOKp1U1pp9GKkZqseE6IdXWuUX8Mt0I1pNlUEqdtEE7vu9XH9isf+k8sKJ00ZTxH/2Evtl428AaW5A==" [90m-> null
@@ -566,7 +566,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" [90m-> null
     }
 [1m  # local_file.this["8s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 8s" [90m-> null
       [31m-[0m content_base64sha256 = "b4bvVO1hmISshx/3VSPO8bL7J7souCH9nXM73UQULAc=" [90m-> null
       [31m-[0m content_base64sha512 = "FCKXzUArLQRZQilyRn7OoUbs1a/NszKRDkReXB8eeBcAvzFHx6kcKgUWYTIZprzU+qUX2ZGC3hDhfUyS2W7+vg==" [90m-> null
@@ -580,7 +580,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "1914c083a90ce088fcecee5762ae5d8e1647a994" [90m-> null
     }
 [1m  # local_file.this["9s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "local_file" "this" {
+  [31m-[0m resource "local_file" "this" {
       [31m-[0m content              = "Content 9s" [90m-> null
       [31m-[0m content_base64sha256 = "2CnLqltbZEQQHFaIELAnu6GBR+8HpHdm7v14HkFWCAQ=" [90m-> null
       [31m-[0m content_base64sha512 = "jY2/DyFsvC5/JLm7T0pjIsJSSzmV/VQfDa5XhiG0ioi7lL7CsBlPeBYjnPaxy7u+A9E7CxmNL1lyUtmDmi8i2A==" [90m-> null
@@ -594,7 +594,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
       [31m-[0m id                   = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" [90m-> null
     }
 [1m  # time_sleep.this["10s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "10s" [90m-> null
       [31m-[0m destroy_duration = "10s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -603,7 +603,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["1s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "1s" [90m-> null
       [31m-[0m destroy_duration = "1s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -612,7 +612,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["2s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "2s" [90m-> null
       [31m-[0m destroy_duration = "2s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -621,7 +621,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["3s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "3s" [90m-> null
       [31m-[0m destroy_duration = "3s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -630,7 +630,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["4s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "4s" [90m-> null
       [31m-[0m destroy_duration = "4s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -639,7 +639,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["5s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "5s" [90m-> null
       [31m-[0m destroy_duration = "5s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -648,7 +648,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["6s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "6s" [90m-> null
       [31m-[0m destroy_duration = "6s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -657,7 +657,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["7s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "7s" [90m-> null
       [31m-[0m destroy_duration = "7s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -666,7 +666,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["8s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "8s" [90m-> null
       [31m-[0m destroy_duration = "8s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -675,7 +675,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1m  # time_sleep.this["9s"][0m will be [1m[31mdestroyed
-[0m  [31m-[0m resource "time_sleep" "this" {
+  [31m-[0m resource "time_sleep" "this" {
       [31m-[0m create_duration  = "9s" [90m-> null
       [31m-[0m destroy_duration = "9s" [90m-> null
       [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
@@ -684,7 +684,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
         } [90m-> null
     }
 [1mPlan:[0m 0 to add, 0 to change, 20 to destroy.
-[0m
+
 Changes to Outputs:
   [31m-[0m filenames =
       [31m-[0m "./demo-1s.txt",
@@ -718,6 +718,5 @@ Changes to Outputs:
 [34m^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 [34m^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 [34m^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
-[0m[1m[32m
+[1m[32m
 Destroy complete! Resources: 20 destroyed.
-[0m
