@@ -1,2 +1,2 @@
 goreleaser 2.15.4 # datasource=github-releases depName=goreleaser/goreleaser
-opentofu   1.10.6 # datasource=github-releases depName=opentofu/opentofu
+opentofu   1.11.6 # datasource=github-releases depName=opentofu/opentofu
