@@ -134,7 +134,7 @@ func terraformWithProgress(command string, args []string) error {
 	noColor := false
 	noOutputs := true
 
-	if TF_IN_AUTOMATION == "1" {
+	if TF_IN_AUTOMATION != "" {
 		progressFormat = progress.Verbose
 	}
 
@@ -390,7 +390,7 @@ func terraformWithProgress(command string, args []string) error {
 			}
 
 			// in CI do not add spaces clearing progress indicator
-			if TF_IN_AUTOMATION == "1" {
+			if TF_IN_AUTOMATION != "" {
 				fmt.Print(line)
 			} else {
 				console.Print(line)
