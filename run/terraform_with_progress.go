@@ -37,6 +37,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
 		`|at .* \(if it is present\),` +
 		`|at .*\.terraformignore (if it is present),` +
+		`|Deferred due to pending dependencies` +
 		`|excluding files or directories as defined by a \.terraformignore file` +
 		`|found no differences, so no changes are needed.` +
 		`|guarantee to take exactly these actions if you run "(terraform|tofu) apply" now\.` +
