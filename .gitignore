@@ -6,6 +6,7 @@
 *.lock.info
 *.log
 *.tfstate
+tfplan*
 demo-*.txt
 dist/
 tmp/

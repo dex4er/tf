@@ -119,16 +119,16 @@ indicator.
 It will skip `(known after apply)` lines from the `-short` mode output. Also
 it will hide a plan for data sources (`data.xxx will be read during apply`
 blocks) from the `-short` and `-compact` mode output.
-
-Additional options can be used: `-counters` shows counters with processed
-resources, `-compact` skips the content of the resources, `-short` removes
-unecessary lines (default), `-full` keeps original manifest, `-fan` hides
-messages about progress and shows short indicator (default), `-dots` hides
-messages about progress and shows single dot or character for each line,
-`-quiet` hides messages about progress and prints no progress indicator,
-`-verbatim` keeps original messages about progress, `-verbose` adds counters
-to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
-outputs (default, `-no-outputs=false` shows it again).
+Additional options can be used: `-plan=FILE` which is passed as an argument to
+`terraform apply`, `-counters` shows counters with processed resources,
+`-compact` skips the content of the resources, `-short` removes unecessary
+lines (default), `-full` keeps original manifest, `-fan` hides messages about
+progress and shows short indicator (default), `-dots` hides messages about
+progress and shows single dot or character for each line, `-quiet` hides
+messages about progress and prints no progress indicator, `-verbatim` keeps
+original messages about progress, `-verbose` adds counters to original
+messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs
+(default, `-no-outputs=false` shows it again).
 
 The command accepts the resource name as an argument without `-target=`
 option. If the argument misses quotes inside square brackets then they will
