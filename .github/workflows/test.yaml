@@ -17,7 +17,14 @@ jobs:
       id-token: write
       contents: write
 
-    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - tool: terraform
+          - tool: opentofu
+
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout
@@ -34,12 +41,14 @@ jobs:
           go-version-file: go.mod
 
       - name: Set up Terraform
+        if: matrix.tool == 'terraform'
         uses: hashicorp/setup-terraform@v4
         with:
           terraform_version: 1.15.0 # datasource=github-releases depName=hashicorp/terraform
           terraform_wrapper: false
 
       - name: Set up OpenTofu
+        if: matrix.tool == 'opentofu'
         uses: opentofu/setup-opentofu@v2
         with:
           tofu_version: 1.11.6 # datasource=github-releases depName=opentofu/opentofu
