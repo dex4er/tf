@@ -51,7 +51,7 @@ jobs:
         if: matrix.tool == 'opentofu'
         uses: opentofu/setup-opentofu@v2
         with:
-          tofu_version: 1.11.6 # datasource=github-releases depName=opentofu/opentofu
+          tofu_version: 1.12.1 # datasource=github-releases depName=opentofu/opentofu
           tofu_wrapper: false
 
       - name: Run GoReleaser
