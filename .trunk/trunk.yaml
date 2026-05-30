@@ -10,7 +10,7 @@ lint:
     - golangci-lint2@2.12.2
     - markdownlint@0.48.0
     - prettier@3.8.3
-    - renovate@43.150.0
+    - renovate@43.204.0
     - shellcheck@0.11.0
     - shfmt@3.6.0
     - taplo@0.10.0
