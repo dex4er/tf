@@ -3,7 +3,6 @@ cli:
   version: 1.25.0
 lint:
   enabled:
-    - pinact@4.1.0
     - actionlint@1.7.12
     - git-diff-check@SYSTEM
     - gitleaks@8.30.1
@@ -26,6 +25,7 @@ lint:
     - gokart
     - grype
     - osv-scanner
+    - pinact
     - terrascan
     - trivy
 actions:
