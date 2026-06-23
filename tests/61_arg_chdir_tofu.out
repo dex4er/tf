@@ -1,7 +1,5 @@
 + ../../../tf -chdir=subdir init
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
 https://opentofu.org/docs/cli/plugins/signing/
 [1m[32mOpenTofu has been successfully initialized![0m[32m

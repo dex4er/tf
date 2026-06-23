@@ -1,7 +1,5 @@
 + ../../../tf init
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
 [1m[32mTerraform has been successfully initialized![0m[32m
 + ../../../tf plan -parallelism=30 -compact -dots 'time_sleep.this[1s]'

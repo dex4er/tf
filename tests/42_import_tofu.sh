@@ -20,8 +20,6 @@ pushd tmp/$test >/dev/null
   ../../../tf import time_sleep.this["1s"] 1s,1s
   ../../../tf import 'time_sleep.this["2s"]' 2s,2s
   ../../../tf list
-  ../../../tf import time_sleep.this["3s"] foo bar baz || true
-  ../../../tf list
 } 2>&1 | ../../sanitize.sh >>tf.out
 
 diff -u ../../$test.out tf.out

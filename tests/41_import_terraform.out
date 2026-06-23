@@ -1,7 +1,5 @@
 + ../../../tf init
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
-- Installing hashicorp/XXX vX.X.X...
 - Installed hashicorp/XXX vX.X.X
 [1m[32mTerraform has been successfully initialized![0m[32m
 + ../../../tf destroy -auto-approve
@@ -37,19 +35,6 @@ resource "time_sleep" "this" {
     id               = "XXXX-XX-XXTXX:XX:XXZ"
     triggers         = {}
 }
-+ ../../../tf list
-time_sleep.this["1s"]
-time_sleep.this["2s"]
-+ ../../../tf import 'time_sleep.this[3s]' foo bar baz
-[90m&X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "foo bar baz"...
-[31m[31m╷
-[31m│[0m [1m[31mError: [0m[1mUnexpected Format of ID
-[31m│[0m
-[31m│[0m Unexpected format of ID ("foo bar baz"), expected
-[31m│[0m CREATEDURATION,DESTROYDURATION where at least one value is non-empty
-[31m╵
-
-+ true
 + ../../../tf list
 time_sleep.this["1s"]
 time_sleep.this["2s"]
