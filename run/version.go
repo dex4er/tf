@@ -3,7 +3,9 @@ package run
 import "fmt"
 
 func Version(args []string, version string) error {
-	fmt.Println("tf", "v"+version)
+	err := Terraform("version", args)
 
-	return Terraform("version", args)
+	fmt.Println("+ tf", "v"+version)
+
+	return err
 }
