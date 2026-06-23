@@ -21,11 +21,9 @@ Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 -[0m/[32m+[0m resource "time_sleep" "this" {
 Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 .[0m[90m&[0m[31m.[0m[31m-[0m[32m.[0m[32m+[0m[33m╷
-
 + ../../../tf refresh -parallelism=30 -compact -dots 'time_sleep.this[1s]'
 ^
 No changes.[0m[1m Your infrastructure still matches the configuration.
-
 + ../../../tf destroy -auto-approve -parallelism=30 -compact -dots 'time_sleep.this[1s]'
 ^
   [31m-[0m destroy

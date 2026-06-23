@@ -177,7 +177,6 @@ Changes to Outputs:
       [32m+[0m "./demo-9s.txt",
       [32m+[0m "./demo-10s.txt",
     ]
-
     tofu apply "tfplan1"
 + ../../../tf apply -auto-approve -parallelism=30 -plan=tfplan1
 &X/X [0m[1mtime_sleep.this["Xs"]: Importing...
@@ -213,9 +212,7 @@ Changes to Outputs:
 =X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 =X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 =X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
-
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
-
 + ../../../tf refresh -parallelism=30
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -247,7 +244,6 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
-
 + ../../../tf plan -destroy -parallelism=30 -out=tfplan2
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -524,7 +520,6 @@ Changes to Outputs:
       [31m-[0m "./demo-9s.txt",
       [31m-[0m "./demo-10s.txt",
     ] [90m-> null
-
     tofu apply "tfplan2"
 + ../../../tf apply -auto-approve -parallelism=30 -plan=tfplan2
 -X/X [0m[1mlocal_file.this["Xs"]: Destruction
@@ -547,5 +542,4 @@ Changes to Outputs:
 -X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 -X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 -X/X [0m[1mtime_sleep.this["Xs"]: Destruction
-
 Apply complete! Resources: 0 added, 0 changed, 20 destroyed.

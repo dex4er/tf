@@ -6,13 +6,11 @@ Terraform has been successfully initialized![0m[32m
 No changes.[0m[1m No objects need to be destroyed.
 Either you have not created any objects yet or the existing objects were
 already deleted outside of Terraform.
-
 Destroy complete! Resources: 0 destroyed.
 + ../../../tf import 'time_sleep.this[1s]' 1s,1s
 &X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "1s,1s"...
 time_sleep.this["Xs"]: Import prepared!
 ^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-
 Import successful!
 # time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
@@ -25,7 +23,6 @@ resource "time_sleep" "this" {
 &X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "2s,2s"...
 time_sleep.this["Xs"]: Import prepared!
 ^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-
 Import successful!
 # time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
@@ -38,7 +35,6 @@ resource "time_sleep" "this" {
 &X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "3s,3s"...
 time_sleep.this["Xs"]: Import prepared!
 ^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-
 Import successful!
 # time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
@@ -51,7 +47,6 @@ resource "time_sleep" "this" {
 &X/X [0m[1mtime_sleep.this["Xs"]: Importing from ID "4s,4s"...
 time_sleep.this["Xs"]: Import prepared!
 ^X [0m[90m&X/X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-
 Import successful!
 # time_sleep.this["Xs"]:
 resource "time_sleep" "this" {
@@ -75,7 +70,6 @@ Resource instance time_sleep.this["4s"] has been marked as tainted.
 │[0m you must run "terraform apply" once to create the corresponding instance(s)
 │[0m before they can be tainted.
 ╵
-
 + true
 + ../../../tf untaint 'time_sleep.this[1s]'
 Resource instance time_sleep.this["1s"] has been successfully untainted.
@@ -92,5 +86,4 @@ Resource instance time_sleep.this["4s"] has been successfully untainted.
 │[0m you must run "terraform apply" once to create the corresponding instance(s)
 │[0m before they can be tainted.
 ╵
-
 + true
