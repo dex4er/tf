@@ -2,7 +2,7 @@
 - Installed hashicorp/XXX vX.X.X
 - Installed hashicorp/XXX vX.X.X
 https://opentofu.org/docs/cli/plugins/signing/
-[1m[32mOpenTofu has been successfully initialized![0m[32m
+OpenTofu has been successfully initialized![0m[32m
 + ../../../tf plan -parallelism=30 'time_sleep.this[1s]'
 ^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -10,7 +10,7 @@ https://opentofu.org/docs/cli/plugins/signing/
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -19,15 +19,15 @@ https://opentofu.org/docs/cli/plugins/signing/
         }
     }
 Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-[33m╷
-[0m[90m[0m+ ../../../tf apply -auto-approve -parallelism=30 'time_sleep.this[1s]'
+╷
++ ../../../tf apply -auto-approve -parallelism=30 'time_sleep.this[1s]'
 ^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 -[0m/[32m+[0m destroy and then create replacement
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -41,10 +41,10 @@ Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 ^X [0m[90m&X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Creation
 ╷
-[0m[33m[0m+ ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'
++ ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
-[1m[32mNo changes.[0m[1m Your infrastructure still matches the configuration.
-[0m[33m[0m[33m[0m+ ../../../tf destroy -auto-approve -parallelism=30 'time_sleep.this[1s]'
+No changes.[0m[1m Your infrastructure still matches the configuration.
++ ../../../tf destroy -auto-approve -parallelism=30 'time_sleep.this[1s]'
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
   [31m-[0m destroy
   # time_sleep.this["1s"][0m will be [1m[31mdestroyed
@@ -59,4 +59,3 @@ Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 Plan:[0m 0 to add, 0 to change, 1 to destroy.
 ^X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ╷
-[0m[33m

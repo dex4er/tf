@@ -27,12 +27,14 @@ tr '\015' '\012' |
     -e 's/ \[i$//' \
     -e 's/ \[\(\o033\)/\1/' \
     -e 's/ \[$//' \
-    -e 's/ complete after [0-9][0-9]*s \(\o033\)/\1/' \
-    -e 's/ complete after [0-9][0-9]*s $//' \
-    -e 's/ complete after [0-9][0-9]*s\(\o033\)/\1/' \
-    -e 's/ complete after [0-9][0-9]*s$//' \
-    -e 's/ complete after [0-9]*\(\o033\)/\1/' \
-    -e 's/ complete after [0-9]*s$//' \
+    -e 's/ complete after \([0-9][0-9]*m\)?[0-9][0-9]*s \(\o033\)/\1/' \
+    -e 's/ complete after \([0-9][0-9]*m\)?[0-9][0-9]*s $//' \
+    -e 's/ complete after \([0-9][0-9]*m\)?[0-9][0-9]*s\(\o033\)/\1/' \
+    -e 's/ complete after \([0-9][0-9]*m\)?[0-9][0-9]*s$//' \
+    -e 's/ complete after \([0-9][0-9]*m\)?[0-9]*\(\o033\)/\1/' \
+    -e 's/ complete after [0-9].*//' \
+    -e 's/ complete after \(\o033\)/\1/' \
+    -e 's/ complete after $//' \
     -e 's/ complete after\(\o033\)/\1/' \
     -e 's/ complete after$//' \
     -e 's/ complete afte\(\o033\)/\1/' \
@@ -67,7 +69,7 @@ tr '\015' '\012' |
     -e 's/\o033\[0\(\o033\)/\1/' \
     -e 's/\o033\[\(\o033\)/\1/' \
     -e 's/\o033\[0m$//g' \
-    -e 's/^\o033\[[0-9][0-9]*m//g' \
+    -e 's/^\(\o033\[[0-9][0-9]*m\)*//g' \
     -e 's/darwin_amd64/XXX/g' \
     -e 's/darwin_arm64/XXX/g' \
     -e 's/linux_amd64/XXX/g' \
@@ -84,4 +86,5 @@ tr '\015' '\012' |
     -e 's/\^[0-9][0-9]*/^X/g' \
     -e 's/\([=&+~-]\)[0-9][0-9]*\/[0-9][0-9]*/\1X\/X/g' \
     -e 's/ *$//' \
-    -e ':a; N; s/^\n\(Changes to Outputs:\)/\1/; ta; P; D'
+    -e ':a; N; s/^\n\(Changes to Outputs:\)/\1/; ta; P; D' \
+    -e '/^ *$/d'

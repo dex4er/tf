@@ -2,9 +2,9 @@
 - Installed hashicorp/XXX vX.X.X
 - Installed hashicorp/XXX vX.X.X
 https://opentofu.org/docs/cli/plugins/signing/
-[1m[32mOpenTofu has been successfully initialized![0m[32m
+OpenTofu has been successfully initialized![0m[32m
 + ../../../tf upgrade
-[1m[32mOpenTofu has been successfully initialized![0m[32m
+OpenTofu has been successfully initialized![0m[32m
 + ../../../tf plan -parallelism=30 -compact
 ^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -35,7 +35,7 @@ https://opentofu.org/docs/cli/plugins/signing/
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
   # time_sleep.this["2s"][0m will be created
   [32m+[0m resource "time_sleep" "this" {
   # time_sleep.this["3s"][0m will be created
@@ -86,7 +86,7 @@ Changes to Outputs:
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
   # time_sleep.this["2s"][0m will be created
   [32m+[0m resource "time_sleep" "this" {
   # time_sleep.this["3s"][0m will be created
@@ -139,9 +139,9 @@ Changes to Outputs:
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
-[1m[32m
+
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
-[1m[32m
+
 + ../../../tf refresh -parallelism=30 -compact
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -173,7 +173,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
-[1m[32m
+
 + ../../../tf destroy -auto-approve -parallelism=30 -compact
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -269,5 +269,5 @@ Changes to Outputs:
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
-[1m[32m
+
 Destroy complete! Resources: 20 destroyed.

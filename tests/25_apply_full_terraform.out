@@ -1,7 +1,7 @@
 + ../../../tf init
 - Installed hashicorp/XXX vX.X.X
 - Installed hashicorp/XXX vX.X.X
-[1m[32mTerraform has been successfully initialized![0m[32m
+Terraform has been successfully initialized![0m[32m
 + ../../../tf plan -parallelism=30 -full
 ^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -300,7 +300,7 @@
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -693,7 +693,7 @@ Changes to Outputs:
   # time_sleep.this["1s"][0m must be [1m[31mreplaced
   # [0m(imported from "1s,1s")
   # [0m[33mWarning: this will destroy the imported resource
-[31m-[0m/[32m+[0m resource "time_sleep" "this" {
+-[0m/[32m+[0m resource "time_sleep" "this" {
         create_duration  = "1s"
         destroy_duration = "1s"
       [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
@@ -820,9 +820,9 @@ Changes to Outputs:
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mdata.local_file.this["Xs"]: Read
-[1m[32m
+
 Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
-[1m[32m
+
 + ../../../tf refresh -parallelism=30 -full
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -854,7 +854,7 @@ Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
 ^X [0m[36m=X/X [0m[1mdata.local_file.this["Xs"]: Read
-[1m[32m
+
 + ../../../tf destroy -auto-approve -parallelism=30 -full
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
@@ -1151,5 +1151,5 @@ Changes to Outputs:
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[36m=X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
-[1m[32m
+
 Destroy complete! Resources: 20 destroyed.
