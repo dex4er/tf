@@ -1,16 +1,60 @@
 + ../../../tf init
 - Installed hashicorp/XXX vX.X.X
+- Installed hashicorp/XXX vX.X.X
+Terraform has been successfully initialized![0m[32m
++ ../../../tf plan -parallelism=30 -verbatim 'time_sleep.this[1s]'
+time_sleep.this["Xs"]: Preparing import...
+time_sleep.this["Xs"]: Refreshing state...
+-[0m/[32m+[0m destroy and then create replacement
+  # time_sleep.this["1s"][0m must be [1m[31mreplaced
+  # [0m(imported from "1s,1s")
+  # [0m[33mWarning: this will destroy the imported resource
+-[0m/[32m+[0m resource "time_sleep" "this" {
+        create_duration  = "1s"
+        destroy_duration = "1s"
+      [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      [33m~[0m triggers         = { [31m# forces replacement
+          [32m+[0m "key" = "1s"
+        }
+    }
+Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 ╷
-│[0m [1m[31mError: [0m[1mFailed to query available provider packages
-│[0m
-│[0m Could not retrieve the list of available versions for provider
-│[0m hashicorp/time: could not connect to registry.terraform.io: failed to
-│[0m request discovery document: GET
-│[0m https://registry.terraform.io/.well-known/terraform.json giving up after 4
-│[0m attempt(s): Get "https://registry.terraform.io/.well-known/terraform.json":
-│[0m context deadline exceeded
-│[0m
-│[0m To see which modules are currently depending on hashicorp/XXX and what
-│[0m versions are specified, run the following command:
-│[0m     terraform providers
-╵
++ ../../../tf apply -auto-approve -parallelism=30 -verbatim 'time_sleep.this[1s]'
+time_sleep.this["Xs"]: Preparing import...
+time_sleep.this["Xs"]: Refreshing state...
+-[0m/[32m+[0m destroy and then create replacement
+  # time_sleep.this["1s"][0m must be [1m[31mreplaced
+  # [0m(imported from "1s,1s")
+  # [0m[33mWarning: this will destroy the imported resource
+-[0m/[32m+[0m resource "time_sleep" "this" {
+        create_duration  = "1s"
+        destroy_duration = "1s"
+      [33m~[0m id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      [33m~[0m triggers         = { [31m# forces replacement
+          [32m+[0m "key" = "1s"
+        }
+    }
+Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
+time_sleep.this["Xs"]: Importing...
+time_sleep.this["Xs"]: Import
+time_sleep.this["Xs"]: Destruction
+time_sleep.this["Xs"]: Creation
+╷
++ ../../../tf refresh -parallelism=30 -verbatim 'time_sleep.this[1s]'
+time_sleep.this["Xs"]: Refreshing state...
+No changes.[0m[1m Your infrastructure still matches the configuration.
++ ../../../tf destroy -auto-approve -parallelism=30 -verbatim 'time_sleep.this[1s]'
+time_sleep.this["Xs"]: Refreshing state...
+  [31m-[0m destroy
+  # time_sleep.this["1s"][0m will be [1m[31mdestroyed
+  [31m-[0m resource "time_sleep" "this" {
+      [31m-[0m create_duration  = "1s" [90m-> null
+      [31m-[0m destroy_duration = "1s" [90m-> null
+      [31m-[0m id               = "XXXX-XX-XXTXX:XX:XXZ" [90m-> null
+      [31m-[0m triggers         = {
+          [31m-[0m "key" = "1s"
+        } [90m-> null
+    }
+Plan:[0m 0 to add, 0 to change, 1 to destroy.
+time_sleep.this["Xs"]: Destruction
+╷

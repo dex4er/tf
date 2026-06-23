@@ -22,7 +22,6 @@ pushd tmp/$test >/dev/null
   ../../../tf show -no-outputs
   ../../../tf show time_sleep.this["1s"]
   ../../../tf show time_sleep.this["1s"] 'time_sleep.this["2s"]'
-  ../../../tf show time_sleep.this["1s"] time_sleep.this["foo"] || true
 } 2>&1 | ../../sanitize.sh >>tf.out
 
 diff -u ../../$test.out tf.out

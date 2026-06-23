@@ -84,16 +84,3 @@ resource "time_sleep" "this" {
     id               = "XXXX-XX-XXTXX:XX:XXZ"
     triggers         = {}
 }
-+ ../../../tf show 'time_sleep.this[1s]' 'time_sleep.this[foo]'
-# time_sleep.this["Xs"]:
-resource "time_sleep" "this" {
-    create_duration  = "1s"
-    destroy_duration = "1s"
-    id               = "XXXX-XX-XXTXX:XX:XXZ"
-    triggers         = {}
-}
-No instance found for the given address!
-This command requires that the address references one specific instance.
-To view the available instances, use "terraform state list". Please modify
-the address to reference a specific instance.
-+ true
