@@ -16,6 +16,7 @@ tr '\015' '\012' |
     -e '/: Destroying\.\.\./d' \
     -e '/: Reading\.\.\./d' \
     -e '/: Still .*\.\.\./d' \
+    -e '/ Installing hashicorp/d' \
     -e 's/ \[id=[0-9a-zA-Z,:-]*\]\(\o033\)/\1/' \
     -e 's/ \[id=[0-9a-zA-Z,:-]*\]$//' \
     -e 's/ \[id=[0-9a-zA-Z,:-]*\(\o033\)/\1/' \
@@ -66,7 +67,7 @@ tr '\015' '\012' |
     -e 's/\o033\[0\(\o033\)/\1/' \
     -e 's/\o033\[\(\o033\)/\1/' \
     -e 's/\o033\[0m$//g' \
-    -e 's/^\o033\[0m//g' \
+    -e 's/^\o033\[[0-9][0-9]*m//g' \
     -e 's/darwin_amd64/XXX/g' \
     -e 's/darwin_arm64/XXX/g' \
     -e 's/linux_amd64/XXX/g' \
