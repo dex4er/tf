@@ -1,2 +1,5 @@
+[tools]
+goreleaser = "2.16.0"
+
 [settings]
-idiomatic_version_file_enable_tools = ["go", "terraform"]
+idiomatic_version_file_enable_tools = ["go", "opentofu", "terraform"]
