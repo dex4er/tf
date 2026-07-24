@@ -27,6 +27,15 @@ archives:
     formats:
       - binary
 
+sboms:
+  - artifacts: binary
+    documents:
+      - "{{ .ArtifactName }}.sbom.json"
+    args:
+      - $artifact
+      - --output
+      - spdx-json=$document
+
 checksum:
   name_template: checksums.txt
 

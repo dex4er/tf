@@ -26,6 +26,16 @@ Terraform more CLI-friendly:
 Download from [releases](https://github.com/dex4er/tf/releases). Put anywhere
 in the `$PATH`.
 
+### Verify
+
+Since v2.14.1 every release carries a build provenance attestation and an SPDX
+SBOM (`*.sbom.json`) for each binary. Verify a downloaded binary with
+[GitHub CLI](https://cli.github.com/):
+
+```sh
+gh attestation verify tf-linux-amd64 --repo dex4er/tf
+```
+
 ### asdf
 
 Install with [asdf](https://asdf-vm.com/):
