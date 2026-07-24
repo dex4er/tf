@@ -7,7 +7,7 @@ toolchain go1.26.5
 require (
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db
-	golang.org/x/term v0.44.0
+	golang.org/x/term v0.45.0
 )
 
-require golang.org/x/sys v0.46.0 // indirect
+require golang.org/x/sys v0.47.0 // indirect
