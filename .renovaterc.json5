@@ -13,6 +13,19 @@
   postUpdateOptions: [
     'gomodTidy',
   ],
+  // Refreshes mise.lock by running `mise lock`, which relocks every tool and
+  // every platform already present in the lockfile. Needed because only
+  // goreleaser lives in mise.toml: go, terraform and opentofu come from their
+  // idiomatic version files via the regex managers below, and those do not
+  // touch the lockfile, so their entries would go stale after every bump.
+  // Scheduled at any time rather than the default weekly slot so the refresh
+  // lands right after such a bump instead of up to seven days later.
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: [
+      'at any time',
+    ],
+  },
   constraints: {
     go: '>= 1.22',
   },
