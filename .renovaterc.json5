@@ -20,11 +20,18 @@
   // touch the lockfile, so their entries would go stale after every bump.
   // Scheduled at any time rather than the default weekly slot so the refresh
   // lands right after such a bump instead of up to seven days later.
+  // Automerged because the PR carries no decision: the version was already
+  // approved when its bump was merged, and nobody can review a sha256 by eye.
+  // The one signal a human could have spotted - a checksum changing while its
+  // version did not - is checked instead by the Mise Lock Check workflow, which
+  // also downloads the tools to verify the recorded sums against the real
+  // artifacts.
   lockFileMaintenance: {
     enabled: true,
     schedule: [
       'at any time',
     ],
+    automerge: true,
   },
   constraints: {
     go: '>= 1.22',

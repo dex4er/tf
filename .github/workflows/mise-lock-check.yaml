@@ -1,0 +1,69 @@
+name: Mise Lock Check
+
+on:
+  pull_request:
+    paths:
+      - mise.lock
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Verify mise.lock
+
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # A checksum that changes while its tool version stays the same means the
+      # artifact behind an already pinned URL was replaced. That is the one thing
+      # in a lockfile diff a human reviewer could realistically spot, and since
+      # lock file maintenance is automerged nobody looks - so it is checked here
+      # instead. Comparing on tool+version+platform means a platform added for an
+      # unchanged version is not flagged, only a genuinely swapped artifact is.
+      - name: Check for replaced artifacts
+        run: |
+          set -eo pipefail
+          rows() {
+            yq -p toml -o json -I0 '
+              [ .tools | to_entries[]
+                | .key as $tool
+                | .value[0] as $t
+                | ( $t | to_entries[]
+                    | select(.key | test("^platforms\."))
+                    | [$tool, $t.version, (.key | sub("^platforms\.";"")), .value.checksum]
+                    | join("|")
+                  )
+              ]' "$1" |
+              yq -p json -oy '.[]' |
+              awk -F'|' '{print $1"|"$2"|"$3"\t"$4}' |
+              sort
+          }
+          git show "origin/${GITHUB_BASE_REF:-main}:mise.lock" > base-mise.lock
+          rows base-mise.lock > base.tsv
+          rows mise.lock > head.tsv
+          join -t"$(printf '\t')" base.tsv head.tsv | awk -F'\t' '$2 != $3' > replaced.tsv
+          if [[ -s replaced.tsv ]]; then
+            while IFS=$'\t' read -r entry old new; do
+              echo "::error file=mise.lock::${entry}: checksum changed while the version did not (${old} -> ${new})"
+            done < replaced.tsv
+            echo "Refusing this lockfile: an artifact behind an already pinned URL was replaced." >&2
+            exit 1
+          fi
+          echo "No replaced artifacts: $(wc -l < head.tsv) locked entries compared."
+
+      # The action adds `--locked` automatically when a lock file is present, so
+      # this downloads every tool for this platform and verifies it against the
+      # recorded checksum - proving the locked sums match the real artifacts.
+      # Only the runner's platform is covered that way; the other seven are
+      # covered by the diff check above.
+      - name: Install locked tools
+        uses: jdx/mise-action@v4
+        with:
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
