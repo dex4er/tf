@@ -67,10 +67,21 @@ jobs:
       # json is produced alongside sarif because post-scan-report needs fields
       # sarif does not carry: component type, installed/fixed-in versions and
       # the risk score.
+      #
+      # GRYPE_MATCH_GOLANG_ALWAYS_USE_CPE_FOR_STDLIB is not optional here: as of
+      # grype 0.116.0 the Go standard library is matched through CPEs only, and
+      # that setting defaults to false, so a binary built with a Go release
+      # carrying known CVEs scans clean without a single warning (0.112.0 still
+      # reported them from govulndb, 0.116.0 reports nothing). The stdlib is the
+      # only realistic source of vulnerabilities in a project with four tiny
+      # dependencies, so leaving it off would make this whole workflow report
+      # "no vulnerabilities found" by construction.
       - name: Scan binary with Grype
         run: |
           set -eo pipefail
           "${{ steps.grype.outputs.cmd }}" file:tf -o sarif=grype.sarif -o json=grype.json
+        env:
+          GRYPE_MATCH_GOLANG_ALWAYS_USE_CPE_FOR_STDLIB: "true"
 
       # Grype points every finding at the scanned file ("/tf"), an absolute path
       # that does not exist in the repository, so code scanning cannot map the
