@@ -3,7 +3,7 @@
 [![GitHub](https://img.shields.io/github/v/release/dex4er/tf?display_name=tag&sort=semver)](https://github.com/dex4er/tf)
 [![Test](https://github.com/dex4er/tf/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/test.yaml)
 [![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml)
-[![OSV Scanner](https://github.com/dex4er/tf/actions/workflows/osv-scanner.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/osv-scanner.yaml)
+[![Main Scan](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml)
 
 Less verbose and more shell-friendly Terraform.
 

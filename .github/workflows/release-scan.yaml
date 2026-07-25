@@ -1,0 +1,215 @@
+name: Release Scan
+
+# Scans what the last release actually shipped, from the SBOMs published with
+# it. Its counterpart, Main Scan, scans what the main branch currently builds.
+
+on:
+  schedule:
+    - cron: 38 21 * * *
+  workflow_dispatch: {}
+  # Refreshes the report as soon as a release is published. workflow_run rather
+  # than the release event, because GoReleaser uploads the assets after
+  # creating the release - waiting for the whole run is what guarantees the
+  # SBOMs are there.
+  #
+  # Not workflow_call from release.yaml, which would put this job in the
+  # release run and read better: a job that calls a reusable workflow accepts
+  # none of continue-on-error, so a scan that fails - an advisory feed that is
+  # down, a rate limit - would mark an otherwise correct release as failed. A
+  # separate run keeps the release conclusion about the release.
+  workflow_run:
+    workflows:
+      - Release
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan the last release
+
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+
+    runs-on: ubuntu-24.04-arm
+
+    permissions:
+      contents: read
+      discussions: write
+
+    env:
+      # Renovate keeps this version up to date via the inline datasource hint
+      # below (see .renovaterc.json5 customManagers).
+      GRYPE_VERSION: v0.116.0 # datasource=github-releases depName=anchore/grype
+      DISCUSSION_NUMBER: 138
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # yq comes from mise so that its version has a single source (mise.toml)
+      # and the download is verified against mise.lock.
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
+          install_args: yq
+
+      - name: Install Grype
+        id: grype
+        uses: anchore/scan-action/download-grype@v7
+        with:
+          grype-version: ${{ env.GRYPE_VERSION }}
+          cache-db: true
+
+      # The SBOMs published with the release are the manifest of what users
+      # actually downloaded, so they are the input here - this job never builds
+      # anything and never looks at the working tree.
+      - name: Download the SBOMs of the last release
+        id: release
+        run: |
+          set -eo pipefail
+          tag=$(gh release view --json tagName --jq .tagName)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/tag/$tag" >> "$GITHUB_OUTPUT"
+          mkdir -p sboms
+          gh release download "$tag" --pattern '*.sbom.json' --dir sboms || true
+          count=$(find sboms -name '*.sbom.json' | wc -l)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "$tag has $count published SBOM(s)"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Releases made before SBOM publishing was added have no SBOM to scan.
+      # Say so in the discussion instead of failing every night - the next
+      # release fixes it on its own.
+      - name: Report a release without SBOMs
+        if: steps.release.outputs.count == '0'
+        run: |
+          set -eo pipefail
+          {
+            echo "The last release, [\`${{ steps.release.outputs.tag }}\`](${{ steps.release.outputs.url }}), ships no SBOM: it predates SBOM publishing."
+            echo
+            echo "This report starts with the first release that publishes one. Updated $(date -u +'%Y-%m-%d %H:%M UTC') by [this run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+          } > body.md
+
+      # Every published SBOM is scanned, not just one: the report should reflect
+      # every artifact a user might have downloaded, not just the runner's own
+      # platform.
+      - name: Scan the SBOMs with Grype
+        if: steps.release.outputs.count != '0'
+        run: |
+          set -eo pipefail
+          mkdir -p jsons
+          for sbom in sboms/*.sbom.json; do
+            platform=$(basename "$sbom" .sbom.json | sed 's/^${{ github.event.repository.name }}-//; s/\.exe$//')
+            echo "::group::grype $sbom"
+            "${{ steps.grype.outputs.cmd }}" "sbom:$sbom" -o json="jsons/$platform.json"
+            echo "::endgroup::"
+            yq -pj -oj '.matches |= map(.platforms = ["'"$platform"'"])' "jsons/$platform.json" > "jsons/$platform.tagged.json"
+          done
+        env:
+          GRYPE_MATCH_GOLANG_ALWAYS_USE_CPE_FOR_STDLIB: "true"
+
+      # Merge as in main-scan.yaml: slurp the per-platform reports and collapse
+      # a finding that repeats across platforms into one row. The platforms it
+      # came from are kept so a platform-only module is not read as affecting
+      # every artifact.
+      - name: Merge the per-platform reports
+        if: steps.release.outputs.count != '0'
+        run: |
+          set -eo pipefail
+          # The full platform list goes in too: a finding present on every one
+          # of them renders as "all" in the report, and that cannot be derived
+          # from the findings alone.
+          PLATFORMS=$(basename -a -s .tagged.json jsons/*.tagged.json | paste -sd,)
+          export PLATFORMS
+          yq ea -pj -oj -I0 '[.]' jsons/*.tagged.json |
+            yq -pj -oj '
+                . as $x
+                | {
+                    "platforms": (strenv(PLATFORMS) | split(",")),
+                    "matches": (
+                      [$x[].matches[]]
+                      | group_by(.vulnerability.id + "@" + .artifact.name + "@" + .artifact.version)
+                      | map(.[0] * {"platforms": (map(.platforms[0]) | unique)})
+                    )
+                  }
+              ' > grype.json
+
+      - name: Build the vulnerability table
+        if: steps.release.outputs.count != '0'
+        run: |
+          set -eo pipefail
+          # Same shape as the main-branch report in main-scan.yaml, plus a
+          # Platforms column. negrisk is a sort-only helper: yq has no unary
+          # minus, so descending-by-risk needs the value pre-negated.
+          total=$(yq -pj -oj '.platforms | length' grype.json)
+          yq -pj -oj '
+            ({"Critical":0,"High":1,"Medium":2,"Low":3,"Negligible":4,"Unknown":5}) as $rank
+            | (.matches // [])
+            | map(
+                {
+                  "severity": .vulnerability.severity,
+                  "risk": (.vulnerability.risk // 0),
+                  "package": .artifact.name,
+                  "type": .artifact.type,
+                  "installed": .artifact.version,
+                  "fixed": ((.vulnerability.fix.versions // []) | join(", ")),
+                  "advisory": ("[" + .vulnerability.id + "](" + (.vulnerability.dataSource // "") + ")"),
+                  "platforms": ((.platforms // []) | sort | join(", ")),
+                  "rank": ($rank[.vulnerability.severity] // 9),
+                  "negrisk": (0 - (.vulnerability.risk // 0))
+                }
+              )
+            | sort_by(.rank, .negrisk, .package)
+            | map(del(.rank) | del(.negrisk))
+          ' grype.json > rows.json
+          count=$(yq -pj -oj 'length' rows.json)
+          # Collapsing the full platform list to "all" is done here rather than
+          # in yq: yq has no if/then/else, and `select(false) | "all"` still
+          # emits "all", so the conditional has to live outside the filter.
+          every=$(yq -pj -oy '(.platforms // []) | sort | join(", ")' grype.json)
+          {
+            echo "Vulnerabilities in the published artifacts of [\`${{ steps.release.outputs.tag }}\`](${{ steps.release.outputs.url }}), scanned from the $total SBOMs shipped with the release. Updated $(date -u +'%Y-%m-%d %H:%M UTC') by [this run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+            echo
+            if [[ "$count" -eq 0 ]]; then
+              echo "No vulnerabilities found."
+            else
+              echo "| Severity | Risk | Package | Type | Installed | Fixed In | Advisory | Platforms |"
+              echo "| --- | --- | --- | --- | --- | --- | --- | --- |"
+              # LC_ALL=C: printf "%.1f" must use a period regardless of the
+              # runner's locale, or it silently truncates "6.6" to "6" (parsed
+              # up to the first non-digit) and re-renders it as "6,0".
+              yq -pj -ot rows.json | tail -n +2 |
+                LC_ALL=C awk -F'\t' -v every="$every" '{
+                  if ($8 == every) $8 = "all"
+                  printf "| %s | %.1f | %s | %s | %s | %s | %s | %s |\n", $1, $2, $3, $4, $5, $6, $7, $8
+                }'
+            fi
+          } > body.md
+          echo "vulnerabilities: $count"
+
+      - name: Update discussion
+        run: |
+          set -eo pipefail
+          discussion_id=$(gh api graphql -f query='
+            query($owner:String!,$repo:String!,$num:Int!){
+              repository(owner:$owner,name:$repo){
+                discussion(number:$num){ id }
+              }
+            }' -f owner="${{ github.repository_owner }}" -f repo="${{ github.event.repository.name }}" -F num="$DISCUSSION_NUMBER" \
+            --jq '.data.repository.discussion.id')
+          if [[ -z "$discussion_id" || "$discussion_id" == "null" ]]; then
+            echo "Discussion #$DISCUSSION_NUMBER not found" >&2
+            exit 1
+          fi
+          gh api graphql -f query='
+            mutation($id:ID!,$body:String!){
+              updateDiscussion(input:{discussionId:$id, body:$body}){
+                discussion{ id }
+              }
+            }' -f id="$discussion_id" -F body=@body.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
