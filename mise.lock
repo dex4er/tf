@@ -89,81 +89,81 @@ url_api = "https://api.github.com/repos/goreleaser/goreleaser/releases/assets/46
 provenance = "github-attestations"
 
 [[tools.opentofu]]
-version = "1.12.3"
+version = "1.12.5"
 backend = "aqua:opentofu/opentofu"
 
 [tools.opentofu."platforms.linux-arm64"]
-checksum = "sha256:98861dad4ac08882dcf255fe5d48bed7deddc34e8d6544f8690c65212320ad64"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267208"
+checksum = "sha256:e67e9da2b1ddf5050ebee62a584cb826eafe1dfd3827d7ec20899ac62791ed1a"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602545"
 
 [tools.opentofu."platforms.linux-arm64-musl"]
-checksum = "sha256:98861dad4ac08882dcf255fe5d48bed7deddc34e8d6544f8690c65212320ad64"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267208"
+checksum = "sha256:e67e9da2b1ddf5050ebee62a584cb826eafe1dfd3827d7ec20899ac62791ed1a"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602545"
 
 [tools.opentofu."platforms.linux-x64"]
-checksum = "sha256:f87d45408dcbb963ddbe10b2f75e55b3495310556e05c35765dfd5913551f182"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_linux_amd64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267210"
+checksum = "sha256:a6894d45ae7a17ce83189cce8fe04b5a65f68cefceb62455b5a6a89fa53ab38f"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_linux_amd64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602624"
 
 [tools.opentofu."platforms.linux-x64-musl"]
-checksum = "sha256:f87d45408dcbb963ddbe10b2f75e55b3495310556e05c35765dfd5913551f182"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_linux_amd64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267210"
+checksum = "sha256:a6894d45ae7a17ce83189cce8fe04b5a65f68cefceb62455b5a6a89fa53ab38f"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_linux_amd64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602624"
 
 [tools.opentofu."platforms.macos-arm64"]
-checksum = "sha256:0c8ddee4294f7cea34d82b122fa805febce41d21905a54dc9ce9f79ee8145284"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267265"
+checksum = "sha256:2ae38150a667f5c0bd57b318d18ad8091d08f93fcca40345f3d88998661de5a9"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602544"
 
 [tools.opentofu."platforms.macos-x64"]
-checksum = "sha256:e4d5fa86cfbe7eb8b56ec19e4c7e0bc7885845ca4e4a955c49d184ae82c62ab2"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_darwin_amd64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267293"
+checksum = "sha256:1012d8f3d4567bcbcd1f2c7d766feca39a30bced32fb8be47e1887fbbee2456d"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_darwin_amd64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602621"
 
 [tools.opentofu."platforms.windows-arm64"]
-checksum = "sha256:34ddbab9eb07a72ea5cf36d98d97ce1931242cb89693cbf5dce06d65ba37d8cc"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_windows_amd64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267166"
+checksum = "sha256:af11850b496f3720e0184084c56d8b43aa74ea92d2338978bf368d70c96473f1"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_windows_amd64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602547"
 
 [tools.opentofu."platforms.windows-x64"]
-checksum = "sha256:34ddbab9eb07a72ea5cf36d98d97ce1931242cb89693cbf5dce06d65ba37d8cc"
-url = "https://github.com/opentofu/opentofu/releases/download/v1.12.3/tofu_1.12.3_windows_amd64.tar.gz"
-url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/451267166"
+checksum = "sha256:af11850b496f3720e0184084c56d8b43aa74ea92d2338978bf368d70c96473f1"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.12.5/tofu_1.12.5_windows_amd64.tar.gz"
+url_api = "https://api.github.com/repos/opentofu/opentofu/releases/assets/484602547"
 
 [[tools.terraform]]
-version = "1.15.6"
+version = "1.15.8"
 backend = "aqua:hashicorp/terraform"
 
 [tools.terraform."platforms.linux-arm64"]
-checksum = "sha256:404c9cfa43728d31005f6e7a848b8a7cc701320067d9d87d8850031a5beb37b0"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_linux_arm64.zip"
+checksum = "sha256:8891e9dcedc9e3b8950bc6af9d4d8af1f4cfade3062f53b9dc403a89f6ce8c9c"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_arm64.zip"
 
 [tools.terraform."platforms.linux-arm64-musl"]
-checksum = "sha256:404c9cfa43728d31005f6e7a848b8a7cc701320067d9d87d8850031a5beb37b0"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_linux_arm64.zip"
+checksum = "sha256:8891e9dcedc9e3b8950bc6af9d4d8af1f4cfade3062f53b9dc403a89f6ce8c9c"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_arm64.zip"
 
 [tools.terraform."platforms.linux-x64"]
-checksum = "sha256:a7150d3b0e1b5c466ad42e8c499954a3c54645f8b56b385fa025d34f7e88faa9"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_linux_amd64.zip"
+checksum = "sha256:d25ce7b6902013ad905db3d2eab0be4cd905887fe88b81a6171b8d5503c31f3d"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_amd64.zip"
 
 [tools.terraform."platforms.linux-x64-musl"]
-checksum = "sha256:a7150d3b0e1b5c466ad42e8c499954a3c54645f8b56b385fa025d34f7e88faa9"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_linux_amd64.zip"
+checksum = "sha256:d25ce7b6902013ad905db3d2eab0be4cd905887fe88b81a6171b8d5503c31f3d"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_linux_amd64.zip"
 
 [tools.terraform."platforms.macos-arm64"]
-checksum = "sha256:8d4c6791a744332bc7ca3962c61ab2ed8e5d25a7299f176f5edffb9cb525e85f"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_darwin_arm64.zip"
+checksum = "sha256:f210110c5698b94d803a7a63cdb0251b5455c150841478808e2bbb343f95ed68"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_darwin_arm64.zip"
 
 [tools.terraform."platforms.macos-x64"]
-checksum = "sha256:ec7e3c2d314b5b0c975b6f7f8c6094d1806cb98f64f79e6f971cc87f786eb6e0"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_darwin_amd64.zip"
+checksum = "sha256:e2e812e783771159bf758fd4e55d6dc9bb08f63e2af2c63d212721807a02c5dc"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_darwin_amd64.zip"
 
 [tools.terraform."platforms.windows-arm64"]
-checksum = "sha256:02820bcae3725c9c4e91deb6656e9b96ca8af9f395fc5faccc0820dd3295d6e0"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_windows_arm64.zip"
+checksum = "sha256:ffd9399a37ee8123263d84ec5c00d09d7704f9997cb345d7c9cac56c3fc1348e"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_windows_arm64.zip"
 
 [tools.terraform."platforms.windows-x64"]
-checksum = "sha256:56b4d3a157e346f8fc1e94254d0a944e6fec81f58ddd43eb274b8e0ebb56e334"
-url = "https://releases.hashicorp.com/terraform/1.15.6/terraform_1.15.6_windows_amd64.zip"
+checksum = "sha256:2ff41d2129afb1982733c132c61a8d6ef038f879f3aeede7fc28b8b8b24acf02"
+url = "https://releases.hashicorp.com/terraform/1.15.8/terraform_1.15.8_windows_amd64.zip"
