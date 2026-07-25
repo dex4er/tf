@@ -1,0 +1,286 @@
+name: Main Scan
+
+# Scans what the main branch currently builds. Its counterpart, Release Scan,
+# scans what the last release actually shipped - same report, different
+# subject, hence two workflows rather than one with a branch in it.
+#
+# No pull_request trigger: the scan is not a required status check, so on a PR
+# it gates nothing, while the snapshot release it builds is the slowest job in
+# the repository. A vulnerability is a property of the published artifacts and
+# of the advisory feed, not of the change under review - main and the nightly
+# schedule are where it has to be caught.
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 38 20 * * *
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan the main branch
+
+    runs-on: ubuntu-24.04-arm
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    env:
+      # Renovate keeps this version up to date via the inline datasource hint
+      # below (see .renovaterc.json5 customManagers).
+      GRYPE_VERSION: v0.116.0 # datasource=github-releases depName=anchore/grype
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      # GoReleaser and yq come from mise so that their versions have a single
+      # source (mise.toml) and the downloads are verified against mise.lock.
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
+          install_args: goreleaser yq
+
+      # Required by the sboms section of .goreleaser.yaml.
+      - name: Install Syft
+        uses: anchore/sbom-action/download-syft@v0
+
+      - name: Install Grype
+        id: grype
+        uses: anchore/scan-action/download-grype@v7
+        with:
+          grype-version: ${{ env.GRYPE_VERSION }}
+          cache-db: true
+
+      # What is published - the SBOM and the vulnerability report - describes
+      # the released binaries, so the scan starts from them. A snapshot release
+      # produces all six with the SBOM configuration the real release uses, so
+      # the scan input is built exactly the way the shipped one is.
+      #
+      # All six are scanned, not one: scanning the SBOM rather than the binary
+      # is what actually matters here (see the next step), and there is no
+      # reason to trust that every platform links the same dependency closure
+      # once that guarantee is not being relied on anymore.
+      - name: Build the release artifacts and their SBOMs
+        run: goreleaser release --snapshot --clean --skip=publish
+
+      # json is produced alongside sarif because the report job needs fields
+      # sarif does not carry: component type, installed/fixed-in versions and
+      # risk score. Scanning the SBOM rather than the binary is not cosmetic:
+      # grype's binary scanner and its SBOM scanner do not walk the same code
+      # paths, and freelensapp/freelens-k8s-proxy found `grype file:` silently
+      # dropping findings that `grype sbom:` reported for the same build.
+      - name: Scan the SBOMs with Grype
+        run: |
+          set -eo pipefail
+          mkdir -p sarifs jsons
+          for sbom in dist/*.sbom.json; do
+            platform=$(basename "$sbom" .sbom.json | sed 's/^${{ github.event.repository.name }}-//; s/\.exe$//')
+            echo "::group::grype $sbom"
+            "${{ steps.grype.outputs.cmd }}" "sbom:$sbom" -o sarif="sarifs/$platform.sarif" -o json="jsons/$platform.json"
+            echo "::endgroup::"
+            yq -pj -oj '.matches |= map(.platforms = ["'"$platform"'"])' "jsons/$platform.json" > "jsons/$platform.tagged.json"
+          done
+        env:
+          GRYPE_MATCH_GOLANG_ALWAYS_USE_CPE_FOR_STDLIB: "true"
+
+      # Code scanning accepts one run per category, so the six are merged:
+      # union the rules by id and concatenate the results, dropping the
+      # duplicates a finding shared by every platform produces. Grype points
+      # them at the artifact recorded in the SBOM, a path that does not exist
+      # in the repository, so code scanning cannot map an alert to a source
+      # file; go.mod is where both stdlib and module findings are actually
+      # fixed.
+      - name: Merge the SARIF reports
+        run: |
+          set -eo pipefail
+          yq ea -pj -oj -I0 '[.]' sarifs/*.sarif |
+            yq -pj -oj '
+                . as $x
+                | {
+                    "$schema": $x[0]["$schema"],
+                    "version": $x[0].version,
+                    "runs": [
+                      {
+                        "tool": {
+                          "driver": (
+                            $x[0].runs[0].tool.driver
+                            | .rules = ([$x[].runs[0].tool.driver.rules[]] | unique_by(.id))
+                          )
+                        },
+                        "results": (
+                          [$x[].runs[0].results[]]
+                          | map(.locations[].physicalLocation.artifactLocation.uri = "go.mod")
+                          | unique
+                        )
+                      }
+                    ]
+                  }
+              ' > grype.sarif
+
+      # Same merge for the JSON report, keeping which platforms a finding came
+      # from so a platform-only module is not read as affecting every
+      # artifact.
+      - name: Merge the vulnerability reports
+        run: |
+          set -eo pipefail
+          # The full platform list goes in too: a finding present on every one
+          # of them renders as "all" in the report, and that cannot be derived
+          # from the findings alone.
+          PLATFORMS=$(basename -a -s .tagged.json jsons/*.tagged.json | paste -sd,)
+          export PLATFORMS
+          yq ea -pj -oj -I0 '[.]' jsons/*.tagged.json |
+            yq -pj -oj '
+                . as $x
+                | {
+                    "platforms": (strenv(PLATFORMS) | split(",")),
+                    "matches": (
+                      [$x[].matches[]]
+                      | group_by(.vulnerability.id + "@" + .artifact.name + "@" + .artifact.version)
+                      | map(.[0] * {"platforms": (map(.platforms[0]) | unique)})
+                    )
+                  }
+              ' > grype.json
+
+      - name: Upload Grype SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: grype.sarif
+          category: grype
+
+      - name: Upload vulnerability report
+        if: github.ref_name == 'main'
+        uses: actions/upload-artifact@v7
+        with:
+          name: "${{ github.event.repository.name }}-grype.json"
+          path: grype.json
+
+  report:
+    name: Report to discussion
+
+    # Turns the Grype JSON report from the scan job into a markdown table and
+    # replaces the tracking discussion's body with it, so the discussion
+    # always reflects the latest main-branch scan. A workflow_dispatch on
+    # another branch would report that branch as if it were main, hence the
+    # guard.
+    if: github.ref_name == 'main'
+
+    needs:
+      - scan
+
+    runs-on: ubuntu-24.04-arm
+
+    permissions:
+      actions: read
+      contents: read
+      discussions: write
+
+    env:
+      DISCUSSION_NUMBER: 134
+
+    steps:
+      # Only needed for mise.toml and mise.lock: this job builds the table
+      # with yq and nothing else here reads the working tree.
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # yq comes from mise so that its version has a single source (mise.toml)
+      # and the download is verified against mise.lock.
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
+          install_args: yq
+
+      - name: Download vulnerability report
+        uses: actions/download-artifact@v8
+        with:
+          name: "${{ github.event.repository.name }}-grype.json"
+
+      - name: Build vulnerability table
+        run: |
+          set -eo pipefail
+          # Flatten each match into a table row. severity/risk/type/installed
+          # version/fixed-in version come straight from grype's JSON fields
+          # (mirroring its own default table columns); the advisory link uses
+          # vulnerability.dataSource. negrisk is a sort-only helper: yq has no
+          # unary minus, so descending-by-risk needs the value pre-negated.
+          yq -pj -oj '
+            ({"Critical":0,"High":1,"Medium":2,"Low":3,"Negligible":4,"Unknown":5}) as $rank
+            | (.matches // [])
+            | map(
+                {
+                  "severity": .vulnerability.severity,
+                  "risk": (.vulnerability.risk // 0),
+                  "package": .artifact.name,
+                  "type": .artifact.type,
+                  "installed": .artifact.version,
+                  "fixed": ((.vulnerability.fix.versions // []) | join(", ")),
+                  "advisory": ("[" + .vulnerability.id + "](" + (.vulnerability.dataSource // "") + ")"),
+                  "platforms": ((.platforms // []) | sort | join(", ")),
+                  "rank": ($rank[.vulnerability.severity] // 9),
+                  "negrisk": (0 - (.vulnerability.risk // 0))
+                }
+              )
+            | sort_by(.rank, .negrisk, .package)
+            | map(del(.rank) | del(.negrisk))
+          ' grype.json > rows.json
+          count=$(yq -pj -oj 'length' rows.json)
+          # Collapsing the full platform list to "all" is done here rather than
+          # in yq: yq has no if/then/else, and `select(false) | "all"` still
+          # emits "all", so the conditional has to live outside the filter.
+          every=$(yq -pj -oy '(.platforms // []) | sort | join(", ")' grype.json)
+          {
+            echo "Vulnerabilities in the binaries built from [\`${GITHUB_SHA:0:12}\`]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA), scanned through the same SBOMs that ship with a release. Updated $(date -u +'%Y-%m-%d %H:%M UTC') by [this run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+            echo
+            if [[ "$count" -eq 0 ]]; then
+              echo "No vulnerabilities found."
+            else
+              echo "| Severity | Risk | Package | Type | Installed | Fixed In | Advisory | Platforms |"
+              echo "| --- | --- | --- | --- | --- | --- | --- | --- |"
+              # LC_ALL=C: printf "%.1f" must use a period regardless of the
+              # runner's locale, or it silently truncates "6.6" to "6" (parsed
+              # up to the first non-digit) and re-renders it as "6,0".
+              yq -pj -ot rows.json | tail -n +2 |
+                LC_ALL=C awk -F'\t' -v every="$every" '{
+                  if ($8 == every) $8 = "all"
+                  printf "| %s | %.1f | %s | %s | %s | %s | %s | %s |\n", $1, $2, $3, $4, $5, $6, $7, $8
+                }'
+            fi
+          } > body.md
+          echo "vulnerabilities: $count"
+
+      - name: Update discussion
+        run: |
+          set -eo pipefail
+          discussion_id=$(gh api graphql -f query='
+            query($owner:String!,$repo:String!,$num:Int!){
+              repository(owner:$owner,name:$repo){
+                discussion(number:$num){ id }
+              }
+            }' -f owner="${{ github.repository_owner }}" -f repo="${{ github.event.repository.name }}" -F num="$DISCUSSION_NUMBER" \
+            --jq '.data.repository.discussion.id')
+          if [[ -z "$discussion_id" || "$discussion_id" == "null" ]]; then
+            echo "Discussion #$DISCUSSION_NUMBER not found" >&2
+            exit 1
+          fi
+          gh api graphql -f query='
+            mutation($id:ID!,$body:String!){
+              updateDiscussion(input:{discussionId:$id, body:$body}){
+                discussion{ id }
+              }
+            }' -f id="$discussion_id" -F body=@body.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

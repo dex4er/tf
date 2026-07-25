@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - mise.lock
+      - mise.toml
   workflow_dispatch: {}
 
 permissions:
@@ -21,6 +22,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      # The action adds `--locked` automatically when a lock file is present, so
+      # this downloads every tool for this platform and verifies it against the
+      # recorded checksum - proving the locked sums match the real artifacts.
+      # Only the runner's platform is covered that way; the other seven are
+      # covered by the diff check below. Installing first, rather than last, also
+      # puts the pinned yq on PATH for that check - it used to rely on whatever
+      # yq the runner image happened to ship, unpinned and unverified against
+      # mise.lock.
+      - name: Install locked tools
+        uses: jdx/mise-action@v4
+        with:
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
+
       # A checksum that changes while its tool version stays the same means the
       # artifact behind an already pinned URL was replaced. That is the one thing
       # in a lockfile diff a human reviewer could realistically spot, and since
@@ -28,7 +42,7 @@ jobs:
       # instead. Comparing on tool+version+platform means a platform added for an
       # unchanged version is not flagged, only a genuinely swapped artifact is.
       - name: Check for replaced artifacts
-        run: |
+        run: |-
           set -eo pipefail
           rows() {
             yq -p toml -o json -I0 '
@@ -57,13 +71,3 @@ jobs:
             exit 1
           fi
           echo "No replaced artifacts: $(wc -l < head.tsv) locked entries compared."
-
-      # The action adds `--locked` automatically when a lock file is present, so
-      # this downloads every tool for this platform and verifies it against the
-      # recorded checksum - proving the locked sums match the real artifacts.
-      # Only the runner's platform is covered that way; the other seven are
-      # covered by the diff check above.
-      - name: Install locked tools
-        uses: jdx/mise-action@v4
-        with:
-          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
