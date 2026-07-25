@@ -51,7 +51,7 @@ jobs:
         if: matrix.tool == 'opentofu'
         uses: opentofu/setup-opentofu@v2
         with:
-          tofu_version: 1.12.3 # datasource=github-releases depName=opentofu/opentofu
+          tofu_version: 1.12.5 # datasource=github-releases depName=opentofu/opentofu
           tofu_wrapper: false
 
       # GoReleaser comes from mise rather than goreleaser-action so its version
