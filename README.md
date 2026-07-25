@@ -61,8 +61,12 @@ Install with [homebrew](https://brew.sh/):
 
 ```sh
 brew tap dex4er/tap
-brew install tf
+brew install --cask tf
 ```
+
+Since v2.14.1 the tap ships a cask rather than a formula, on both macOS and
+Linux. If you installed the formula earlier, `brew upgrade` migrates you over
+automatically.
 
 ### Zsh
 
