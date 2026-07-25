@@ -42,12 +42,30 @@ checksum:
 changelog:
   use: github
 
-brews:
+homebrew_casks:
   - name: tf
     description: Less verbose and more shell friendly Terraform
     homepage: https://github.com/dex4er/tf
-    license: MIT
+    binaries:
+      - tf
     repository:
       owner: dex4er
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_GITHUB_TOKEN }}"
+    # The released binaries are neither signed nor notarized, so without
+    # clearing the quarantine attribute Gatekeeper refuses to run tf after a
+    # cask install. Casks have no license field, so the MIT declaration that
+    # the formula carried is gone - it lives in LICENSE and in the repository
+    # metadata.
+    #
+    # The upstream example points xattr at "#{staged_path}/<name>", which does
+    # not exist here: the archives are bare binaries, so the staged file keeps
+    # its artifact name (tf-darwin-arm64) - see the binary stanzas in the
+    # generated cask. postflight is shared by every platform block and cannot
+    # know which one, so clear the whole staged directory recursively instead.
+    hooks:
+      post:
+        install: |-
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", staged_path]
+          end

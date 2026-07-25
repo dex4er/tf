@@ -54,11 +54,17 @@ jobs:
           tofu_version: 1.12.3 # datasource=github-releases depName=opentofu/opentofu
           tofu_wrapper: false
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v7
+      # GoReleaser comes from mise rather than goreleaser-action so its version
+      # lives in mise.toml only, instead of being pinned again here, and so the
+      # download is verified against the checksum in mise.lock.
+      - name: Set up GoReleaser
+        uses: jdx/mise-action@v4
         with:
-          version: 2.16.0 # datasource=github-releases depName=goreleaser/goreleaser
-          args: build --clean --snapshot --single-target --output tf
+          version: 2026.7.13 # datasource=github-releases depName=jdx/mise
+          install_args: goreleaser
+
+      - name: Run GoReleaser
+        run: goreleaser build --clean --snapshot --single-target --output tf
 
       - name: Run tests
         run: make test
