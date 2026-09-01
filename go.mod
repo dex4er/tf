@@ -2,7 +2,7 @@ module github.com/dex4er/tf
 
 go 1.25.0
 
-toolchain go1.26.5
+toolchain go1.27.1
 
 require (
 	github.com/awoodbeck/strftime v0.0.0-20180221155908-016cde65fcde
