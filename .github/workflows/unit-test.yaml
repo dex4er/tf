@@ -1,8 +1,7 @@
 name: Unit Test
 
 # Apart from Test, whose matrix runs make test once for Terraform and once
-# for OpenTofu: the unit tests need neither, and run on every pull request,
-# also one of a stack whose base is not main.
+# for OpenTofu, which the unit tests need neither of.
 on:
   pull_request:
     branches:

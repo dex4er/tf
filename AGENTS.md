@@ -58,8 +58,9 @@ make unit    # go test ./..., without terraform or tofu
 ```
 
 The workflow Test runs `make test` in a matrix of Terraform and OpenTofu, and
-Unit Test runs `make unit` once, on every pull request, as the unit tests need
-neither tool.
+Unit Test runs `make unit` once, as the unit tests need neither tool. Both
+run on a pull request to any branch, so that the upper pull request of a
+stack, whose base is not `main`, is tested before the stack merges.
 
 `tests/test.sh` sets `TF_AGENT=false` and unsets `NO_COLOR`, so that the
 `.out` files keep their colors when an agent runs the tests; the tests of the
