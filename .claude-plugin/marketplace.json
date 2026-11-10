@@ -1,0 +1,15 @@
+{
+  "name": "tf",
+  "owner": {
+    "name": "dex4er",
+    "url": "https://github.com/dex4er"
+  },
+  "description": "Skills for coding agents that run Terraform and OpenTofu with tf",
+  "plugins": [
+    {
+      "name": "tf",
+      "source": "./plugins/tf",
+      "description": "Skills for running Terraform and OpenTofu with tf, the less verbose and more shell friendly wrapper"
+    }
+  ]
+}

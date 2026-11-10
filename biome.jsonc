@@ -14,6 +14,15 @@
     "lineEnding": "lf",
     "useEditorconfig": true
   },
+  "markdown": {
+    // The front matter of the SKILL.md of a skill, which the parser reads as
+    // Markdown otherwise, and turns its YAML into a heading. Biome takes the
+    // options of the parser only for the files under the directory of the
+    // configuration, so Trunk copies it to its sandbox.
+    "parser": {
+      "frontmatter": true
+    }
+  },
   "yaml": {
     "formatter": {
       // An expression of GitHub Actions reads better on one line
@@ -25,11 +34,11 @@
     "rules": {
       "nursery": {
         // Markdown, where the rest of the rules of markdownlint are about
-        // formatting, which the formatter does
+        // formatting, which the formatter does; not useTopLevelHeading, as
+        // CLAUDE.md starts with the import of AGENTS.md
         "useConsistentHeadingLevel": "error",
         "useFencedCodeLanguage": "error",
-        "useSingleTopLevelHeading": "error",
-        "useTopLevelHeading": "error"
+        "useSingleTopLevelHeading": "error"
       },
       "preset": "recommended"
     }
