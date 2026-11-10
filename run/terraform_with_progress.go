@@ -138,6 +138,10 @@ func terraformWithProgress(command string, args []string) error {
 		progressFormat = progress.Verbose
 	}
 
+	if util.IsAgent() {
+		progressFormat = progress.Quiet
+	}
+
 	if TF_PLAN_FORMAT != "" {
 		planFormat = TF_PLAN_FORMAT
 	}
@@ -192,6 +196,14 @@ func terraformWithProgress(command string, args []string) error {
 		default:
 			newArgs = append(newArgs, arg)
 		}
+	}
+
+	// first, as terraform reads no option after a positional argument, as the
+	// plan file of apply
+	if !noColor && util.NoColor() {
+		noColor = true
+		console.NoColor = true
+		newArgs = append([]string{"-no-color"}, newArgs...)
 	}
 
 	// clear color even after errors

@@ -123,6 +123,16 @@ export TERRAFORM_PATH=tofu
 current directory or in one of the parents directories and there was no
 `.terraform-version` file in the directory earlier.
 
+### Coding agents
+
+When `tf` runs under a coding agent, it turns the colors off and hides the
+progress indicator, as with `-no-color -quiet`. It recognizes the agent by the
+`AI_AGENT` environment variable, or by the variables of Claude Code, Codex,
+opencode and GitHub Copilot. `TF_AGENT=true` or `TF_AGENT=false` overrides the
+detection, and the options of the command line still win.
+
+The `NO_COLOR` environment variable turns the colors off too.
+
 ### `tf apply`
 
 The same as `terraform apply` with less verbose output.

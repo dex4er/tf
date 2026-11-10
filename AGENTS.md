@@ -27,6 +27,18 @@ filters what it prints, and takes resource addresses as plain arguments.
   through `strftime`.
 - `progress/` holds the progress formats, `console/` the printing that a
   progress line written with `\r` can overwrite.
+- `util/agent.go` detects a coding agent by the variables that agents set in
+  the environment of their commands and not in the terminal of a human:
+  `AI_AGENT`, the convention shared by several agents, then those of Claude
+  Code, Codex, opencode and Copilot; not `CLAUDECODE`, which the IDE extensions
+  of Claude Code also set in the terminals of a human, nor `TERM_PROGRAM` or
+  `VSCODE_*`. Under an agent, and with `NO_COLOR`, the commands of
+  `terraform_with_progress.go` and `terraform_with_filter.go` get `-no-color`,
+  put first, as terraform reads no option after a positional argument such as
+  the plan file of `apply`; under an agent the progress defaults to `quiet`,
+  which `TF_PROGRESS_FORMAT` and the options still override. A terminal is not
+  the signal, as CI runs without one and wants the colors. `TF_AGENT` forces
+  the detection on or off.
 
 What `tf` prints, its options and its variables are documented in
 `README.md` and in the skill `plugins/tf/skills/tf/SKILL.md`; a change of them
@@ -42,7 +54,16 @@ and the workflows read the same versions.
 ```sh
 make build   # goreleaser build --snapshot --single-target, the binary ./tf
 make test    # tests/test.sh against ./tf
+make unit    # go test ./..., without terraform or tofu
 ```
+
+The workflow Test runs `make test` in a matrix of Terraform and OpenTofu, and
+Unit Test runs `make unit` once, as the unit tests need neither tool. Both
+run on a pull request to any branch, not only to `main`.
+
+`tests/test.sh` sets `TF_AGENT=false` and unsets `NO_COLOR`, so that the
+`.out` files keep their colors when an agent runs the tests; the tests of the
+agent mode unset `TF_AGENT` and set `AI_AGENT` themselves.
 
 Each `tests/NN_<name>_<terraform|tofu>.sh` copies `demo.tf` into
 `tests/tmp`, runs `tf` there with `TERRAFORM_PATH` from the suffix of its

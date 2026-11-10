@@ -95,6 +95,11 @@ test: $(BIN)
 	$(call print-target)
 	$(MAKE) -C tests test
 
+.PHONY: unit
+unit: ## Run Go unit tests
+	$(call print-target)
+	$(GO) test ./...
+
 define print-target
 	@$(PRINTF) "Executing target: \033[36m$@\033[0m\n"
 endef

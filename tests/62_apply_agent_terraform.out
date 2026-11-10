@@ -1,0 +1,595 @@
++ ../../../tf init
+- Installed hashicorp/XXX vX.X.X
+- Installed hashicorp/XXX vX.X.X
+Terraform has been successfully initialized!
++ ../../../tf upgrade
+Terraform has been successfully initialized!
++ ../../../tf plan -parallelism=30
+  + create
+-/+ destroy and then create replacement
+  # local_file.this["10s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 10s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-10s.txt"
+    }
+  # local_file.this["1s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 1s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-1s.txt"
+    }
+  # local_file.this["2s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 2s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-2s.txt"
+    }
+  # local_file.this["3s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 3s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-3s.txt"
+    }
+  # local_file.this["4s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 4s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-4s.txt"
+    }
+  # local_file.this["5s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 5s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-5s.txt"
+    }
+  # local_file.this["6s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 6s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-6s.txt"
+    }
+  # local_file.this["7s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 7s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-7s.txt"
+    }
+  # local_file.this["8s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 8s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-8s.txt"
+    }
+  # local_file.this["9s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 9s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-9s.txt"
+    }
+  # time_sleep.this["10s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "10s"
+      + destroy_duration = "10s"
+      + triggers         = {
+          + "key" = "10s"
+        }
+    }
+  # time_sleep.this["1s"] must be replaced
+  # (imported from "1s,1s")
+  # Warning: this will destroy the imported resource
+-/+ resource "time_sleep" "this" {
+        create_duration  = "1s"
+        destroy_duration = "1s"
+      ~ id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      ~ triggers         = { # forces replacement
+          + "key" = "1s"
+        }
+    }
+  # time_sleep.this["2s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "2s"
+      + destroy_duration = "2s"
+      + triggers         = {
+          + "key" = "2s"
+        }
+    }
+  # time_sleep.this["3s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "3s"
+      + destroy_duration = "3s"
+      + triggers         = {
+          + "key" = "3s"
+        }
+    }
+  # time_sleep.this["4s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "4s"
+      + destroy_duration = "4s"
+      + triggers         = {
+          + "key" = "4s"
+        }
+    }
+  # time_sleep.this["5s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "5s"
+      + destroy_duration = "5s"
+      + triggers         = {
+          + "key" = "5s"
+        }
+    }
+  # time_sleep.this["6s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "6s"
+      + destroy_duration = "6s"
+      + triggers         = {
+          + "key" = "6s"
+        }
+    }
+  # time_sleep.this["7s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "7s"
+      + destroy_duration = "7s"
+      + triggers         = {
+          + "key" = "7s"
+        }
+    }
+  # time_sleep.this["8s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "8s"
+      + destroy_duration = "8s"
+      + triggers         = {
+          + "key" = "8s"
+        }
+    }
+  # time_sleep.this["9s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "9s"
+      + destroy_duration = "9s"
+      + triggers         = {
+          + "key" = "9s"
+        }
+    }
+Plan: 1 to import, 20 to add, 0 to change, 1 to destroy.
+Changes to Outputs:
+  + filenames =
+      + "./demo-1s.txt",
+      + "./demo-2s.txt",
+      + "./demo-3s.txt",
+      + "./demo-4s.txt",
+      + "./demo-5s.txt",
+      + "./demo-6s.txt",
+      + "./demo-7s.txt",
+      + "./demo-8s.txt",
+      + "./demo-9s.txt",
+      + "./demo-10s.txt",
+    ]
++ ../../../tf apply -auto-approve -parallelism=30
+  + create
+-/+ destroy and then create replacement
+  # local_file.this["10s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 10s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-10s.txt"
+    }
+  # local_file.this["1s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 1s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-1s.txt"
+    }
+  # local_file.this["2s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 2s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-2s.txt"
+    }
+  # local_file.this["3s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 3s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-3s.txt"
+    }
+  # local_file.this["4s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 4s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-4s.txt"
+    }
+  # local_file.this["5s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 5s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-5s.txt"
+    }
+  # local_file.this["6s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 6s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-6s.txt"
+    }
+  # local_file.this["7s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 7s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-7s.txt"
+    }
+  # local_file.this["8s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 8s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-8s.txt"
+    }
+  # local_file.this["9s"] will be created
+  + resource "local_file" "this" {
+      + content              = "Content 9s"
+      + directory_permission = "0777"
+      + file_permission      = "0664"
+      + filename             = "./demo-9s.txt"
+    }
+  # time_sleep.this["10s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "10s"
+      + destroy_duration = "10s"
+      + triggers         = {
+          + "key" = "10s"
+        }
+    }
+  # time_sleep.this["1s"] must be replaced
+  # (imported from "1s,1s")
+  # Warning: this will destroy the imported resource
+-/+ resource "time_sleep" "this" {
+        create_duration  = "1s"
+        destroy_duration = "1s"
+      ~ id               = "XXXX-XX-XXTXX:XX:XXZ" -> (known after apply)
+      ~ triggers         = { # forces replacement
+          + "key" = "1s"
+        }
+    }
+  # time_sleep.this["2s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "2s"
+      + destroy_duration = "2s"
+      + triggers         = {
+          + "key" = "2s"
+        }
+    }
+  # time_sleep.this["3s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "3s"
+      + destroy_duration = "3s"
+      + triggers         = {
+          + "key" = "3s"
+        }
+    }
+  # time_sleep.this["4s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "4s"
+      + destroy_duration = "4s"
+      + triggers         = {
+          + "key" = "4s"
+        }
+    }
+  # time_sleep.this["5s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "5s"
+      + destroy_duration = "5s"
+      + triggers         = {
+          + "key" = "5s"
+        }
+    }
+  # time_sleep.this["6s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "6s"
+      + destroy_duration = "6s"
+      + triggers         = {
+          + "key" = "6s"
+        }
+    }
+  # time_sleep.this["7s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "7s"
+      + destroy_duration = "7s"
+      + triggers         = {
+          + "key" = "7s"
+        }
+    }
+  # time_sleep.this["8s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "8s"
+      + destroy_duration = "8s"
+      + triggers         = {
+          + "key" = "8s"
+        }
+    }
+  # time_sleep.this["9s"] will be created
+  + resource "time_sleep" "this" {
+      + create_duration  = "9s"
+      + destroy_duration = "9s"
+      + triggers         = {
+          + "key" = "9s"
+        }
+    }
+Plan: 1 to import, 20 to add, 0 to change, 1 to destroy.
+Changes to Outputs:
+  + filenames =
+      + "./demo-1s.txt",
+      + "./demo-2s.txt",
+      + "./demo-3s.txt",
+      + "./demo-4s.txt",
+      + "./demo-5s.txt",
+      + "./demo-6s.txt",
+      + "./demo-7s.txt",
+      + "./demo-8s.txt",
+      + "./demo-9s.txt",
+      + "./demo-10s.txt",
+    ]
+Apply complete! Resources: 1 imported, 20 added, 0 changed, 1 destroyed.
++ ../../../tf refresh -parallelism=30
++ ../../../tf destroy -auto-approve -parallelism=30
+  - destroy
+  # local_file.this["10s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 10s" -> null
+      - content_base64sha256 = "Z5prD8GOqCuH+n9ropUeOZ0S97E3On0ZfFErMzwbSY4=" -> null
+      - content_base64sha512 = "/5bdepszLGbpdljW+OdT+cuSHW9Kc3SrUeI7NL2VrpjXohtZtpyPAv6jtg7QGUw3AqR4iuCwBd5aKv1TjIT5QA==" -> null
+      - content_md5          = "a4fcecea3ac3f81b4d2bf03fc2a3b9f2" -> null
+      - content_sha1         = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" -> null
+      - content_sha256       = "679a6b0fc18ea82b87fa7f6ba2951e399d12f7b1373a7d197c512b333c1b498e" -> null
+      - content_sha512       = "ff96dd7a9b332c66e97658d6f8e753f9cb921d6f4a7374ab51e23b34bd95ae98d7a21b59b69c8f02fea3b60ed0194c3702a4788ae0b005de5a2afd538c84f940" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-10s.txt" -> null
+      - id                   = "aafe1fb2cfea29107fe5868c3ad2c31e85445bd8" -> null
+    }
+  # local_file.this["1s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 1s" -> null
+      - content_base64sha256 = "R2JqCF9gH8IAaDTCMInEEwcZ1hIl5v8fid8pv8lOyN0=" -> null
+      - content_base64sha512 = "0HjHnRP1RyHlGrbjHyxUrh7QglcDtG1qSBVOX/sWKmG8KKf4X8/SW2iSCtTDn1R/BRTnmsXvaMIuzWnPd204mQ==" -> null
+      - content_md5          = "e1706ec403695e940bd25721a925a196" -> null
+      - content_sha1         = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" -> null
+      - content_sha256       = "47626a085f601fc2006834c23089c4130719d61225e6ff1f89df29bfc94ec8dd" -> null
+      - content_sha512       = "d078c79d13f54721e51ab6e31f2c54ae1ed0825703b46d6a48154e5ffb162a61bc28a7f85fcfd25b68920ad4c39f547f0514e79ac5ef68c22ecd69cf776d3899" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-1s.txt" -> null
+      - id                   = "c21661340a16f5353e461a18fe2f27cbf9b8e65f" -> null
+    }
+  # local_file.this["2s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 2s" -> null
+      - content_base64sha256 = "BryT775y0R+AMM6kWyyiEUAk4z40AIubLhOxaV5Qe4c=" -> null
+      - content_base64sha512 = "6w8oTyKdhdGjDDySTw4L65yEZJP+lQZ1NXvWOHf+vslNXfnNYWW+jvlx0XU53Uxlj6ejtU3PILKFcPDdyHjE7A==" -> null
+      - content_md5          = "8806f6195fa442b0a60cc23fe44808b8" -> null
+      - content_sha1         = "ac7384e6b359d76c4157ace43768f83ff52de1d1" -> null
+      - content_sha256       = "06bc93efbe72d11f8030cea45b2ca2114024e33e34008b9b2e13b1695e507b87" -> null
+      - content_sha512       = "eb0f284f229d85d1a30c3c924f0e0beb9c846493fe950675357bd63877febec94d5df9cd6165be8ef971d17539dd4c658fa7a3b54dcf20b28570f0ddc878c4ec" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-2s.txt" -> null
+      - id                   = "ac7384e6b359d76c4157ace43768f83ff52de1d1" -> null
+    }
+  # local_file.this["3s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 3s" -> null
+      - content_base64sha256 = "W6MxY4epoe2trh+J0txiWA1lADpZ+Heql4XgtYbq1Fk=" -> null
+      - content_base64sha512 = "LoPBTxnyzFaTg4zSzeVtZuWHUn6OBHIKVtmFqpDKE8hrL+UeXV49970TdqZohd83y24na1NfXJWloehHnjO8PQ==" -> null
+      - content_md5          = "51822dc7f0e8ee0c52e82f3ad5b32d05" -> null
+      - content_sha1         = "d2a209c18925e90c3cea5e1cec250368799ee185" -> null
+      - content_sha256       = "5ba3316387a9a1edadae1f89d2dc62580d65003a59f877aa9785e0b586ead459" -> null
+      - content_sha512       = "2e83c14f19f2cc5693838cd2cde56d66e587527e8e04720a56d985aa90ca13c86b2fe51e5d5e3df7bd1376a66885df37cb6e276b535f5c95a5a1e8479e33bc3d" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-3s.txt" -> null
+      - id                   = "d2a209c18925e90c3cea5e1cec250368799ee185" -> null
+    }
+  # local_file.this["4s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 4s" -> null
+      - content_base64sha256 = "JwWv2X7fsfGC3ITPVYEVlTpy2ntW98G4LC8QnTVbjw8=" -> null
+      - content_base64sha512 = "hfi5tvsiuBKG6E77WEeJnhfJ52VouJQ6Sg0lQM+j6adg0aOkg929SGSEnwghZRgNR6Itm0AlUJhPucqXKbHgAg==" -> null
+      - content_md5          = "e06e3b4b609cc9ca6332e0ee0cb7317a" -> null
+      - content_sha1         = "fc922ff08cfe15aa027938315e60fcc26244931f" -> null
+      - content_sha256       = "2705afd97edfb1f182dc84cf558115953a72da7b56f7c1b82c2f109d355b8f0f" -> null
+      - content_sha512       = "85f8b9b6fb22b81286e84efb5847899e17c9e76568b8943a4a0d2540cfa3e9a760d1a3a483ddbd4864849f082165180d47a22d9b402550984fb9ca9729b1e002" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-4s.txt" -> null
+      - id                   = "fc922ff08cfe15aa027938315e60fcc26244931f" -> null
+    }
+  # local_file.this["5s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 5s" -> null
+      - content_base64sha256 = "9J8E57b+wnBb9pRxxL8WBaFqJbHkC+cQ2+2kw5Wy9Ng=" -> null
+      - content_base64sha512 = "Dfv6f8LPfD0h+MMzVx4RDiEF9kCZDGspFDvE8ywv9iTFCDjAGfjxkKyfBSUPDupJZQe9cOwgXFL2D5G2L/5eCQ==" -> null
+      - content_md5          = "458fbcf0cd8562e4c3bf6d0837fbdad7" -> null
+      - content_sha1         = "285fe43f3bb239622ee280ad61e536db9927c73d" -> null
+      - content_sha256       = "f49f04e7b6fec2705bf69471c4bf1605a16a25b1e40be710dbeda4c395b2f4d8" -> null
+      - content_sha512       = "0dfbfa7fc2cf7c3d21f8c333571e110e2105f640990c6b29143bc4f32c2ff624c50838c019f8f190ac9f05250f0eea496507bd70ec205c52f60f91b62ffe5e09" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-5s.txt" -> null
+      - id                   = "285fe43f3bb239622ee280ad61e536db9927c73d" -> null
+    }
+  # local_file.this["6s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 6s" -> null
+      - content_base64sha256 = "ipXPegAhhf0c8LpOj3xCOz5NQ6cX7pLS5krQqyIXtNY=" -> null
+      - content_base64sha512 = "/zoj7JtiKX4bKprpIjImf/hVY3usHi8tECuBTH1ScCAdaJtglvJoi81oEbCkj+MIsaQp51tqPoEAkf0DQgZCGQ==" -> null
+      - content_md5          = "5ed6f753c59c704fd1d743d5bb19ad80" -> null
+      - content_sha1         = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" -> null
+      - content_sha256       = "8a95cf7a002185fd1cf0ba4e8f7c423b3e4d43a717ee92d2e64ad0ab2217b4d6" -> null
+      - content_sha512       = "ff3a23ec9b62297e1b2a9ae92232267ff855637bac1e2f2d102b814c7d5270201d689b6096f2688bcd6811b0a48fe308b1a429e75b6a3e810091fd0342064219" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-6s.txt" -> null
+      - id                   = "1d6464f85d7c72f3c8f312ca543b093fadad6b15" -> null
+    }
+  # local_file.this["7s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 7s" -> null
+      - content_base64sha256 = "XfZLUzWcw3DOUOo1yQhBlQM6pn3fbBVPzq/6brd/EVg=" -> null
+      - content_base64sha512 = "YlXykl5HqOKp1U1pp9GKkZqseE6IdXWuUX8Mt0I1pNlUEqdtEE7vu9XH9isf+k8sKJ00ZTxH/2Evtl428AaW5A==" -> null
+      - content_md5          = "28e3dff5895c527bb012bef520227602" -> null
+      - content_sha1         = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" -> null
+      - content_sha256       = "5df64b53359cc370ce50ea35c9084195033aa67ddf6c154fceaffa6eb77f1158" -> null
+      - content_sha512       = "6255f2925e47a8e2a9d54d69a7d18a919aac784e887575ae517f0cb74235a4d95412a76d104eefbbd5c7f62b1ffa4f2c289d34653c47ff612fb65e36f00696e4" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-7s.txt" -> null
+      - id                   = "ded89bbdf7e5d9cd46d8f3baf7f5c090270fd143" -> null
+    }
+  # local_file.this["8s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 8s" -> null
+      - content_base64sha256 = "b4bvVO1hmISshx/3VSPO8bL7J7souCH9nXM73UQULAc=" -> null
+      - content_base64sha512 = "FCKXzUArLQRZQilyRn7OoUbs1a/NszKRDkReXB8eeBcAvzFHx6kcKgUWYTIZprzU+qUX2ZGC3hDhfUyS2W7+vg==" -> null
+      - content_md5          = "d8516cb0b4a412344a56baa22e7f9f63" -> null
+      - content_sha1         = "1914c083a90ce088fcecee5762ae5d8e1647a994" -> null
+      - content_sha256       = "6f86ef54ed619884ac871ff75523cef1b2fb27bb28b821fd9d733bdd44142c07" -> null
+      - content_sha512       = "142297cd402b2d0459422972467ecea146ecd5afcdb332910e445e5c1f1e781700bf3147c7a91c2a0516613219a6bcd4faa517d99182de10e17d4c92d96efebe" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-8s.txt" -> null
+      - id                   = "1914c083a90ce088fcecee5762ae5d8e1647a994" -> null
+    }
+  # local_file.this["9s"] will be destroyed
+  - resource "local_file" "this" {
+      - content              = "Content 9s" -> null
+      - content_base64sha256 = "2CnLqltbZEQQHFaIELAnu6GBR+8HpHdm7v14HkFWCAQ=" -> null
+      - content_base64sha512 = "jY2/DyFsvC5/JLm7T0pjIsJSSzmV/VQfDa5XhiG0ioi7lL7CsBlPeBYjnPaxy7u+A9E7CxmNL1lyUtmDmi8i2A==" -> null
+      - content_md5          = "aea549f00f28a28d0c206c3cd85d95ad" -> null
+      - content_sha1         = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" -> null
+      - content_sha256       = "d829cbaa5b5b6444101c568810b027bba18147ef07a47766eefd781e41560804" -> null
+      - content_sha512       = "8d8dbf0f216cbc2e7f24b9bb4f4a6322c2524b3995fd541f0dae578621b48a88bb94bec2b0194f7816239cf6b1cbbbbe03d13b0b198d2f597252d9839a2f22d8" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0664" -> null
+      - filename             = "./demo-9s.txt" -> null
+      - id                   = "5ba43ea99614b6119fbaba5b3c7b94c2fdca24ed" -> null
+    }
+  # time_sleep.this["10s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "10s" -> null
+      - destroy_duration = "10s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "10s"
+        } -> null
+    }
+  # time_sleep.this["1s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "1s" -> null
+      - destroy_duration = "1s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "1s"
+        } -> null
+    }
+  # time_sleep.this["2s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "2s" -> null
+      - destroy_duration = "2s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "2s"
+        } -> null
+    }
+  # time_sleep.this["3s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "3s" -> null
+      - destroy_duration = "3s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "3s"
+        } -> null
+    }
+  # time_sleep.this["4s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "4s" -> null
+      - destroy_duration = "4s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "4s"
+        } -> null
+    }
+  # time_sleep.this["5s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "5s" -> null
+      - destroy_duration = "5s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "5s"
+        } -> null
+    }
+  # time_sleep.this["6s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "6s" -> null
+      - destroy_duration = "6s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "6s"
+        } -> null
+    }
+  # time_sleep.this["7s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "7s" -> null
+      - destroy_duration = "7s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "7s"
+        } -> null
+    }
+  # time_sleep.this["8s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "8s" -> null
+      - destroy_duration = "8s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "8s"
+        } -> null
+    }
+  # time_sleep.this["9s"] will be destroyed
+  - resource "time_sleep" "this" {
+      - create_duration  = "9s" -> null
+      - destroy_duration = "9s" -> null
+      - id               = "XXXX-XX-XXTXX:XX:XXZ" -> null
+      - triggers         = {
+          - "key" = "9s"
+        } -> null
+    }
+Plan: 0 to add, 0 to change, 20 to destroy.
+Changes to Outputs:
+  - filenames =
+      - "./demo-1s.txt",
+      - "./demo-2s.txt",
+      - "./demo-3s.txt",
+      - "./demo-4s.txt",
+      - "./demo-5s.txt",
+      - "./demo-6s.txt",
+      - "./demo-7s.txt",
+      - "./demo-8s.txt",
+      - "./demo-9s.txt",
+      - "./demo-10s.txt",
+    ] -> null
+Destroy complete! Resources: 20 destroyed.

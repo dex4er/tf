@@ -6,6 +6,10 @@ cd "$(dirname "$0")"
 
 pwd=$(pwd)
 export TF_PLUGIN_CACHE_DIR=$pwd/tmp/cache
+
+# The .out files keep the colors, also when an agent runs the tests
+export TF_AGENT=false
+unset NO_COLOR
 mkdir -p $TF_PLUGIN_CACHE_DIR
 
 status=0

@@ -43,7 +43,12 @@ func show(line string) {
 	maxLine := max(console.Cols-countersLength, 0)
 	lineTrimmed := line[:min(len(line), maxLine)]
 
-	console.Printf("%s%s%s\r", counters, lineTrimmed, colorstring.Color("[reset]"))
+	reset := ""
+	if !console.NoColor {
+		reset = colorstring.Color("[reset]")
+	}
+
+	console.Printf("%s%s%s\r", counters, lineTrimmed, reset)
 }
 
 func Counters() (string, int) {

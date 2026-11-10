@@ -1,0 +1,34 @@
+name: Unit Test
+
+# Apart from Test, whose matrix runs make test once for Terraform and once
+# for OpenTofu, which the unit tests need neither of.
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: Unit Test
+
+    runs-on: ubuntu-26.04-arm
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Run unit tests
+        run: make unit
