@@ -42,7 +42,7 @@ jobs:
       # lives in mise.toml only, instead of being pinned again here, and so the
       # download is verified against the checksum in mise.lock.
       - name: Set up GoReleaser
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@v5
         with:
           version: 2026.11.6 # datasource=github-releases depName=jdx/mise
           install_args: goreleaser
