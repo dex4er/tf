@@ -41,6 +41,16 @@ checksum:
 
 changelog:
   use: github
+  # The release notes are for the users of tf, so the updates that change only
+  # CI, the development tools or the configuration of Renovate stay out. The
+  # updates of Go and of the Go modules stay in, as they change the binaries.
+  filters:
+    exclude:
+      - ^Automated trunk upgrade
+      - ^Lock file maintenance
+      - "^Renovate: "
+      - "^Update \\S+ action to "
+      - "^Update dependency (@biomejs/biome|anchore/grype|goreleaser|hashicorp/terraform|jdx/mise|opentofu/opentofu|terraform|ubuntu|yq) to "
 
 homebrew_casks:
   - name: tf
