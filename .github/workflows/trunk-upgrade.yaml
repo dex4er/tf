@@ -29,7 +29,7 @@ jobs:
   trunk-upgrade:
     name: trunk upgrade
 
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     timeout-minutes: 10
 
     if: github.event_name != 'issue_comment' || (startsWith(github.event.issue.title, 'Automated trunk
