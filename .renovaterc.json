@@ -26,6 +26,15 @@
   "constraints": {
     "go": ">= 1.22"
   },
+  "packageRules": [
+    {
+      "description": "The terraform monorepo group of config:recommended, as Renovate reads hashicorp/terraform of the version hints and terraform of setup-terraform as two dependencies of one source, titled as the one dependency that it is. The groupName stays, and so does the branch of the group.",
+      "matchSourceUrls": ["https://github.com/hashicorp/terraform"],
+      "group": {
+        "commitMessageTopic": "dependency terraform"
+      }
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
