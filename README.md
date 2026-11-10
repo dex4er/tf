@@ -5,7 +5,7 @@
 [![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml)
 [![Main Scan](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml)
 
-Less verbose and more shell-friendly Terraform.
+Less verbose, more shell-friendly and LLM-friendly Terraform.
 
 | Better this:                                               | Than this:                                                             |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -20,6 +20,12 @@ Terraform more CLI-friendly:
 - allows to use of multiple arguments when original command doesn't support it
 - adds automatically quotes for indexed resources (`xargs` friendly)
 - generates a log file when `TF_OUTPUT_PATH` environment variable is used
+
+`tf` is optimized for LLM coding agents too: its output takes a fraction of
+the tokens of the output of Terraform, and its resource addresses need no
+shell quoting. Under an agent the token-saving mode is on by default, without
+colors and without the progress indicator (see
+[Coding agents](#coding-agents)).
 
 ## Install
 
