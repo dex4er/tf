@@ -1,5 +1,11 @@
 name: Automated trunk upgrade
 
+# Runs trunk upgrade every day, and trunk fmt --all after it, as a new version
+# of a formatter can format the files otherwise, and keeps the changes in the
+# pull request of the branch automated/trunk-upgrade, which a comment /rerun on
+# it runs again. It works with the token of the workflow, whose push leaves the
+# runs of pull_request waiting for an approval, so the job starts Test and
+# Trunk Check on the branch with workflow_dispatch, as Biome Migrate does.
 on:
   issue_comment:
     types:
@@ -14,7 +20,9 @@ on:
   workflow_dispatch: {}
 
 permissions:
+  actions: write
   contents: write
+  issues: write
   pull-requests: write
 
 jobs:
@@ -22,75 +30,76 @@ jobs:
     name: trunk upgrade
 
     runs-on: ubuntu-24.04-arm
-    environment: automated
     timeout-minutes: 10
 
-    if: github.event_name != 'issue_comment' || (startsWith(github.event.issue.title, 'Automated trunk upgrade') && contains(github.event.comment.body, '/rerun'))
+    if: github.event_name != 'issue_comment' || (startsWith(github.event.issue.title, 'Automated trunk
+      upgrade') && contains(github.event.comment.body, '/rerun'))
 
     env:
+      BRANCH: automated/trunk-upgrade
       DO_NOT_TRACK: "1"
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Set up Trunk
         run: curl https://get.trunk.io -fsSL | bash -s -- -y
 
       - name: Trunk upgrade
         run: |
+          set -o pipefail
           trunk upgrade --yes-to-all --no-progress --ci --color | tee .github/update.log
           sed -e '/Downloading Trunk/,/Unpacking Trunk... done/d' -e 's/\x1b\[[0-9;]*m//g' -e 's/^\(  \)\{0,1\}  /\1- /' .github/update.log > .github/pr_body.log
           perl -0777 -ne 'print join ", ", map {s/://gr} map {s/^- //r} grep {/^(-|cli) /} split "\n"' .github/pr_body.log > .github/pr_title.log
 
+      - name: Trunk fmt
+        run: trunk fmt --all --ci --no-progress
+
       - name: Check for changes
         run: |
           if git diff --exit-code; then
-            echo "changes=false" >> $GITHUB_ENV
+            echo "changes=false" >> "${GITHUB_ENV}"
           else
-            echo "changes=true" >> $GITHUB_ENV
+            echo "changes=true" >> "${GITHUB_ENV}"
           fi
-
-      - name: Trunk Check
-        if: env.changes == 'true'
-        uses: trunk-io/trunk-action@v2.0.0
-        with:
-          check-mode: all
-        continue-on-error: true
 
       - name: Commit and push to branch
         if: env.changes == 'true'
-        uses: EndBug/add-and-commit@v11
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          default_author: github_actions
-          message: Automated trunk upgrade [skip ci]
-          new_branch: automated/trunk-upgrade
-          fetch: false
-          push: origin automated/trunk-upgrade --set-upstream --force
+        run: |
+          git add --all -- . ':!.github/*.log'
+          git -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m 'Automated trunk upgrade'
+          git push --force origin "HEAD:refs/heads/${BRANCH}"
 
       - name: Create pull request
         if: env.changes == 'true'
-        run: |-
-          if [[ $(gh pr view automated/trunk-upgrade --json state --jq .state || true) != "OPEN" ]]; then
+        run: |
+          gh label create automated --color ededed --force
+          gh label create trunk --color ededed --force
+          title="Automated trunk upgrade $(cat .github/pr_title.log)"
+          if [[ $(gh pr view "${BRANCH}" --json state --jq .state || true) != "OPEN" ]]; then
             gh pr create \
-              --head automated/trunk-upgrade \
-              --title "Automated trunk upgrade $(cat .github/pr_title.log) [skip ci]" \
+              --base main \
+              --head "${BRANCH}" \
+              --title "${title}" \
               --body-file .github/pr_body.log \
               --label automated \
               --label trunk
           else
-            gh pr edit automated/trunk-upgrade \
-              --title "Automated trunk upgrade $(cat .github/pr_title.log) [skip ci]" \
+            gh pr edit "${BRANCH}" \
+              --title "${title}" \
               --body-file .github/pr_body.log
           fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Run the checks of the commit
+        if: env.changes == 'true'
+        run: |-
+          gh workflow run test.yaml --ref "${BRANCH}"
+          gh workflow run trunk-check.yaml --ref "${BRANCH}"
 
       - name: Close pull request
         if: env.changes == 'false'
-        run: gh pr list --head automated/trunk-upgrade --json number --jq '.[].number' | xargs -rn1 gh pr close --delete-branch
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: gh pr list --head "${BRANCH}" --json number --jq '.[].number' | xargs -rn1 gh pr close --delete-branch

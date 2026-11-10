@@ -1,0 +1,147 @@
+name: Biome Migrate
+
+# Renovate bumps the version of Biome in .trunk/trunk.yaml but cannot run
+# `biome migrate` nor `biome format`, so the $schema and the renamed options
+# and rules of biome.jsonc stay behind, and so do the files that the new
+# version formats otherwise, which Trunk Check fails on. On its branches the
+# update job below commits the migrated biome.jsonc and the formatted files;
+# anywhere else, a file that the Biome of .trunk/trunk.yaml would migrate or
+# format fails the check.
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/biome-migrate.yaml
+      - .trunk/trunk.yaml
+      - biome.jsonc
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check biome.jsonc and the formatting
+
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 10
+
+    outputs:
+      stale: ${{ steps.up_to_date.outputs.stale }}
+
+    env:
+      # Only branches of this repository qualify, never a fork's.
+      RENOVATE_PR: ${{ github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/')
+        && github.event.pull_request.head.repo.full_name == github.repository }}
+
+    steps:
+      # A Renovate branch is checked out at its head rather than merged with
+      # main, so that the migrated biome.jsonc and the formatted files match
+      # the branch they are committed to.
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ env.RENOVATE_PR == 'true' && github.event.pull_request.head.sha || '' }}
+
+      # The version is the one that Trunk runs, pinned with a trailing ! in
+      # .trunk/trunk.yaml. npx comes with the Node of the runner image.
+      - name: Migrate biome.jsonc
+        run: |-
+          BIOME_VERSION=$(perl -ne 'print $1 if /^\s*-\s*biome@([^!\s]+)/' .trunk/trunk.yaml)
+          if [[ -z $BIOME_VERSION ]]; then
+            echo "::error::No version of Biome in .trunk/trunk.yaml" >&2
+            exit 1
+          fi
+          echo "BIOME_VERSION=$BIOME_VERSION" >> "$GITHUB_ENV"
+          npx --yes "@biomejs/biome@${BIOME_VERSION}" migrate --write
+
+      # After the migration, with the options of the migrated biome.jsonc, over
+      # the files of its files.includes, as Trunk Check formats them.
+      - name: Format with Biome
+        run: npx --yes "@biomejs/biome@${BIOME_VERSION}" format --write
+
+      - name: Check the files are up to date
+        id: up_to_date
+        run: |-
+          if git diff --exit-code --stat; then
+            echo "biome.jsonc and the formatting are up to date."
+            exit 0
+          fi
+
+          if [ "$RENOVATE_PR" = 'true' ]; then
+            git diff --binary > biome.patch
+            echo "stale=true" | tee -a "$GITHUB_OUTPUT"
+            echo "::notice::biome.jsonc is not migrated or the files are not formatted on a Renovate branch; the update job commits them."
+            exit 0
+          fi
+
+          echo "::error::biome.jsonc is not migrated or the files are not formatted with the Biome of .trunk/trunk.yaml. Run \`npx --yes @biomejs/biome@$BIOME_VERSION migrate --write\` and \`npx --yes @biomejs/biome@$BIOME_VERSION format --write\` and commit the result." >&2
+          exit 1
+
+      - name: Upload the patch
+        if: steps.up_to_date.outputs.stale == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: biome-patch
+          path: biome.patch
+          retention-days: 1
+
+  # Commits the biome.jsonc that the check job migrated and the files that it
+  # formatted onto the Renovate branch, with the token of the workflow. A push
+  # with it starts no workflow, so the job starts the checks of the commit
+  # itself, as workflow_dispatch is the event that the token can start; this
+  # check among them, which fails if a file still needs migrating or
+  # formatting, as it does not commit on such a run. The job runs no code of
+  # npm: it only applies the patch. The token cannot change a workflow, so a
+  # file of .github/workflows that the new Biome formats otherwise fails the
+  # push, and is formatted by hand.
+  update:
+    name: Commit the migrated biome.jsonc and the formatted files
+
+    needs: check
+    if: needs.check.outputs.stale == 'true'
+
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 10
+
+    permissions:
+      actions: write
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Download the patch
+        uses: actions/download-artifact@v8
+        with:
+          name: biome-patch
+
+      # The author is in gitIgnoredAuthors of .renovaterc.json, so that
+      # Renovate keeps rebasing and updating the branch. The push goes to the
+      # commit that the check job migrated biome.jsonc for: if the branch moved
+      # meanwhile, the push is rejected, and the run of the newer commit takes
+      # over.
+      - name: Commit and push to the pull request branch
+        env:
+          BRANCH: ${{ github.head_ref }}
+          MESSAGE: Migrate biome.jsonc and format the files with the new version of Biome
+        run: |-
+          git apply --index biome.patch
+          rm biome.patch
+          git -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "$MESSAGE"
+          git push origin "HEAD:refs/heads/$BRANCH"
+
+      - name: Run the checks of the commit
+        env:
+          BRANCH: ${{ github.head_ref }}
+          GH_TOKEN: ${{ github.token }}
+        run: |-
+          gh workflow run biome-migrate.yaml --ref "$BRANCH"
+          gh workflow run test.yaml --ref "$BRANCH"
+          gh workflow run trunk-check.yaml --ref "$BRANCH"
