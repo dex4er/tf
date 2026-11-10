@@ -34,11 +34,11 @@
     "rules": {
       "nursery": {
         // Markdown, where the rest of the rules of markdownlint are about
-        // formatting, which the formatter does
+        // formatting, which the formatter does; not useTopLevelHeading, as
+        // CLAUDE.md starts with the import of AGENTS.md
         "useConsistentHeadingLevel": "error",
         "useFencedCodeLanguage": "error",
-        "useSingleTopLevelHeading": "error",
-        "useTopLevelHeading": "error"
+        "useSingleTopLevelHeading": "error"
       },
       "preset": "recommended"
     }
