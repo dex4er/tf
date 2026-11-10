@@ -32,8 +32,9 @@ jobs:
       security-events: write
 
     env:
-      # Renovate keeps this version up to date via the inline datasource hint
-      # below (see .renovaterc.json5 customManagers).
+      # Without the v of the tags of Grype: the regex manager of .renovaterc.json
+      # strips it when it updates the version, so the step that installs Grype
+      # adds it.
       GRYPE_VERSION: 0.121.3 # datasource=github-releases depName=anchore/grype
 
     steps:
@@ -61,7 +62,7 @@ jobs:
         id: grype
         uses: anchore/scan-action/download-grype@v7
         with:
-          grype-version: ${{ env.GRYPE_VERSION }}
+          grype-version: v${{ env.GRYPE_VERSION }}
           cache-db: true
 
       # What is published - the SBOM and the vulnerability report - describes
