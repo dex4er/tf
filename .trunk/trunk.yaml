@@ -1,15 +1,94 @@
 version: 0.1
 cli:
   version: 1.29.0
+# actionlint comes from the maintained fork of kjanat, which continues the
+# releases of rhysd/actionlint after 1.7.12 with the same names of the files,
+# where the plugin downloads them from rhysd/actionlint.
+downloads:
+  - name: actionlint
+    downloads:
+      - os:
+          linux: linux
+          macos: darwin
+        cpu:
+          x86_64: amd64
+          arm_64: arm64
+        url: https://github.com/kjanat/actionlint/releases/download/v${version}/actionlint_${version}_${os}_${cpu}.tar.gz
+      - os: windows
+        cpu:
+          x86_64: amd64
+          arm_64: arm64
+        url: https://github.com/kjanat/actionlint/releases/download/v${version}/actionlint_${version}_windows_${cpu}.zip
 lint:
+  definitions:
+    # shfmt ignores .editorconfig when it is given any formatting flag, and
+    # the plugin passes `-s`, so it would indent with tabs regardless of
+    # indent_style. Run it without flags; `simplify = true` in .editorconfig
+    # keeps the simplification.
+    - name: shfmt
+      commands:
+        - name: format
+          output: shfmt
+          run: shfmt -w ${target}
+          success_codes: [0, 1]
+          cache_results: true
+          formatter: true
+          batch: true
+          in_place: true
+    # Biome formats and lints CSS, HTML, JavaScript, JSON, Markdown and YAML,
+    # with biome.jsonc. parse_regex is matched against the whole output of a
+    # batch, so `^` needs `(?m)` to match at every line; without it Trunk
+    # reports only the first issue that Biome prints. Trunk runs Biome on a copy
+    # of the files in a sandbox outside the repository, with a copy of
+    # biome.jsonc of direct_configs, not --config-path of the one of the
+    # repository, as Biome takes the options of its parser only for the files
+    # under the directory of its configuration. The sandbox has no .gitignore,
+    # which vcs.useIgnoreFile reads, so the commands turn it off, as Trunk
+    # applies .gitignore itself, and --no-errors-on-unmatched passes a file
+    # that biome.jsonc leaves out.
+    - name: biome
+      direct_configs:
+        - biome.jsonc
+      files:
+        - css
+        - html
+        - javascript
+        - json
+        - markdown
+        - yaml
+      commands:
+        - output: regex
+          success_codes:
+            - 0
+            - 1
+          batch: true
+          cache_results: false
+          name: lint
+          parse_regex: (?m)^::(?P<severity>.*) title=(?P<code>[^,]+),file=(?P<path>[^,]+),line=(?P<line>[^,]+),endLine=[^,]+,col=(?P<col>[^,]+),endColumn=[^:]+::(?P<message>.*)
+          read_output_from: stdout
+          run: biome check --vcs-use-ignore-file=false --reporter=github --no-errors-on-unmatched ${target}
+          run_from: ${root_or_parent_with(biome.jsonc)}
+        - output: regex
+          success_codes:
+            - 0
+          batch: true
+          cache_results: false
+          formatter: true
+          name: fmt
+          parse_regex: (?m)^::(?P<severity>.*) title=(?P<code>[^,]+),file=(?P<path>[^,]+),line=(?P<line>[^,]+),endLine=[^,]+,col=(?P<col>[^,]+),endColumn=[^:]+::(?P<message>.*)
+          read_output_from: stdout
+          run: biome format --vcs-use-ignore-file=false --reporter=github --write --no-errors-on-unmatched ${target}
+          run_from: ${root_or_parent_with(biome.jsonc)}
+      run_timeout: 1m
   enabled:
-    - actionlint@1.7.12
+    - actionlint@1.17.1
+    # Renovate bumps it, and the ! keeps it from trunk upgrade, so that Biome
+    # Migrate migrates biome.jsonc for the new version
+    - biome@2.6.6! # datasource=npm depName=@biomejs/biome
     - git-diff-check@SYSTEM
     - gitleaks@8.30.1
     - gofmt@1.20.4
     - golangci-lint2@2.15.0
-    - markdownlint@0.50.0
-    - prettier@3.9.10
     - shellcheck@0.11.0
     - shfmt@3.14.1
     - taplo@0.10.0
@@ -17,17 +96,31 @@ lint:
     - tflint@0.66.0
     - tfsec@1.28.14
     - trufflehog@3.99.8
-    - yamlfmt@0.21.0
+    # yamllint checks what Biome does not, as the duplicated keys and the
+    # values that YAML 1.1 reads otherwise
     - yamllint@1.38.0
   disabled:
     - checkov
     - gokart
     - grype
+    # markdownlint: lints Markdown; Biome formats it and has its rules that are
+    # not about formatting
+    - markdownlint
     - osv-scanner
     - pinact
+    # prettier: formats JSON, Markdown and YAML; Biome formats them
+    - prettier
     - renovate
     - terrascan
     - trivy
+    # yamlfmt: formats YAML; Biome formats it
+    - yamlfmt
+  ignore:
+    # Rewritten by trunk upgrade
+    - linters:
+        - biome
+      paths:
+        - .trunk/trunk.yaml
 actions:
   enabled:
     - trunk-announce

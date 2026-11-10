@@ -1,0 +1,42 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      // Rewritten by trunk upgrade
+      "!**/.trunk"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "useEditorconfig": true
+  },
+  "yaml": {
+    "formatter": {
+      // An expression of GitHub Actions reads better on one line
+      "lineWidth": 120
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "nursery": {
+        // Markdown, where the rest of the rules of markdownlint are about
+        // formatting, which the formatter does
+        "useConsistentHeadingLevel": "error",
+        "useFencedCodeLanguage": "error",
+        "useSingleTopLevelHeading": "error",
+        "useTopLevelHeading": "error"
+      },
+      "preset": "recommended"
+    }
+  },
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
+}
