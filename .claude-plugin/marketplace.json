@@ -9,7 +9,7 @@
     {
       "name": "tf",
       "source": "./plugins/tf",
-      "description": "Skills for running Terraform and OpenTofu with tf, the less verbose and more shell friendly wrapper"
+      "description": "Skills for running Terraform and OpenTofu with tf, the less verbose, more shell-friendly and LLM-friendly wrapper"
     }
   ]
 }

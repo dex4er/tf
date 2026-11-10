@@ -54,7 +54,7 @@ changelog:
 
 homebrew_casks:
   - name: tf
-    description: Less verbose and more shell friendly Terraform
+    description: Less verbose, more shell-friendly and LLM-friendly Terraform
     homepage: https://github.com/dex4er/tf
     binaries:
       - tf

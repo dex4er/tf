@@ -1,6 +1,6 @@
 {
   "name": "tf",
-  "description": "Skills for running Terraform and OpenTofu with tf, the less verbose and more shell friendly wrapper",
+  "description": "Skills for running Terraform and OpenTofu with tf, the less verbose, more shell-friendly and LLM-friendly wrapper",
   "author": {
     "name": "dex4er",
     "url": "https://github.com/dex4er"
