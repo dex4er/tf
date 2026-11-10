@@ -323,6 +323,27 @@ existing signature and checksums will be removed from the lock file. It will
 allow to run providers by Terraform on MacOS when the system blocks
 applications with unrecognized signature.
 
+## Skill for coding agents
+
+`tf` suits coding agents too: its output takes a fraction of the tokens of the
+output of Terraform, and its resource addresses need no shell quoting. The
+skill that teaches an agent to use it is a plugin of
+[Claude Code](https://code.claude.com/docs/en/plugins), whose `SKILL.md` other
+agents read too:
+
+```text
+/plugin install tf --marketplace dex4er/tf
+```
+
+or from the shell, as the extensions of the editors have no `/plugin`:
+
+```sh
+claude plugin install tf --marketplace dex4er/tf
+```
+
+The skill is in
+[plugins/tf/skills/tf/SKILL.md](plugins/tf/skills/tf/SKILL.md).
+
 ## License
 
 Copyright (c) 2020-2025 Piotr Roszatycki <piotr.roszatycki@gmail.com>
