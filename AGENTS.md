@@ -153,6 +153,16 @@ the root of a plugin. It has no version, so that Claude Code updates it with
 each commit, instead of a version that a change of the skill would have to
 bump; `claude plugin validate` warns about it, which is expected.
 
+Its icon, `.claude-plugin/icon.png`, is `tf` in Fira Code SemiBold, in the
+colors of the terminal of the dark theme of VS Code (`#CCCCCC` on `#191A1B`),
+as Claude Code takes no SVG for it. Fira Code has no ligature of `tf`. The
+icon that the developer portal shows is taken from the first submission only.
+
+```sh
+magick -background none -fill '#CCCCCC' -font FiraCode-SemiBold.ttf -pointsize 640 label:tf -trim +repage text.png
+magick -size 1024x1024 xc:'#191A1B' text.png -gravity center -composite -strip PNG24:plugins/tf/.claude-plugin/icon.png
+```
+
 A skill holds the idioms, the commands and the mistakes of its subject, not a
 copy of `README.md`, and its description says when it applies. Its front
 matter has only the fields of the format of Agent Skills, `name` and
