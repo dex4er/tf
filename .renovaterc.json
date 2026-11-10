@@ -1,10 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
+    "prConcurrentLimit, prHourlyLimit: the 10 open pull requests and the 2 an hour of config:recommended would hold back the updates of the many tools, actions and dependencies for hours.",
     "gitIgnoredAuthors: Biome Migrate commits the migrated biome.jsonc and the formatted files to Renovate branches as github-actions. Without this, Renovate would see the branch as modified by someone else and stop rebasing and updating it."
   ],
   "extends": ["config:recommended", ":semanticCommitsDisabled"],
   "addLabels": ["renovate"],
+  "prConcurrentLimit": 25,
+  "prHourlyLimit": 25,
   "gitIgnoredAuthors": [
     "41898282+github-actions[bot]@users.noreply.github.com"
   ],
