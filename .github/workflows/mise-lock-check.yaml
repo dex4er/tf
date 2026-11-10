@@ -31,7 +31,7 @@ jobs:
       # yq the runner image happened to ship, unpinned and unverified against
       # mise.lock.
       - name: Install locked tools
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@v5
         with:
           version: 2026.11.6 # datasource=github-releases depName=jdx/mise
 
