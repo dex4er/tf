@@ -53,8 +53,13 @@ and the workflows read the same versions.
 
 ```sh
 make build   # goreleaser build --snapshot --single-target, the binary ./tf
-make test    # go test ./..., then tests/test.sh against ./tf
+make test    # tests/test.sh against ./tf
+make unit    # go test ./..., without terraform or tofu
 ```
+
+The workflow Test runs `make test` in a matrix of Terraform and OpenTofu, and
+Unit Test runs `make unit` once, on every pull request, as the unit tests need
+neither tool.
 
 `tests/test.sh` sets `TF_AGENT=false` and unsets `NO_COLOR`, so that the
 `.out` files keep their colors when an agent runs the tests; the tests of the
