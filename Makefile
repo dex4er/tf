@@ -93,6 +93,7 @@ clean: ## Clean working directory
 test: ## Test app binary
 test: $(BIN)
 	$(call print-target)
+	$(GO) test ./...
 	$(MAKE) -C tests test
 
 define print-target

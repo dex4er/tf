@@ -34,13 +34,20 @@ directly only for what `tf` cannot do.
 ## For an agent
 
 ```sh
-tf plan -quiet -compact -no-color                  # what changes, one line per resource
-tf plan -quiet -no-color foo.bar                   # the attributes of the ones that matter
-TF_OUTPUT_PATH=tf.log tf apply -quiet -no-color    # filtered output, verbatim log
+tf plan -compact                     # what changes, one line per resource
+tf plan foo.bar                      # the attributes of the ones that matter
+TF_OUTPUT_PATH=tf.log tf apply       # filtered output, verbatim log
 ```
 
-`tf` keeps the colors of `plan` and `apply`, which are escape codes in a
-captured output, so pass `-no-color`; it goes through to terraform or tofu.
+Under a coding agent `tf` turns the colors off and hides the progress, as
+with `-no-color -quiet`, so the output has no escape codes and no redrawn
+spinner. It recognizes the agent by `AI_AGENT`, which Claude Code, opencode and
+Copilot in VS Code set, or by `CLAUDE_CODE_CHILD_SESSION`, `CODEX_CI`,
+`CODEX_THREAD_ID`, `OPENCODE`, `COPILOT_CLI` and `COPILOT_AGENT`. An agent that
+sets none of them gets the same with `TF_AGENT=true`. An older `tf` does not
+detect agents; when its output still has colors or a spinner, pass `-no-color
+-quiet` on the command line.
+
 Read a big plan with `-compact` first, which lists each resource and its action
 without its attributes, and then the resources that matter in full.
 
@@ -104,8 +111,9 @@ is `-chdir=DIR`.
 - Progress format: `-fan` (the default) is a spinner, `-dots` a character per
   line, `-counters` the counts of the resources, `-verbose` the original lines
   with counters (the default when `TF_IN_AUTOMATION` is set), `-verbatim` the
-  original lines, `-quiet` no progress at all. Use `-quiet` when the output is
-  read by a program or an agent rather than watched in a terminal.
+  original lines, `-quiet` no progress at all, the default under an agent.
+  Use `-quiet` when the output is read by a program rather than watched in a
+  terminal.
 - `-no-outputs=false` shows the outputs, which `apply`, `refresh` and `show`
   hide by default.
 - `TF_PLAN_FORMAT` and `TF_PROGRESS_FORMAT` set the defaults, as

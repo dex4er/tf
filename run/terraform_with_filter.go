@@ -36,6 +36,11 @@ func terraformWithFilter(command string, args []string, patternIgnoreLine string
 		}
 	}
 
+	if !noColor && util.NoColor() {
+		noColor = true
+		newArgs = append([]string{"-no-color"}, newArgs...)
+	}
+
 	// clear color even after errors
 	if !noColor {
 		defer fmt.Print("\x1b[0m")
