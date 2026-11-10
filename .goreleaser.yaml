@@ -58,14 +58,19 @@ homebrew_casks:
     # the formula carried is gone - it lives in LICENSE and in the repository
     # metadata.
     #
-    # The upstream example points xattr at "#{staged_path}/<name>", which does
-    # not exist here: the archives are bare binaries, so the staged file keeps
-    # its artifact name (tf-darwin-arm64) - see the binary stanzas in the
-    # generated cask. postflight is shared by every platform block and cannot
-    # know which one, so clear the whole staged directory recursively instead.
+    # The upstream example points xattr at "{{ .StagedPath }}/<name>", which
+    # does not exist here: the archives are bare binaries, so the staged file
+    # keeps its artifact name (tf-darwin-arm64) - see the binary stanzas in the
+    # generated cask. The install steps are shared by every platform block and
+    # cannot know which one, so clear the whole staged directory recursively
+    # instead.
+    #
+    # install_steps, Homebrew's declarative DSL, rather than the raw Ruby of
+    # install: Homebrew deprecated the postflight block that install
+    # generates, and warns about it on every brew command (#154).
     hooks:
       post:
-        install: |-
-          if OS.mac?
-            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", staged_path]
+        install_steps: |-
+          on_macos do
+            run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{ .StagedPath }}"]
           end
