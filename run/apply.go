@@ -12,6 +12,10 @@ func Apply(args []string) error {
 	planFile := ""
 
 	for _, arg := range args {
+		if address, ok := util.TargetAddress(arg); ok {
+			newArgs = append(newArgs, "-target="+util.AddQuotes(address))
+			continue
+		}
 		if strings.HasPrefix(arg, "-") {
 			if strings.HasPrefix(util.ReplaceFirstTwoDashes(arg), "-plan=") {
 				planFile = strings.TrimPrefix(util.ReplaceFirstTwoDashes(arg), "-plan=")

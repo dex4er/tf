@@ -11,6 +11,10 @@ func Refresh(args []string) error {
 	resources := []string{}
 
 	for _, arg := range args {
+		if _, ok := util.TargetAddress(arg); ok {
+			resources = append(resources, arg)
+			continue
+		}
 		if strings.HasPrefix(arg, "-") {
 			if util.ReplaceFirstTwoDashes(arg) == "-target" {
 				continue

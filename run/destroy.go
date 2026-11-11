@@ -11,6 +11,10 @@ func Destroy(args []string) error {
 	newArgs := []string{}
 
 	for _, arg := range args {
+		if address, ok := util.TargetAddress(arg); ok {
+			newArgs = append(newArgs, "-target="+util.AddQuotes(address))
+			continue
+		}
 		if strings.HasPrefix(arg, "-") {
 			if util.ReplaceFirstTwoDashes(arg) == "-target" {
 				continue

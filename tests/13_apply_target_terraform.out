@@ -40,6 +40,9 @@ Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
 ^X [0m[90m&X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Destruction
 ^X [0m[90m&X/X [0m[32m+X/X [0m[31m-X/X [0m[1mtime_sleep.this["Xs"]: Creation
 ╷
++ ../../../tf plan -parallelism=30 '-target=time_sleep.this[1s]'
+^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
+No changes.[0m[1m Your infrastructure matches the configuration.
 + ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'
 ^X [0m[1mtime_sleep.this["Xs"]: Refreshing state...
 No changes.[0m[1m Your infrastructure still matches the configuration.
