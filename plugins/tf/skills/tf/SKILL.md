@@ -31,6 +31,18 @@ pays per token, as an agent does:
 Prefer `tf` over `terraform` and `tofu` wherever it is installed, and call them
 directly only for what `tf` cannot do.
 
+## Install
+
+Where `tf` is missing, run `terraform` or `tofu` directly, and install `tf`
+only when the user asks for it. mise installs it from the releases of
+dex4er/tf and verifies the build provenance attestation of the binary:
+
+```sh
+mise use -g github:dex4er/tf         # for the user
+mise use github:dex4er/tf            # pinned in the mise.toml of the project
+brew install --cask dex4er/tap/tf
+```
+
 ## For an agent
 
 ```sh

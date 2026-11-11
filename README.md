@@ -54,11 +54,11 @@ asdf global tf latest
 
 ### mise
 
-Install with [mise-en-place](https://mise.jdx.dev/):
+Install with [mise-en-place](https://mise.jdx.dev/) from the releases, which
+verifies the build provenance attestation of the binary:
 
 ```sh
-mise plugins install tf https://github.com/dex4er/asdf-tf.git
-mise use -g tf@latest
+mise use -g github:dex4er/tf
 ```
 
 ### Homebrew
@@ -66,8 +66,7 @@ mise use -g tf@latest
 Install with [homebrew](https://brew.sh/):
 
 ```sh
-brew tap dex4er/tap
-brew install --cask tf
+brew install --cask dex4er/tap/tf
 ```
 
 Since v2.14.1 the tap ships a cask rather than a formula, on both macOS and
