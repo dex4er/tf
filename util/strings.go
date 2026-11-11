@@ -22,6 +22,15 @@ func RemoveColors(line string) string {
 	return re.ReplaceAllString(line, "")
 }
 
+// Returns the address of `-target=ADDRESS` or `--target=ADDRESS`, which then gets
+// its quotes back as a positional address does.
+func TargetAddress(arg string) (string, bool) {
+	if address, ok := strings.CutPrefix(ReplaceFirstTwoDashes(arg), "-target="); ok {
+		return address, true
+	}
+	return "", false
+}
+
 func ReplaceFirstTwoDashes(input string) string {
 	if strings.HasPrefix(input, "--") {
 		result := "-" + strings.TrimPrefix(input, "--")

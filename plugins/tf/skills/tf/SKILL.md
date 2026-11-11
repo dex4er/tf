@@ -77,9 +77,10 @@ tf version                   # version of terraform or tofu, and of tf
 
 ## Addresses
 
-An address is a positional argument, never `-target=`, and `tf` adds the
-quotes of a string index that the shell has removed: `tf apply foo.bar[baz]`
-and `tf apply foo.bar["baz"]` both reach `-target='foo.bar["baz"]'`. A numeric
+An address is a positional argument, and `-target=` before it is optional.
+`tf` adds the quotes of a string index that the shell has removed:
+`tf apply foo.bar[baz]`, `tf apply foo.bar["baz"]` and
+`tf apply -target=foo.bar[baz]` all reach `-target='foo.bar["baz"]'`. A numeric
 index, as `foo.bar[0]`, stays as it is. So the addresses need no shell quoting,
 and the output of `tf list` feeds the other commands:
 

@@ -81,11 +81,13 @@ func terraformWithProgress(command string, args []string) error {
 		`|Saved the plan to: `
 
 	patternIgnoreBlockStart := `This plan was saved to: ` +
+		`|Note: You used the -target option, so OpenTofu only checked resources` +
 		`|Warning:.*Applied changes may be incomplete` +
 		`|Warning:.*Resource targeting is in effect` +
 		`|Warning:.*Some objects will no longer be managed by Terraform`
 
 	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
+		`|verify that the addresses passed to -target are correct\.` +
 		`|suggests to use it as part of an error message` +
 		`|You will need to import them into Terraform to manage them again\.` +
 		"|(terraform|tofu) apply `.*`"
