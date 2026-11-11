@@ -5,14 +5,14 @@
 [![Trunk Check](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/trunk-check.yaml)
 [![Main Scan](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml/badge.svg?branch=main)](https://github.com/dex4er/tf/actions/workflows/main-scan.yaml)
 
-Less verbose, more shell-friendly and LLM-friendly Terraform.
+Less verbose, more shell-friendly and LLM-friendly Terraform and OpenTofu.
 
 | Better this:                                               | Than this:                                                             |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [![tf apply -compact](assets/tf-small.gif)](assets/tf.gif) | [![terraform apply](assets/terraform-small.gif)](assets/terraform.gif) |
 
-The original Terraform is abusively oververbosed. The `tf` wrapper makes
-Terraform more CLI-friendly:
+The original Terraform and OpenTofu are abusively oververbosed. The `tf`
+wrapper runs either of them and makes it more CLI-friendly:
 
 - removes unnecessary output
 - adds own colored progress indicator
@@ -22,9 +22,9 @@ Terraform more CLI-friendly:
 - generates a log file when `TF_OUTPUT_PATH` environment variable is used
 
 `tf` is optimized for LLM coding agents too: its output takes a fraction of
-the tokens of the output of Terraform, and its resource addresses need no
-shell quoting. Under an agent the token-saving mode is on by default, without
-colors and without the progress indicator (see
+the tokens of the output of Terraform or OpenTofu, and its resource addresses
+need no shell quoting. Under an agent the token-saving mode is on by default,
+without colors and without the progress indicator (see
 [Coding agents](#coding-agents)).
 
 ## Install
@@ -85,7 +85,8 @@ Add to `~/.zshenv`:
 alias tf='noglob tf'
 ```
 
-You can use re-use Oh My Zsh plugin dedicated to the original Terraform:
+You can re-use the completion of the Oh My Zsh plugin dedicated to the
+original Terraform, whether `tf` runs Terraform or OpenTofu:
 
 ```sh
 compdef _terraform tf
@@ -116,18 +117,22 @@ tf list | fzf | xargs tf show | highlight -O xterm256 --syntax terraform
 
 It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy` because these commands are interactive.
 
-For not recognized commands `tf` passes all arguments to `terraform` command.
+For not recognized commands `tf` passes all arguments to `terraform` or
+`tofu` command.
 
-`terraform` command might be replaced with another using `TERRAFORM_PATH`
-environment variable, ie.:
+### Terraform or OpenTofu
+
+`tf` runs `tofu` if a `.opentofu-version` file exists in the current
+directory or in one of the parent directories and there was no
+`.terraform-version` file in a directory nearer to the current one. Otherwise
+it runs `terraform`.
+
+The command might be set explicitly with `TERRAFORM_PATH` environment
+variable, ie.:
 
 ```sh
 export TERRAFORM_PATH=tofu
 ```
-
-`terraform` command is replaced if `.opentofu-version` file exists in the
-current directory or in one of the parents directories and there was no
-`.terraform-version` file in the directory earlier.
 
 ### Coding agents
 
@@ -141,7 +146,7 @@ The `NO_COLOR` environment variable turns the colors off too.
 
 ### `tf apply`
 
-The same as `terraform apply` with less verbose output.
+The same as `apply` of Terraform or OpenTofu, with less verbose output.
 
 Instead of Reading/Creating/Destroying... messages it will show a short progress
 indicator.
@@ -150,15 +155,15 @@ It will skip `(known after apply)` lines from the `-short` mode output. Also
 it will hide a plan for data sources (`data.xxx will be read during apply`
 blocks) from the `-short` and `-compact` mode output.
 Additional options can be used: `-plan=FILE` which is passed as an argument to
-`terraform apply`, `-counters` shows counters with processed resources,
-`-compact` skips the content of the resources, `-short` removes unecessary
-lines (default), `-full` keeps original manifest, `-fan` hides messages about
-progress and shows short indicator (default), `-dots` hides messages about
-progress and shows single dot or character for each line, `-quiet` hides
-messages about progress and prints no progress indicator, `-verbatim` keeps
-original messages about progress, `-verbose` adds counters to original
-messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides outputs
-(default, `-no-outputs=false` shows it again).
+`terraform apply` or `tofu apply`, `-counters` shows counters with processed
+resources, `-compact` skips the content of the resources, `-short` removes
+unecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dots` hides
+messages about progress and shows single dot or character for each line,
+`-quiet` hides messages about progress and prints no progress indicator,
+`-verbatim` keeps original messages about progress, `-verbose` adds counters
+to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
+outputs (default, `-no-outputs=false` shows it again).
 
 The command accepts the resource name as an argument, with or without the
 `-target=` option. If the argument misses quotes inside square brackets then
@@ -174,7 +179,7 @@ verbose, verbatim).
 
 ### `tf destroy`
 
-The same as `terraform destroy` with less verbose output.
+The same as `destroy` of Terraform or OpenTofu, with less verbose output.
 
 Instead of Reading/Creating/Destroying... messages it will show a short progress
 indicator.
@@ -184,12 +189,14 @@ it will hide a plan for data sources (`data.xxx will be read during apply`
 blocks) from the `-short` and `-compact` mode output.
 
 Additional options can be used: `-counters` shows counters with processed
-resources, `-compact` skips the content of the resources, `-`short`removes
-unnecessary lines (default),`-full`keeps original manifest,`-fan`hides
-messages about progress and shows short indicator (default),`-dots`hides
-messages about progress and shows single dot or character for each line,`-quiet`hides messages about progress and prints no progress indicator,`-verbatim`keeps original messages about progress,`-verbose`adds counters
-to original messages (default if`TF_IN_AUTOMATION=1`), `-no-outputs`hides
-outputs (default,`-no-outputs=false` shows it again).
+resources, `-compact` skips the content of the resources, `-short` removes
+unnecessary lines (default), `-full` keeps original manifest, `-fan` hides
+messages about progress and shows short indicator (default), `-dots` hides
+messages about progress and shows single dot or character for each line,
+`-quiet` hides messages about progress and prints no progress indicator,
+`-verbatim` keeps original messages about progress, `-verbose` adds counters
+to original messages (default if `TF_IN_AUTOMATION=1`), `-no-outputs` hides
+outputs (default, `-no-outputs=false` shows it again).
 
 The command accepts the resource name as an argument, with or without the
 `-target=` option. If the argument misses quotes inside square brackets then
@@ -205,7 +212,8 @@ verbose, verbatim).
 
 ### `tf import`
 
-The same as `terraform import` with better handling of arguments.
+The same as `import` of Terraform or OpenTofu, with better handling of
+arguments.
 
 If the first argument misses quotes inside square brackets then they will be
 added.
@@ -218,31 +226,32 @@ The `tf show` for this resource is run after import unless additional option
 
 ### `tf init`
 
-The same as `terraform init` with less verbose output.
+The same as `init` of Terraform or OpenTofu, with less verbose output.
 
 The command will log to the file named in `TF_OUTPUT_PATH` environment
 variable. The file name is resolved with `strftime`'s `%` sequences.
 
 Additional option `-codesign` causes that all providers will have replaced
 existing signature and checksums will be removed from the lock file. It will
-allow to run providers by Terraform on MacOS when the system blocks
-applications with unrecognized signature.
+allow to run providers by Terraform or OpenTofu on macOS when the system
+blocks applications with unrecognized signature.
 
 ### `tf list`
 
-The same as `terraform state list` with less verbose output and ANSI stripped.
+The same as `state list` of Terraform or OpenTofu, with less verbose output
+and ANSI stripped.
 
 If the argument misses quotes inside square brackets then they will be added.
 
 ### `tf mv`
 
-The same as `terraform state mv` with less verbose output.
+The same as `state mv` of Terraform or OpenTofu, with less verbose output.
 
 If the argument misses quotes inside square brackets then they will be added.
 
 ### `tf plan`
 
-The same as `terraform plan` with less verbose output.
+The same as `plan` of Terraform or OpenTofu, with less verbose output.
 
 Instead of Reading... messages it will show a short progress indicator.
 
@@ -273,7 +282,7 @@ verbose, verbatim).
 
 ### `tf refresh`
 
-The same as `terraform refresh` with less verbose output.
+The same as `refresh` of Terraform or OpenTofu, with less verbose output.
 
 Additional options can be used: `-counters` shows counters with processed
 resources, `-compact` skips the content of the resources, `-short` removes
@@ -299,18 +308,18 @@ verbose, verbatim).
 
 ### `tf rm`
 
-The same as `terraform state rm` with less verbose output.
+The same as `state rm` of Terraform or OpenTofu, with less verbose output.
 
 The command accepts multiple arguments. If the argument misses quotes inside
 square brackets then they will be added.
 
 ### `tf show`
 
-The same as `terraform show` and `terraform state show` with less verbose output
-and ANSI stripped.
+The same as `show` and `state show` of Terraform or OpenTofu, with less
+verbose output and ANSI stripped.
 
-`terraform show` is used when the command is run without arguments and
-`terraform state show` when arguments are used.
+`show` is used when the command is run without arguments and `state show`
+when arguments are used.
 
 The command accepts multiple arguments. If the argument misses quotes inside
 square brackets then they will be added.
@@ -320,31 +329,33 @@ An additional option can be used: `-no-outputs` hides outputs (default,
 
 ### `tf taint`
 
-The same as `terraform taint` and it accepts multiple arguments. If the
-argument misses quotes inside square brackets then they will be added.
+The same as `taint` of Terraform or OpenTofu, and it accepts multiple
+arguments. If the argument misses quotes inside square brackets then they will
+be added.
 
 ### `tf untaint`
 
-The same as `terraform untaint` and it accepts multiple arguments. If the
-argument misses quotes inside square brackets then they will be added.
+The same as `untaint` of Terraform or OpenTofu, and it accepts multiple
+arguments. If the argument misses quotes inside square brackets then they will
+be added.
 
 ### `tf upgrade`
 
-The same as `terraform init -upgrade` with less verbose output.
+The same as `init -upgrade` of Terraform or OpenTofu, with less verbose output.
 
 The command will log to the file named in `TF_OUTPUT_PATH` environment
 variable. The file name is resolved with `strftime`'s `%` sequences.
 
 Additional option `-codesign` causes that all providers will have replaced
 existing signature and checksums will be removed from the lock file. It will
-allow to run providers by Terraform on MacOS when the system blocks
-applications with unrecognized signature.
+allow to run providers by Terraform or OpenTofu on macOS when the system
+blocks applications with unrecognized signature.
 
 ## Skill for coding agents
 
 `tf` suits coding agents too: its output takes a fraction of the tokens of the
-output of Terraform, and its resource addresses need no shell quoting. The
-skill that teaches an agent to use it is a plugin of
+output of Terraform or OpenTofu, and its resource addresses need no shell
+quoting. The skill that teaches an agent to use it is a plugin of
 [Claude Code](https://code.claude.com/docs/en/plugins), whose `SKILL.md` other
 agents read too:
 
