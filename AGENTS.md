@@ -66,7 +66,8 @@ run on a pull request to any branch, not only to `main`.
 agent mode unset `TF_AGENT` and set `AI_AGENT` themselves.
 
 Each `tests/NN_<name>_<terraform|tofu>.sh` copies `demo.tf` into
-`tests/tmp`, runs `tf` there with `TERRAFORM_PATH` from the suffix of its
+`tests/tmp`, or `tests/ephemeral.tf` for the ephemeral resource of the
+provider random, which `demo.tf` has none of, runs `tf` there with `TERRAFORM_PATH` from the suffix of its
 name, and compares the output, after `tests/sanitize.sh`, with its
 `tests/NN_<name>_<tool>.out`. A test of a tool that is not installed is
 skipped. The tests download the providers of `demo.tf` and sleep in it, so

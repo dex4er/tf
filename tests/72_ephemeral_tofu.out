@@ -1,0 +1,33 @@
++ ../../../tf init
+- Installed hashicorp/XXX vX.X.X
+https://opentofu.org/docs/cli/plugins/signing/
+OpenTofu has been successfully initialized![0m[32m
++ ../../../tf plan -verbose
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Open
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Close
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -counters
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Open
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Close
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -dots
+.[0m[34m<[0m[34m.[0m[34m>
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -quiet
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf apply -auto-approve -verbose
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Open
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Close
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf apply -auto-approve -counters
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Open
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Close
+No changes.[0m[1m Your infrastructure matches the configuration.

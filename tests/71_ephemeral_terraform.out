@@ -1,0 +1,40 @@
++ ../../../tf init
+- Installed hashicorp/XXX vX.X.X
+Terraform has been successfully initialized![0m[32m
++ ../../../tf plan -verbose
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Opening
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Closing
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -counters
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Opening
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Closing
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -dots
+.[0m[34m<[0m[34m.[0m[34m>
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf plan -quiet
+No changes.[0m[1m Your infrastructure matches the configuration.
++ ../../../tf apply -auto-approve -verbose
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Opening
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Closing
+No changes.[0m[1m Your infrastructure matches the configuration.
+<1/2 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Opening...
+<2/2 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Opening
+<2/2 [0m[34m>1/2 [0m[1mephemeral.random_password.this: Closing...
+<2/2 [0m[34m>2/2 [0m[1mephemeral.random_password.this: Closing
++ ../../../tf apply -auto-approve -counters
+<0/1 [0m[1mephemeral.random_password.this: Opening...
+<1/1 [0m[1mephemeral.random_password.this: Opening
+<1/1 [0m[34m>0/1 [0m[1mephemeral.random_password.this: Closing...
+<1/1 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Closing
+No changes.[0m[1m Your infrastructure matches the configuration.
+<1/2 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Opening...
+<2/2 [0m[34m>1/1 [0m[1mephemeral.random_password.this: Opening
+<2/2 [0m[34m>1/2 [0m[1mephemeral.random_password.this: Closing...
+<2/2 [0m[34m>2/2 [0m[1mephemeral.random_password.this: Closing
