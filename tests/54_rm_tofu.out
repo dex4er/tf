@@ -1,7 +1,6 @@
 + ../../../tf init
-- Installed hashicorp/XXX vX.X.X
-- Installed hashicorp/XXX vX.X.X
-https://opentofu.org/docs/cli/plugins/signing/
+- Detected previously-installed hashicorp/XXX vX.X.X in the shared cache directory
+- Detected previously-installed hashicorp/XXX vX.X.X in the shared cache directory
 OpenTofu has been successfully initialized![0m[32m
 + ../../../tf destroy -auto-approve
 No changes.[0m[1m No objects need to be destroyed.

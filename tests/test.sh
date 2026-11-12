@@ -39,6 +39,4 @@ for t in [0-9]*.sh; do
   fi
 done
 
-rm -rf $TF_PLUGIN_CACHE_DIR
-
 exit $status

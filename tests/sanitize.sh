@@ -79,6 +79,7 @@ tr '\015' '\012' |
     -e 's/ (signed, key ID .*)//' \
     -e 's/ (unauthenticated)//' \
     -e 's/v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[0-9a-zA-Z-]*/vX.X.X/g' \
+    -e 's/version [0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[0-9a-zA-Z-]* of/version X.X.X of/g' \
     -e 's/key ID [0-9A-F][0-9A-F]*/key ID XXX/g' \
     -e 's/[0-9a-f]\{8\}-[0-9a-f]\{4\}-[0-9a-f]\{4\}-[0-9a-f]\{4\}-[0-9a-f]\{12\}/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/g' \
     -e 's/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z/XXXX-XX-XXTXX:XX:XXZ/g' \

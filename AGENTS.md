@@ -88,6 +88,18 @@ for a `removed` block that keeps the object. It runs `tf` there with
 skipped. The tests download the providers of `demo.tf` and sleep in it, so
 they need the network and take a while.
 
+`tests/lock.sh` gives each test the lock file of its fixture and tool from
+`tests/tmp/locks`, which it generates when it is missing or older than the
+fixture, outside the output that the test compares. With the lock file and the
+provider cache of `tests/tmp/cache`, which `test.sh` keeps between runs,
+`init` needs no network with OpenTofu, and only the registry with Terraform:
+without the lock file Terraform fetches the checksums of each provider from
+`releases.hashicorp.com`, whose timeouts failed the tests. `upgrade` needs the
+network still. The lock files pin the providers until `make clean` removes
+`tests/tmp`; the `.out` files mask their versions, and CI starts without them.
+The tests of `version` run no `init` and take no lock file, as `version` would
+list its providers.
+
 The `.out` files keep the ANSI codes that terraform and tofu print, so a
 change of the filtering or of the colors changes them. `TEST_UPDATE=1 make
 test` rewrites the `.out` of each failing test with its current output; read

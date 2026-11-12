@@ -1,6 +1,6 @@
 + ../../../tf init
-- Installed hashicorp/XXX vX.X.X
-- Installed hashicorp/XXX vX.X.X
+- Reusing version X.X.X of hashicorp/XXX from the dependency lock file
+- Reusing version X.X.X of hashicorp/XXX from the dependency lock file
 Terraform has been successfully initialized![0m[32m
 + ../../../tf plan -parallelism=30 -full
 ^X [0m[1mtime_sleep.this["Xs"]: Preparing import...
