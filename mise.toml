@@ -1,5 +1,5 @@
 [tools]
-goreleaser = "2.20.0"
+goreleaser = "2.20.2"
 yq = "4.54.3"
 
 [settings]
