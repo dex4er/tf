@@ -309,6 +309,16 @@ func terraformWithProgress(command string, args []string) error {
 					goto NEXT
 				}
 
+				// before the start, which "Opening complete" and "Closing complete" of
+				// terraform match too
+				if m := reStopOperation.FindStringSubmatch(line); m != nil {
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Stop(progressFormat, line, m[1], strings.ToLower(m[2]))
+					goto NEXT
+				}
+
 				if m := reStartOperation.FindStringSubmatch(line); m != nil {
 					line := m[0]
 					line = strings.TrimSuffix(line, "\n")
@@ -322,14 +332,6 @@ func terraformWithProgress(command string, args []string) error {
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
 					progress.Still(progressFormat, line, m[1], strings.ToLower(m[2]))
-					goto NEXT
-				}
-
-				if m := reStopOperation.FindStringSubmatch(line); m != nil {
-					line := m[0]
-					line = strings.TrimSuffix(line, "\n")
-					line = strings.TrimSuffix(line, "\r")
-					progress.Stop(progressFormat, line, m[1], strings.ToLower(m[2]))
 					goto NEXT
 				}
 			}
