@@ -12,7 +12,7 @@ filters what it prints, and takes resource addresses as plain arguments.
 - `run/` has a file per subcommand, and a helper for each kind of them:
   `terraform_with_progress.go` for the ones with a plan and a progress
   indicator (`plan`, `apply`, `destroy`, `refresh`, `import`), with the regular
-  expressions of what is dropped; `terraform_with_filter.go` for `init` and
+  expressions of what is dropped, and its options in `progress_options.go`; `terraform_with_filter.go` for `init` and
   `upgrade`; `terraform_without_colors.go` for `list` and `show`;
   `terraform_with_args_quotes.go` for `mv` and `rm`; and
   `terraform_with_args_iteration.go` for `taint` and `untaint`, which run once
@@ -63,8 +63,10 @@ Unit Test runs `make unit` once, as the unit tests need neither tool. Both
 run on a pull request to any branch, not only to `main`.
 
 The unit tests cover what the shell tests reach little: the arguments, which
-they pass in one form of an address each, and the choice of terraform or tofu,
-which they skip by setting `TERRAFORM_PATH`. What `tf` prints, its filtering
+they pass in one form of an address each, the options with their defaults from
+the environment, as `-no-color` before the plan file under an agent, which no
+shell test combines, and the choice of terraform or tofu, which they skip by
+setting `TERRAFORM_PATH`. What `tf` prints, its filtering
 and its progress, is specified by the `.out` files, and gets no unit tests.
 
 `tests/test.sh` sets `TF_AGENT=false` and unsets `NO_COLOR`, so that the
