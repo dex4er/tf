@@ -17,7 +17,12 @@ filters what it prints, and takes resource addresses as plain arguments.
   `terraform_with_args_quotes.go` for `mv` and `rm`; and
   `terraform_with_args_iteration.go` for `taint` and `untaint`, which run once
   per address. `target_args.go` turns the addresses of `plan`, `apply` and
-  `destroy` into `-target=` and puts the plan file of `-plan=` last.
+  `destroy` into `-target=` and puts the plan file of `-plan=` last. Its
+  `valueOptions` lists the options of terraform and tofu that take a value,
+  which can come as the next argument, as `-out tfplan`: an option missing
+  from it gets its value taken for an address, so a new option of terraform or
+  tofu with a value goes there, and in `addressOptions` when its value is an
+  address, as `-replace`, `-exclude` and `-invoke`.
   `exec_terraform_command.go` chooses `TERRAFORM_PATH`, or `tofu` or
   `terraform` from the nearest `.opentofu-version` or `.terraform-version`
   (`util/find.go`).

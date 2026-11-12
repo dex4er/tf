@@ -14,7 +14,8 @@ func Show(args []string) error {
 
 	noOutputs := true
 
-	for _, arg := range args {
+	for i := 0; i < len(args); i++ {
+		arg := args[i]
 		switch util.ReplaceFirstTwoDashes(arg) {
 		case "-no-output":
 			noOutputs = true
@@ -26,7 +27,9 @@ func Show(args []string) error {
 			noOutputs = false
 		default:
 			if strings.HasPrefix(arg, "-") {
-				newArgs = append(newArgs, arg)
+				optionArgs, n := optionArgs(args, i)
+				newArgs = append(newArgs, optionArgs...)
+				i += n - 1
 			} else if _, err := os.Stat(arg); err == nil {
 				newArgs = append(newArgs, arg)
 			} else {

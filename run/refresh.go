@@ -1,31 +1,14 @@
 package run
 
 import (
+	"slices"
 	"strings"
-
-	"github.com/dex4er/tf/util"
 )
 
 func Refresh(args []string) error {
-	newArgs := []string{}
-	resources := []string{}
+	newArgs := targetArgs(args, false)
 
-	for _, arg := range args {
-		if _, ok := util.TargetAddress(arg); ok {
-			resources = append(resources, arg)
-			continue
-		}
-		if strings.HasPrefix(arg, "-") {
-			if util.ReplaceFirstTwoDashes(arg) == "-target" {
-				continue
-			}
-			newArgs = append(newArgs, arg)
-		} else {
-			resources = append(resources, arg)
-		}
-	}
-
-	if len(resources) > 0 {
+	if slices.ContainsFunc(newArgs, func(arg string) bool { return strings.HasPrefix(arg, "-target=") }) {
 		return Apply(append([]string{"-refresh-only", "-auto-approve"}, args...))
 	}
 

@@ -119,6 +119,10 @@ It is recommended to use `$()` rather than `xargs` for `tf apply` or `tf destroy
 For not recognized commands `tf` passes all arguments to `terraform` or
 `tofu` command.
 
+The options take their values after `=` or as the next argument, as `-out
+tfplan` or `-var name=value`. The addresses of `-replace`, `-exclude` and
+`-invoke` get their quotes back as those of `-target` do.
+
 ### Terraform or OpenTofu
 
 `tf` runs `tofu` if a `.opentofu-version` file exists in the current
