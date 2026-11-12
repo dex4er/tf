@@ -16,7 +16,8 @@ filters what it prints, and takes resource addresses as plain arguments.
   `upgrade`; `terraform_without_colors.go` for `list` and `show`;
   `terraform_with_args_quotes.go` for `mv` and `rm`; and
   `terraform_with_args_iteration.go` for `taint` and `untaint`, which run once
-  per address.
+  per address. `target_args.go` turns the addresses of `plan`, `apply` and
+  `destroy` into `-target=` and puts the plan file of `-plan=` last.
   `exec_terraform_command.go` chooses `TERRAFORM_PATH`, or `tofu` or
   `terraform` from the nearest `.opentofu-version` or `.terraform-version`
   (`util/find.go`).
@@ -60,6 +61,11 @@ make unit    # go test ./..., without terraform or tofu
 The workflow Test runs `make test` in a matrix of Terraform and OpenTofu, and
 Unit Test runs `make unit` once, as the unit tests need neither tool. Both
 run on a pull request to any branch, not only to `main`.
+
+The unit tests cover what the shell tests reach little: the arguments, which
+they pass in one form of an address each, and the choice of terraform or tofu,
+which they skip by setting `TERRAFORM_PATH`. What `tf` prints, its filtering
+and its progress, is specified by the `.out` files, and gets no unit tests.
 
 `tests/test.sh` sets `TF_AGENT=false` and unsets `NO_COLOR`, so that the
 `.out` files keep their colors when an agent runs the tests; the tests of the
