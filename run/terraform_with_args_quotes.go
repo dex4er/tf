@@ -7,16 +7,22 @@ import (
 )
 
 func terraformWithArgsQuotes(command string, args []string) error {
+	return Terraform(command, quotedArgs(args))
+}
+
+// Keeps the order, as the subcommand of `state` comes first.
+func quotedArgs(args []string) []string {
 	newArgs := []string{}
 
-	for _, arg := range args {
-		if strings.HasPrefix(arg, "-") {
-			newArgs = append(newArgs, arg)
-		} else {
-			newArgs = append(newArgs, util.AddQuotes(arg))
+	for i := 0; i < len(args); i++ {
+		if strings.HasPrefix(args[i], "-") {
+			optionArgs, n := optionArgs(args, i)
+			newArgs = append(newArgs, optionArgs...)
+			i += n - 1
+			continue
 		}
+		newArgs = append(newArgs, util.AddQuotes(args[i]))
 	}
 
-	// it should print a message that command expects exactly one argument
-	return Terraform(command, newArgs)
+	return newArgs
 }

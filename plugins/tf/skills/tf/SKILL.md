@@ -93,8 +93,10 @@ An address is a positional argument, and `-target=` before it is optional.
 `tf` adds the quotes of a string index that the shell has removed:
 `tf apply foo.bar[baz]`, `tf apply foo.bar["baz"]` and
 `tf apply -target=foo.bar[baz]` all reach `-target='foo.bar["baz"]'`. A numeric
-index, as `foo.bar[0]`, stays as it is. So the addresses need no shell quoting,
-and the output of `tf list` feeds the other commands:
+index, as `foo.bar[0]`, stays as it is. The addresses of `-replace`,
+`-exclude` (OpenTofu) and `-invoke` (Terraform) get their quotes back too. So
+the addresses need no shell quoting, and the output of `tf list` feeds the
+other commands:
 
 ```sh
 tf list | grep module.old | xargs tf show
@@ -116,6 +118,11 @@ The options of `tf` and of `terraform` go **after** the subcommand: `tf plan
 -quiet`, never `tf -quiet plan`, which goes to terraform or tofu as it is, and
 which they reject as an unknown option. The only option before the subcommand
 is `-chdir=DIR`.
+
+A value goes after `=` or as the next argument: `-out tfplan` and `-var
+name=value` work as `-out=tfplan` and `-var=name=value` do. An older `tf` took
+such a value for an address, and saved the plan of `-out tfplan` as
+`-target=tfplan`; there the value goes after `=`.
 
 - Plan format: `-short` (the default) drops the noise, `-compact` drops the
   attributes of the resources too, `-full` keeps the original plan. A
