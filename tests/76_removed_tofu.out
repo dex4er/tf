@@ -19,7 +19,6 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     output = "this"
 }
 Plan:[0m 0 to add, 0 to change, 0 to destroy, 1 to forget.
-╷
 + ../../../tf apply -auto-approve -quiet
   [31m.[0m forget
   # terraform_data.this[0m will be removed from the OpenTofu state [1m[31mbut will not be destroyed
@@ -29,5 +28,4 @@ Plan:[0m 0 to add, 0 to change, 0 to destroy, 1 to forget.
     output = "this"
 }
 Plan:[0m 0 to add, 0 to change, 0 to destroy, 1 to forget.
-╷
 Apply complete! Resources: 0 added, 0 changed, 0 destroyed, 1 forgotten.
