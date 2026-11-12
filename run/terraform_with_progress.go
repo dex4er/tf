@@ -23,10 +23,6 @@ const (
 	Short   = "short"
 )
 
-var TF_IN_AUTOMATION = os.Getenv("TF_IN_AUTOMATION")
-var TF_PLAN_FORMAT = os.Getenv("TF_PLAN_FORMAT")
-var TF_PROGRESS_FORMAT = os.Getenv("TF_PROGRESS_FORMAT")
-
 func terraformWithProgress(command string, args []string) error {
 	patternIgnoreLine := `  Prepared .* for import` +
 		`|: Drift detected` +
@@ -131,81 +127,16 @@ func terraformWithProgress(command string, args []string) error {
 	reStopOperation := regexp.MustCompile(patternStopOperation)
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
-	planFormat := Short
-	progressFormat := progress.Counters
-	noColor := false
-	noOutputs := true
+	opts := parseProgressOptions(args)
+	planFormat := opts.planFormat
+	progressFormat := opts.progressFormat
+	noColor := opts.noColor
+	noOutputs := opts.noOutputs
+	newArgs := opts.args
+	inAutomation := os.Getenv("TF_IN_AUTOMATION") != ""
 
-	if TF_IN_AUTOMATION != "" {
-		progressFormat = progress.Verbose
-	}
-
-	if util.IsAgent() {
-		progressFormat = progress.Quiet
-	}
-
-	if TF_PLAN_FORMAT != "" {
-		planFormat = TF_PLAN_FORMAT
-	}
-
-	if TF_PROGRESS_FORMAT != "" {
-		progressFormat = TF_PROGRESS_FORMAT
-	}
-
-	newArgs := []string{}
-
-	for _, arg := range args {
-		switch util.ReplaceFirstTwoDashes(arg) {
-		case "-compact":
-			planFormat = Compact
-		case "-counter":
-			progressFormat = progress.Counters
-		case "-counters":
-			progressFormat = progress.Counters
-		case "-dot":
-			progressFormat = progress.Dots
-		case "-dots":
-			progressFormat = progress.Dots
-		case "-fan":
-			progressFormat = progress.Fan
-		case "-full":
-			planFormat = Full
-		case "-no-color":
-			noColor = true
-			console.NoColor = true
-			newArgs = append(newArgs, arg)
-		case "-no-colors":
-			noColor = true
-			console.NoColor = true
-			newArgs = append(newArgs, "-no-color")
-		case "-no-output":
-			noOutputs = true
-		case "-no-outputs":
-			noOutputs = true
-		case "-no-output=false":
-			noOutputs = false
-		case "-no-outputs=false":
-			noOutputs = false
-		case "-quiet":
-			progressFormat = progress.Quiet
-		case "-short":
-			planFormat = Short
-		case "-verbatim":
-			planFormat = Full
-			progressFormat = progress.Verbatim
-		case "-verbose":
-			progressFormat = progress.Verbose
-		default:
-			newArgs = append(newArgs, arg)
-		}
-	}
-
-	// first, as terraform reads no option after a positional argument, as the
-	// plan file of apply
-	if !noColor && util.NoColor() {
-		noColor = true
+	if noColor {
 		console.NoColor = true
-		newArgs = append([]string{"-no-color"}, newArgs...)
 	}
 
 	// clear color even after errors
@@ -406,7 +337,7 @@ func terraformWithProgress(command string, args []string) error {
 			}
 
 			// in CI do not add spaces clearing progress indicator
-			if TF_IN_AUTOMATION != "" {
+			if inAutomation {
 				fmt.Print(line)
 			} else {
 				console.Print(line)
