@@ -1,5 +1,5 @@
 + ../../../tf init
-- Installed hashicorp/XXX vX.X.X
+- Reusing version X.X.X of hashicorp/XXX from the dependency lock file
 Terraform has been successfully initialized![0m[32m
 + ../../../tf plan -verbose
 <0/1 [0m[1mephemeral.random_password.this: Opening...

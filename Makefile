@@ -88,6 +88,7 @@ clean: ## Clean working directory
 	$(call print-target)
 	$(RM) -f $(BIN)
 	$(RM) -rf dist
+	$(RM) -rf tests/tmp
 
 .PHONY: test
 test: ## Test app binary

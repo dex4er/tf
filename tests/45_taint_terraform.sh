@@ -10,6 +10,7 @@ export TERRAFORM_PATH=${test##*_}
 rm -rf tmp/$test
 mkdir -p tmp/$test
 cp ../demo.tf tmp/$test
+./lock.sh ../demo.tf tmp/$test
 pushd tmp/$test >/dev/null
 
 {

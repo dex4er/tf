@@ -14,6 +14,7 @@ export AI_AGENT=tf-test
 rm -rf tmp/$test
 mkdir -p tmp/$test
 cp ../demo.tf tmp/$test
+./lock.sh ../demo.tf tmp/$test
 pushd tmp/$test >/dev/null
 
 {
