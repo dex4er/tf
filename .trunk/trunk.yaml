@@ -85,7 +85,7 @@ lint:
     - actionlint@1.17.1
     # Renovate bumps it, and the ! keeps it from trunk upgrade, so that Biome
     # Migrate migrates biome.jsonc for the new version
-    - biome@2.6.6! # datasource=npm depName=@biomejs/biome
+    - biome@2.6.7! # datasource=npm depName=@biomejs/biome
     - git-diff-check@SYSTEM
     - gitleaks@8.30.1
     - gofmt@1.20.4
