@@ -80,6 +80,7 @@ tr '\015' '\012' |
     -e 's/ (unauthenticated)//' \
     -e 's/v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[0-9a-zA-Z-]*/vX.X.X/g' \
     -e 's/key ID [0-9A-F][0-9A-F]*/key ID XXX/g' \
+    -e 's/[0-9a-f]\{8\}-[0-9a-f]\{4\}-[0-9a-f]\{4\}-[0-9a-f]\{4\}-[0-9a-f]\{12\}/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/g' \
     -e 's/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9]Z/XXXX-XX-XXTXX:XX:XXZ/g' \
     -e 's/\(hashicorp\/\)[a-z]* /\1XXX /g' \
     -e 's/\["[0-9][0-9]*s"\]:/["Xs"]:/g' \

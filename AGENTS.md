@@ -79,9 +79,11 @@ and its progress, is specified by the `.out` files, and gets no unit tests.
 agent mode unset `TF_AGENT` and set `AI_AGENT` themselves.
 
 Each `tests/NN_<name>_<terraform|tofu>.sh` copies `demo.tf` into
-`tests/tmp`, or `tests/ephemeral.tf` for the ephemeral resource of the
-provider random, which `demo.tf` has none of, runs `tf` there with `TERRAFORM_PATH` from the suffix of its
-name, and compares the output, after `tests/sanitize.sh`, with its
+`tests/tmp`, or a fixture of its own for what `demo.tf` has none of:
+`tests/ephemeral.tf` for an ephemeral resource, `tests/actions.tf` for an
+action of Terraform 1.14, which OpenTofu does not have, and `tests/removed.tf`
+for a `removed` block that keeps the object. It runs `tf` there with
+`TERRAFORM_PATH` from the suffix of its name, and compares the output, after `tests/sanitize.sh`, with its
 `tests/NN_<name>_<tool>.out`. A test of a tool that is not installed is
 skipped. The tests download the providers of `demo.tf` and sleep in it, so
 they need the network and take a while.

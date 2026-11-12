@@ -1,0 +1,33 @@
++ ../../../tf init
+- terraform.io/builtin/terraform is built in to OpenTofu
+OpenTofu has been successfully initialized![0m[32m
++ ../../../tf apply -auto-approve -quiet
+  [32m+[0m create
+  # terraform_data.this[0m will be created
+  [32m+[0m resource "terraform_data" "this" {
+      [32m+[0m input  = "this"
+    }
+Plan:[0m 1 to add, 0 to change, 0 to destroy.
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
++ perl -0 -i -pe 's/resource "terraform_data" "this" \{\n  input = "this"\n\}/removed {\n  from = terraform_data.this\n  lifecycle {\n    destroy = false\n  }\n}/' removed.tf
++ ../../../tf plan -quiet
+  [31m.[0m forget
+  # terraform_data.this[0m will be removed from the OpenTofu state [1m[31mbut will not be destroyed
+  [31m.[0m resource "terraform_data" "this" {
+    id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    input  = "this"
+    output = "this"
+}
+Plan:[0m 0 to add, 0 to change, 0 to destroy, 1 to forget.
+╷
++ ../../../tf apply -auto-approve -quiet
+  [31m.[0m forget
+  # terraform_data.this[0m will be removed from the OpenTofu state [1m[31mbut will not be destroyed
+  [31m.[0m resource "terraform_data" "this" {
+    id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    input  = "this"
+    output = "this"
+}
+Plan:[0m 0 to add, 0 to change, 0 to destroy, 1 to forget.
+╷
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed, 1 forgotten.

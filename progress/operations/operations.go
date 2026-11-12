@@ -9,7 +9,8 @@ const (
 	Creating   = "creat"
 	Modifying  = "modif"
 	Destroying = "destr"
+	Invoking   = "invok"
 )
 
-var Operation2symbol = map[string]string{Refreshing: "^", Reading: "=", Opening: "<", Closing: ">", Importing: "&", Creating: "+", Modifying: "~", Destroying: "-"}
-var Operation2color = map[string]string{Refreshing: "blue", Reading: "cyan", Opening: "blue", Closing: "blue", Importing: "dark_gray", Creating: "green", Modifying: "yellow", Destroying: "red"}
+var Operation2symbol = map[string]string{Refreshing: "^", Reading: "=", Opening: "<", Closing: ">", Importing: "&", Creating: "+", Modifying: "~", Destroying: "-", Invoking: "!"}
+var Operation2color = map[string]string{Refreshing: "blue", Reading: "cyan", Opening: "blue", Closing: "blue", Importing: "dark_gray", Creating: "green", Modifying: "yellow", Destroying: "red", Invoking: "magenta"}

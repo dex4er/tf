@@ -1,0 +1,44 @@
++ ../../../tf init
+- terraform.io/builtin/terraform is built in to Terraform
+- Installed hashicorp/XXX vX.X.X
+Terraform has been successfully initialized![0m[32m
++ ../../../tf plan
+  [32m+[0m create
+  # terraform_data.this[0m will be created
+  [32m+[0m resource "terraform_data" "this" {
+      [32m+[0m input  = "this"
+    }
+    [1m# Actions to be invoked after this change in order:
+    # action.local_command.hello
+Plan:[0m 1 to add, 0 to change, 0 to destroy. Actions: 1 to invoke.
++ ../../../tf apply -auto-approve -counters
+  [32m+[0m create
+  # terraform_data.this[0m will be created
+  [32m+[0m resource "terraform_data" "this" {
+      [32m+[0m input  = "this"
+    }
+    [1m# Actions to be invoked after this change in order:
+    # action.local_command.hello
+Plan:[0m 1 to add, 0 to change, 0 to destroy. Actions: 1 to invoke.
++X/X [0m[35m!0/1 [0m[1mAction started: action.local_command.hello (triggered by terra
+Action action.local_command.hello (triggered by terraform_data.this):[0m
+hello
++X/X [0m[35m!1/1 [0m[1m[32mAction complete: action.local_command.hello (triggered by
++X/X [0m[35m!1/1 [0m[1mterraform_data.this: Creation
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.[0m[1m[32m Actions: 1 invoked.
++ ../../../tf apply -auto-approve -verbose -invoke=action.local_command.hello
+Plan:[0m 0 to add, 0 to change, 0 to destroy. Actions: 1 to invoke.
+  [1m# action.local_command.hello[0m will be invoked
+    # action.local_command.hello
+!0/1 [0m[1mAction started: action.local_command.hello (triggered by CLI)
+Action action.local_command.hello (triggered by CLI):[0m
+hello
+!1/1 [0m[1m[32mAction complete: action.local_command.hello (triggered by CLI)
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.[0m[1m[32m Actions: 1 invoked.
++ ../../../tf apply -auto-approve -quiet -invoke action.local_command.hello
+Plan:[0m 0 to add, 0 to change, 0 to destroy. Actions: 1 to invoke.
+  [1m# action.local_command.hello[0m will be invoked
+    # action.local_command.hello
+Action action.local_command.hello (triggered by CLI):[0m
+hello
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.[0m[1m[32m Actions: 1 invoked.

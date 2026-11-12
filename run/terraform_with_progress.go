@@ -14,6 +14,7 @@ import (
 
 	"github.com/dex4er/tf/console"
 	"github.com/dex4er/tf/progress"
+	"github.com/dex4er/tf/progress/operations"
 	"github.com/dex4er/tf/util"
 )
 
@@ -30,7 +31,8 @@ func terraformWithProgress(command string, args []string) error {
 		`|Acquiring state lock\. This may take a few moments\.\.\.` +
 		`|actions to undo or respond to these changes\.` +
 		`|and found no differences, so no changes are needed\.` +
-		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.` +
+		// not with the actions that an apply of -invoke reports after it
+		`|Apply complete! Resources: 0 added, 0 changed, 0 destroyed\.(?:\x1b\[\d+m)*\r?\n?$` +
 		`|at .* \(if it is present\),` +
 		`|at .*\.terraformignore (if it is present),` +
 		`|Deferred due to pending dependencies` +
@@ -54,6 +56,7 @@ func terraformWithProgress(command string, args []string) error {
 		`|(Terraform|OpenTofu) will destroy all your managed infrastructure, as shown above\.` +
 		`|(Terraform|OpenTofu) will perform the actions described above\.` +
 		`|(Terraform|OpenTofu) will perform the following actions:` +
+		`|Terraform will invoke the following action\(s\):` +
 		`|(Terraform|OpenTofu) specifically suggests` +
 		`|The remote workspace is configured to work with configuration at` +
 		`|The resources that were imported are shown above\. These resources are now in` +
@@ -80,9 +83,11 @@ func terraformWithProgress(command string, args []string) error {
 		`|Note: You used the -target option, so OpenTofu only checked resources` +
 		`|Warning:.*Applied changes may be incomplete` +
 		`|Warning:.*Resource targeting is in effect` +
-		`|Warning:.*Some objects will no longer be managed by Terraform`
+		`|Warning:.*Some objects will no longer be managed by Terraform` +
+		`|Warning:.*Resource will be removed from the state`
 
 	patternIgnoreBlockEnd := `exceptional situations such as recovering from errors or mistakes` +
+		`|In case you want to manage the resource again, you will have to import it\.` +
 		`|verify that the addresses passed to -target are correct\.` +
 		`|suggests to use it as part of an error message` +
 		`|You will need to import them into Terraform to manage them again\.` +
@@ -93,7 +98,9 @@ func terraformWithProgress(command string, args []string) error {
 		`|\(config refers to values not yet known\)` +
 		`|read \(data resources\)`
 
-	patternIgnoreShortBlockStart := ` will be read during apply`
+	// the configuration of an action, repeated for each resource that triggers it
+	patternIgnoreShortBlockStart := ` will be read during apply` +
+		`|^(?:\x1b\[\d+m)*    action "[^"]*" "[^"]*" \{`
 
 	patternIgnoreShortBlockEnd := `^    }`
 
@@ -109,6 +116,8 @@ func terraformWithProgress(command string, args []string) error {
 	patternStartOperation := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w*ing.*?(?:\r?\n|$)`
 	patternStillOperation := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): Still (import|read|creat|destr|modif|open|clos).*?(?:\r?\n|$)`
 	patternStopOperation := `(?:(?:\x1b\[0m)?\x1b\[1m)?(.*?): (Import|Read|Creat|Destr|Modif|Open|Clos)\w* co.*?(?:\r?\n|$)`
+	patternStartAction := `(?:(?:\x1b\[0m)?\x1b\[1m)?Action started: (.*?)(?:\x1b\[0m)*(?:\r?\n|$)`
+	patternStopAction := `(?:(?:\x1b\[0m)?\x1b\[1m)?(?:\x1b\[32m)?Action complete: (.*?)(?:\x1b\[0m)*(?:\r?\n|$)`
 
 	patternIgnoreOutputs := `^Outputs:(\n|$)`
 
@@ -125,6 +134,8 @@ func terraformWithProgress(command string, args []string) error {
 	reStartOperation := regexp.MustCompile(patternStartOperation)
 	reStillOperation := regexp.MustCompile(patternStillOperation)
 	reStopOperation := regexp.MustCompile(patternStopOperation)
+	reStartAction := regexp.MustCompile(patternStartAction)
+	reStopAction := regexp.MustCompile(patternStopAction)
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
 
 	opts := parseProgressOptions(args)
@@ -263,6 +274,24 @@ func terraformWithProgress(command string, args []string) error {
 					line = strings.TrimSuffix(line, "\n")
 					line = strings.TrimSuffix(line, "\r")
 					progress.Still(progressFormat, line, m[1], strings.ToLower(m[2]))
+					goto NEXT
+				}
+
+				// the address of an action with what triggered it, as an action can
+				// run for several resources at once
+				if m := reStartAction.FindStringSubmatch(line); m != nil {
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Start(progressFormat, line, m[1], operations.Invoking)
+					goto NEXT
+				}
+
+				if m := reStopAction.FindStringSubmatch(line); m != nil {
+					line := m[0]
+					line = strings.TrimSuffix(line, "\n")
+					line = strings.TrimSuffix(line, "\r")
+					progress.Stop(progressFormat, line, m[1], operations.Invoking)
 					goto NEXT
 				}
 			}
