@@ -81,6 +81,7 @@ lint:
           run_from: ${root_or_parent_with(biome.jsonc)}
       run_timeout: 1m
   enabled:
+    - oxipng@9.1.5
     - actionlint@1.17.1
     # Renovate bumps it, and the ! keeps it from trunk upgrade, so that Biome
     # Migrate migrates biome.jsonc for the new version
