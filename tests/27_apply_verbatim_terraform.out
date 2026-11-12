@@ -18,7 +18,6 @@ time_sleep.this["Xs"]: Refreshing state...
         }
     }
 Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-╷
 + ../../../tf apply -auto-approve -parallelism=30 -verbatim 'time_sleep.this[1s]'
 time_sleep.this["Xs"]: Preparing import...
 time_sleep.this["Xs"]: Refreshing state...
@@ -39,7 +38,6 @@ time_sleep.this["Xs"]: Importing...
 time_sleep.this["Xs"]: Import
 time_sleep.this["Xs"]: Destruction
 time_sleep.this["Xs"]: Creation
-╷
 + ../../../tf refresh -parallelism=30 -verbatim 'time_sleep.this[1s]'
 time_sleep.this["Xs"]: Refreshing state...
 No changes.[0m[1m Your infrastructure still matches the configuration.
@@ -57,4 +55,3 @@ time_sleep.this["Xs"]: Refreshing state...
     }
 Plan:[0m 0 to add, 0 to change, 1 to destroy.
 time_sleep.this["Xs"]: Destruction
-╷

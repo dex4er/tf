@@ -137,6 +137,8 @@ func terraformWithProgress(command string, args []string) error {
 	reStartAction := regexp.MustCompile(patternStartAction)
 	reStopAction := regexp.MustCompile(patternStopAction)
 	reIgnoreOutputs := regexp.MustCompile(patternIgnoreOutputs)
+	reBoxTop := regexp.MustCompile(`^(?:\x1b\[\d+m)*╷(?:\x1b\[\d+m)*\r?\n?$`)
+	reBoxBottom := regexp.MustCompile(`^(?:\x1b\[\d+m)*╵(?:\x1b\[\d+m)*\r?\n?$`)
 
 	opts := parseProgressOptions(args)
 	planFormat := opts.planFormat
@@ -196,6 +198,34 @@ func terraformWithProgress(command string, args []string) error {
 	skipOutputs := false
 	wasEmptyLine := false
 
+	// the top corner of a box, held until the next line tells whether the box
+	// is dropped, and then its bottom corner, after the end of the block
+	heldBoxTop := ""
+	boxDropped := false
+	dropBoxBottom := false
+
+	printLine := func(line string) {
+		dropBoxBottom = false
+
+		// skip another empty line but preserve color codes
+		if wasEmptyLine && util.IsEmptyLine(line) {
+			line = strings.TrimSuffix(line, "\n")
+			line = strings.TrimSuffix(line, "\r")
+			line = strings.ReplaceAll(line, "╵", "")
+			line = strings.ReplaceAll(line, "╷", "")
+		}
+
+		// in CI do not add spaces clearing progress indicator
+		if inAutomation {
+			fmt.Print(line)
+		} else {
+			console.Print(line)
+		}
+
+		// mark if current line was empty for next loop iteration
+		wasEmptyLine = util.IsEmptyLine(line)
+	}
+
 	// buffer for the current line
 	line := ""
 
@@ -230,6 +260,28 @@ func terraformWithProgress(command string, args []string) error {
 
 			// skip after "Outputs:" line
 			if skipOutputs {
+				goto NEXT
+			}
+
+			// lines of the box after the end of the block can still be dropped
+			// one by one before it
+			if dropBoxBottom && reBoxBottom.MatchString(line) {
+				dropBoxBottom = false
+				goto NEXT
+			}
+
+			if heldBoxTop != "" {
+				held := heldBoxTop
+				heldBoxTop = ""
+				if reIgnoreBlockStart.MatchString(line) {
+					boxDropped = true
+				} else {
+					printLine(held)
+				}
+			}
+
+			if !ignoreBlock && reBoxTop.MatchString(line) {
+				heldBoxTop = line
 				goto NEXT
 			}
 
@@ -314,6 +366,8 @@ func terraformWithProgress(command string, args []string) error {
 
 			if ignoreBlock && reIgnoreBlockEnd.MatchString(line) {
 				ignoreBlock = false
+				dropBoxBottom = boxDropped
+				boxDropped = false
 				goto NEXT
 			}
 
@@ -357,28 +411,16 @@ func terraformWithProgress(command string, args []string) error {
 				goto NEXT
 			}
 
-			// skip another empty line but preserve color codes
-			if wasEmptyLine && util.IsEmptyLine(line) {
-				line = strings.TrimSuffix(line, "\n")
-				line = strings.TrimSuffix(line, "\r")
-				line = strings.ReplaceAll(line, "╵", "")
-				line = strings.ReplaceAll(line, "╷", "")
-			}
-
-			// in CI do not add spaces clearing progress indicator
-			if inAutomation {
-				fmt.Print(line)
-			} else {
-				console.Print(line)
-			}
-
-			// mark if current line was empty for next loop iteration
-			wasEmptyLine = util.IsEmptyLine(line)
+			printLine(line)
 
 		NEXT:
 			// empty line buffer before next loop iteration
 			line = ""
 		}
+	}
+
+	if heldBoxTop != "" {
+		printLine(heldBoxTop)
 	}
 
 	return cmd.Wait()

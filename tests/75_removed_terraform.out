@@ -17,7 +17,6 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
         id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
     }
 Plan:[0m 0 to add, 0 to change, 0 to destroy.
-╷
 + ../../../tf apply -auto-approve -quiet
  # terraform_data.this[0m will no longer be managed by Terraform, but [1m[31mwill not be destroyed
  # (destroy = false is set in the configuration)
@@ -25,4 +24,3 @@ Plan:[0m 0 to add, 0 to change, 0 to destroy.
         id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
     }
 Plan:[0m 0 to add, 0 to change, 0 to destroy.
-╷

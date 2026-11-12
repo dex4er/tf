@@ -12,7 +12,6 @@ OpenTofu has been successfully initialized![0m[32m
   # [0m[33mWarning: this will destroy the imported resource
 -[0m/[32m+[0m resource "time_sleep" "this" {
 Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-╷
 + ../../../tf apply -auto-approve -parallelism=30 'time_sleep.this[1s]'
 [][34m^
 -[0m/[32m+[0m destroy and then create replacement
@@ -21,7 +20,7 @@ Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
   # [0m[33mWarning: this will destroy the imported resource
 -[0m/[32m+[0m resource "time_sleep" "this" {
 Plan:[0m 1 to import, 1 to add, 0 to change, 1 to destroy.
-.[0m[90m&[0m[31m.[0m[31m-[0m[32m.[0m[32m+[0m[33m╷
+.[0m[90m&[0m[31m.[0m[31m-[0m[32m.[0m[32m+
 + ../../../tf refresh -parallelism=30 'time_sleep.this[1s]'
 ^
 No changes.[0m[1m Your infrastructure still matches the configuration.
@@ -31,4 +30,4 @@ No changes.[0m[1m Your infrastructure still matches the configuration.
   # time_sleep.this["1s"][0m will be [1m[31mdestroyed
   [31m-[0m resource "time_sleep" "this" {
 Plan:[0m 0 to add, 0 to change, 1 to destroy.
-.[0m[31m-[0m[33m╷
+.[0m[31m-
