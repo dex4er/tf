@@ -1,0 +1,28 @@
++ ../../../tf init
+- terraform.io/builtin/terraform is built in to Terraform
+Terraform has been successfully initialized![0m[32m
++ ../../../tf apply -auto-approve -quiet
+  [32m+[0m create
+  # terraform_data.this[0m will be created
+  [32m+[0m resource "terraform_data" "this" {
+      [32m+[0m input  = "this"
+    }
+Plan:[0m 1 to add, 0 to change, 0 to destroy.
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
++ perl -0 -i -pe 's/resource "terraform_data" "this" \{\n  input = "this"\n\}/removed {\n  from = terraform_data.this\n  lifecycle {\n    destroy = false\n  }\n}/' removed.tf
++ ../../../tf plan -quiet
+ # terraform_data.this[0m will no longer be managed by Terraform, but [1m[31mwill not be destroyed
+ # (destroy = false is set in the configuration)
+ [31m.[0m resource "terraform_data" "this" {
+        id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    }
+Plan:[0m 0 to add, 0 to change, 0 to destroy.
+╷
++ ../../../tf apply -auto-approve -quiet
+ # terraform_data.this[0m will no longer be managed by Terraform, but [1m[31mwill not be destroyed
+ # (destroy = false is set in the configuration)
+ [31m.[0m resource "terraform_data" "this" {
+        id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    }
+Plan:[0m 0 to add, 0 to change, 0 to destroy.
+╷

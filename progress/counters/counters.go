@@ -10,8 +10,8 @@ import (
 )
 
 var Refreshing = 0
-var Started = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0}
-var Stopped = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0}
+var Started = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0, operations.Invoking: 0}
+var Stopped = map[string]int{operations.Reading: 0, operations.Opening: 0, operations.Closing: 0, operations.Importing: 0, operations.Creating: 0, operations.Destroying: 0, operations.Invoking: 0}
 
 func Refresh(line string, resource string, operation string) {
 	Refreshing += 1
@@ -84,6 +84,10 @@ func Counters() (string, int) {
 		counters += c
 	}
 	if c, l := counter(operations.Modifying); l > 0 {
+		countersLength += l
+		counters += c
+	}
+	if c, l := counter(operations.Invoking); l > 0 {
 		countersLength += l
 		counters += c
 	}
