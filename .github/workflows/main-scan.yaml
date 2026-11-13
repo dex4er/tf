@@ -51,7 +51,7 @@ jobs:
       - name: Set up mise
         uses: jdx/mise-action@v5
         with:
-          version: 2026.11.6 # datasource=github-releases depName=jdx/mise
+          version: 2026.11.8 # datasource=github-releases depName=jdx/mise
           install_args: goreleaser yq
 
       # Required by the sboms section of .goreleaser.yaml.
@@ -202,7 +202,7 @@ jobs:
       - name: Set up mise
         uses: jdx/mise-action@v5
         with:
-          version: 2026.11.6 # datasource=github-releases depName=jdx/mise
+          version: 2026.11.8 # datasource=github-releases depName=jdx/mise
           install_args: yq
 
       - name: Download vulnerability report
