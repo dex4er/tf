@@ -96,7 +96,7 @@ lint:
     - terraform@1.17.1 # datasource=github-releases depName=hashicorp/terraform
     - tflint@0.66.0
     - tfsec@1.28.14
-    - trufflehog@3.99.8
+    - trufflehog@3.99.9
     # yamllint checks what Biome does not, as the duplicated keys and the
     # values that YAML 1.1 reads otherwise
     - yamllint@1.38.0
