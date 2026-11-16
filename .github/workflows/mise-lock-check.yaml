@@ -33,7 +33,7 @@ jobs:
       - name: Install locked tools
         uses: jdx/mise-action@v5
         with:
-          version: 2026.11.6 # datasource=github-releases depName=jdx/mise
+          version: 2026.11.8 # datasource=github-releases depName=jdx/mise
 
       # A checksum that changes while its tool version stays the same means the
       # artifact behind an already pinned URL was replaced. That is the one thing
