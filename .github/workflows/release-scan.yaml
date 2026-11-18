@@ -42,7 +42,7 @@ jobs:
       # Without the v of the tags of Grype: the regex manager of .renovaterc.json
       # strips it when it updates the version, so the step that installs Grype
       # adds it.
-      GRYPE_VERSION: 0.121.3 # datasource=github-releases depName=anchore/grype
+      GRYPE_VERSION: 0.122.1 # datasource=github-releases depName=anchore/grype
       DISCUSSION_NUMBER: 138
 
     steps:
